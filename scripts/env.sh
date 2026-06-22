@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+export OPENRSDK_ROOT="${OPENRSDK_ROOT:-/usr/OPENR_SDK}"
+export PATH="$OPENRSDK_ROOT/bin:$PATH"
+export OPENRSDK_LIB="$OPENRSDK_ROOT/lib"
+export OPENRSDK_INCLUDE="$OPENRSDK_ROOT/include"
+
+echo "OPENRSDK_ROOT=$OPENRSDK_ROOT"
