@@ -23,11 +23,12 @@ OPEN-R exposes the low-level robotics side of AIBO: joints, sensors, LEDs, audio
 ```text
 .
 ├── README.md
-├── docs/
+├── tasks/
 │   ├── debian-setup.md
 │   ├── memory-stick.md
 │   ├── openr-model.md
-│   └── first-project.md
+│   ├── first-project.md
+│   └── cribsheet.md
 ├── scripts/
 │   ├── env.sh
 │   ├── check-openr.sh
@@ -57,10 +58,12 @@ source scripts/env.sh
 # Verify expected directories/tools
 ./scripts/check-openr.sh
 
-# Build first sample
-cd src/hello_body
+# Build a known-good Sony sample first
+cd samples/common/HelloWorld/HelloWorld
 make
 ```
+
+For the practical Debian bring-up order, see `tasks/cribsheet.md`.
 
 ## Development rule
 
