@@ -65,6 +65,33 @@ make
 
 For the practical Debian bring-up order, see `tasks/cribsheet.md`.
 
+## Simulator Direction
+
+We cannot fully boot Sony Aperios on Debian from this repo alone, but we can still simulate the parts that matter most during development:
+
+- Memory Stick object layout
+- OPEN-R object load order from `OBJECT.CFG`
+- source-level lifecycle behavior
+- scripted sensor/event replay
+
+The first layer is now available:
+
+```bash
+scripts/simulate-openr-boot.sh samples/common/HelloWorld
+```
+
+That checks what Aperios would attempt to load from a local `MS/OPEN-R` tree and flags missing object payloads.
+
+The first host-side lifecycle shim is also available:
+
+```bash
+make -C aperios run-hello-world
+```
+
+That compiles the original Sony `HelloWorld` sample source against a tiny host-side OPEN-R shim and drives `DoInit`, `DoStart`, `DoStop`, and `DoDestroy` on Debian.
+
+For the broader simulator plan, see [simulator/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/simulator/README.md) and [aperios/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/aperios/README.md).
+
 ## Development rule
 
 Use a **separate programmable Memory Stick**. Do not modify your working AIBO MIND 2 stick.

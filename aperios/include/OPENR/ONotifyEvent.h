@@ -1,0 +1,6 @@
+#ifndef APERIOS_HOST_OPENR_ONOTIFYEVENT_H
+#define APERIOS_HOST_OPENR_ONOTIFYEVENT_H
+
+#include <OPENR/OObject.h>
+
+#endif
