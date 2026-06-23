@@ -4,7 +4,7 @@
 # ****** CONFIGURATION ****** 
 # ***************************
 
-PREFIX=/usr/local/OPEN_R_SDK
+PREFIX="$(pwd)/local/OPEN_R_SDK"
 TARGET=mipsel-linux
 
 BINUTILS=binutils-2.15
@@ -13,7 +13,8 @@ NEWLIB=newlib-1.15.0
 OPENRSDK=OPEN_R_SDK-1.1.5-r5
 
 BUILDDIR=bld-
-export CFLAGS="-O2 -no-cpp-precomp"
+# Modern Linux toolchains reject the old Darwin-specific flag.
+export CFLAGS="-O2"
 
 
 # *******************
@@ -187,9 +188,9 @@ if [ ! -e "$BLD/.installed" ] ; then
 	(
 		cd "$BLD" \
 		&& echo "Building ${p}..." \
-		&& make \
+		&& make MAKEINFO=true \
 		&& echo "Installing ${p}..." \
-		&& make install \
+		&& make MAKEINFO=true install \
 		&& touch ".installed"
 	) || exit 1;
 fi;
@@ -220,9 +221,9 @@ if [ ! -e "$BLD/.installed" ] ; then
 	(
 		cd "$BLD" \
 		&& echo "Building ${p}..." \
-		&& make \
+		&& make MAKEINFO=true \
 		&& echo "Installing ${p}..." \
-		&& make install \
+		&& make MAKEINFO=true install \
 		&& touch ".installed"
 	) || exit 1;
 fi;
@@ -245,9 +246,9 @@ if [ ! -e "$BLD/.installed" ] ; then
 	(
 		cd "$BLD" \
 		&& echo "Building ${p}..." \
-		&& make \
+		&& make MAKEINFO=true \
 		&& echo "Installing ${p}..." \
-		&& make install \
+		&& make MAKEINFO=true install \
 		&& touch ".installed"
 	) || exit 1;
 fi;

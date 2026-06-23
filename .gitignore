@@ -1,3 +1,9 @@
 .DS_Store
 ._*
-
+sdk/binutils-2.15/
+sdk/gcc-3.3.6/
+sdk/newlib-1.15.0/
+sdk/bld-*/
+sdk/local/
+sdk/work/
+sdk/build-aibo-toolchain-local.sh
