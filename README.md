@@ -49,8 +49,8 @@ OPEN-R exposes the low-level robotics side of AIBO: joints, sensors, LEDs, audio
 ## Quick start
 
 ```bash
-git clone https://github.com/YOURNAME/aibo-ers7-openr-debian.git
-cd aibo-ers7-openr-debian
+git clone https://github.com/cartheur-aibo/openr-debian.git
+cd openr-debian
 
 # Edit if your SDK path differs
 source scripts/env.sh

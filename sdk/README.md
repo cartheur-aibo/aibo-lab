@@ -9,6 +9,8 @@ This guide is based on:
 - the actual files present in this `sdk/` directory
 - inspection of the local `build-aibo-toolchain-3.3.6-r1.sh` script
 
+The DogsBody page identifies its contents as freeware and/or copyrighted material and says they may not be sold. This repo-local guide is a practical restatement for our Debian setup, not a mirror of the original page.
+
 ## What Is In `sdk/`
 
 Host-side SDK/toolchain inputs:
@@ -20,6 +22,8 @@ Host-side SDK/toolchain inputs:
 - `binutils-2.15.tar.bz2`
 - `newlib-1.15.0.tar.gz`
 - `build-aibo-toolchain-3.3.6-r1.sh`
+
+This exactly matches the file set listed near the top of the DogsBody page.
 
 What these are for:
 
@@ -56,6 +60,11 @@ The DogsBody page lays out a classic Linux install flow:
 6. copy the sample onto a programmable Memory Stick
 
 That page was written for much older Linux distributions, so some package names and compiler assumptions are dated.
+
+Two important details from the top of the original page:
+
+- it says to get these files from the Tekkotsu site
+- it explicitly says not to unzip the toolchain/source archives ahead of time because the build script handles that
 
 ## What We Have Confirmed Locally
 
@@ -108,6 +117,7 @@ sudo apt install -y flex texinfo
 ### 2. Extract docs and samples
 
 The DogsBody page says to unpack docs and samples separately from the toolchain build.
+That same page says not to pre-unpack the SDK/toolchain source archives.
 
 From the repo root:
 
@@ -123,6 +133,13 @@ This gives you:
 - documentation PDFs
 - the original Sony sample tree
 
+Leave these archives untouched before running the build script:
+
+- `OPEN_R_SDK-1.1.5-r5.tar.gz`
+- `gcc-3.3.6.tar.bz2`
+- `binutils-2.15.tar.bz2`
+- `newlib-1.15.0.tar.gz`
+
 ### 3. Review the build script before running it
 
 The current script:
@@ -131,6 +148,8 @@ The current script:
 - patches `gcc-3.3.6` and `newlib-1.15.0`
 - builds a `mipsel-linux` cross-toolchain
 - installs under `/usr/local/OPEN_R_SDK`
+
+This matches the original DogsBody flow, which assumes you downloaded the archives into a convenient working directory such as `~/aibo` and then ran the build script from there.
 
 Check the install prefix in:
 
@@ -167,6 +186,8 @@ Expected destination:
 ```bash
 /usr/local/OPEN_R_SDK
 ```
+
+The main difference from the original DogsBody instructions is that we are adapting the process to Debian 13 instead of older Ubuntu 7.04/7.10-era assumptions.
 
 ### 5. Verify installed tools
 
