@@ -13,7 +13,8 @@ Environment variables:
   OPENRSDK_ROOT   SDK root. Defaults to ./sdk/local/OPEN_R_SDK
   SAMPLE_DIR      Sample root. Default: ./samples/common/HelloWorld
   FEATURE_SLUG    Feature output folder name. Default: derived from SAMPLE_DIR
-  STICK_FLAVOR    WCONSOLE or WLAN. Default: WCONSOLE
+  PAYLOAD_MODE    base-only, hello-only, or hello-plus-powermon. Default: hello-plus-powermon
+  STICK_FLAVOR    BASIC, WCONSOLE, or WLAN. Default: WCONSOLE
   MEMPROT         memprot or nomemprot. Default: memprot
   AIBO_HOSTNAME   Default: AIBO
   ESSID           Default: AIBONET
@@ -38,6 +39,7 @@ fi
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OPENRSDK_ROOT="${OPENRSDK_ROOT:-$ROOT_DIR/sdk/local/OPEN_R_SDK}"
 SAMPLE_DIR="${SAMPLE_DIR:-$ROOT_DIR/samples/common/HelloWorld}"
+PAYLOAD_MODE="${PAYLOAD_MODE:-hello-plus-powermon}"
 STICK_FLAVOR="${STICK_FLAVOR:-WCONSOLE}"
 MEMPROT="${MEMPROT:-memprot}"
 AIBO_HOSTNAME="${AIBO_HOSTNAME:-AIBO}"
@@ -73,6 +75,8 @@ SAMPLE_WORK_DIR="$WORK_COMMON_DIR/$SAMPLE_BASENAME"
 POWERMON_WORK_DIR="$WORK_COMMON_DIR/PowerMonitor"
 PAYLOAD_STAGE_DIR="$BUILD_ROOT/payload"
 COPY_NOTE_FILE="$BUILD_ROOT/COPY_TO_MS.txt"
+SAMPLE_COMPONENT_DIR="$SAMPLE_WORK_DIR/$SAMPLE_BASENAME"
+POWERMON_COMPONENT_DIR="$POWERMON_WORK_DIR/PowerMonitor"
 
 require_file() {
   if [ ! -e "$1" ]; then
@@ -85,10 +89,18 @@ require_file "$BASE_DIR"
 require_file "$SAMPLE_DIR/Makefile"
 require_file "$POWERMON_SAMPLE_DIR"
 
-case "$STICK_FLAVOR" in
-  WCONSOLE|WLAN) ;;
+case "$PAYLOAD_MODE" in
+  base-only|hello-only|hello-plus-powermon) ;;
   *)
-    echo "error: STICK_FLAVOR must be WCONSOLE or WLAN" >&2
+    echo "error: PAYLOAD_MODE must be base-only, hello-only, or hello-plus-powermon" >&2
+    exit 1
+    ;;
+esac
+
+case "$STICK_FLAVOR" in
+  BASIC|WCONSOLE|WLAN) ;;
+  *)
+    echo "error: STICK_FLAVOR must be BASIC, WCONSOLE, or WLAN" >&2
     exit 1
     ;;
 esac
@@ -139,60 +151,79 @@ mkdir -p "$OUTPUT_DIR"
 rm -rf "$WORK_COMMON_DIR" "$PAYLOAD_STAGE_DIR"
 mkdir -p "$WORK_COMMON_DIR" "$PAYLOAD_STAGE_DIR/OPEN-R/MW/OBJS"
 
-cp -a "$SAMPLE_DIR" "$SAMPLE_WORK_DIR"
-cp -a "$POWERMON_SAMPLE_DIR" "$POWERMON_WORK_DIR"
+if [ "$PAYLOAD_MODE" != "base-only" ]; then
+  cp -a "$SAMPLE_DIR" "$SAMPLE_WORK_DIR"
+fi
+if [ "$PAYLOAD_MODE" = "hello-plus-powermon" ]; then
+  cp -a "$POWERMON_SAMPLE_DIR" "$POWERMON_WORK_DIR"
+fi
 
 cp -a "$BASE_DIR" "$OUTPUT_DIR/OPEN-R"
 chmod -R u+w "$OUTPUT_DIR/OPEN-R"
 : > "$OUTPUT_DIR/MEMSTICK.IND"
 
-cat > "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT" <<EOF
+if [ "$STICK_FLAVOR" != "BASIC" ]; then
+  cat > "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT" <<EOF
 HOSTNAME=$AIBO_HOSTNAME
 EOF
 
-if [ "$USE_DHCP" = "0" ]; then
-  cat >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT" <<EOF
+  if [ "$USE_DHCP" = "0" ]; then
+    cat >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT" <<EOF
 ETHER_IP=$ETHER_IP
 ETHER_NETMASK=$ETHER_NETMASK
 IP_GATEWAY=$IP_GATEWAY
 EOF
-fi
+  fi
 
-cat >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT" <<EOF
+  cat >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT" <<EOF
 ESSID=$ESSID
 WEPENABLE=$WEPENABLE
 EOF
 
-if [ "$WEPENABLE" = "1" ]; then
-  cat >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT" <<EOF
+  if [ "$WEPENABLE" = "1" ]; then
+    cat >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT" <<EOF
 WEPKEY=$WEPKEY
 EOF
-fi
+  fi
 
-cat >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT" <<EOF
+  cat >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT" <<EOF
 APMODE=$APMODE
 CHANNEL=$CHANNEL
 EOF
 
-if [ -n "$DNS_SERVER_1" ]; then
-  echo "DNS_SERVER_1=$DNS_SERVER_1" >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT"
+  if [ -n "$DNS_SERVER_1" ]; then
+    echo "DNS_SERVER_1=$DNS_SERVER_1" >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT"
+  fi
+
+  if [ -n "$DNS_DEFDNAME" ]; then
+    echo "DNS_DEFDNAME=$DNS_DEFDNAME" >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT"
+  fi
+
+  if [ "$USE_DHCP" = "1" ]; then
+    echo "USE_DHCP=1" >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT"
+  fi
 fi
 
-if [ -n "$DNS_DEFDNAME" ]; then
-  echo "DNS_DEFDNAME=$DNS_DEFDNAME" >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT"
+if [ "$PAYLOAD_MODE" = "hello-plus-powermon" ]; then
+  make -C "$SAMPLE_WORK_DIR" install \
+    OPENRSDK_ROOT="$OPENRSDK_ROOT" \
+    INSTALLDIR="$PAYLOAD_STAGE_DIR"
+
+  cp -a "$PAYLOAD_STAGE_DIR/OPEN-R/MW/OBJS/HELLO.BIN" "$OUTPUT_DIR/OPEN-R/MW/OBJS/"
+  cp -a "$PAYLOAD_STAGE_DIR/OPEN-R/MW/OBJS/POWERMON.BIN" "$OUTPUT_DIR/OPEN-R/MW/OBJS/"
+  cp -a "$SAMPLE_WORK_DIR/MS/OPEN-R/MW/CONF/OBJECT.CFG" "$OUTPUT_DIR/OPEN-R/MW/CONF/OBJECT.CFG"
+elif [ "$PAYLOAD_MODE" = "hello-only" ]; then
+  make -C "$SAMPLE_COMPONENT_DIR" install \
+    OPENRSDK_ROOT="$OPENRSDK_ROOT" \
+    INSTALLDIR="$PAYLOAD_STAGE_DIR"
+
+  cp -a "$PAYLOAD_STAGE_DIR/OPEN-R/MW/OBJS/HELLO.BIN" "$OUTPUT_DIR/OPEN-R/MW/OBJS/"
+  cat > "$OUTPUT_DIR/OPEN-R/MW/CONF/OBJECT.CFG" <<'EOF'
+/MS/OPEN-R/MW/OBJS/HELLO.BIN
+EOF
+else
+  : > "$OUTPUT_DIR/OPEN-R/MW/CONF/OBJECT.CFG"
 fi
-
-if [ "$USE_DHCP" = "1" ]; then
-  echo "USE_DHCP=1" >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT"
-fi
-
-make -C "$SAMPLE_WORK_DIR" install \
-  OPENRSDK_ROOT="$OPENRSDK_ROOT" \
-  INSTALLDIR="$PAYLOAD_STAGE_DIR"
-
-cp -a "$PAYLOAD_STAGE_DIR/OPEN-R/MW/OBJS/HELLO.BIN" "$OUTPUT_DIR/OPEN-R/MW/OBJS/"
-cp -a "$PAYLOAD_STAGE_DIR/OPEN-R/MW/OBJS/POWERMON.BIN" "$OUTPUT_DIR/OPEN-R/MW/OBJS/"
-cp -a "$SAMPLE_WORK_DIR/MS/OPEN-R/MW/CONF/OBJECT.CFG" "$OUTPUT_DIR/OPEN-R/MW/CONF/OBJECT.CFG"
 
 cat > "$COPY_NOTE_FILE" <<EOF
 ERS-7 Memory Stick copy notes
@@ -201,6 +232,7 @@ Feature slug: $FEATURE_SLUG
 Sample: $SAMPLE_BASENAME
 Build root: $BUILD_ROOT
 Stick staging dir: $OUTPUT_DIR
+Payload mode: $PAYLOAD_MODE
 
 Copy these items to the root of the mounted Memory Stick:
 
@@ -229,7 +261,14 @@ echo "Feature slug: $FEATURE_SLUG"
 echo "Feature build root: $BUILD_ROOT"
 echo "Flavor: $STICK_FLAVOR/$MEMPROT"
 echo "Wi-Fi: ESSID=$ESSID APMODE=$APMODE DHCP=$USE_DHCP WEP=$WEPENABLE"
-echo "Payload: $SAMPLE_BASENAME + PowerMonitor"
+echo "Payload mode: $PAYLOAD_MODE"
+if [ "$PAYLOAD_MODE" = "hello-plus-powermon" ]; then
+  echo "Payload: $SAMPLE_BASENAME + PowerMonitor"
+elif [ "$PAYLOAD_MODE" = "hello-only" ]; then
+  echo "Payload: $SAMPLE_BASENAME only"
+else
+  echo "Payload: base system only"
+fi
 echo "Size: ${SIZE_MIB} MiB (${SIZE_BYTES} bytes)"
 echo "Copy note: $COPY_NOTE_FILE"
 echo "Files to copy to the stick root:"
