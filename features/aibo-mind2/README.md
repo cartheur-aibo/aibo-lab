@@ -36,17 +36,20 @@ That tree already looks like a Memory Stick dump, including:
 Use the included script:
 
 ```bash
-./scripts/stage-aibo-mind2.sh /tmp/aibo-mind2-stick
+./scripts/stage-aibo-mind2.sh
 ```
 
 That creates a ready-to-copy staging directory with the AIBO MIND 2 layout.
+By default, it stages into:
+
+- `features/aibo-mind2/build/stick`
 
 ## Write It To A Mounted Stick
 
 If you have a compatible stick large enough for the staged layout:
 
 ```bash
-rsync -a --delete /tmp/aibo-mind2-stick/ /path/to/mounted-stick/
+rsync -a --delete features/aibo-mind2/build/stick/ /path/to/mounted-stick/
 sync
 ```
 

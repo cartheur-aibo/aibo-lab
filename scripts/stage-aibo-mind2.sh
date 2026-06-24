@@ -3,9 +3,10 @@ set -euo pipefail
 
 usage() {
   cat <<'EOF'
-usage: stage-aibo-mind2.sh /path/to/staging-dir
+usage: stage-aibo-mind2.sh [/path/to/staging-dir]
 
 Create a staged AIBO MIND 2 Memory Stick layout from the bundled ERS-7 dump.
+By default, build outputs live under features/aibo-mind2/.
 
 This copies:
   opt/AIBO7M2/MEMSTICK.IND
@@ -17,14 +18,15 @@ into the target directory so it can be written to a compatible Memory Stick.
 EOF
 }
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -gt 1 ]; then
   usage
   exit 1
 fi
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SOURCE_DIR="$ROOT_DIR/opt/AIBO7M2"
-TARGET_DIR="$1"
+FEATURE_DIR="$ROOT_DIR/features/aibo-mind2"
+TARGET_DIR="${1:-$FEATURE_DIR/build/stick}"
 
 if [ ! -d "$SOURCE_DIR/OPEN-R" ]; then
   echo "error: source AIBO MIND 2 tree not found at $SOURCE_DIR" >&2
@@ -56,4 +58,3 @@ echo
 echo "Staged size: ${SIZE_MB} MiB"
 echo "Note: the bundled AIBO MIND 2 image is larger than an 8 MiB Memory Stick."
 echo "Use a larger stick unless you have a verified trimmed layout."
-

@@ -1,7 +1,7 @@
-# ERS-7 8 MB Test Stick
+# HelloWorld ERS-7 Test Stick
 
-This builds a scratch programmable ERS-7 Memory Stick from the local OPEN-R SDK,
-not from the oversized AIBO MIND 2 runtime dump.
+This feature builds a scratch programmable ERS-7 Memory Stick from the local
+OPEN-R SDK, not from the oversized AIBO MIND 2 runtime dump.
 
 The goal is a small stick we can:
 
@@ -12,7 +12,7 @@ The goal is a small stick we can:
 
 ## What It Uses
 
-The builder uses:
+This `hello-world` feature uses:
 
 - the SDK's ERS-7 `WCONSOLE` base
 - the Sony `HelloWorld` sample
@@ -23,6 +23,18 @@ The `WCONSOLE` base gives us wireless networking plus a telnet console on port
 
 ## Build It
 
+By default, the builder writes its outputs under:
+
+- `features/hello-world/build/`
+
+That keeps generated payloads and staged stick files owned by the feature rather
+than mixed back into `samples/`.
+
+The script is reusable. Its default feature output folder is derived from the
+sample name, so `HelloWorld` maps to `features/hello-world/`. You can also
+override that with `FEATURE_SLUG=...` or change the sample with `SAMPLE_DIR=...`
+when needed.
+
 Example for an open SSID with DHCP:
 
 ```bash
@@ -30,7 +42,7 @@ AIBO_HOSTNAME=AIBO \
 ESSID=YOUR_WIFI_NAME \
 WEPENABLE=0 \
 USE_DHCP=1 \
-./scripts/build-ers7-8mb-stick.sh /tmp/ers7-8mb-stick
+./scripts/build-ers7-feature-stick.sh
 ```
 
 Example for WEP with DHCP:
@@ -41,7 +53,7 @@ ESSID=YOUR_WIFI_NAME \
 WEPENABLE=1 \
 WEPKEY=AIBO2 \
 USE_DHCP=1 \
-./scripts/build-ers7-8mb-stick.sh /tmp/ers7-8mb-stick
+./scripts/build-ers7-feature-stick.sh
 ```
 
 Example for a static IP:
@@ -55,10 +67,18 @@ ETHER_IP=192.168.10.100 \
 ETHER_NETMASK=255.255.255.0 \
 IP_GATEWAY=192.168.10.1 \
 DNS_SERVER_1=192.168.10.1 \
-./scripts/build-ers7-8mb-stick.sh /tmp/ers7-8mb-stick
+./scripts/build-ers7-feature-stick.sh
 ```
 
 ## What The Builder Produces
+
+The default output directory is:
+
+- `features/hello-world/build/stick`
+
+The feature-local build workspace is:
+
+- `features/hello-world/build/work`
 
 The output directory contains:
 
@@ -73,6 +93,32 @@ Inside `OPEN-R/` it includes:
 - `POWERMON.BIN`
 - the sample `MW/CONF/OBJECT.CFG`
 
+## What To Copy To The Memory Stick
+
+Copy these items from the staged build directory to the root of the mounted
+Memory Stick:
+
+- `MEMSTICK.IND`
+- `OPEN-R/`
+
+The staged build directory is:
+
+- `features/hello-world/build/stick`
+
+Example:
+
+```bash
+rsync -a --delete features/hello-world/build/stick/ /path/to/mounted-stick/
+sync
+```
+
+After copying:
+
+1. Eject or unmount the stick cleanly.
+2. Insert it into the ERS-7 while powered off.
+3. Boot the robot.
+4. If Wi-Fi succeeds, connect to the wireless console with `telnet AIBO_IP 59000`.
+
 ## Why This Fits
 
 The SDK base used here is only about `1.1 MiB` before the sample payload is
@@ -80,17 +126,6 @@ added, so it is comfortably within 8 MB.
 
 This is very different from the `opt/AIBO7M2` dump in this repo, which is not a
 verified 8 MB retail stick image.
-
-## Write It To The Stick
-
-After building:
-
-```bash
-rsync -a --delete /tmp/ers7-8mb-stick/ /path/to/mounted-stick/
-sync
-```
-
-Then eject the stick cleanly.
 
 ## Boot Test
 
@@ -168,5 +203,5 @@ an AIBO MIND 2-style interactive behavior.
 - `WCONSOLE` is the default because it is best for bring-up and debugging.
 - The builder defaults to `memprot` for safety.
 - The Wi-Fi settings here follow the same old Sony constraints described in
-  [docs/ers7-wifi/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/ers7-wifi/README.md):
+  [features/ers7-wifi/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-wifi/README.md):
   open or WEP-era networking, not WPA/WPA2/WPA3.

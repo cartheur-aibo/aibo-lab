@@ -3,13 +3,16 @@ set -euo pipefail
 
 usage() {
   cat <<'EOF'
-usage: build-ers7-8mb-stick.sh /path/to/output-dir
+usage: build-ers7-feature-stick.sh [/path/to/output-dir]
 
 Build a scratch ERS-7 programmable Memory Stick tree sized for an 8 MB stick,
 using the SDK's WCONSOLE base plus the HelloWorld + PowerMonitor test payload.
+By default, build outputs live under features/<feature-slug>/.
 
 Environment variables:
   OPENRSDK_ROOT   SDK root. Defaults to ./sdk/local/OPEN_R_SDK
+  SAMPLE_DIR      Sample root. Default: ./samples/common/HelloWorld
+  FEATURE_SLUG    Feature output folder name. Default: derived from SAMPLE_DIR
   STICK_FLAVOR    WCONSOLE or WLAN. Default: WCONSOLE
   MEMPROT         memprot or nomemprot. Default: memprot
   AIBO_HOSTNAME   Default: AIBO
@@ -27,15 +30,14 @@ Environment variables:
 EOF
 }
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -gt 1 ]; then
   usage
   exit 1
 fi
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-OUTPUT_DIR="$1"
-
 OPENRSDK_ROOT="${OPENRSDK_ROOT:-$ROOT_DIR/sdk/local/OPEN_R_SDK}"
+SAMPLE_DIR="${SAMPLE_DIR:-$ROOT_DIR/samples/common/HelloWorld}"
 STICK_FLAVOR="${STICK_FLAVOR:-WCONSOLE}"
 MEMPROT="${MEMPROT:-memprot}"
 AIBO_HOSTNAME="${AIBO_HOSTNAME:-AIBO}"
@@ -51,8 +53,26 @@ IP_GATEWAY="${IP_GATEWAY:-}"
 DNS_SERVER_1="${DNS_SERVER_1:-}"
 DNS_DEFDNAME="${DNS_DEFDNAME:-}"
 
+slugify() {
+  printf '%s' "$1" \
+    | sed -E 's/([a-z0-9])([A-Z])/\1-\2/g' \
+    | tr '[:upper:]' '[:lower:]' \
+    | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//'
+}
+
+SAMPLE_BASENAME="$(basename "$SAMPLE_DIR")"
+FEATURE_SLUG="${FEATURE_SLUG:-$(slugify "$SAMPLE_BASENAME")}"
+FEATURE_DIR="$ROOT_DIR/features/$FEATURE_SLUG"
+BUILD_ROOT="$FEATURE_DIR/build"
+OUTPUT_DIR="${1:-$BUILD_ROOT/stick}"
+
 BASE_DIR="$OPENRSDK_ROOT/OPEN_R/MS_ERS7/$STICK_FLAVOR/$MEMPROT/OPEN-R"
-HELLO_SAMPLE_DIR="$ROOT_DIR/samples/common/HelloWorld"
+POWERMON_SAMPLE_DIR="$ROOT_DIR/samples/common/PowerMonitor"
+WORK_COMMON_DIR="$BUILD_ROOT/work/samples/common"
+SAMPLE_WORK_DIR="$WORK_COMMON_DIR/$SAMPLE_BASENAME"
+POWERMON_WORK_DIR="$WORK_COMMON_DIR/PowerMonitor"
+PAYLOAD_STAGE_DIR="$BUILD_ROOT/payload"
+COPY_NOTE_FILE="$BUILD_ROOT/COPY_TO_MS.txt"
 
 require_file() {
   if [ ! -e "$1" ]; then
@@ -62,7 +82,8 @@ require_file() {
 }
 
 require_file "$BASE_DIR"
-require_file "$HELLO_SAMPLE_DIR/Makefile"
+require_file "$SAMPLE_DIR/Makefile"
+require_file "$POWERMON_SAMPLE_DIR"
 
 case "$STICK_FLAVOR" in
   WCONSOLE|WLAN) ;;
@@ -115,6 +136,11 @@ fi
 
 rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
+rm -rf "$WORK_COMMON_DIR" "$PAYLOAD_STAGE_DIR"
+mkdir -p "$WORK_COMMON_DIR" "$PAYLOAD_STAGE_DIR/OPEN-R/MW/OBJS"
+
+cp -a "$SAMPLE_DIR" "$SAMPLE_WORK_DIR"
+cp -a "$POWERMON_SAMPLE_DIR" "$POWERMON_WORK_DIR"
 
 cp -a "$BASE_DIR" "$OUTPUT_DIR/OPEN-R"
 chmod -R u+w "$OUTPUT_DIR/OPEN-R"
@@ -160,20 +186,52 @@ if [ "$USE_DHCP" = "1" ]; then
   echo "USE_DHCP=1" >> "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT"
 fi
 
-make -C "$HELLO_SAMPLE_DIR" install OPENRSDK_ROOT="$OPENRSDK_ROOT"
+make -C "$SAMPLE_WORK_DIR" install \
+  OPENRSDK_ROOT="$OPENRSDK_ROOT" \
+  INSTALLDIR="$PAYLOAD_STAGE_DIR"
 
-cp -a "$HELLO_SAMPLE_DIR/MS/OPEN-R/MW/OBJS/HELLO.BIN" "$OUTPUT_DIR/OPEN-R/MW/OBJS/"
-cp -a "$HELLO_SAMPLE_DIR/MS/OPEN-R/MW/OBJS/POWERMON.BIN" "$OUTPUT_DIR/OPEN-R/MW/OBJS/"
-cp -a "$HELLO_SAMPLE_DIR/MS/OPEN-R/MW/CONF/OBJECT.CFG" "$OUTPUT_DIR/OPEN-R/MW/CONF/OBJECT.CFG"
+cp -a "$PAYLOAD_STAGE_DIR/OPEN-R/MW/OBJS/HELLO.BIN" "$OUTPUT_DIR/OPEN-R/MW/OBJS/"
+cp -a "$PAYLOAD_STAGE_DIR/OPEN-R/MW/OBJS/POWERMON.BIN" "$OUTPUT_DIR/OPEN-R/MW/OBJS/"
+cp -a "$SAMPLE_WORK_DIR/MS/OPEN-R/MW/CONF/OBJECT.CFG" "$OUTPUT_DIR/OPEN-R/MW/CONF/OBJECT.CFG"
+
+cat > "$COPY_NOTE_FILE" <<EOF
+ERS-7 Memory Stick copy notes
+
+Feature slug: $FEATURE_SLUG
+Sample: $SAMPLE_BASENAME
+Build root: $BUILD_ROOT
+Stick staging dir: $OUTPUT_DIR
+
+Copy these items to the root of the mounted Memory Stick:
+
+- MEMSTICK.IND
+- OPEN-R/
+
+Example:
+
+  rsync -a --delete "$OUTPUT_DIR"/ /path/to/mounted-stick/
+  sync
+
+After copying:
+
+1. Eject/unmount the stick cleanly.
+2. Insert it into the ERS-7 while powered off.
+3. Boot the robot.
+4. If Wi-Fi succeeds, connect to the wireless console:
+   telnet AIBO_IP 59000
+EOF
 
 SIZE_BYTES="$(du -sb "$OUTPUT_DIR" | awk '{print $1}')"
 SIZE_MIB="$(awk -v bytes="$SIZE_BYTES" 'BEGIN { printf "%.2f", bytes / (1024 * 1024) }')"
 
 echo "Built ERS-7 test stick at: $OUTPUT_DIR"
+echo "Feature slug: $FEATURE_SLUG"
+echo "Feature build root: $BUILD_ROOT"
 echo "Flavor: $STICK_FLAVOR/$MEMPROT"
 echo "Wi-Fi: ESSID=$ESSID APMODE=$APMODE DHCP=$USE_DHCP WEP=$WEPENABLE"
-echo "Payload: HelloWorld + PowerMonitor"
+echo "Payload: $SAMPLE_BASENAME + PowerMonitor"
 echo "Size: ${SIZE_MIB} MiB (${SIZE_BYTES} bytes)"
+echo "Copy note: $COPY_NOTE_FILE"
 echo "Files to copy to the stick root:"
 echo "  MEMSTICK.IND"
 echo "  OPEN-R/"
