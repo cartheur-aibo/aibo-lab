@@ -209,6 +209,9 @@ If you just want the highest chance of success on first boot:
 - Make sure the SSID exactly matches `ESSID`.
 - If using WEP, re-check the key length and format.
 - If your router only offers WPA/WPA2/WPA3, the ERS-7 will likely not join it.
+- A matching SSID on a modern guest network is not enough by itself. In local
+  testing, the robot joined an older-style mobile hotspot much more reliably
+  than a modern router guest SSID with the same `AIBONET` name.
 
 ### `APMODE` confusion
 

@@ -64,6 +64,30 @@ Then eject the stick cleanly before inserting it into the ERS-7.
 - this is the cleanest path for testing real apps without fighting low-level
   8 MB media behavior
 
+## Verified Milestone
+
+We now have a verified live network result with the real robot:
+
+- the ERS-7 joined a compatible mobile-hotspot `AIBONET`
+- the robot obtained IP `192.168.43.8`
+- this machine reached the robot over Wi-Fi
+- `ping 192.168.43.8` succeeded
+- `http://192.168.43.8/` responded with:
+  `Server: AIBO HTTPD v1.14 (Aperios)`
+- the top page identified itself as `AIBO MIND 2 | Top Page`
+
+This is the strongest networking proof we have so far. It confirms:
+
+- the robot can join a compatible access point as a client
+- the live `WLANCONF.TXT` in `src/ERS7M2/WLANCONF.TXT` is a credible baseline
+- earlier failures were strongly influenced by access-point compatibility, not
+  just stick contents
+
+One important caveat:
+
+- port `59000` was still closed during this test, so this proved MIND 2 HTTP
+  reachability, not the OPEN-R wireless console
+
 ## Next App-Test Step
 
 Once the 64 MB stick boots reliably, the next work should be:
