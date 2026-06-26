@@ -1,13 +1,22 @@
 # openr-debian for ERS-7
 
-Debian workspace for building and testing Sony AIBO ERS-7 OPEN-R software.
+Debian workspace for developing existing and creating new Aibo ERS-7 OPEN-R software.
+
+The main effort in this repo is OPEN-R / Aperios runtime work under `aperios/`: documenting the original execution model from Sony's manuals, building a small host-side shim on Debian, and using original sample code to prove lifecycle behavior before attempting deeper simulation.
+
+## Current Focus
+
+- documenting the OPEN-R / Aperios object model, lifecycle, and messaging behavior from the Sony manuals
+- building a host-side shim under `aperios/` for original OPEN-R objects
+- validating assumptions by compiling and running the Sony `HelloWorld` sample on Debian
+- using that runtime understanding to guide later simulator and tooling work
 
 ## Start Here
 
-1. Check the local boot layout:
+1. Read the OPEN-R / Aperios notes and document map:
 
 ```bash
-scripts/simulate-openr-boot.sh samples/common/HelloWorld
+sed -n '1,220p' aperios/README.md
 ```
 
 2. Run the host-side lifecycle proof:
@@ -16,7 +25,13 @@ scripts/simulate-openr-boot.sh samples/common/HelloWorld
 make -C aperios run-hello-world
 ```
 
-3. If you want a real Memory Stick payload, build and stage `HelloWorld`:
+3. Check the local boot layout:
+
+```bash
+scripts/simulate-openr-boot.sh samples/common/HelloWorld
+```
+
+4. If you want a real Memory Stick payload, build and stage `HelloWorld`:
 
 ```bash
 export OPENRSDK_ROOT="$PWD/sdk/local/OPEN_R_SDK"
@@ -32,23 +47,42 @@ make -C samples/common/HelloWorld/HelloWorld \
 
 ## What This Repo Does
 
+- studies and documents the OPEN-R / Aperios runtime model using Sony manuals and companion papers
+- builds a first host-side OPEN-R lifecycle shim under `aperios/`
 - builds legacy OPEN-R tools on Debian
 - builds real OPEN-R sample payloads for Memory Stick deployment
 - simulates OPEN-R boot layout from `OBJECT.CFG`
-- runs a first host-side lifecycle shim for OPEN-R objects
+- preserves enough original sample structure to test assumptions against real Sony source
+
+## Aperios Work
+
+The center of gravity for the current project is [`aperios/README.md`](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/aperios/README.md). It maps the local Sony manuals and academic papers, summarizes the OPEN-R / Aperios runtime model, and documents the first Debian host shim for running original OPEN-R sample code.
+
+Right now that work has established:
+
+- a practical object model based on single-threaded message handling
+- an explicit lifecycle model centered on `DoInit`, `DoStart`, `DoStop`, and `DoDestroy`
+- a working Debian host proof for the original Sony `HelloWorld` sample
+- clear next steps around subject/observer readiness, buffering, and mailbox scheduling
 
 ## Easy Commands
 
-Check what a local OPEN-R stick tree would try to boot:
+Read the current OPEN-R / Aperios notes:
 
 ```bash
-scripts/simulate-openr-boot.sh samples/common/HelloWorld
+sed -n '1,220p' aperios/README.md
 ```
 
 Run the host-side lifecycle simulator for the original Sony `HelloWorld` sample:
 
 ```bash
 make -C aperios run-hello-world
+```
+
+Check what a local OPEN-R stick tree would try to boot:
+
+```bash
+scripts/simulate-openr-boot.sh samples/common/HelloWorld
 ```
 
 ## Build A Real Sample
@@ -99,9 +133,9 @@ The practical differences are:
 
 ## Where To Look
 
+- [aperios/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/aperios/README.md) for the main OPEN-R / Aperios runtime notes, document map, and host-shim status
 - [sdk/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/sdk/README.md) for Debian SDK setup
 - [simulator/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/simulator/README.md) for simulator scope and plan
-- [aperios/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/aperios/README.md) for OPEN-R/Aperios messaging notes
 - [features/ers7-wifi/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-wifi/README.md) for ERS-7 Wi-Fi setup from the bundled Sony docs
 - [features/aibo-mind2/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/aibo-mind2/README.md) for staging the bundled AIBO MIND 2 ERS-7 stick layout
 - [features/new-sticks-playbook/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/new-sticks-playbook/README.md) for the handoff workflow and proven conclusions for new 64 MB Sony sticks
