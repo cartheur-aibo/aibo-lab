@@ -4,7 +4,7 @@
 
 ## Included Documentation
 
-Official SDK documentation in `../docs/aperios/`:
+Official SDK documentation in `../docs/aperios/`.
 
 Setup and release notes:
 
@@ -23,9 +23,24 @@ Model-specific reference:
 - `../docs/aperios/ModelInformation_210_E.pdf` - hardware and device-specific behavior notes for the ERS-210 platform
 - `../docs/aperios/ModelInformation_220_E.pdf` - hardware and device-specific behavior notes for the ERS-220 platform
 
-Academic AIBO programming papers are in:
+Academic AIBO programming papers are in `../docs/papers/`.
 
-- `../docs/papers/`
+Beginner programming tutorials:
+
+- `../docs/papers/AIBO programming.pdf` - tutorial-style introduction to the AIBO programming environment and basic OPEN-R development
+- `../docs/papers/AIBO-quickstart.pdf` - quickstart guide covering SDK installation, Memory Stick setup, wireless networking, and first OPEN-R workflow steps
+- `../docs/papers/AIBOTutorial.pdf` - compact programming tutorial with basic OPEN-R constructs, build/run/debug flow, and small sample programs
+- `../docs/papers/Introduction to programming environment.pdf` - introductory overview of the AIBO programming environment and how OPEN-R development is structured
+- `../docs/papers/tutorial_OPENR_ENSTA-1.0.pdf` - longer OPEN-R programming tutorial with practical examples, written for learners using the Sony SDK
+
+Simulation, tooling, and platform adaptation:
+
+- `../docs/papers/opensdk08.pdf` - short paper on `openSDK`, an open-source OPEN-R implementation for simulation, debugging, and running AIBO code off-robot
+- `../docs/papers/ICC_2008-05-02.pdf` - technical report on adding camera functions to a Webots OPEN-R wrapper for AIBO robots
+
+Research and motion generation:
+
+- `../docs/papers/Kim_Kemilae.pdf` - thesis on generating and exporting motion sequences for the AIBO ERS-7 using a virtual robot and physics simulation
 
 General information and historical background:
 
