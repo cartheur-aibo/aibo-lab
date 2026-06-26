@@ -50,7 +50,7 @@ _General information and historical background:_
 
 Generally speaking, the public Internet is thin on Aperios internals. The Sony OPEN-R manuals are the only source of truth.
 
-## Essentials overview
+## Aperios essentials overview
 
 ### 1. OPEN-R objects are single-threaded message processors
 
