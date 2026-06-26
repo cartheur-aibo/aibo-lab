@@ -1,6 +1,6 @@
 # openr-debian for ERS-7
 
-Debian workspace for developing existing and creating new Aibo ERS-7 OPEN-R software.
+Debian workspace for developing existing and creating new (modern) Aibo ERS-7 OPEN-R software.
 
 The main effort in this repo is OPEN-R / Aperios runtime work under `aperios/`: documenting the original execution model from Sony's manuals, building a small host-side shim on Debian, and using original sample code to prove lifecycle behavior before attempting deeper simulation.
 
