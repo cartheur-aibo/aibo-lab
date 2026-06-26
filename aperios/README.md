@@ -153,7 +153,7 @@ Practical simulator implication:
 - sensor replay should be channel-specific
 - one global "tick" is too crude for believable ERS-7 behavior
 
-## What We Can Safely Extrapolate For Simulation
+## A safe extrapolation set of assumptions for simulation of Aperios
 
 These are reasonable simulator rules for this repo:
 
@@ -164,16 +164,16 @@ These are reasonable simulator rules for this repo:
 5. `DoInit -> DoStart -> runtime messages -> DoStop -> DoDestroy` is the minimum lifecycle.
 6. Sensor and actuator timing should be modeled as asynchronous event sources, not blocking calls.
 
-## What We Should Not Pretend Yet
+## What should NOT be assumed
 
-We still do not know enough to claim:
+There is not enough experience to claim:
 
 - exact Aperios scheduler policy
 - exact queue limits for every system object
 - interrupt timing behavior
 - precise kernel-level priority inheritance or preemption semantics
 
-So our simulator should present itself as:
+So the simulator should present itself as:
 
 - OPEN-R object-model simulation
 - not a full Aperios emulator
