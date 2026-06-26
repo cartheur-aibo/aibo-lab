@@ -6,9 +6,9 @@ This folder collects what we can say with confidence about the OPEN-R/Aperios ex
 
 Primary local sources:
 
-- `sdk/work/OPEN_R_SDK-docE-1.1.5-r1/ProgrammersGuide_E.pdf`
-- `sdk/work/OPEN_R_SDK-docE-1.1.5-r1/Level2ReferenceGuide_E.pdf`
-- `sdk/work/OPEN_R_SDK-docE-1.1.5-r1/ModelInformation_7_E.pdf`
+- `../sdk/work/OPEN_R_SDK-docE-1.1.5-r1/ProgrammersGuide_E.pdf`
+- `../sdk/work/OPEN_R_SDK-docE-1.1.5-r1/Level2ReferenceGuide_E.pdf`
+- `../sdk/work/OPEN_R_SDK-docE-1.1.5-r1/ModelInformation_7_E.pdf`
 
 Useful public background:
 
@@ -148,7 +148,7 @@ So our simulator should present itself as:
 
 This repo now includes a first host-side shim under:
 
-- `aperios/include/OPENR`
+- `include/OPENR`
 
 It currently provides minimal versions of:
 
@@ -176,7 +176,7 @@ That host run exercises:
 3. `DoStop`
 4. `DoDestroy`
 
-using the original `samples/common/HelloWorld/HelloWorld/HelloWorld.cc` source.
+using the original `../samples/common/HelloWorld/HelloWorld/HelloWorld.cc` source.
 
 ## Next Step
 
