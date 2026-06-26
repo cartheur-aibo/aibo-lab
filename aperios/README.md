@@ -6,7 +6,7 @@
 
 This section groups the local Sony OPEN-R manuals and companion AIBO papers by setup, APIs, hardware model, tutorials, simulation, and research focus.
 
-### Official SDK documentation in `../docs/aperios/`.
+### Official SDK documentation
 
 _Setup and release notes:_
 
@@ -25,7 +25,7 @@ _Model-specific reference:_
 - `../docs/aperios/ModelInformation_210_E.pdf` - hardware and device-specific behavior notes for the ERS-210 platform
 - `../docs/aperios/ModelInformation_220_E.pdf` - hardware and device-specific behavior notes for the ERS-220 platform
 
-### Academic AIBO programming papers in `../docs/papers/`.
+### Academic AIBO programming papers
 
 _Beginner programming tutorials:_
 
