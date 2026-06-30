@@ -139,9 +139,13 @@ future formatting reference even before any AIBO files are copied onto it.
 Recommended preservation command
 --------------------------------
 
-The captured raw image is stored at:
+The captured raw image is stored locally at:
 
-  features/ers7-stick-forensics/sony-32mb-reference-carte.img
+  local-artifacts/sony-32mb-reference-carte.img
+
+The checksum file remains in the repo at:
+
+  features/ers7-stick-forensics/sony-32mb-reference-carte.img.sha256
 
 Recorded SHA-256:
 
@@ -150,6 +154,6 @@ Recorded SHA-256:
 When raw device access is available, save the full stick image before rewriting
 the media:
 
-  dd if=/dev/sdX of=features/ers7-stick-forensics/sony-32mb-reference.img bs=1M status=progress
+  dd if=/dev/sdX of=local-artifacts/sony-32mb-reference-carte.img bs=1M status=progress
   sync
-  sha256sum features/ers7-stick-forensics/sony-32mb-reference.img
+  sha256sum local-artifacts/sony-32mb-reference-carte.img
