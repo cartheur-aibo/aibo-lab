@@ -141,11 +141,11 @@ Recommended preservation command
 
 The captured raw image is stored locally at:
 
-  local-artifacts/sony-32mb-reference-carte.img
+  local-artifacts/sony-32mb-reference.img
 
 The checksum file remains in the repo at:
 
-  features/ers7-stick-forensics/sony-32mb-reference-carte.img.sha256
+  features/reference-sticks/sony-32mb-reference.img.sha256
 
 Recorded SHA-256:
 
@@ -154,6 +154,6 @@ Recorded SHA-256:
 When raw device access is available, save the full stick image before rewriting
 the media:
 
-  dd if=/dev/sdX of=local-artifacts/sony-32mb-reference-carte.img bs=1M status=progress
+  dd if=/dev/sdX of=local-artifacts/sony-32mb-reference.img bs=1M status=progress
   sync
-  sha256sum local-artifacts/sony-32mb-reference-carte.img
+  sha256sum local-artifacts/sony-32mb-reference.img

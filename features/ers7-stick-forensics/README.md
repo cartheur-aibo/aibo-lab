@@ -139,8 +139,8 @@ unformatted sticks.
 
 We preserved the raw image of the `CARTE` reference stick locally at:
 
-- `local-artifacts/sony-32mb-reference-carte.img`
-- [sony-32mb-reference-carte.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-stick-forensics/sony-32mb-reference-carte.img.sha256)
+- `local-artifacts/sony-32mb-reference.img`
+- [sony-32mb-reference.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/sony-32mb-reference.img.sha256)
 
 The image is intentionally kept out of normal Git history for consistency with
 the larger MIND 3 reference image.
@@ -155,9 +155,9 @@ When a future session has direct host access to `/dev/sdX`, preserve a raw
 image before rewriting the media:
 
 ```bash
-dd if=/dev/sdX of=local-artifacts/sony-32mb-reference-carte.img bs=1M status=progress
+dd if=/dev/sdX of=local-artifacts/sony-32mb-reference.img bs=1M status=progress
 sync
-sha256sum local-artifacts/sony-32mb-reference-carte.img
+sha256sum local-artifacts/sony-32mb-reference.img
 ```
 
 If the media is mounted, unmount it cleanly first so the filesystem is not

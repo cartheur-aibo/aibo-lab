@@ -1,13 +1,24 @@
+MIND 3-class imaging process
+============================
+
+Use this when the stick already appears to be a MIND 3-class ERS-7 stick and
+you want the short preservation workflow.
+
+1. Capture the raw image locally
+
+```bash
 umount /dev/sdb1
 
 dd if=/dev/sdb of=local-artifacts/sony-mind3-reference.img bs=1M status=progress conv=fsync
-
 sha256sum local-artifacts/sony-mind3-reference.img | tee features/reference-sticks/sony-mind3-reference.img.sha256
-
 sync
-
 ls -lh local-artifacts/sony-mind3-reference.img features/reference-sticks/sony-mind3-reference.img.sha256
+```
 
-If you want a quick sanity check after capture:
+2. Sanity-check the capture
+
+```bash
 cmp -n 32768 /dev/sdb local-artifacts/sony-mind3-reference.img
-If cmp prints nothing, the first 32 KiB match.
+```
+
+If `cmp` prints nothing, the first `32768` bytes match.

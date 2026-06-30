@@ -1,0 +1,94 @@
+Sony stick identification and imaging process
+============================================
+
+Use this when a Sony stick turns up and we do not yet know whether it is:
+
+- a Sony-formatted 32 MB reference stick
+- a genuine MIND 2 stick
+- a MIND 3-class stick
+
+1. Identify the media and geometry
+
+```bash
+lsblk -o NAME,RM,SIZE,FSTYPE,LABEL,MOUNTPOINT
+mount | grep -E 'sdb|CARTE|media'
+cat /sys/class/block/sdb/device/vendor
+cat /sys/class/block/sdb/device/model
+cat /sys/class/block/sdb/size
+cat /sys/class/block/sdb1/start
+cat /sys/class/block/sdb1/size
+
+/sbin/fdisk -l /dev/sdb
+/sbin/fsck.fat -vn /dev/sdb1
+dd if=/dev/sdb bs=512 count=1 status=none | hexdump -C
+```
+
+Useful first classification clues:
+
+- `31M` media with partition start `19` often means Sony 32 MB class
+- `124M` media with partition start `33` is consistent with the captured MIND 3-class stick
+- `FAT12` plus Sony-era 32 MB geometry is a strong clue for the 32 MB reference class
+- `FAT16` plus larger media points more toward the preserved MIND 3-class image
+
+2. Inspect the mounted tree
+
+```bash
+mkdir -p /tmp/stickcheck
+mount -o ro /dev/sdb1 /tmp/stickcheck
+
+find /tmp/stickcheck -maxdepth 3 | sed -n '1,200p'
+find /tmp/stickcheck -maxdepth 5 \
+  \( -name 'MEMSTICK.IND' -o -name 'BOOTPARA' -o -name 'VERSION' \
+     -o -name 'WLANCONF.TXT' -o -name 'SA.BIN' -o -name 'STM.BIN' \
+     -o -path '*/APP/PC/DIARY' \) | sed -n '1,200p'
+du -sh /tmp/stickcheck
+```
+
+Interpretation:
+
+- Sony 32 MB formatting reference stick:
+  `MEMSTICK.IND` and `PALM/` may be present, but `OPEN-R/` may be absent
+- Genuine MIND 2:
+  `PALM/`, `OPEN-R/`, `MEMSTICK.IND`, `BOOTPARA`, version files, WLAN config
+  no `SA.BIN`, `STM.BIN`, or `APP/PC/DIARY`
+- MIND 3-class:
+  `MEMSTICK.IND`, `OPEN-R/BOOTPARA`, `SA.BIN`, `STM.BIN`, `APP/PC/DIARY`
+
+3. Capture the raw image locally
+
+```bash
+cd /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian
+umount /dev/sdb1
+```
+
+If it is a Sony 32 MB formatting reference stick:
+
+```bash
+dd if=/dev/sdb of=local-artifacts/sony-32mb-reference.img bs=1M status=progress conv=fsync
+sha256sum local-artifacts/sony-32mb-reference.img | tee features/reference-sticks/sony-32mb-reference.img.sha256
+sync
+ls -lh local-artifacts/sony-32mb-reference.img features/reference-sticks/sony-32mb-reference.img.sha256
+cmp -n 32768 /dev/sdb local-artifacts/sony-32mb-reference.img
+```
+
+If it is a genuine MIND 2 stick:
+
+```bash
+dd if=/dev/sdb of=local-artifacts/sony-mind2-reference.img bs=1M status=progress conv=fsync
+sha256sum local-artifacts/sony-mind2-reference.img | tee features/reference-sticks/sony-mind2-reference.img.sha256
+sync
+ls -lh local-artifacts/sony-mind2-reference.img features/reference-sticks/sony-mind2-reference.img.sha256
+cmp -n 32768 /dev/sdb local-artifacts/sony-mind2-reference.img
+```
+
+If it is a MIND 3-class stick:
+
+```bash
+dd if=/dev/sdb of=local-artifacts/sony-mind3-reference.img bs=1M status=progress conv=fsync
+sha256sum local-artifacts/sony-mind3-reference.img | tee features/reference-sticks/sony-mind3-reference.img.sha256
+sync
+ls -lh local-artifacts/sony-mind3-reference.img features/reference-sticks/sony-mind3-reference.img.sha256
+cmp -n 32768 /dev/sdb local-artifacts/sony-mind3-reference.img
+```
+
+If `cmp` prints nothing, the first `32768` bytes match.
