@@ -1,0 +1,155 @@
+Sony 32 MB reference stick capture
+==================================
+
+Purpose
+-------
+
+Preserve the observed low-level formatting details of a Sony-prepared 32 MB
+Memory Stick that was inserted in the `MSAC-US40` reader and mounted as:
+
+  /media/cartheur/CARTE
+
+This stick is not currently an AIBO boot stick, but it is valuable as a
+reference when future development work encounters blank or unformatted Memory
+Sticks and needs an authentic Sony-era formatting baseline.
+
+Observed filesystem contents
+----------------------------
+
+  /media/cartheur/CARTE
+  /media/cartheur/CARTE/MEMSTICK.IND
+  /media/cartheur/CARTE/PALM
+  /media/cartheur/CARTE/PALM/volInfo.txt
+  /media/cartheur/CARTE/PALM/Launcher
+  /media/cartheur/CARTE/PALM/Launcher/LAUNCHER.DAT
+  /media/cartheur/CARTE/PALM/Launcher/StikZap_14.prc
+  /media/cartheur/CARTE/PALM/PROGRAMS
+  /media/cartheur/CARTE/PALM/PROGRAMS/MSFILES
+  /media/cartheur/CARTE/System Volume Information
+  /media/cartheur/CARTE/System Volume Information/IndexerVolumeGuid
+
+Notably absent:
+
+  OPEN-R/
+
+Host-visible identity
+---------------------
+
+  NAME   RM   SIZE FSTYPE LABEL MOUNTPOINT
+  sdb     1    31M
+  `-sdb1  1  30.9M vfat   CARTE /media/cartheur/CARTE
+
+  /dev/sdb1 on /media/cartheur/CARTE type vfat
+
+  vendor: Sony
+  model:  MSAC-US40
+  disk sectors: 63424
+  partition start: 19
+  partition sectors: 63341
+
+fdisk capture
+-------------
+
+  Disk /dev/sdb: 30.97 MiB, 32473088 bytes, 63424 sectors
+  Disk model: MSAC-US40
+  Units: sectors of 1 * 512 = 512 bytes
+  Sector size (logical/physical): 512 bytes / 512 bytes
+  I/O size (minimum/optimal): 512 bytes / 512 bytes
+  Disklabel type: dos
+  Disk identifier: 0x00000000
+
+  Device     Boot Start   End Sectors  Size Id Type
+  /dev/sdb1  *       19 63359   63341 30.9M  1 FAT12
+
+fsck.fat -vn capture
+--------------------
+
+  Boot sector contents:
+  System ID "        "
+  Media byte 0xf8 (hard disk)
+         512 bytes per logical sector
+       16384 bytes per cluster
+           1 reserved sector
+  First FAT starts at byte 512 (sector 1)
+           2 FATs, 12 bit entries
+        3072 bytes per FAT (= 6 sectors)
+  Root directory starts at byte 6656 (sector 13)
+         512 root directory entries
+  Data area starts at byte 23040 (sector 45)
+        1978 data clusters (32407552 bytes)
+  16 sectors/track, 4 heads
+          19 hidden sectors
+       63341 sectors total
+
+  Dirty bit is set. Fs was not properly unmounted and some data may be corrupt.
+   Automatically removing dirty bit.
+
+  Leaving filesystem unchanged.
+  /dev/sdb1: 11 files, 12/1978 clusters
+
+MBR sector hexdump
+------------------
+
+  00000000  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00
+  *
+  000001b0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 80 01
+  000001c0  04 00 01 03 d0 dd 13 00  00 00 6d f7 00 00 00 00
+  000001d0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00
+  *
+  000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa
+
+Partition boot sector hexdump
+-----------------------------
+
+Read from:
+
+  dd if=/dev/sdb bs=512 skip=19 count=1 status=none | hexdump -C
+
+Observed bytes:
+
+  00000000  e9 00 00 20 20 20 20 20  20 20 20 00 02 20 01 00
+  00000010  02 00 02 6d f7 f8 06 00  10 00 04 00 13 00 00 00
+  00000020  00 00 00 00 00 01 29 78  56 34 12 43 41 52 54 45
+  00000030  20 20 20 20 20 20 46 41  54 31 32 20 20 20 00 00
+  00000040  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00
+  *
+  000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa
+
+Interpretation
+--------------
+
+This stick matches the same low-level Sony 32 MB pattern already observed on
+the working AIBO MIND 2 stick:
+
+  partition start:   19
+  partition sectors: 63341
+  sector size:       512
+  cluster size:      16384
+  FATs:              2
+  FAT size:          6 sectors
+  root entries:      512
+  heads:             4
+  hidden sectors:    19
+  jump bytes:        e9 00 00
+  MBR disk id:       0x00000000
+
+This is the most important conclusion. It means this stick is useful as a
+future formatting reference even before any AIBO files are copied onto it.
+
+Recommended preservation command
+--------------------------------
+
+The captured raw image is stored at:
+
+  features/ers7-stick-forensics/sony-32mb-reference-carte.img
+
+Recorded SHA-256:
+
+  de73c765713e95c9cc73e54bb01bbc727ed4bec4a8845e87a931fb5221e2499c
+
+When raw device access is available, save the full stick image before rewriting
+the media:
+
+  dd if=/dev/sdX of=features/ers7-stick-forensics/sony-32mb-reference.img bs=1M status=progress
+  sync
+  sha256sum features/ers7-stick-forensics/sony-32mb-reference.img

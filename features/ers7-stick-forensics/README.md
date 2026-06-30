@@ -100,3 +100,62 @@ If the goal is to get to a bootable result fastest, the next best direction is:
 
 If the goal stays focused on the 8 MB stick specifically, the next phase should
 be sector-level comparison and reproduction, not more `OPEN-R` payload changes.
+
+## Sony 32 MB Reference Media: `CARTE`
+
+We also captured a second Sony-prepared 32 MB stick that is useful as a
+formatting reference even though it is not an AIBO boot stick yet.
+
+Its recorded details live in:
+
+- [32mb-carte-capture.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-stick-forensics/32mb-carte-capture.txt)
+
+The important conclusion is that this media matches the same Sony low-level
+formatting pattern as the working 32 MB AIBO MIND 2 stick:
+
+- `dos` MBR
+- bootable `FAT12` partition
+- start sector `19`
+- partition size `63341` sectors
+- `16 KB` clusters
+- `6` sectors per FAT
+- `4` heads
+- `19` hidden sectors
+- partition jump bytes `e9 00 00`
+- MBR disk identifier `0x00000000`
+
+Unlike the working MIND 2 stick, this one currently contains only:
+
+- `MEMSTICK.IND`
+- `PALM/`
+- Palm launcher files
+
+and does not contain `OPEN-R/`.
+
+That makes it a strong "Sony formatting reference" for future work on blank or
+unformatted sticks.
+
+## Raw Image Preservation
+
+We preserved a raw image of the `CARTE` reference stick here:
+
+- [sony-32mb-reference-carte.img](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-stick-forensics/sony-32mb-reference-carte.img)
+- [sony-32mb-reference-carte.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-stick-forensics/sony-32mb-reference-carte.img.sha256)
+
+Recorded SHA-256:
+
+```text
+de73c765713e95c9cc73e54bb01bbc727ed4bec4a8845e87a931fb5221e2499c
+```
+
+When a future session has direct host access to `/dev/sdX`, preserve a raw
+image before rewriting the media:
+
+```bash
+dd if=/dev/sdX of=features/ers7-stick-forensics/sony-32mb-reference.img bs=1M status=progress
+sync
+sha256sum features/ers7-stick-forensics/sony-32mb-reference.img
+```
+
+If the media is mounted, unmount it cleanly first so the filesystem is not
+captured in a dirty state.
