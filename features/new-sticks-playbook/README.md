@@ -18,6 +18,38 @@ Use larger original Sony sticks to:
 2. test app overlays safely
 3. test programmable-stick samples such as camera serving
 
+## Closure
+
+The original "can we make a working stick?" question is now closed enough for
+future agents to treat it as solved operationally.
+
+What is now established:
+
+- a Sony 32 MB class stick with correct low-level formatting can be preserved
+  as raw media
+- a non-boot Sony-formatted stick can be diagnosed from its image contents
+- a missing `OPEN-R/` plus missing `MEMSTICK.IND` explains the unhappy
+  startup-and-power-off behavior
+- the repo now contains a repeatable scan workflow and restore workflow
+- a restored stick has been proven to boot on real hardware
+- the repaired working stick has been preserved as its own raw image
+
+The practical result is:
+
+- a future user or agent should not need to rediscover stick-making from
+  scratch
+- they should start from the provided tools and preserved reference artifacts
+  instead
+
+Canonical tools for that closed problem:
+
+- [scripts/scan-sony-stick-image.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/scan-sony-stick-image.sh)
+- [scripts/restore-mind2-stick.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/restore-mind2-stick.sh)
+- [features/aibo-mind2/RESTORE-SONY-32MB-STICK.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/aibo-mind2/RESTORE-SONY-32MB-STICK.md)
+- [features/reference-sticks/MILESTONE-2026-07-01-mind2-recovery.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/MILESTONE-2026-07-01-mind2-recovery.md)
+- [features/reference-sticks/REPAIRED-MIND2-PRESERVATION.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/REPAIRED-MIND2-PRESERVATION.md)
+- [features/reference-sticks/sony-mind2-restored-2026-07-01.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/sony-mind2-restored-2026-07-01.img.sha256)
+
 ## What Is Already Proven
 
 These points are no longer guesses:
@@ -218,15 +250,16 @@ sync
 
 ## Definition Of The Next Big Milestone
 
-The next big milestone is not merely "the new stick mounts."
+The next big milestone is no longer merely "the new stick mounts" or even
+"the stick boots."
 
 It is this:
 
-- a newly prepared larger Sony stick boots in the ERS-7
-- the robot joins Wi-Fi
-- the host reaches the robot over the network
-- the stock or sample service responds exactly as expected
+- distinctive higher-order MIND 2 behavior is preserved on real media
+- that behavior can be described precisely
+- candidate persistent-state files can be identified
+- one-variable tests can show whether the behavior is reproducible or unique
 
-For stock MIND 2, that means port `80`.
+That next phase now lives in:
 
-For camera streaming, that means port `60080`.
+- [features/mind2-behavior-research/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/README.md)

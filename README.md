@@ -10,6 +10,7 @@ The main effort in this repo is OPEN-R / Aperios runtime work under `aperios/`: 
 - building a host-side shim under `aperios/` for original OPEN-R objects
 - validating assumptions by compiling and running the Sony `HelloWorld` sample on Debian
 - using that runtime understanding to guide later simulator and tooling work
+- preserving, restoring, and now behaviorally studying real ERS-7 MIND 2 stick state
 
 ## Start Here
 
@@ -53,6 +54,8 @@ make -C samples/common/HelloWorld/HelloWorld \
 - builds real OPEN-R sample payloads for Memory Stick deployment
 - simulates OPEN-R boot layout from `OBJECT.CFG`
 - preserves enough original sample structure to test assumptions against real Sony source
+- preserves real-stick images and recovery workflows for ERS-7 MIND 2 media
+- pivots from stick-making into behavior forensics on persistent MIND 2 state
 
 ## Aperios Work
 
@@ -143,6 +146,7 @@ The practical differences are:
 - [features/ers7m2-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-test-stick/README.md) for the larger-stick full MIND 2 app-testing workflow
 - [features/ers7m3-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m3-test-stick/README.md) for the larger-stick full MIND 3 app-testing workflow
 - [features/reference-sticks/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/README.md) for the active baseline records of preserved genuine MIND 2 and MIND 3 sticks
+- [features/mind2-behavior-research/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/README.md) for the new behavior-forensics research loop, candidate files, and research questions
 - [features/ers7-camera-stream/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-camera-stream/README.md) for the ERS-7 `W3AIBO` camera-serving workflow on port `60080`
 - [features/hello-world/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/hello-world/README.md) for a scratch-built ERS-7 Wi-Fi test stick
 - [features/ers7-runtime-base/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-runtime-base/README.md) for a runtime-system hybrid ERS-7 test stick
