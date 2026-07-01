@@ -47,9 +47,14 @@ scripts/simulate-openr-boot.sh
 What it does:
 
 - reads `OPEN-R/MW/CONF/OBJECT.CFG`
-- lists the object load plan in order
-- checks whether each referenced `/MS/...` object exists in the local Memory Stick tree
-- reports missing dependencies such as system objects expected from a base OPEN-R stick
+- lists the object load plan in order when the file is a plain-text `/MS/...`
+  object list
+- detects retail encoded/binary `OBJECT.CFG` files and reports them honestly as
+  unsupported instead of pretending they load zero objects
+- checks whether each referenced `/MS/...` object exists in the local Memory
+  Stick tree
+- reports missing dependencies such as system objects expected from a base
+  OPEN-R stick
 
 Example:
 
@@ -68,6 +73,8 @@ Why it matters:
 
 - it is the closest Debian-side proof of "what Aperios will try to load first"
 - it catches incomplete sample payloads before copying to real media
+- it now separates "plain-text sample config we can validate" from "retail
+  Sony config we have detected but cannot yet decode"
 
 ### 2. Lifecycle Simulator
 

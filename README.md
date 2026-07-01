@@ -53,6 +53,8 @@ make -C samples/common/HelloWorld/HelloWorld \
 - builds legacy OPEN-R tools on Debian
 - builds real OPEN-R sample payloads for Memory Stick deployment
 - simulates OPEN-R boot layout from `OBJECT.CFG`
+- distinguishes plain-text sample `OBJECT.CFG` files from unsupported retail
+  encoded configs so zero-object reports are not misread
 - preserves enough original sample structure to test assumptions against real Sony source
 - preserves real-stick images and recovery workflows for ERS-7 MIND 2 media
 - pivots from stick-making into behavior forensics on persistent MIND 2 state
