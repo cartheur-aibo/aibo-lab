@@ -1,0 +1,11 @@
+Live hardware matrix preparation
+Date: 2026-07-01
+Injected lab WLAN: 0
+
+Prepared trees:
+- 01-baseline -> features/aibo-mind2/build/stick
+- 02-0400 -> features/mind2-behavior-research/build/aibo-mind2-0400-specimen
+- 03-0400-plus-1200 -> features/mind2-behavior-research/build/aibo-mind2-0400-1200-specimen
+- 04-0400-plus-ieg -> features/mind2-behavior-research/build/aibo-mind2-0400-plus-ieg
+
+Copy each tree to separate sacrificial media before testing.
