@@ -62,12 +62,15 @@ struct BehaviorProfile {
     int wake_intensity = 0;
     int shutdown_resistance = 0;
     int social_attachment = 0;
+    int routine_rigidity = 0;
     int adaptability = 0;
 };
 
 struct SimulationState {
     std::string mode = "offline";
     int engagement = 0;
+    int routine_hold = 0;
+    int idle_ticks = 0;
     int fatigue = 0;
     int shutdown_deferrals = 0;
 };
@@ -336,6 +339,7 @@ BehaviorProfile load_profile(const std::string& tree_root) {
     }
     if (profile.ieg.sparse_fixed_schedule) {
         profile.social_attachment += 2;
+        profile.routine_rigidity += 3;
         if (row0400_active) {
             profile.shutdown_resistance += 1;
         }
@@ -409,6 +413,7 @@ void print_profile(const BehaviorProfile& profile) {
     std::cout << "  wake_intensity=" << profile.wake_intensity << "\n";
     std::cout << "  shutdown_resistance=" << profile.shutdown_resistance << "\n";
     std::cout << "  social_attachment=" << profile.social_attachment << "\n";
+    std::cout << "  routine_rigidity=" << profile.routine_rigidity << "\n";
     std::cout << "  adaptability=" << profile.adaptability << "\n";
     if (profile.retail_connect.present) {
         std::cout << "  mw_connect_records=" << profile.retail_connect.record_count << "\n";
@@ -445,10 +450,14 @@ void note_expected_writes(const std::string& event) {
         std::cout << "  likely-writes: STTLOG, PAT.LOG\n";
     } else if (event == "head_touch" || event == "back_touch" || event == "chest_button") {
         std::cout << "  likely-writes: PAT.LOG, FVAR, GVAR\n";
+    } else if (event == "nearby_presence") {
+        std::cout << "  likely-writes: PAT.LOG\n";
     } else if (event == "shutdown_request") {
         std::cout << "  likely-writes: STTLOG, PAT.LOG\n";
     } else if (event == "sleep_request") {
         std::cout << "  likely-writes: STTLOG, AWAKING.CFG\n";
+    } else if (event == "schedule_disruption") {
+        std::cout << "  likely-writes: STTLOG, AWAKING.CFG, IEG.CFG\n";
     }
 }
 
@@ -458,6 +467,8 @@ void simulate_event(const std::string& event, const BehaviorProfile& profile, Si
     if (event == "boot") {
         state.mode = "awake";
         state.engagement = profile.social_attachment / 2;
+        state.routine_hold = profile.routine_rigidity;
+        state.idle_ticks = 0;
         state.fatigue = 0;
         std::cout << "  transition: offline -> awake\n";
         std::cout << "  startup-audio: ";
@@ -487,10 +498,32 @@ void simulate_event(const std::string& event, const BehaviorProfile& profile, Si
         return;
     }
 
-    if (event == "head_touch" || event == "back_touch") {
-        state.engagement += 2;
-        std::cout << "  symbolic-behavior: increase social engagement and keep posture awake\n";
+    if (event == "nearby_presence") {
+        if (profile.social_attachment >= 8) {
+            state.engagement += 1;
+        }
+        std::cout << "  symbolic-behavior: register nearby presence without direct contact\n";
+        std::cout << "  cue-salience=neutral\n";
         std::cout << "  engagement=" << state.engagement << "\n";
+        std::cout << "  routine_hold=" << state.routine_hold << "\n";
+        note_expected_writes(event);
+        return;
+    }
+
+    if (event == "head_touch" || event == "back_touch") {
+        if (event == "head_touch") {
+            state.engagement += 3;
+        } else {
+            state.engagement += 1;
+        }
+        if (event == "head_touch" && state.routine_hold > 0) {
+            state.routine_hold -= 1;
+        }
+        std::cout << "  symbolic-behavior: increase engagement and keep posture awake\n";
+        std::cout << "  touch-salience="
+                  << (event == "head_touch" ? "social-high" : "social-low") << "\n";
+        std::cout << "  engagement=" << state.engagement << "\n";
+        std::cout << "  routine_hold=" << state.routine_hold << "\n";
         note_expected_writes(event);
         return;
     }
@@ -504,7 +537,8 @@ void simulate_event(const std::string& event, const BehaviorProfile& profile, Si
     }
 
     if (event == "shutdown_request") {
-        const int resistance = profile.shutdown_resistance + state.engagement - state.fatigue;
+        const int resistance =
+            profile.shutdown_resistance + state.engagement + state.routine_hold - state.fatigue;
         const bool retail_connect_bias =
             profile.retail_connect.mixed_stable_tail_layout && state.engagement >= 1;
         if ((profile.shutdown_resistance >= 3 || retail_connect_bias) &&
@@ -526,7 +560,7 @@ void simulate_event(const std::string& event, const BehaviorProfile& profile, Si
     }
 
     if (event == "sleep_request") {
-        if (profile.ieg.sparse_fixed_schedule && profile.shutdown_resistance >= 4) {
+        if (state.routine_hold >= 2 && profile.shutdown_resistance >= 3) {
             std::cout << "  symbolic-behavior: postpone sleep to preserve a fixed routine state\n";
         } else if (state.engagement >= 5 && profile.shutdown_resistance >= 2) {
             std::cout << "  symbolic-behavior: postpone sleep because engagement remains high\n";
@@ -538,9 +572,44 @@ void simulate_event(const std::string& event, const BehaviorProfile& profile, Si
         return;
     }
 
+    if (event == "schedule_disruption") {
+        if (state.routine_hold >= 2 && profile.ieg.sparse_fixed_schedule) {
+            state.fatigue += 1;
+            state.routine_hold -= 1;
+            std::cout << "  symbolic-behavior: preserve the current routine despite schedule disruption\n";
+            std::cout << "  verdict: routine state preserved\n";
+        } else if (state.engagement >= 5 && profile.shutdown_resistance >= 2) {
+            state.engagement -= 1;
+            std::cout << "  symbolic-behavior: redirect disruption into renewed social attention\n";
+            std::cout << "  verdict: seek interaction rather than preserve routine\n";
+        } else {
+            state.mode = "alert";
+            std::cout << "  symbolic-behavior: accept disruption and reorient state\n";
+            std::cout << "  verdict: routine broken\n";
+        }
+        std::cout << "  engagement=" << state.engagement << "\n";
+        std::cout << "  routine_hold=" << state.routine_hold << "\n";
+        std::cout << "  fatigue=" << state.fatigue << "\n";
+        note_expected_writes(event);
+        return;
+    }
+
     if (event == "idle_tick") {
+        ++state.idle_ticks;
+        if (state.engagement > 0) {
+            state.engagement -= 1;
+        }
+        if (profile.ieg.sparse_fixed_schedule) {
+            if (state.routine_hold > 0 && state.idle_ticks > 1) {
+                state.routine_hold -= 1;
+            }
+        } else if (state.routine_hold > 0) {
+            state.routine_hold = 0;
+        }
         state.fatigue += 1;
         std::cout << "  symbolic-behavior: idle decay\n";
+        std::cout << "  engagement=" << state.engagement << "\n";
+        std::cout << "  routine_hold=" << state.routine_hold << "\n";
         std::cout << "  fatigue=" << state.fatigue << "\n";
         return;
     }
@@ -595,6 +664,7 @@ int main(int argc, char** argv) {
         std::cout << "\nfinal-state:\n";
         std::cout << "  mode=" << state.mode << "\n";
         std::cout << "  engagement=" << state.engagement << "\n";
+        std::cout << "  routine_hold=" << state.routine_hold << "\n";
         std::cout << "  fatigue=" << state.fatigue << "\n";
         std::cout << "  shutdown_deferrals=" << state.shutdown_deferrals << "\n";
         std::cout << "\n";

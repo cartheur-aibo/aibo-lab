@@ -1,0 +1,7 @@
+# Probe whether social-touch reinforcement and later disruption distinguish
+# social-weighted bridge paths from routine-weighted bridge paths.
+boot
+observe_startup_audio
+head_touch
+schedule_disruption
+sleep_request

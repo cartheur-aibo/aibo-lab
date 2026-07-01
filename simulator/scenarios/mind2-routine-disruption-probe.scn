@@ -1,0 +1,8 @@
+# Probe routine-preservation directly after the first idle transition.
+# The goal is to separate sparse-IEG routine persistence from social-weighted
+# bridge paths before a final sleep request.
+boot
+observe_startup_audio
+idle_tick
+schedule_disruption
+sleep_request

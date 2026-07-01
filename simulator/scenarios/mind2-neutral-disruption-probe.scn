@@ -1,0 +1,6 @@
+# Probe whether non-contact nearby presence is enough to sustain a social path.
+boot
+observe_startup_audio
+nearby_presence
+schedule_disruption
+sleep_request

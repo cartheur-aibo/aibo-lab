@@ -1,0 +1,6 @@
+# Probe whether lower-salience touch still sustains social persistence.
+boot
+observe_startup_audio
+back_touch
+schedule_disruption
+sleep_request

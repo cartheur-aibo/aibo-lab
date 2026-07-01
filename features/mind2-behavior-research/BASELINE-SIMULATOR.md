@@ -58,6 +58,7 @@ The simulator emits:
 - a retail MW connection-table partition summary when present
 - event-by-event transitions
 - a shutdown-resistance judgment
+- a routine-preservation judgment on routine-disruption probes
 - likely file-write hints for each event
 
 That is enough to support:
@@ -65,6 +66,31 @@ That is enough to support:
 - specimen vs reference comparison
 - hypothesis logging
 - better-targeted live trials
+
+## Current Event Set
+
+The current scenario vocabulary includes:
+
+- `boot`
+- `observe_startup_audio`
+- `head_touch`
+- `back_touch`
+- `chest_button`
+- `idle_tick`
+- `shutdown_request`
+- `sleep_request`
+- `schedule_disruption`
+
+The newest addition, `schedule_disruption`, exists to probe whether a tree
+looks more routine-preserving or merely more socially persistent.
+
+Current scenario probes now include:
+
+- `mind2-routine-sleep-probe.scn`
+- `mind2-routine-disruption-probe.scn`
+- `mind2-social-disruption-probe.scn`
+- `mind2-low-salience-disruption-probe.scn`
+- `mind2-neutral-disruption-probe.scn`
 
 ## Run It
 
@@ -127,6 +153,51 @@ differences as a repeatable host-side hypothesis.
 It also means the simulator now exposes one of the repo's strongest structural
 reverse-engineering clues directly in its runtime output, instead of keeping it
 only in offline notes and scripts.
+
+## Current Routine Boundary
+
+The current simulator now also reaches a cleaner routine-side separation:
+
+- `mind2-routine-sleep-probe.scn`
+  - `0400 + IEG.CFG` postpones sleep to preserve a fixed routine state
+  - baseline, `0400`, and `0400 + 1200` still enter sleep
+- `mind2-routine-disruption-probe.scn`
+  - `0400 + IEG.CFG` preserves routine state after a modeled disruption
+  - baseline, `0400`, and `0400 + 1200` break routine and fall through toward
+    sleep
+- `mind2-social-disruption-probe.scn`
+  - `0400 + IEG.CFG` preserves routine state
+  - `0400 + 1200` seeks interaction rather than preserving routine
+  - `0400` alone redirects briefly but still enters sleep
+  - baseline breaks routine and enters sleep
+- `mind2-low-salience-disruption-probe.scn`
+  - `0400 + 1200` still redirects into interaction after `back_touch`
+  - but it no longer retains enough engagement to postpone sleep
+  - `0400 + IEG.CFG` still preserves routine state and postpones sleep
+  - `0400` and baseline enter sleep
+- `mind2-neutral-disruption-probe.scn`
+  - `0400 + 1200` reacts to nearby presence and briefly redirects
+  - but that neutral cue still does not sustain sleep postponement
+  - `0400 + IEG.CFG` still preserves routine state and postpones sleep
+  - `0400` and baseline enter sleep
+
+This does not prove Sony's internal behavior logic, but it does give the repo
+two distinct host-side probe families:
+
+- shutdown/social persistence probes
+- routine-preservation probes
+
+And one hybrid probe family:
+
+- touch-plus-disruption probes that distinguish social persistence from
+  routine preservation
+
+Within that hybrid family, the current model now separates:
+
+- high-salience social persistence
+- low-salience social redirection
+- neutral-cue social sensitivity
+- routine preservation
 
 ## Current Swap Boundary
 

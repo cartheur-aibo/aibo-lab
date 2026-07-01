@@ -113,6 +113,19 @@ Supporting tools and notes:
 - [STTLOG-0400-NOTE-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/STTLOG-0400-NOTE-2026-07-01.md)
 - [STTLOG-1200-NOTE-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/STTLOG-1200-NOTE-2026-07-01.md)
 - [IEG-CFG-NOTE-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/IEG-CFG-NOTE-2026-07-01.md)
+- [LIVE-HYPOTHESES-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/LIVE-HYPOTHESES-2026-07-01.md)
+- [EVENT-SEMANTICS-BACKLOG-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/EVENT-SEMANTICS-BACKLOG-2026-07-01.md)
+
+Current best simulator-side conclusion boundary:
+
+- `0400` remains the strongest shutdown-side pivot
+- `1200` still reads as a more social-weighted bridge
+- specimen-side sparse `IEG.CFG` now separates as a more routine-preserving
+  bridge under no-touch sleep and routine-disruption probes
+- `1200` now also looks more dependent on socially salient touch than on lower-
+  salience touch
+- `1200` can react even to nearby presence, but that neutral cue alone still
+  does not preserve wakefulness the way the routine-weighted path does
 
 ## Why This Matters
 
