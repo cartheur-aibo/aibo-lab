@@ -115,6 +115,7 @@ Supporting tools and notes:
 - [IEG-CFG-NOTE-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/IEG-CFG-NOTE-2026-07-01.md)
 - [LIVE-HYPOTHESES-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/LIVE-HYPOTHESES-2026-07-01.md)
 - [EVENT-SEMANTICS-BACKLOG-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/EVENT-SEMANTICS-BACKLOG-2026-07-01.md)
+- [CURRENT-VERDICT-TABLE-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/CURRENT-VERDICT-TABLE-2026-07-01.md)
 
 Current best simulator-side conclusion boundary:
 
