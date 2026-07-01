@@ -1,0 +1,60 @@
+\documentclass[12pt]{article}
+
+\usepackage[paperwidth=90mm,paperheight=122mm,margin=6mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setlength{\emergencystretch}{1.5em}
+\widowpenalty=10000
+\clubpenalty=10000
+\sloppy
+\raggedright
+\urlstyle{same}
+\setlist{leftmargin=*,itemsep=0.25em,topsep=0.35em,parsep=0pt,partopsep=0pt}
+
+\makeatletter
+\renewcommand{\maketitle}{
+  \begin{center}
+    {\Large\bfseries Toward Behavioral Forensics of AIBO ERS-7 MIND 2\par}
+    \vspace{0.4em}
+    {\normalsize Recovery, Preservation, and Hypothesis-Driven Modeling of Persistent State\par}
+    \vspace{0.5em}
+    {\small Draft Manuscript\par}
+    {\small July 1, 2026\par}
+  \end{center}
+  \vspace{0.5em}
+}
+\makeatother
+
+\newcommand{\DynamicBoundaryPresentation}{
+\subsection*{Dynamic Boundary Summary}
+The current dynamic conclusion boundary is:
+\begin{itemize}[leftmargin=*]
+\item Routine endurance:
+  \texttt{0400} breaks and sleeps; \texttt{0400 + 1200} also breaks and
+  sleeps; \texttt{0400 + IEG} preserves both cycles and stays awake.
+\item High-salience social endurance:
+  \texttt{0400} breaks and sleeps; \texttt{0400 + 1200} yields two social
+  redirections and then sleep; \texttt{0400 + IEG} preserves routine and stays
+  awake.
+\item Low-salience social endurance:
+  \texttt{0400} breaks and sleeps; \texttt{0400 + 1200} weakens sooner and
+  then sleeps; \texttt{0400 + IEG} preserves routine and stays awake.
+\end{itemize}
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+\input{paper/mind2_behavior_forensics_body.tex}
+\end{document}
