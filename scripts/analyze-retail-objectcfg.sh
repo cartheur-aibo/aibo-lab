@@ -58,3 +58,36 @@ case "$hash" in
     echo "match: no known preserved retail OBJECT.CFG baseline"
     ;;
 esac
+
+zero_bytes=$(od -An -tu1 -v "$CFG" | tr ' ' '\n' | awk 'NF { if ($1 == 0) count++ } END { print count + 0 }')
+string_count=$(strings -a "$CFG" | wc -l)
+ms_refs=$(grep -a -c '/MS/' "$CFG" || true)
+path_like=$(strings -a "$CFG" | grep -E -c 'OPEN-R|\\.BIN|/MS/' || true)
+
+echo "zero-bytes: $zero_bytes"
+echo "printable-strings: $string_count"
+echo "embedded-/MS/-refs: $ms_refs"
+echo "path-like-strings: $path_like"
+
+for width in 24 12 8; do
+  if [ $((size % width)) -eq 0 ]; then
+    echo "candidate-record-width: $width bytes ($((size / width)) records)"
+  fi
+done
+
+echo "8-byte-blocks: $((size / 8))"
+
+echo
+echo "first-bytes:"
+xxd -g 1 "$CFG" | sed -n '1,4p'
+
+echo
+if [ "$string_count" -le 6 ] && [ "$path_like" -eq 0 ] && [ "$ms_refs" -eq 0 ]; then
+  echo "characterization: dense binary blob with little or no embedded object-path text"
+else
+  echo "characterization: contains some printable material, but not a plain-text object list"
+fi
+
+if [ $((size % 8)) -eq 0 ]; then
+  echo "hypothesis: consistent with a wider 8-byte-aligned retail binary-config family"
+fi
