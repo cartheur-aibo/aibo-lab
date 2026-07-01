@@ -88,6 +88,23 @@ The current front-door questions live here:
 
 - [QUESTIONS.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/QUESTIONS.md)
 
+## Experimental Workflow
+
+The first operational transplant workflow now lives here:
+
+- [WORKFLOW.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/WORKFLOW.md)
+- [CONCLUSION-BOUNDARY.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/CONCLUSION-BOUNDARY.md)
+
+Supporting tools and notes:
+
+- [scripts/compare-mind2-persistent-state.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/compare-mind2-persistent-state.sh)
+- [scripts/compare-sttlog.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/compare-sttlog.sh)
+- [scripts/stage-mind2-behavior-transplant.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/stage-mind2-behavior-transplant.sh)
+- [INITIAL-COMPARISON-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/INITIAL-COMPARISON-2026-07-01.md)
+- [SUSPECT-DOSSIER-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/SUSPECT-DOSSIER-2026-07-01.md)
+- [AIBO-ID-NOTE-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/AIBO-ID-NOTE-2026-07-01.md)
+- [EXPERIMENT-DESIGN-IDENTITY-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/EXPERIMENT-DESIGN-IDENTITY-2026-07-01.md)
+
 ## Why This Matters
 
 This is the deeper milestone behind the repo:

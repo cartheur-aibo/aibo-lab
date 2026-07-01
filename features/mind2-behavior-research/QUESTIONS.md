@@ -34,6 +34,10 @@
 4. If only `OWNER.TXT` or owner-facing config files differ, do we see merely
    cosmetic changes or deeper behavioral ones?
 5. Which files can be changed without breaking boot, and which appear critical?
+6. Does distinctive behavior transfer when the differing app-state files are
+   transplanted without `AIBO-ID`?
+7. Does the behavior transfer more strongly when `AIBO-ID` is transplanted
+   together with the app-state cluster?
 
 ## Preservation Questions
 
