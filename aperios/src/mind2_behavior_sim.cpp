@@ -39,10 +39,20 @@ struct RetailConnectSummary {
     std::string variant = "unknown";
 };
 
+struct IegSummary {
+    bool present = false;
+    std::size_t size = 0;
+    std::size_t body_words = 0;
+    std::size_t zero_words = 0;
+    std::size_t value_48_words = 0;
+    bool sparse_fixed_schedule = false;
+};
+
 struct BehaviorProfile {
     std::map<std::string, SttlogRow> sttlog_rows;
     PatLogSummary pat_log;
     RetailConnectSummary retail_connect;
+    IegSummary ieg;
     std::vector<std::uint8_t> aibo_id;
     std::size_t awaking_size = 0;
     std::size_t ieg_size = 0;
@@ -106,6 +116,52 @@ std::vector<std::uint8_t> read_binary(const std::string& path) {
         return {};
     }
     return std::vector<std::uint8_t>(std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>());
+}
+
+std::uint32_t read_le_u32(const std::vector<std::uint8_t>& data, std::size_t offset) {
+    if (offset + 4 > data.size()) {
+        return 0;
+    }
+    return static_cast<std::uint32_t>(data[offset]) |
+           (static_cast<std::uint32_t>(data[offset + 1]) << 8) |
+           (static_cast<std::uint32_t>(data[offset + 2]) << 16) |
+           (static_cast<std::uint32_t>(data[offset + 3]) << 24);
+}
+
+IegSummary load_ieg_summary(const std::string& path) {
+    IegSummary summary;
+    const std::vector<std::uint8_t> data = read_binary(path);
+    if (data.empty()) {
+        return summary;
+    }
+
+    summary.present = true;
+    summary.size = data.size();
+    if (data.size() <= 0x40) {
+        return summary;
+    }
+
+    for (std::size_t offset = 0x40; offset + 4 <= data.size(); offset += 4) {
+        const std::uint32_t value = read_le_u32(data, offset);
+        ++summary.body_words;
+        if (value == 0) {
+            ++summary.zero_words;
+        }
+        if (value == 0x42480000U) {
+            ++summary.value_48_words;
+        }
+    }
+
+    // Current specimen-side clue: a very sparse tail with many zero words and
+    // repeated 0x42480000 values where the lean packaged baseline keeps a
+    // denser changing schedule-like tail.
+    if (summary.body_words > 0 &&
+        summary.zero_words >= (summary.body_words / 3) &&
+        summary.value_48_words >= (summary.body_words / 4)) {
+        summary.sparse_fixed_schedule = true;
+    }
+
+    return summary;
 }
 
 RetailConnectSummary load_retail_connect_summary(const std::string& path) {
@@ -237,6 +293,7 @@ BehaviorProfile load_profile(const std::string& tree_root) {
     profile.pat_log = load_pat_log(join_path(tree_root, "OPEN-R/MW/DATA/P/PAT.LOG"));
     profile.retail_connect = load_retail_connect_summary(
         join_path(tree_root, "OPEN-R/MW/CONF/CONNECT.CFG"));
+    profile.ieg = load_ieg_summary(join_path(tree_root, "OPEN-R/APP/DATA/P/IEG.CFG"));
     profile.aibo_id = read_binary(join_path(tree_root, "OPEN-R/SYSTEM/DATA/P/AIBO-ID"));
     profile.awaking_size = file_size_or_zero(join_path(tree_root, "OPEN-R/APP/DATA/P/AWAKING.CFG"));
     profile.ieg_size = file_size_or_zero(join_path(tree_root, "OPEN-R/APP/DATA/P/IEG.CFG"));
@@ -272,8 +329,16 @@ BehaviorProfile load_profile(const std::string& tree_root) {
 
     profile.social_attachment += row_signal(profile.sttlog_rows, "0046") / 4;
     profile.social_attachment += row_signal(profile.sttlog_rows, "0055") / 8;
+    const bool row0400_active =
+        row0400 != profile.sttlog_rows.end() && row0400->second.desired_condition != "0000";
     if (profile.pat_log.sample_count > 0 && profile.pat_log.mean > 5.0) {
         profile.social_attachment += 1;
+    }
+    if (profile.ieg.sparse_fixed_schedule) {
+        profile.social_attachment += 2;
+        if (row0400_active) {
+            profile.shutdown_resistance += 1;
+        }
     }
     if (profile.retail_connect.mixed_stable_tail_layout) {
         profile.social_attachment += 1;
@@ -282,6 +347,9 @@ BehaviorProfile load_profile(const std::string& tree_root) {
     profile.adaptability = 1;
     if (profile.ieg_size > 0) {
         profile.adaptability += 1;
+    }
+    if (profile.ieg.sparse_fixed_schedule && profile.adaptability > 0) {
+        profile.adaptability -= 1;
     }
     if (profile.fvar_size > 0 && profile.gvar_size > 0) {
         profile.adaptability += 1;
@@ -358,6 +426,14 @@ void print_profile(const BehaviorProfile& profile) {
     std::cout << "state files:\n";
     std::cout << "  AWAKING.CFG=" << profile.awaking_size << " bytes\n";
     std::cout << "  IEG.CFG=" << profile.ieg_size << " bytes\n";
+    if (profile.ieg.present) {
+        std::cout << "    ieg_tail_zero_words=" << profile.ieg.zero_words
+                  << "/" << profile.ieg.body_words << "\n";
+        std::cout << "    ieg_tail_48_words=" << profile.ieg.value_48_words << "\n";
+        std::cout << "    ieg_pattern="
+                  << (profile.ieg.sparse_fixed_schedule ? "sparse-fixed-schedule" : "dense-or-mixed")
+                  << "\n";
+    }
     std::cout << "  FVAR=" << profile.fvar_size << " bytes\n";
     std::cout << "  GVAR=" << profile.gvar_size << " bytes\n";
     std::cout << "  SIDRDATA.BIN=" << profile.sidr_size << " bytes\n";

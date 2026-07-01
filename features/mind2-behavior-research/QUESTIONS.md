@@ -50,6 +50,14 @@
     role that amplifies `0400`?
 18. Do the current modeled alternatives `0046` and `0055` fail to substitute
     for `1200`, making `0400 + 1200` the strongest current minimal pair?
+19. Do the remaining differing non-`STTLOG` specimen files fail to substitute
+    for `1200` only because of the current heuristic, or is that likely to
+    hold after richer modeling?
+20. Once `IEG.CFG` gets explicit semantics, does specimen `0400 + IEG.CFG`
+    become a second current bridge path on lean baselines, while `SIDRDATA.BIN`
+    still does not?
+21. After calibration, does `IEG.CFG` remain a companion bridge signal rather
+    than becoming a standalone shutdown trigger on stronger baselines?
 
 ## Experimental Questions
 
@@ -92,6 +100,12 @@
 17. Are there any remaining currently modeled row combinations that can match
     `0400 + 1200`, or have we reached the present simulator-side minimal pair
     boundary?
+18. Should the next simulator iteration give `IEG.CFG`, `SIDRDATA.BIN`, `FVAR`,
+    or `GVAR` explicit shutdown/social semantics before we draw a harder
+    conclusion about their ability to substitute for `1200`?
+19. Is the current `IEG.CFG` sparse-pattern heuristic the right first explicit
+    non-`STTLOG` semantic hook, or should it be narrowed or reweighted before
+    further conclusions are drawn?
 
 ## Preservation Questions
 

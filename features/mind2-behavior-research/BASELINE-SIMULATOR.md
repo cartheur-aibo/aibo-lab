@@ -484,3 +484,91 @@ now much better constrained:
 - `0400 + 1200` is sufficient
 - the currently modeled alternatives built from `0046` and `0055` do not
   substitute for that pair
+
+## Non-STTLOG Boundary
+
+The next boundary check asked whether the remaining specimen-side persistent
+state outside the currently modeled `STTLOG` rows could replace `1200`'s bridge
+role on the lean packaged MIND 2 baseline.
+
+Three variants were tested, each keeping specimen `0400` but replacing
+different non-`STTLOG` state from the specimen:
+
+- `0400 + FVAR + GVAR`
+- `0400 + IEG.CFG + SIDRDATA.BIN`
+- `0400 + all remaining differing non-STTLOG state`
+
+Observed result:
+
+- all three variants kept:
+  - `shutdown_resistance=3`
+  - `social_attachment=5`
+  - verdict: accept shutdown
+
+So the current simulator-side boundary is:
+
+- none of the remaining currently tested non-`STTLOG` specimen state can
+  substitute for `1200`'s bridge role under the present heuristic
+- the current bridge still lives inside the presently modeled `STTLOG` row set
+
+This should be interpreted carefully:
+
+- it is a boundary of the current simulator model, not proof that those files
+  have no real behavioral meaning on hardware
+- in the current code, `FVAR` and `GVAR` only influence adaptability, while
+  `IEG.CFG` and `SIDRDATA.BIN` are surfaced but do not yet alter shutdown or
+  social scoring
+
+That last part is now partially outdated in an important way.
+
+The simulator was then extended with a first explicit `IEG.CFG` semantic hook:
+
+- detect a sparse repeated-tail pattern in specimen-side `IEG.CFG`
+- treat it as a current fixed-routine / rigid-engagement clue
+- `social_attachment += 2`
+- `adaptability -= 1`
+- `shutdown_resistance += 1` only when `0400` is already active
+
+Under that revised model on the lean packaged MIND 2 baseline:
+
+- specimen `IEG.CFG` alone:
+  - `shutdown_resistance=1`
+  - `social_attachment=8`
+  - verdict: accept shutdown
+- specimen `0400 + IEG.CFG`:
+  - `shutdown_resistance=4`
+  - `social_attachment=7`
+  - verdict: defer once
+- specimen `0400 + SIDRDATA.BIN`:
+  - `shutdown_resistance=3`
+  - `social_attachment=5`
+  - verdict: accept shutdown
+
+So the current simulator-side bridge is no longer confined only to `STTLOG`
+row `1200`:
+
+- specimen `1200` still works as a bridge companion for `0400`
+- but the newly modeled specimen-side `IEG.CFG` sparse-pattern clue also works
+- `SIDRDATA.BIN` still does not under the current heuristic
+
+This is a stronger research position than before:
+
+- the shutdown pivot still lives primarily in `STTLOG` row `0400`
+- but at least one non-`STTLOG` persistent-state file now has explicit modeled
+  behavioral weight strong enough to cross the same verdict boundary
+
+The first draft of that heuristic was then tightened so `IEG.CFG` would not
+become a standalone shutdown trigger on the stronger baseline side.
+
+Current calibrated check:
+
+- `baseline-control + specimen IEG.CFG`:
+  - `shutdown_resistance=2`
+  - `social_attachment=9`
+  - verdict: accept shutdown
+
+So the present calibrated `IEG.CFG` role is:
+
+- not a standalone shutdown pivot
+- but a companion bridge signal that can help `0400` cross the verdict boundary
+  on lean baselines
