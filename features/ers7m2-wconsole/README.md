@@ -12,6 +12,17 @@ If you want the lowest-risk first hardware boot path, start with:
 
 and only return here once the preserved-only baseline is stable.
 
+## Current Status
+
+This workflow is still experimental on real hardware.
+
+The current `SYSTEM_FLAVOR=WCONSOLE` overlay has produced abnormal boot
+behavior on the ERS-7, including grinding/no-full-boot symptoms that do not
+appear with the preserved-only baseline.
+
+Treat this feature as an analysis and staging path, not a currently safe
+hardware deployment path.
+
 ## Goal
 
 Prepare a full MIND 2 WCONSOLE stick for app testing with:
@@ -41,8 +52,9 @@ into:
 
 - `OPEN-R/SYSTEM/CONF/WLANCONF.TXT`
 
-The default `ers7m2-wconsole` build includes the SDK's `WCONSOLE` extras
-for wireless-console testing.
+The default `ers7m2-wconsole` build still includes the SDK's `WCONSOLE` extras
+for wireless-console testing, but current evidence says that overlay is not yet
+safe enough for routine robot boots.
 
 If you need a narrower preserved-only first boot instead, use:
 
@@ -122,13 +134,18 @@ For the shared Sony-reader deployment procedure, see:
 
 - [features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md)
 
-## Why This Is The Preferred WCONSOLE Path
+## Why This Path Is Still Useful
 
 - the full MIND 2 layout already works on the robot
 - `Aibonet` is already proven live on the working 32 MB stick
 - the new 64 MB sticks remove the 8 MB capacity pressure
-- this is the cleanest path for testing real apps and the wireless console
-  without fighting low-level 8 MB media behavior
+- it gives us a repeatable candidate tree to audit against the preserved
+  baseline
+
+What it is **not** yet:
+
+- a proven safe WCONSOLE hardware boot path
+- a justified reason to keep trying blind robot boots with the current overlay
 
 ## Verified Milestone
 
@@ -155,12 +172,20 @@ One important caveat:
 - port `59000` was still closed during this test, so this proved MIND 2 HTTP
   reachability, not the OPEN-R wireless console
 
-That is why this feature now defaults to `SYSTEM_FLAVOR=WCONSOLE`.
+Later hardware testing also showed that the current WCONSOLE overlay can push
+the robot into a bad boot state even though the baseline still works.
+
+For that reason, this feature should now be paired with:
+
+- [features/boot-risk-audit/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/boot-risk-audit/README.md)
+
+before any further hardware deployment attempts.
 
 ## Next App-Test Step
 
-Once the 64 MB stick boots reliably, the next work should be:
+Before more real-hardware WCONSOLE attempts, the next work should be:
 
-1. decide where app payloads should live in the MIND 2 tree
-2. define a safe overlay workflow for testing new binaries and configs
-3. keep the preserved known-good base intact and layer app changes on top
+1. reduce or explain the `SYSTEM/CONF/CARDDRV.CFG` drift
+2. reduce or explain the `SYSTEM/CONF/EXTOBJ.CFG` drift
+3. classify which added `SYSTEM/OBJS` files are actually required
+4. prefer simulator or remote-processing work where possible
