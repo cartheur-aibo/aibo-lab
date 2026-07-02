@@ -41,7 +41,7 @@ OPENRSDK_ROOT="${OPENRSDK_ROOT:-$ROOT_DIR/sdk/local/OPEN_R_SDK}"
 SOURCE_STICK_DIR="${SOURCE_STICK_DIR:-$ROOT_DIR/features/aibo-mind2/build/stick}"
 WLANCONF_SOURCE="${WLANCONF_SOURCE:-$ROOT_DIR/src/ERS7M2/WLANCONF.TXT}"
 SYSTEM_FLAVOR="${SYSTEM_FLAVOR:-WCONSOLE}"
-TARGET_MOUNT="${TARGET_MOUNT:-/media/$USER/disk}"
+TARGET_MOUNT="${TARGET_MOUNT:-/media/$USER/YOUR_STICK_MOUNT}"
 FEATURE_DIR="${FEATURE_DIR:-$ROOT_DIR/features/ers7m2-wconsole}"
 OUTPUT_DIR="${1:-$FEATURE_DIR/build/stick}"
 COPY_NOTE_FILE="${COPY_NOTE_FILE:-$FEATURE_DIR/build/COPY_TO_MS.txt}"
@@ -83,18 +83,19 @@ if [ "$SYSTEM_FLAVOR" != "preserved" ]; then
 
   mkdir -p "$OUTPUT_DIR/OPEN-R/SYSTEM/OBJS" "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF"
 
-  # Keep the known-good MIND 2 runtime as the base and add only the SDK's
-  # flavor-specific system extras and config files needed to enable WLAN or
-  # WCONSOLE services.
+  # Keep the known-good MIND 2 runtime as the base and add only the SDK
+  # flavor's extra system objects that are not already present in the preserved
+  # tree. This preserves the narrow-overlay behavior for WCONSOLE and also lets
+  # the WLAN flavor stage correctly.
   while IFS= read -r relpath; do
-    cp -a "$FLAVOR_DIR/SYSTEM/OBJS/$relpath" "$OUTPUT_DIR/OPEN-R/SYSTEM/OBJS/$relpath"
-  done <<'EOF'
-ANTTCPIO.BIN
-EMGCYMON.BIN
-HOOK.BIN
-HOOKACT.BIN
-WLANDRVM.BIN
-EOF
+    [ -z "$relpath" ] && continue
+    if [ ! -e "$OUTPUT_DIR/OPEN-R/SYSTEM/OBJS/$relpath" ]; then
+      cp -a "$FLAVOR_DIR/SYSTEM/OBJS/$relpath" \
+        "$OUTPUT_DIR/OPEN-R/SYSTEM/OBJS/$relpath"
+    fi
+  done < <(
+    find "$FLAVOR_DIR/SYSTEM/OBJS" -maxdepth 1 -type f -printf '%f\n' | sort
+  )
 
   cp -a "$FLAVOR_DIR/SYSTEM/CONF/CARDDRV.CFG" \
     "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/CARDDRV.CFG"
