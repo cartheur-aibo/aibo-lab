@@ -1,7 +1,7 @@
 # Deploy An ERS-7 MIND 2 Stick To A Sony USB Memory Stick Reader
 
-Use this workflow to copy a staged ERS-7 MIND 2 payload onto a larger original
-Sony Memory Stick mounted through a Sony USB reader.
+Use this workflow to copy a complete staged ERS-7 payload onto a larger
+original Sony Memory Stick mounted through a Sony USB reader.
 
 Do not use your preserved working stick for this. Use a separate test stick.
 
@@ -19,15 +19,15 @@ That creates:
 
 - `features/ers7m2-baseline/build/stick`
 
-For the WCONSOLE variant:
+For the pure SDK HelloWorld WCONSOLE sample:
 
 ```bash
-./scripts/prepare-ers7m2-wconsole.sh
+./scripts/prepare-ers7-sdk-wconsole-helloworld.sh
 ```
 
 This creates:
 
-- `features/ers7m2-wconsole/build/stick`
+- `features/ers7-sdk-wconsole-helloworld/build/stick`
 
 Set the staged source path you actually want to deploy:
 
@@ -38,7 +38,7 @@ STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-d
 or:
 
 ```bash
-STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/build/stick
+STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-helloworld/build/stick
 ```
 
 The staged tree already contains the two items that must exist at the stick
@@ -128,7 +128,7 @@ Do not pull the reader or stick early.
 5. Find the robot IP from your hotspot or router.
 6. Test `ping AIBO_IP`.
 7. Test `http://AIBO_IP/`.
-8. If you deployed the WCONSOLE variant, also test:
+8. If you deployed the pure SDK WCONSOLE HelloWorld variant, also test:
 
 ```bash
 telnet AIBO_IP 59000
@@ -161,12 +161,12 @@ rsync -a --delete \
 sync
 ```
 
-For the WCONSOLE deployment command:
+For the pure SDK WCONSOLE HelloWorld deployment command:
 
 ```bash
-./scripts/prepare-ers7m2-wconsole.sh
+./scripts/prepare-ers7-sdk-wconsole-helloworld.sh
 rsync -a --delete \
-  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/build/stick/ \
+  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-helloworld/build/stick/ \
   /media/$USER/disk/
 sync
 ```

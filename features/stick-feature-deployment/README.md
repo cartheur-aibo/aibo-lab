@@ -105,12 +105,12 @@ When a future agent needs the best known inputs, start here:
   necessarily the preserved specimen WLAN state
 - the intended hostname naming convention for the current lab is:
   `AIBO-M2A`, `AIBO-M2B`, `AIBO-M3A`
-- [features/ers7m2-wconsole/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/README.md)
-  describes the larger-stick MIND 2 `WCONSOLE` workflow for post-baseline
-  testing
 - [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/README.md)
-  describes the preserved-only first-boot MIND 2 baseline that should come
-  before `WCONSOLE`
+  describes the preserved-only first-boot MIND 2 baseline
+- [features/ers7-sdk-wconsole-helloworld/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-helloworld/README.md)
+  describes the complete pure SDK ERS-7 WCONSOLE HelloWorld workflow
+- [features/ers7-sdk-wconsole-objectcomm/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-objectcomm/README.md)
+  describes the complete pure SDK ERS-7 WCONSOLE/nomemprot ObjectComm workflow
 - [features/ers7m3-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m3-test-stick/README.md)
   describes the larger-stick MIND 3 workflow
 - [features/reference-sticks/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/README.md)
@@ -167,8 +167,7 @@ sync
 
 If this fails, stop and debug that before trying custom payloads.
 
-Do not use `SYSTEM_FLAVOR=WCONSOLE` for this first hardware test. Treat that as
-a later boot-overlay experiment only after the preserved baseline is stable.
+Do not jump to other workflows before the preserved baseline is stable.
 
 ## Phase 2: Safe App-Overlay Workflow
 
@@ -236,7 +235,7 @@ If a future agent opens this repo cold, the best order is:
    [features/aibo-mind2/build/stick](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/aibo-mind2/build/stick).
 5. Prepare the larger-stick MIND 2 baseline tree.
 6. Test stock boot and stock HTTP first.
-7. Only then move to `WCONSOLE`, app overlays, or `W3AIBO`.
+7. Only then move to complete SDK sample workflows, app overlays, or `W3AIBO`.
 
 ## Minimal Command Set
 
@@ -246,10 +245,10 @@ Prepare the known-good MIND 2 staging tree:
 ./scripts/prepare-ers7m2-baseline.sh
 ```
 
-Prepare the `WCONSOLE` MIND 2 test tree:
+Prepare the pure SDK WCONSOLE HelloWorld tree:
 
 ```bash
-./scripts/prepare-ers7m2-wconsole.sh
+./scripts/prepare-ers7-sdk-wconsole-helloworld.sh
 ```
 
 Prepare the camera-stream staging tree:

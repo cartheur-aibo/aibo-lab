@@ -54,9 +54,9 @@ It focuses specifically on the `SYSTEM` boot layer and answers:
 - which `SYSTEM/OBJS` files are added beyond baseline?
 - which boot-object entries become visible in the candidate?
 
-This is especially useful for the current ERS-7 MIND 2 work because the
-preserved baseline uses opaque retail `SYSTEM` config while the `WLAN` and
-`WCONSOLE` overlays replace that layer with SDK-style text config lists.
+This is especially useful for ERS-7 MIND 2 analysis because the preserved
+baseline uses opaque retail `SYSTEM` config while earlier experimental SDK
+overlay attempts replaced that layer with SDK-style text config lists.
 
 The record-table analyzer goes one step lower:
 
@@ -75,12 +75,12 @@ The provenance checker answers a different question:
 
 ## Example
 
-Compare the preserved baseline and the WCONSOLE candidate:
+Compare the preserved baseline and a complete SDK WCONSOLE sample candidate:
 
 ```bash
 ./scripts/audit-ers7-stick-risk.sh \
   features/ers7m2-baseline/build/stick \
-  features/ers7m2-wconsole/build/stick
+  features/ers7-sdk-wconsole-helloworld/build/stick
 ```
 
 Typical result:
@@ -102,7 +102,7 @@ For a more specific explanation of the boot-layer delta:
 ```bash
 ./scripts/explain-ers7-system-delta.sh \
   features/ers7m2-baseline/build/stick \
-  features/ers7m2-wconsole/build/stick
+  features/ers7-sdk-wconsole-helloworld/build/stick
 ```
 
 For the retail `SYSTEM` record-table view:
@@ -120,7 +120,7 @@ For the mixed-provenance check:
 ```bash
 ./scripts/check-ers7-system-provenance.sh \
   features/ers7m2-baseline/build/stick \
-  features/ers7m2-wconsole/build/stick \
+  features/ers7-sdk-wconsole-helloworld/build/stick \
   sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R
 ```
 

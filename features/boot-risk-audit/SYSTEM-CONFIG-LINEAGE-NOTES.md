@@ -128,14 +128,14 @@ Using
 [scripts/check-ers7-system-provenance.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/check-ers7-system-provenance.sh),
 we now know the current staging trees are not pure SDK overlays.
 
-For `features/ers7m2-wlan/build/stick`:
+For the retired experimental mixed `WLAN` candidate:
 
 - `IPSTACK.BIN`: preserved retail MIND 2
 - `WLANENBL.BIN`: preserved retail MIND 2
 - `EMGCYMON.BIN`: SDK overlay
 - `NETCONFS.BIN`: preserved retail MIND 2
 
-For `features/ers7m2-wconsole/build/stick`:
+For the retired experimental mixed `WCONSOLE` candidate:
 
 - `IPSTACK.BIN`: preserved retail MIND 2
 - `WLANENBL.BIN`: preserved retail MIND 2
@@ -157,9 +157,8 @@ objects no longer come from a single known lineage.
 
 ## Pure-SDK SYSTEM Comparison Result
 
-We also built a pure-SDK `WCONSOLE` `SYSTEM` comparison candidate with:
-
-- [scripts/prepare-ers7m2-wconsole-sdk-system.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/prepare-ers7m2-wconsole-sdk-system.sh)
+We also built a pure-SDK `WCONSOLE` `SYSTEM` comparison candidate during
+analysis.
 
 That candidate does remove the mixed-provenance issue:
 

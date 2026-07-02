@@ -36,9 +36,9 @@ For preserved-only stock MIND 2 bring-up:
 
 - `features/ers7m2-baseline/build/stick`
 
-For MIND 2 WCONSOLE testing:
+For pure SDK WCONSOLE sample testing:
 
-- `features/ers7m2-wconsole/build/stick`
+- `features/ers7-sdk-wconsole-helloworld/build/stick`
 
 For camera-stream testing:
 
@@ -134,9 +134,9 @@ Expected success pattern:
 - `ping` succeeds
 - HTTP on port `80` responds
 
-### Sequence A2: MIND 2 WCONSOLE
+### Sequence A2: SDK WCONSOLE HelloWorld
 
-1. Prepare `features/ers7m2-wconsole/build/stick`.
+1. Prepare `features/ers7-sdk-wconsole-helloworld/build/stick`.
 2. Copy it to the new larger stick.
 3. Boot the robot.
 4. Join the same compatible Wi-Fi network from the host.
@@ -154,7 +154,6 @@ Expected success pattern:
 - robot stays on
 - robot joins Wi-Fi
 - `ping` succeeds
-- HTTP on port `80` responds
 - port `59000` responds if the wireless console path is working
 
 ### Sequence B: Camera Stream
@@ -278,10 +277,10 @@ Prepare stock MIND 2 on larger sticks:
 ./scripts/prepare-ers7m2-baseline.sh
 ```
 
-Prepare MIND 2 WCONSOLE on larger sticks:
+Prepare the pure SDK WCONSOLE HelloWorld sample:
 
 ```bash
-./scripts/prepare-ers7m2-wconsole.sh
+./scripts/prepare-ers7-sdk-wconsole-helloworld.sh
 ```
 
 Prepare camera stream:

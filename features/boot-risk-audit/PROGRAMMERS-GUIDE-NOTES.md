@@ -9,7 +9,7 @@ that matter most for safer pre-deployment auditing.
 Our first-pass audit started as a drift checker between:
 
 - `features/ers7m2-baseline/build/stick`
-- `features/ers7m2-wconsole/build/stick`
+- an earlier experimental mixed MIND 2 `WCONSOLE` candidate
 
 That already caught dangerous `SYSTEM`-layer drift, but the Programmer's Guide
 adds an important model:
@@ -67,8 +67,8 @@ That creates two distinct preflight problems:
    These can contain retail/binary config files that are not directly modeled by
    the existing sample-style simulator.
 
-The failed `ers7m2-wconsole` boots fit the second category: a preserved retail
-tree plus SDK `WCONSOLE` boot-layer drift.
+The failed experimental mixed MIND 2 `WCONSOLE` boots fit the second category:
+a preserved retail tree plus SDK `WCONSOLE` boot-layer drift.
 
 ## What The Audit Should Learn Next
 

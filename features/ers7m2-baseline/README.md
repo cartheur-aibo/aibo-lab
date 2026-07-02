@@ -3,7 +3,7 @@
 This workflow is the preserved-only first hardware test path for larger
 original Sony Memory Sticks such as 32 MB or 64 MB media.
 
-Use this before `WCONSOLE`, camera-serving, or any other runtime overlay work.
+Use this before camera-serving or any other runtime overlay work.
 
 ## Goal
 
@@ -16,10 +16,7 @@ Prepare a full MIND 2 stick for first boot validation with:
 
 ## Why This Exists
 
-The broader `ers7m2-wconsole` workflow can also be built with
-`SYSTEM_FLAVOR=WCONSOLE`, which changes early boot system objects and config.
-
-This baseline feature exists to keep the first hardware test narrower:
+This baseline feature keeps the first hardware test narrow:
 
 - preserved MIND 2 runtime and app tree
 - lab WLAN config for reachability
@@ -47,15 +44,11 @@ into:
 
 ## What It Uses
 
-The wrapper stages from:
+The script stages from:
 
 - [features/aibo-mind2/build/stick](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/aibo-mind2/build/stick)
 
-through:
-
-- [scripts/prepare-ers7m2-wconsole.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/prepare-ers7m2-wconsole.sh)
-
-with `SYSTEM_FLAVOR=preserved`.
+and injects the repo WLAN config directly without any SDK `SYSTEM` overlay.
 
 ## Copy To The Mounted Stick
 
@@ -81,14 +74,13 @@ For the shared Sony-reader deployment procedure, see:
 - host can reach the robot
 - `http://AIBO_IP/` opens the stock MIND 2 page
 
-If this baseline fails, stop and debug that before trying `WCONSOLE` or app
-overlays.
+If this baseline fails, stop and debug that before trying SDK sample workflows
+or app overlays.
 
 ## Next Step After A Clean Boot
 
-After this baseline is proven on hardware, the next higher-risk path is:
+After this baseline is proven on hardware, the next complete comparison paths
+are:
 
-- [features/ers7m2-wconsole/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/README.md)
-
-using `SYSTEM_FLAVOR=WCONSOLE` only if you specifically want to test the
-wireless console path.
+- [features/ers7-sdk-wconsole-helloworld/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-helloworld/README.md)
+- [features/ers7-sdk-wconsole-objectcomm/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-objectcomm/README.md)
