@@ -3,16 +3,16 @@ set -euo pipefail
 
 usage() {
   cat <<'EOF'
-usage: prepare-ers7m2-test-stick.sh [/path/to/output-dir]
+usage: prepare-ers7m2-wconsole.sh [/path/to/output-dir]
 
-Prepare a full ERS-7 AIBO MIND 2 test-stick staging tree for larger Sony
+Prepare a full ERS-7 AIBO MIND 2 WCONSOLE staging tree for larger Sony
 Memory Sticks such as 32 MB or 64 MB media.
 
 By default this:
 - copies the preserved known-good MIND 2 stick tree from
   features/aibo-mind2/build/stick
 - replaces OPEN-R/SYSTEM/CONF/WLANCONF.TXT with src/ERS7M2/WLANCONF.TXT
-- writes the result under features/ers7m2-test-stick/build/stick
+- writes the result under features/ers7m2-wconsole/build/stick
 
 Environment variables:
   OPENRSDK_ROOT    SDK root.
@@ -42,10 +42,10 @@ SOURCE_STICK_DIR="${SOURCE_STICK_DIR:-$ROOT_DIR/features/aibo-mind2/build/stick}
 WLANCONF_SOURCE="${WLANCONF_SOURCE:-$ROOT_DIR/src/ERS7M2/WLANCONF.TXT}"
 SYSTEM_FLAVOR="${SYSTEM_FLAVOR:-WCONSOLE}"
 TARGET_MOUNT="${TARGET_MOUNT:-/media/$USER/disk}"
-FEATURE_DIR="${FEATURE_DIR:-$ROOT_DIR/features/ers7m2-test-stick}"
+FEATURE_DIR="${FEATURE_DIR:-$ROOT_DIR/features/ers7m2-wconsole}"
 OUTPUT_DIR="${1:-$FEATURE_DIR/build/stick}"
 COPY_NOTE_FILE="${COPY_NOTE_FILE:-$FEATURE_DIR/build/COPY_TO_MS.txt}"
-STICK_LABEL="${STICK_LABEL:-ERS-7 MIND 2 test stick}"
+STICK_LABEL="${STICK_LABEL:-ERS-7 MIND 2 WCONSOLE stick}"
 
 require_path() {
   if [ ! -e "$1" ]; then

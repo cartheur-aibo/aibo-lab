@@ -132,7 +132,7 @@ The practical differences are:
   content such as `OPEN-R/APP/PC/DIARY`, `OPEN-R/APP/OBJS/SA.BIN`, and
   `OPEN-R/APP/OBJS/STM.BIN`.
 - For repeatable testing, the repo now exposes both paths as separate staging
-  workflows: [features/ers7m2-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-test-stick/README.md)
+  workflows: [features/ers7m2-wconsole/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/README.md)
   for MIND 2 and [features/ers7m3-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m3-test-stick/README.md)
   for MIND 3.
 
@@ -146,7 +146,7 @@ The practical differences are:
 - [features/new-sticks-playbook/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/new-sticks-playbook/README.md) for the handoff workflow and proven conclusions for new 64 MB Sony sticks
 - [features/new-sticks-playbook/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/new-sticks-playbook/TROUBLESHOOTING.md) for the operational checklist and failure-triage guide during delicate stick bring-up
 - [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/README.md) for the preserved-only first-boot MIND 2 baseline on larger Sony sticks
-- [features/ers7m2-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-test-stick/README.md) for the larger-stick full MIND 2 `WCONSOLE` app-testing workflow
+- [features/ers7m2-wconsole/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/README.md) for the larger-stick full MIND 2 `WCONSOLE` app-testing workflow
 - [features/ers7m3-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m3-test-stick/README.md) for the larger-stick full MIND 3 app-testing workflow
 - [features/reference-sticks/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/README.md) for the active baseline records of preserved genuine MIND 2 and MIND 3 sticks
 - [features/mind2-behavior-research/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/README.md) for the new behavior-forensics research loop, candidate files, and research questions

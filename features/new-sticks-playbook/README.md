@@ -104,7 +104,7 @@ When a future agent needs the best known inputs, start here:
   necessarily the preserved specimen WLAN state
 - the intended hostname naming convention for the current lab is:
   `AIBO-M2A`, `AIBO-M2B`, `AIBO-M3A`
-- [features/ers7m2-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-test-stick/README.md)
+- [features/ers7m2-wconsole/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/README.md)
   describes the larger-stick MIND 2 `WCONSOLE` workflow for post-baseline
   testing
 - [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/README.md)
@@ -248,7 +248,7 @@ Prepare the known-good MIND 2 staging tree:
 Prepare the `WCONSOLE` MIND 2 test tree:
 
 ```bash
-./scripts/prepare-ers7m2-test-stick.sh
+./scripts/prepare-ers7m2-wconsole.sh
 ```
 
 Prepare the camera-stream staging tree:

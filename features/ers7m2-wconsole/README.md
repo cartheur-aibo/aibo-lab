@@ -1,4 +1,4 @@
-# ERS-7 MIND 2 Test Stick Workflow
+# ERS-7 MIND 2 WCONSOLE Workflow
 
 This workflow is for larger original Sony Memory Sticks such as the 64 MB
 sticks you ordered.
@@ -14,7 +14,7 @@ and only return here once the preserved-only baseline is stable.
 
 ## Goal
 
-Prepare a full MIND 2 stick for app testing with:
+Prepare a full MIND 2 WCONSOLE stick for app testing with:
 
 - the known-good MIND 2 file tree
 - the lab-operational Wi-Fi config from `src/ERS7M2/WLANCONF.TXT`
@@ -26,12 +26,12 @@ Prepare a full MIND 2 stick for app testing with:
 Run:
 
 ```bash
-./scripts/prepare-ers7m2-test-stick.sh
+./scripts/prepare-ers7m2-wconsole.sh
 ```
 
 That creates:
 
-- `features/ers7m2-test-stick/build/stick`
+- `features/ers7m2-wconsole/build/stick`
 
 and injects:
 
@@ -41,7 +41,7 @@ into:
 
 - `OPEN-R/SYSTEM/CONF/WLANCONF.TXT`
 
-The default `ers7m2-test-stick` build now includes the SDK's `WCONSOLE` extras
+The default `ers7m2-wconsole` build includes the SDK's `WCONSOLE` extras
 for wireless-console testing.
 
 If you need a narrower preserved-only first boot instead, use:
@@ -54,7 +54,7 @@ If you want to override the test-stick build back to a non-`WCONSOLE` flavor,
 run:
 
 ```bash
-SYSTEM_FLAVOR=preserved ./scripts/prepare-ers7m2-test-stick.sh
+SYSTEM_FLAVOR=preserved ./scripts/prepare-ers7m2-wconsole.sh
 ```
 
 The standard test-stick path keeps the preserved MIND 2 runtime and app tree,
@@ -112,7 +112,7 @@ convention rather than assuming one shared hostname forever.
 Once the 64 MB Sony stick is mounted:
 
 ```bash
-rsync -a --delete /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-test-stick/build/stick/ /path/to/mounted-stick/
+rsync -a --delete /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/build/stick/ /path/to/mounted-stick/
 sync
 ```
 

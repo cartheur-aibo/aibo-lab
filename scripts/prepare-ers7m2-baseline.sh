@@ -33,4 +33,4 @@ OUTPUT_DIR="${1:-$FEATURE_DIR/build/stick}"
 
 FEATURE_DIR="$FEATURE_DIR" SYSTEM_FLAVOR=preserved \
   STICK_LABEL="ERS-7 MIND 2 baseline stick" \
-  "$ROOT_DIR/scripts/prepare-ers7m2-test-stick.sh" "$OUTPUT_DIR"
+  "$ROOT_DIR/scripts/prepare-ers7m2-wconsole.sh" "$OUTPUT_DIR"

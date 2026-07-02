@@ -34,7 +34,7 @@ Before touching a stick, confirm:
 
 For stock MIND 2 bring-up:
 
-- `features/ers7m2-test-stick/build/stick`
+- `features/ers7m2-wconsole/build/stick`
 
 For camera-stream testing:
 
@@ -111,7 +111,7 @@ Before inserting a newly prepared stick into the ERS-7:
 
 ### Sequence A: Stock MIND 2
 
-1. Prepare `features/ers7m2-test-stick/build/stick`.
+1. Prepare `features/ers7m2-wconsole/build/stick`.
 2. Copy it to the new larger stick.
 3. Boot the robot.
 4. Join the same compatible Wi-Fi network from the host.
@@ -248,7 +248,7 @@ This matters because subtle drift is easy to misremember.
 Prepare stock MIND 2 on larger sticks:
 
 ```bash
-./scripts/prepare-ers7m2-test-stick.sh
+./scripts/prepare-ers7m2-wconsole.sh
 ```
 
 Prepare camera stream:
@@ -282,4 +282,3 @@ The safest next-step pattern is:
 4. only then try overlays or `W3AIBO`
 
 That sequence gives the cleanest signal and the least confusion.
-

@@ -1,6 +1,6 @@
-# Deploy `ers7m2-test-stick` To A Sony USB Memory Stick Reader
+# Deploy `ers7m2-wconsole` To A Sony USB Memory Stick Reader
 
-Use this workflow to copy the staged ERS-7 MIND 2 test-stick payload onto a
+Use this workflow to copy the staged ERS-7 MIND 2 WCONSOLE payload onto a
 larger original Sony Memory Stick mounted through a Sony USB reader.
 
 Do not use your preserved working stick for this. Use a separate test stick.
@@ -10,18 +10,18 @@ Do not use your preserved working stick for this. Use a separate test stick.
 Default preserved MIND 2 system:
 
 ```bash
-./scripts/prepare-ers7m2-test-stick.sh
+./scripts/prepare-ers7m2-wconsole.sh
 ```
 
 If you want the wireless console variant as well:
 
 ```bash
-SYSTEM_FLAVOR=WCONSOLE ./scripts/prepare-ers7m2-test-stick.sh
+./scripts/prepare-ers7m2-wconsole.sh
 ```
 
 This creates:
 
-- `features/ers7m2-test-stick/build/stick`
+- `features/ers7m2-wconsole/build/stick`
 
 The staged tree already contains the two items that must exist at the stick
 root:
@@ -79,7 +79,7 @@ Use the real mount path from the Sony USB reader. If it mounted at
 
 ```bash
 rsync -a --delete \
-  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-test-stick/build/stick/ \
+  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/build/stick/ \
   /media/$USER/disk/
 sync
 ```
@@ -136,9 +136,9 @@ If your Sony reader mounts the stick at `/media/$USER/disk`, this is the full
 deployment command:
 
 ```bash
-./scripts/prepare-ers7m2-test-stick.sh
+./scripts/prepare-ers7m2-wconsole.sh
 rsync -a --delete \
-  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-test-stick/build/stick/ \
+  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/build/stick/ \
   /media/$USER/disk/
 sync
 ```

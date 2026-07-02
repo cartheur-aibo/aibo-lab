@@ -16,7 +16,7 @@ Prepare a full MIND 2 stick for first boot validation with:
 
 ## Why This Exists
 
-The broader `ers7m2-test-stick` workflow can also be built with
+The broader `ers7m2-wconsole` workflow can also be built with
 `SYSTEM_FLAVOR=WCONSOLE`, which changes early boot system objects and config.
 
 This baseline feature exists to keep the first hardware test narrower:
@@ -53,7 +53,7 @@ The wrapper stages from:
 
 through:
 
-- [scripts/prepare-ers7m2-test-stick.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/prepare-ers7m2-test-stick.sh)
+- [scripts/prepare-ers7m2-wconsole.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/prepare-ers7m2-wconsole.sh)
 
 with `SYSTEM_FLAVOR=preserved`.
 
@@ -84,7 +84,7 @@ overlays.
 
 After this baseline is proven on hardware, the next higher-risk path is:
 
-- [features/ers7m2-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-test-stick/README.md)
+- [features/ers7m2-wconsole/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/README.md)
 
 using `SYSTEM_FLAVOR=WCONSOLE` only if you specifically want to test the
 wireless console path.
