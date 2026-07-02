@@ -5,6 +5,35 @@ This feature starts a safer preflight track for ERS-7 stick deployment work.
 The goal is not to emulate Aperios fully. The goal is to catch dangerous drift
 before another real-hardware boot.
 
+## Why The Robot Behaved Badly
+
+The most useful outcome of the retired mixed-runtime work is not a deployable
+stick. It is a stronger explanation for why the robot could grind, stall, or
+fail early even when the changed files looked small from a source-code point of
+view.
+
+Current best explanation:
+
+- the preserved MIND 2 baseline uses opaque retail `SYSTEM` boot tables
+- the mixed `WCONSOLE` experiments replaced those with SDK-style plain-text
+  config lists
+- that is a boot-layer representation change, not a small app tweak
+- the mixed candidates also combined retail and SDK `SYSTEM/OBJS` binaries
+  under one boot configuration
+- the pure-SDK comparison removed that mixture, but then exposed that the SDK
+  lineage drops at least one real retail runtime object: `RRWH.BIN`
+
+So the likely cause is not "one bad C++ line."
+
+It is a runtime-lineage mismatch at the robot's early boot and service layer:
+
+- changed boot-table family
+- changed referenced system objects
+- changed provenance of those objects
+
+That is exactly the kind of change that can produce mechanically alarming
+behavior long before higher-level application logic becomes relevant.
+
 ## Why This Exists
 
 The current `simulate-openr-boot.sh` tool is useful for plain-text sample
@@ -72,6 +101,17 @@ The provenance checker answers a different question:
   from the preserved retail baseline, or from a mixture of both?
 - and if we force a pure-SDK `SYSTEM` lineage, which real-runtime ERS-7
   `SYSTEM/OBJS` files disappear?
+
+## What We Kept And What We Removed
+
+We intentionally removed the stale mixed-runtime deployment artifact.
+
+We intentionally kept the analytical record, because it tells us:
+
+- why retail-plus-SDK mixing is inherently risky
+- why pure SDK and preserved retail are separate tracks
+- why the robot's behavior must be explained at the boot-layout and runtime
+  lineage level, not only at the C++ source level
 
 ## Example
 

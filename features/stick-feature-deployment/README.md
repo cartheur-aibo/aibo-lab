@@ -10,6 +10,15 @@ Operational troubleshooting lives here:
 
 - [features/stick-feature-deployment/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/TROUBLESHOOTING.md)
 - [features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md)
+- [features/stick-feature-deployment/SAFE-LIVE-TEST.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/SAFE-LIVE-TEST.md)
+
+Mixed retail-MIND-2-plus-SDK deployment artifacts are intentionally not part of
+this playbook anymore.
+
+If you need the reasoning behind that, read:
+
+- [features/boot-risk-audit/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/boot-risk-audit/README.md)
+- [features/boot-risk-audit/SYSTEM-CONFIG-LINEAGE-NOTES.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/boot-risk-audit/SYSTEM-CONFIG-LINEAGE-NOTES.md)
 
 ## Mission
 
