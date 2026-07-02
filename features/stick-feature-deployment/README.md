@@ -8,7 +8,8 @@ start from the right baseline without repeating dead ends.
 
 Operational troubleshooting lives here:
 
-- [features/new-sticks-playbook/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/new-sticks-playbook/TROUBLESHOOTING.md)
+- [features/stick-feature-deployment/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/TROUBLESHOOTING.md)
+- [features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md)
 
 ## Mission
 
@@ -229,7 +230,7 @@ So the remaining unknown is robot/media behavior, not the basic host build.
 If a future agent opens this repo cold, the best order is:
 
 1. Read this playbook.
-2. Read [features/new-sticks-playbook/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/new-sticks-playbook/TROUBLESHOOTING.md).
+2. Read [features/stick-feature-deployment/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/TROUBLESHOOTING.md).
 3. Read [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/README.md).
 4. Verify the preserved baseline exists at
    [features/aibo-mind2/build/stick](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/aibo-mind2/build/stick).

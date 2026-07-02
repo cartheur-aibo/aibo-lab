@@ -1,7 +1,7 @@
 # New Sticks Troubleshooting
 
 This guide is the operational companion to
-[features/new-sticks-playbook/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/new-sticks-playbook/README.md).
+[features/stick-feature-deployment/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/README.md).
 
 Use it when the process feels delicate, ambiguous, or easy to derail.
 
@@ -32,7 +32,11 @@ Before touching a stick, confirm:
 
 ## Canonical Staging Directories
 
-For stock MIND 2 bring-up:
+For preserved-only stock MIND 2 bring-up:
+
+- `features/ers7m2-baseline/build/stick`
+
+For MIND 2 WCONSOLE testing:
 
 - `features/ers7m2-wconsole/build/stick`
 
@@ -111,7 +115,7 @@ Before inserting a newly prepared stick into the ERS-7:
 
 ### Sequence A: Stock MIND 2
 
-1. Prepare `features/ers7m2-wconsole/build/stick`.
+1. Prepare `features/ers7m2-baseline/build/stick`.
 2. Copy it to the new larger stick.
 3. Boot the robot.
 4. Join the same compatible Wi-Fi network from the host.
@@ -129,6 +133,29 @@ Expected success pattern:
 - robot joins Wi-Fi
 - `ping` succeeds
 - HTTP on port `80` responds
+
+### Sequence A2: MIND 2 WCONSOLE
+
+1. Prepare `features/ers7m2-wconsole/build/stick`.
+2. Copy it to the new larger stick.
+3. Boot the robot.
+4. Join the same compatible Wi-Fi network from the host.
+5. Find the robot IP.
+6. Test:
+
+```bash
+ping AIBO_IP
+curl -I http://AIBO_IP/
+telnet AIBO_IP 59000
+```
+
+Expected success pattern:
+
+- robot stays on
+- robot joins Wi-Fi
+- `ping` succeeds
+- HTTP on port `80` responds
+- port `59000` responds if the wireless console path is working
 
 ### Sequence B: Camera Stream
 
@@ -246,6 +273,12 @@ This matters because subtle drift is easy to misremember.
 ## Commands Worth Reusing
 
 Prepare stock MIND 2 on larger sticks:
+
+```bash
+./scripts/prepare-ers7m2-baseline.sh
+```
+
+Prepare MIND 2 WCONSOLE on larger sticks:
 
 ```bash
 ./scripts/prepare-ers7m2-wconsole.sh

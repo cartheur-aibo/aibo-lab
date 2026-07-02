@@ -118,6 +118,10 @@ sync
 
 Then eject the stick cleanly before inserting it into the ERS-7.
 
+For the shared Sony-reader deployment procedure, see:
+
+- [features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md)
+
 ## Why This Is The Preferred WCONSOLE Path
 
 - the full MIND 2 layout already works on the robot

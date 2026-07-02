@@ -1,19 +1,25 @@
-# Deploy `ers7m2-wconsole` To A Sony USB Memory Stick Reader
+# Deploy An ERS-7 MIND 2 Stick To A Sony USB Memory Stick Reader
 
-Use this workflow to copy the staged ERS-7 MIND 2 WCONSOLE payload onto a
-larger original Sony Memory Stick mounted through a Sony USB reader.
+Use this workflow to copy a staged ERS-7 MIND 2 payload onto a larger original
+Sony Memory Stick mounted through a Sony USB reader.
 
 Do not use your preserved working stick for this. Use a separate test stick.
 
 ## 1. Prepare The Staged Payload
 
-Default preserved MIND 2 system:
+Choose the staged tree you want to deploy.
+
+For the preserved-only baseline:
 
 ```bash
-./scripts/prepare-ers7m2-wconsole.sh
+./scripts/prepare-ers7m2-baseline.sh
 ```
 
-If you want the wireless console variant as well:
+That creates:
+
+- `features/ers7m2-baseline/build/stick`
+
+For the WCONSOLE variant:
 
 ```bash
 ./scripts/prepare-ers7m2-wconsole.sh
@@ -22,6 +28,18 @@ If you want the wireless console variant as well:
 This creates:
 
 - `features/ers7m2-wconsole/build/stick`
+
+Set the staged source path you actually want to deploy:
+
+```bash
+STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/build/stick
+```
+
+or:
+
+```bash
+STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/build/stick
+```
 
 The staged tree already contains the two items that must exist at the stick
 root:
@@ -79,7 +97,7 @@ Use the real mount path from the Sony USB reader. If it mounted at
 
 ```bash
 rsync -a --delete \
-  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-wconsole/build/stick/ \
+  "$STAGED_STICK"/ \
   /media/$USER/disk/
 sync
 ```
@@ -110,7 +128,7 @@ Do not pull the reader or stick early.
 5. Find the robot IP from your hotspot or router.
 6. Test `ping AIBO_IP`.
 7. Test `http://AIBO_IP/`.
-8. If you built with `SYSTEM_FLAVOR=WCONSOLE`, also test:
+8. If you deployed the WCONSOLE variant, also test:
 
 ```bash
 telnet AIBO_IP 59000
@@ -130,10 +148,20 @@ Those values come from:
 
 - [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/ERS7M2/WLANCONF.TXT)
 
-## One-Line Copy Command
+## One-Line Copy Commands
 
 If your Sony reader mounts the stick at `/media/$USER/disk`, this is the full
-deployment command:
+baseline deployment command:
+
+```bash
+./scripts/prepare-ers7m2-baseline.sh
+rsync -a --delete \
+  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/build/stick/ \
+  /media/$USER/disk/
+sync
+```
+
+For the WCONSOLE deployment command:
 
 ```bash
 ./scripts/prepare-ers7m2-wconsole.sh

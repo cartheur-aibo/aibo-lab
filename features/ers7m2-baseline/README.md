@@ -69,6 +69,10 @@ umount /media/$USER/disk
 
 Then insert the stick into the powered-off ERS-7 and boot.
 
+For the shared Sony-reader deployment procedure, see:
+
+- [features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md)
+
 ## Success Criteria
 
 - robot boots normally
