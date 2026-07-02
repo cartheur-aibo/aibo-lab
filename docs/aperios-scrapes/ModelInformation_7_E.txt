@@ -1,0 +1,1069 @@
+OPEN-R SDK
+Model Information for ERS-7
+
+115-01
+© 2004 by Sony Corporation
+
+Notes on This Document
+Notes on Using This Document
+!
+
+The contents provided by this document (PDF files) are intended only for
+supplying information.
+
+!
+
+The contents provided by this document (PDF files) are subject to change
+without notice.
+
+!
+
+We are not responsible for errors or omissions in technical or editorial aspects
+concerning the contents described in this document. We also are not
+responsible for technical measures, correspondence, execution according to this
+document, as well as for the results occurred by them such as inevitable,
+indirect or incidental damages.
+
+Notes on Copyright
+!
+
+Sony Corporation is the copyright holder of this document.
+
+!
+
+No information in this document may be duplicated, reproduced or modified. It
+is also prohibited to publish the contents of this document on the Internet
+Website or other public media without the express written permission of Sony
+Corporation.
+
+About Trademarks
+!
+
+OPEN-R is a trademark or a registered trademark of Sony Corporation.
+
+!
+
+"Memory Stick" is a trademark of Sony Corporation. "TM" is not described in
+this document.
+
+!
+
+Adobe Acrobat and Adobe Reader are registered trademarks of Adobe Systems
+Incorporated.
+
+!
+
+Other system names, product names, service names and firm names contained
+in this document are generally trademarks or registered trademarks of
+respective makers.
+
+1
+
+Model Information
+
+Index
+Notes on This Document ............................................................................. 1
+Notes on Using This Document....................................................................1
+Notes on Copyright.......................................................................................1
+About Trademarks .......................................................................................1
+
+Index ............................................................................................................ 2
+
+Chapter 1 Outside Specifications ....................................................3
+1.1
+
+External Measurements..................................................................... 3
+
+1.2
+
+Hardware Limitations of Joint Motions ............................................ 5
+
+Chapter 2 Joints................................................................................7
+2.1 Software Limitations of Joint Motions .................................................. 7
+2.1.1 Single Joints.........................................................................................7
+2.1.2 Two Joints in Legs ...............................................................................7
+2.1.3 Joints of Head and Mouth ....................................................................8
+
+2.2 Servo Gain ............................................................................................. 8
+2.3 Notes on Programming .......................................................................... 9
+
+Chapter 3 Devices ...........................................................................10
+3.1 Output Devices .................................................................................... 10
+3.1.1 Light...................................................................................................10
+3.1.2 Speaker ..............................................................................................11
+
+3.2 Input Devices ....................................................................................... 12
+3.2.1 Color Camera.....................................................................................12
+3.2.2 Stereo microphones............................................................................12
+3.2.3 Head sensor, Back sensor...................................................................12
+3.2.4 Paw sensor, Chin sensor.....................................................................13
+3.2.5 Distance sensor ..................................................................................13
+3.2.6 Acceleration sensor ............................................................................14
+3.2.7 Vibration sensor .................................................................................14
+
+Appendix 15
+A.1 List of CPC Primitive Locators........................................................... 15
+A.2 Position and Color of Face lights ........................................................ 17
+A.3 Direction of Distance sensors.............................................................. 18
+
+Model Information
+
+2
+
+Chapter 1 Outside Specifications
+1.1 External Measurements
+
+180.15
+
+317.38
+
+-30
+
+130
+
+Tilt2 Center
+
+2.5
+
+14.6
+
+125
+
+Tilt1 Center
+30
+
+19.5
+71.5
+
+76.5
+
+69.5
+
+220.942
+
+278.23
+
+80
+
+134.4
+
+148
+
+unit: mm
+
+3
+
+Model Information
+
+Line passed Rear leg Joint1
+
+Line passed Front leg Joint1
+
+8
+
+7.
+
+7.
+
+76.5
+
+71.5
+
+8
+
+30
+28.3 9
+37.3
+
+9
+
+47.712
+
+Microphone
+
+15.507
+
+15.507
+
+47.712
+
+30
+21.3
+30.3
+
+10
+
+10
+Z
+X
+76.9
+
+8.40
+
+45.610
+
+14.6
+
+Face Distance Sensor
+
+Neck Tilt2 Center
+
+Z
+
+17.50
+
+Color Camera
+Mouth joint center
+
+Y
+
+40.00
+81.06
+
+unit: mm
+
+Model Information
+
+4
+
+1.2 Hardware Limitations of Joint Motions
+-80
+
+3
+65
+
+0
+
+-60
+50
+-20
+
+127
+
+127
+-30
+
+-30
+
+120
+
+135
+0 -135
+
+-12
+
+unit: degree
+
+5
+
+Model Information
+
+60
+
+3
+
+-9
+
+93
+
+-60
+
+15
+
+93
+
+15
+
+-15
+
+unit: degree
+
+Model Information
+
+6
+
+Chapter 2 Joints
+Refer to Appendix A.1 for CPC Primitive Locator.
+
+2.1 Software Limitations of Joint Motions
+2.1.1 Single Joints
+Parts
+Neck tilt1
+Neck pan
+Neck tilt2
+Mouth
+Left leg(front/rear)J1
+Left leg(front/rear)J2
+Left leg(front/rear)J3
+Right leg(front/rear)J1
+Right leg(front/rear)J2
+Right leg(front/rear)J3
+Tail tilt
+Tail pan
+
+Range (Unit: degree)
+(-75, 0)
+(-88, 88)
+(-15, 45)
+(-55, -3)
+(-115, 130)
+(-10, 88)
+(-25, 122)
+(-130, 115)
+(-10, 88)
+(-25, 122)
+(5, 60)
+(-45, 45)
+
+2.1.2 Two Joints in Legs
+Front leg
+J1-range
+(-115, -76)
+(-75, -54)
+(-55, -46)
+(-45, -36)
+(-35, -31)
+(-30, -26)
+(-25, -21)
+(-20, -16)
+(-15, -11)
+(-10, 20)
+(21, 25)
+(26, 30)
+(29, 40)
+(41, 45)
+(46, 50)
+(51, 55)
+(56, 65)
+(64, 130)
+
+J2-range (Unit: degree)
+(-1, 88)
+(-2, 88)
+(-3, 88)
+(-4, 88)
+(-5, 88)
+(-6, 88)
+(-7, 88)
+(-8, 88)
+(-9, 88)
+(-10, 88)
+(-9, 88)
+(-8, 88)
+(-7, 88)
+(-6, 88)
+(-5, 88)
+(-4, 88)
+(-3, 88)
+(-2, 88)
+
+7
+
+Model Information
+
+Rear leg
+J1-range J2-range (Unit: degree)
+(115, 71)
+(0, 88)
+(70, 61)
+(-1, 88)
+(60, 51)
+(-2, 88)
+(50, 46)
+(-3, 88)
+(45, 41)
+(-4, 88)
+(40, 36)
+(-5, 88)
+(35, 31)
+(-6, 88)
+(30, 26)
+(-7, 88)
+(25, 21)
+(-8, 88)
+(20, 16)
+(-9, 88)
+(15, -10)
+(-10, 88)
+(-11, -15)
+(-9, 88)
+(-16, -20)
+(-8, 88)
+(-21, -25)
+(-7, 88)
+(-26, -30)
+(-6, 88)
+(-31, -35)
+(-5, 88)
+(-36, -40)
+(-4, 88)
+(-41, -45)
+(-3, 88)
+(-46, -55)
+(-2, 88)
+(-56, -70)
+(-1, 88)
+(-71, -130)
+(0, 88)
+
+2.1.3 Joints of Head and Mouth
+Please be aware that there may be collisions between body parts outside these limits.
+Mouth-range Neck-tilt1-range Neck-tilt2-range
+(-30, -3)
+(-75, -39)
+(5, 45)
+(-30, -3)
+(-40, 0)
+(-5, 45)
+
+2.2 Servo Gain
+Use standard values normally, and use weak gain values when large vibrations occur.
+PSHIFT, ISHIFT, DSHIFT are fixed values; please do not change these values.
+
+(standard values)
+CPC Primitive Locator
+PGAIN IGAIN DGAIN PSHIFT ISHIFT SHIFT
+PRM:/r1/c1-Joint2:11
+0x0A 0x04 0x02 0x0E 0x02 0x0F
+PRM:/r1/c1/c2-Joint2:12
+0x08 0x02 0x04 0x0E 0x02 0x0F
+PRM:/r1/c1/c2/c3-Joint2:13
+0x08 0x04 0x02 0x0E 0x02 0x0F
+PRM:/r1/c1/c2/c3/c4-Joint2:14 0x08 0x00 0x04 0x0E 0x02 0x0F
+PRM:/r2/c1-Joint2:21
+0x1C 0x08 0x01 0x0E 0x02 0x0F
+PRM:/r2/c1/c2-Joint2:22
+0x14 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r2/c1/c2/c3-Joint2:23
+0x1C 0x08 0x01 0x0E 0x02 0x0F
+PRM:/r3/c1-Joint2:31
+0x1C 0x08 0x01 0x0E 0x02 0x0F
+PRM:/r3/c1/c2-Joint2:32
+0x14 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r3/c1/c2/c3-Joint2:33
+0x1C 0x08 0x01 0x0E 0x02 0x0F
+PRM:/r4/c1-Joint2:41
+0x1C 0x08 0x01 0x0E 0x02 0x0F
+PRM:/r4/c1/c2-Joint2:42
+0x14 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r4/c1/c2/c3-Joint2:43
+0x1C 0x08 0x01 0x0E 0x02 0x0F
+PRM:/r5/c1-Joint2:51
+0x1C 0x08 0x01 0x0E 0x02 0x0F
+PRM:/r5/c1/c2-Joint2:52
+0x14 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r5/c1/c2/c3-Joint2:53
+0x1C 0x08 0x01 0x0E 0x02 0x0F
+PRM:/r6/c1-Joint2:61
+0x0A 0x04 0x04 0x0E 0x02 0x0F
+PRM:/r6/c2-Joint2:62
+0x0A 0x04 0x04 0x0E 0x02 0x0F
+
+Model Information
+
+8
+
+(weak gain values)
+CPC Primitive Locator
+PGAIN IGAIN DGAIN PSHIFT ISHIFT DSHIFT
+PRM:/r1/c1-Joint2:11
+0x0A 0x04 0x02 0x0E 0x02 0x0F
+PRM:/r1/c1/c2-Joint2:12
+0x08 0x02 0x04 0x0E 0x02 0x0F
+PRM:/r1/c1/c2/c3-Joint2:13
+0x08 0x04 0x02 0x0E 0x02 0x0F
+PRM:/r1/c1/c2/c3/c4-Joint2:14 0x08 0x00 0x04 0x0E 0x02 0x0F
+PRM:/r2/c1-Joint2:21
+0x10 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r2/c1/c2-Joint2:22
+0x0A 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r2/c1/c2/c3-Joint2:23
+0x10 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r3/c1-Joint2:31
+0x10 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r3/c1/c2-Joint2:32
+0x0A 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r3/c1/c2/c3-Joint2:33
+0x10 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r4/c1-Joint2:41
+0x10 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r4/c1/c2-Joint2:42
+0x0A 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r4/c1/c2/c3-Joint2:43
+0x10 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r5/c1-Joint2:51
+0x10 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r5/c1/c2-Joint2:52
+0x0A 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r5/c1/c2/c3-Joint2:53
+0x10 0x04 0x01 0x0E 0x02 0x0F
+PRM:/r6/c1-Joint2:61
+0x0A 0x04 0x04 0x0E 0x02 0x0F
+PRM:/r6/c2-Joint2:62
+0x0A 0x04 0x04 0x0E 0x02 0x0F
+
+2.3 Notes on Programming
+(1)The following is used for OCommandInfo’s type variable.
+ERS-7’s ear
+odataJOINT_COMMAND4
+
+(2) If you want to make the jam detection less strict, put and edit
+the following file:
+/OPEN-R/SYSTEM/CONF/VRCOMM.CFG
+
+and set 'JamDetectionHighThreshold' in this file.
+(3) Don't activate the ear plunger to 'on' for an extended period; it may
+cause damage to AIBO.
+
+9
+
+Model Information
+
+Chapter 3 Devices
+(1)Refer to Appendix A.1 for CPC Primitive Locator.
+(2)Refer to Level2 Reference Guide for details of functions and values.
+
+3.1 Output Devices
+3.1.1 Light
+Specifications
+LED method
+Face lights are controlled by A /B faces. (Refer to A.2)
+
+OCommandInfo’s type variable, and structure of OCommandData’s
+value variable
+Face light, Back light : odataLEDCOMMAND3, OLEDCommandValue3
+Others
+
+: odataLEDCOMMAND2, OLEDCOmmandValur2
+
+Notes
+(1)Face lights can show A /B faces by setting OLEDCommandValue3’s
+mode variable to the following. (mode is ineffective on Back lights.)
+oled3_MODE_A, oled3_MODE_B
+(2)Face lights and Back lights can show a range between 0 and 255
+by setting OLEDCommandValue’s intensity variable.
+
+Color of Face lights
+(A1 means Face light 1’s A surface)
+Face light’s ID, Color of A surface, Color of B surface
+1 white green
+
+(A1 and B1 are same position.)
+
+2 white green
+
+(A2 and B2 are same position.)
+
+3 white green
+
+(B3 and B13’s left are same position.)
+
+4 white green
+
+(B4 and B13’s right are same position.)
+
+5 white green
+
+(A5 and B5 are same position.)
+
+6 white white
+
+(A6 and B6 are same position.)
+
+7 white white
+
+(A7 and B7 are same position.)
+
+8 white white
+
+(A8 and B8 are same position.)
+
+9 white white
+
+(A9 and B9 are same position.)
+
+10 white white
+
+(A10 and B10 are same position.)
+
+11 white white
+
+(A11 and B11 are same position.)
+
+12 white white
+
+(A12 and B12 are same position.)
+
+13 red blue
+
+(A13 and A9:A10(B9+B10) are same position.
+B13 and B3+B4 are same position)
+
+14 red blue
+
+Model Information
+
+10
+
+Notes
+(1)You can’t use A/B surface’s LED at the same time. (ex. A1 and B2)
+(2)If you use same position’s LED at the same time, the colors become
+blended. (ex. A9 and A13)
+
+3.1.2 Speaker
+Specifications
+Sampling frequency: 8kHz/16kHz
+Quantized bit length: 8bit/16bit (Linear PCM)
+Channel: 1 channel (monaural)
+Variables which can be set during OPENR::ControlPrimitive()’s request
+oprmreqSPEAKER_MUTE_ON
+oprmreqSPEAKER_MUTE_OFF
+
+oprmreqSPEAKER_SET_VOLUME
+set the following OSpeakerVolume to param’s variable
+ospkvolinfdB (minimum)
+ospkvol25dB (-25dB)
+ospkvol18dB (-18dB)
+ospkvol10dB (-10dB)
+oprmreqSPEAKER_GET_SOUND_TYPE
+oprmreqSPEAKER_SET_SOUND_TYPE
+set the following OSpeakerVolume to param’s variable
+soundType(ospksndMONO8K8B)
+soundType(ospksndMONO16K16B)
+
+11
+
+Model Information
+
+3.2 Input Devices
+3.2.1 Color Camera
+Specifications
+CMOS part: 1/4 inch
+The number of picture elements: 416(H) x 320(V), 30 FPS
+Lens: F 2.8, f = 3.27mm
+Angle of view:
+Horizontal angle 56.9 degrees
+Vertical angle
+45.2 degrees
+Default:
+White balance 5000K fixed
+Shutter speed
+1/100 sec fixed
+Gain
+0dB fixed
+Variables which can be set during OPENR::ControlPrimitive()’s request
+White balance
+oprmreqCAM_SET_WHITE_BALANCE
+ocamparamWB_INDOOR_MODE
+
+(2856K)
+
+ocamparamWB_FL_MODE
+
+(5000K)
+
+ocamparamWB_OUTDOOR_MODE
+
+(6500K)
+
+Shutter speed
+ocamparamSHUTTER_SLOW
+
+(1/50sec)
+
+ocamparamSHUTTER_MID
+ocamparamSHUTTER_FAST
+
+(1/100sec)
+(1/200sec)
+
+ocamparamGAIN_LOW
+
+(-6dB)
+
+ocamparamGAIN_MID
+
+(0dB)
+
+ocamparamGAIN_HIGH
+
+(+6dB)
+
+Gain
+
+Notes
+In ERS-7, the CDT is effective for channel 0-6 and channel 7 is NOT available.
+
+3.2.2 Stereo microphones
+Specifications
+Sampling frequency: 16kHz
+Quantized bit length: 16bit (Linear PCM)
+Channel: 2 channel (stereo)
+Variables which can be set during OPENR::ControlPrimitive()’s request
+No effective variable.
+
+3.2.3 Head sensor, Back sensor
+Specifications
+Electrostatic method
+
+Value of OSensorValue’s signal and value variables
+Signal and value variables are the same AD value and the output range
+is about (0,80).
+
+Model Information
+
+12
+
+(reference) on/off’s thresholds
+on’s threshold off’s threshold
+Head sensor
+
+9
+
+9
+
+Back sensor(front)
+
+12
+
+12
+
+Back sensor(middle)
+
+14
+
+10
+
+Back sensor(rear)
+
+14
+
+10
+
+Notes
+(1)The back sensors’ thresholds consider hysteresis and shape
+of the sensor.
+(2)Thresholds may vary according to temperature and humidity.
+
+3.2.4 Paw sensor, Chin sensor
+Specifications
+Switch method
+Value of OSensorValue’s signal and value variables
+Return the following values.
+OswitchON,oswitchOFF
+
+3.2.5 Distance sensor
+Specifications
+The head distance sensor switches between the near and far sensors.
+(Refer to A1.3.)
+Range of OSensorValue’s value variable (unit: 10-6m)
+Chest distance sensor
+
+(100000, 900000)
+
+Head distance sensor(near)
+
+(50000, 500000)
+
+Head distance sensor(far)
+
+(200000, 1500000)
+
+Notes
+(1)The output values for the near/far head distance sensor appears
+alternatively. During each sensor’s turn, the result will show the most
+recent value. At other times, the result will show 0 for the signal, and
+remember the most recent value for the value(e.g. the previous’ frame’s
+value). For example:
+
+13
+
+Model Information
+
+(sample for near distance sensor)
+frame-ID turn signal value
+0
+
+near
+
+s1
+
+v1
+
+1
+
+far
+
+0
+
+v1
+
+2
+
+near
+
+s2
+
+v2
+
+3
+
+far
+
+0
+
+v2
+
+(2)The device measurement period of the head distance sensor is
+about 50msec; the chest distance sensor’s period is about 40msec;
+and the software’s sampling period is about 8msec. So, there might be
+a small delay to update the latest value due to the differences in the
+various update periods.
+
+3.2.6 Acceleration sensor
+Specifications
+3 axis(front-back, right-left, up-down)
+Range of OSensorValue’s value variable (unit: 10-6m/sec2)
+(-19613300, 19613300)
+
+3.2.7 Vibration sensor
+Specifications
+The vibration sensor is connected to a microprocessor for battery control.
+Variables which can be set during OPENR::Shutdown()’s bootCondition
+If the following variable is set, when the vibration sensor detects a vibration,
+the battery control microcomputer can boot AIBO.
+obcbVIBRATION_DETECTED
+
+Model Information
+
+14
+
+Appendix
+A.1 List of CPC Primitive Locators
+To use these locators, specify the CPC Primitive Locator in OPENR::OpenPrimitive()
+and retrieve the ID.
+For ease of reading, this list shows the small character ’l’ in the color blue, and the
+numeral ’1’ in the color black.
+CPC Primitive Locator
+
+Parts
+
+Head
+PRM:/r1/c1-Joint2:11
+Neck tilt1
+PRM:/r1/c1/c2-Joint2:12
+Neck pan
+PRM:/r1/c1/c2/c3-Joint2:13
+Neck tilt2
+PRM:/r1/c1/c2/c3/c4-Joint2:14
+Mouth
+PRM:/r1/c1/c2/c3/e5-Joint4:15
+Left ear
+PRM:/r1/c1/c2/c3/e6-Joint4:16
+Right ear
+PRM:/r1/c1/c2/c3/t1-Sensor:t1
+Head sensor
+PRM:/r1/c1/c2/c3/p1-Sensor:p1
+Head distance sensor(near)
+PRM:/r1/c1/c2/c3/p2-Sensor:p2
+Head distance sensor(far)
+PRM:/r1/c1/c2/c3/c4/s5-Sensor:s5
+Chin sensor
+PRM:/r1/c1/c2/c3/l1-LED2:l1
+Head light(color)
+PRM:/r1/c1/c2/c3/l2-LED2:l2
+Head light(white)
+PRM:/r1/c1/c2/c3/l3-LED2:l3
+Mode Indicator(red)
+PRM:/r1/c1/c2/c3/l4-LED2:l4
+Mode Indicator(green)
+PRM:/r1/c1/c2/c3/l5-LED2:l5
+Mode Indicator(blue)
+PRM:/r1/c1/c2/c3/l6-LED2:l6
+Wireless light
+PRM:/r1/c1/c2/c3/la-LED3:la
+Face light1
+PRM:/r1/c1/c2/c3/lb-LED3:lb
+Face light2
+PRM:/r1/c1/c2/c3/lc-LED3:lc
+Face light3
+PRM:/r1/c1/c2/c3/ld-LED3:ld
+Face light4
+PRM:/r1/c1/c2/c3/le-LED3:le
+Face light5
+PRM:/r1/c1/c2/c3/lf-LED3:lf
+Face light6
+PRM:/r1/c1/c2/c3/lg-LED3:lg
+Face light7
+PRM:/r1/c1/c2/c3/lh-LED3:lh
+Face light8
+PRM:/r1/c1/c2/c3/li-LED3:li
+Face light9
+PRM:/r1/c1/c2/c3/lj-LED3:lj
+Face light10
+PRM:/r1/c1/c2/c3/lk-LED3:lk
+Face light11
+PRM:/r1/c1/c2/c3/ll-LED3:ll
+Face light12
+PRM:/r1/c1/c2/c3/lm-LED3:lm
+Face light13
+PRM:/r1/c1/c2/c3/ln-LED3:ln
+Face light14
+PRM:/r1/c1/c2/c3/i1-FbkImageSensor:F1
+Color Camera
+PRM:/r1/c1/c2/c3/m1-Mic:M1
+Stereo microphones
+Left front leg
+PRM:/r2/c1-Joint2:21
+PRM:/r2/c1/c2-Joint2:22
+PRM:/r2/c1/c2/c3-Joint2:23
+PRM:/r2/c1/c2/c3/c4-Sensor:24
+
+Left front legJ1
+Left front legJ2
+Left front legJ3
+Left front leg, paw sensor
+
+PRM:/r3/c1-Joint2:31
+PRM:/r3/c1/c2-Joint2:32
+PRM:/r3/c1/c2/c3-Joint2:33
+PRM:/r3/c1/c2/c3/c4-Sensor:34
+
+Left rear legJ1
+Left rear legJ2
+Left rear legJ3
+Left rear leg, paw sensor
+
+Left rear leg
+
+15
+
+Model Information
+
+Right front leg
+PRM:/r4/c1-Joint2:41
+PRM:/r4/c1/c2-Joint2:42
+PRM:/r4/c1/c2/c3-Joint2:43
+PRM:/r4/c1/c2/c3/c4-Sensor:44
+
+Right front legJ1
+Right front legJ2
+Right front legJ3
+Right front leg, paw sensor
+
+PRM:/r5/c1-Joint2:51
+PRM:/r5/c1/c2-Joint2:52
+PRM:/r5/c1/c2/c3-Joint2:53
+PRM:/r5/c1/c2/c3/c4-Sensor:54
+
+Right rear legJ1
+Right rear legJ2
+Right rear legJ3
+Right rear leg, paw sensor
+
+PRM:/r6/c1-Joint2:61
+PRM:/r6/c2-Joint2:62
+PRM:/s1-Speaker:S1
+PRM:/p1-Sensor:p1
+PRM:/b1-Sensor:b1
+PRM:/t2-Sensor:t2
+PRM:/t3-Sensor:t3
+PRM:/t4-Sensor:t4
+PRM:/lu-LED3:lu
+PRM:/lv-LED3:lv
+PRM:/lw-LED3:lw
+PRM:/lx-LED3:lx
+PRM:/ly-LED3:ly
+PRM:/lz-LED3:lz
+
+Tail tilt
+Tail pan
+Speaker
+Chest distance sensor
+Wireless LAN switch
+Back sensor(rear)
+Back sensor(middle)
+Back sensor(front)
+Back light(front, color)
+Back light(front, white)
+Back light(middle, color)
+Back light(middle, white)
+Back light(rear, color)
+Back light(rear, white)
+
+Right rear leg
+
+Tail/Others
+
+Acceleration sensor
+PRM:/a1-Sensor:a1
+PRM:/a2-Sensor:a2
+PRM:/a3-Sensor:a3
+
+Model Information
+
+Acceleration sensor(front-back)
+Acceleration sensor(right-left)
+Acceleration sensor(up-down)
+
+16
+
+A.2 Position and Color of Face lights
+A1(left), A2(right)
+
+A3(left), A4(right)
+
+A5(left), A6(right)
+
+A7(left), A8(right)
+
+A9(left), A10(right)
+
+A11
+
+A12
+
+A13
+
+B1(left), B2(right)
+
+B3(left), B4(right)
+
+B5(left), B6(right)
+
+B7(left), B8(right)
+
+B9(left), B10(right)
+
+B11
+
+B12
+
+B13
+
+A14
+
+B14
+
+17
+
+Model Information
+
+A.3 Direction of Distance sensors
+Head distance sensor
+(top view)
+distance between light axis of head distance sensor(near) and central axis
+Acceptance point
+
+distance between light axis of head distance sensor(far) and central axis
+Chest distance sensor
+(side view)
+neck tilt1 center
+
+angle of chest distance sensor
+
+Model Information
+
+18
+
+

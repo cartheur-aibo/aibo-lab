@@ -1,0 +1,46 @@
+Notes
+
+The file name must comply 8+3 format (xxxxxxxx.xxx).
+The file is also gzipped.
+
+Installation Guide
+
+8
+
+3.2 Running
+3.2.1 Execution in a Wireless LAN environment
+Set up the wireless LAN environment with the following steps.
+
+1
+
+Copy the following two OPEN-R directories to a blank AIBO Programming
+Memory Stick. (/mydir is the directory where you installed the sample
+programs.)
+/usr/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R
+/mydir/sample/common/HelloWorld/MS/OPEN-R
+
+2
+
+Edit WLANCONF.TXT on the AIBO Programming Memory Stick and setup the
+wireless LAN parameters for AIBO. Refer to [3.2.2 How to set up
+WLANCONF.TXT] for details.
+
+3
+
+Insert an AIBO wireless LAN card and an AIBO Programming Memory Stick
+into AIBO. Then boot AIBO.
+
+4
+
+To connect your PC to AIBO’s wireless console, start the following telnet
+program on your PC. The AIBO wireless console uses a TCP port number
+59000 and telnet protocol. (You can alternatively use other third-party telnet
+programs if you prefer.)
+> telnet (IP address of AIBO) 59000
+
+If the characters [!!! Hello World!!!] are displayed after a series of system
+information is displayed, your AIBO is working normally in the OPEN-R SDK
+environment.
+
+5
+

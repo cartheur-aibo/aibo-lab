@@ -1,0 +1,129 @@
+4.1.1 Running on AIBO
+1 Build the executable file. (/mydir is the directory where you installed the sample
+programs)
+cd /mydir/sample/common/ObjectComm
+make install
+
+2 Copy these two OPEN-R directories to a blank AIBO Programming Memory
+Stick.
+/usr/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/nomemprot/OPEN-R
+/mydir/sample/common/ObjectComm/MS/OPEN-R
+
+3
+
+Insert the AIBO Programming Memory Stick into AIBO, then boot it.
+Subsequent operations (usage of wireless console, how to shutdown AIBO, etc.)
+are the same as before.
+
+4.1.2 Running on host
+1 Run ipc-daemon.
+/usr/bin/ipc-daemon2
+
+2
+
+Build the executable file.
+cd /mydir/sample/common/ObjectComm/RP/host
+make install
+
+Run start-rp-openr
+/usr/local/OPEN_R_SDK/RP_OPEN_R/bin/start-rp-openr
+[pid:29444,msqid:196610,oid:0x00030002] oserviceManager
+[pid:29445,msqid:229379,oid:0x00038003] tcpGateway
+[pid:29446,msqid:262148,oid:0x00040004]
+MS/OPEN-R/MW/OBJS/SUBJECT.BIN
+[pid:29447,msqid:294917,oid:0x00048005]
+MS/OPEN-R/MW/OBJS/OBSERVER.BIN
+SampleSubject::Ready() : ASSERT READY
+SampleObserver::Notify() !!! Hello world !!!
+SampleSubject::Ready() : ASSERT READY
+
+Installation Guide
+
+12
+
+SampleObserver::Notify() !!! Hello world again !!!
+SampleSubject::Ready() : ASSERT READY
+
+3 Type ctrl-c to terminate the program.
+
+4.2 Building & running LMasterRSlave
+4.2.1 Running on AIBO.
+1 Build the executable file.
+cd /mydir/sample/ers7/LmasterRSlave7
+make install
+
+2
+
+Copy the following two OPEN-R directories to a blank AIBO Programming
+Memory Stick.
+/usr/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/nomemprot/OPEN-R
+/mydir/sample/ers7/LmasterRSlave7/MS/OPEN-R
+
+3
+
+Insert the AIBO Programming Memory Stick into AIBO. Then boot AIBO.
+Subsequent operations (usage of wireless console, how to shutdown AIBO,
+etc.) are the same as before.
+
+4.2.2 Distributed execution on AIBO and host
+0 Run ipc-daemon (for Cygwin only)
+/usr/bin/ipc-daemon2
+
+Procedures for AIBO
+1 Build the executable file.
+cd /mydir/sample/ers7/LmasterRSlave7/RP/robot
+make install
+
+2
+
+Copy the following two OPEN-R directories to a blank AIBO Programming
+Memory Stick.
+/usr/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/nomemprot/OPEN-R
+/mydir/sample/ers7/LmasterRSlave7/RP/robot/MS/OPEN-R
+
+3
+
+Edit the following file according to your wireless setup.
+/OPEN-R/SYSTEM/CONF/WLANCONF.TXT
+
+4
+
+insert the AIBO Programming Memory Stick into AIBO, then boot it.
+Subsequent operations (usage of wireless console, how to shutdown AIBO,
+etc.) are the same as before.
+
+13
+
+Installation Guide
+
+Procedures for host
+1 Build the executable file.
+cd /mydir/sample/ers7/LmasterRSlave7/RP/host
+make install
+
+2
+
+Edit the following file.
+MS/OPEN-R/MW/CONF/HOSTGW.CFG
+
+Change 10.0.1.100 to the IP address of your AIBO.
+!ROBOT_PROXY 59001 10.0.1.100
+TCPGateway.Sensor.OSensorFrameVectorData.S 59001 10.0.1.100
+TCPGateway.Effector.OCommandVectorData.O 59003 10.0.1.100
+
+3 Run start-rp-openr
+/usr/local/OPEN_R_SDK/RP_OPEN_R/bin/start-rp-openr
+
+4 Type ctrl-c to terminate the program.
+4.3 Limitations of Remote Processing OPEN-R
+! The configuration of the system objects on AIBO is limited to 'nomemprot'
+when executing a program distributed between AIBO and a remote host.
+Therefore, please use the following directory as the OPEN-R directory to be
+copied to an AIBO Programming Memory Stick.
+/usr/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/nomemprot/OPEN-R
+
+!
+
+Description using [RobotDesign] as shown below is not supported in
+OBJECT.CFG and CONNECT.CFG on the host.
+#

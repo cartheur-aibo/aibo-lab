@@ -1,0 +1,183 @@
+4.1 Selection of OPEN-R configuration
+There are several OPEN-R configurations you can choose from to run your program
+in. The OPEN-R directory corresponding to each configuration is installed in the
+directory /usr/local/OPEN_R_SDK/OPEN_R/MS/. When you run your object on a
+robot, copy the OPEN-R directory corresponding to the configuration that you chose,
+as well as the objects that you created, to an AIBO Programming Memory Stick.
+BASIC/memprot/OPEN-R/
+BASIC/nomemprot/OPEN-R/
+WLAN/memprot/OPEN-R/
+WLAN/nomemprot/OPEN-R/
+WCONSOLE/memprot/OPEN-R/
+WCONSOLE/nomemprot/OPEN-R/
+
+4.1.1 Differences among BASIC/WLAN/WCONSOLE
+Choose one of the following depending on your purpose.
+#
+
+BASIC
+Without a wireless LAN environment
+
+#
+
+WLAN
+With a wireless LAN environment and without a wireless console
+
+#
+
+WCONSOLE
+With both a wireless LAN environment and a wireless console
+
+4.1.2 memprot/nomemprot
+Choose one of the following depending on your purpose.
+#
+
+memprot
+This configuration enables memory protection. Objects can work with user/tlb
+mode. Refer to “3.1 .ocf” for user/tlb mode details.
+The memory area that objects in user/tlb mode uses is placed in a virtual address
+space using TLB(translation lookaside buffer). This has the following
+advantages and disadvantages.
+Advantages
+• An object running in user mode cannot access the memory area of other
+objects. Thus, it is easier to find bugs caused by using a wrong pointer value.
+•
+
+In a virtual address space, you can use physically fragmented memory areas
+as a continuous memory area. This increases memory utilization.
+
+Disadvantages
+• Shared memory is reserved by 4096 byte chunks. When you reserve large
+quantities of a small memory area, memory utilization is decreased.
+•
+
+When the following happens, some overhead is incurred which affects the
+speed of your application:
+(a) The conversion from a virtual address to physical address in case of a
+TLB miss.
+(b) The allocation of shared memory, the release of shared memory, and
+the attachment of shared memory to other objects
+
+21
+
+Programmer’s Guide
+
+#
+
+nomemprot
+This deactivates memory protection. Here, all objects work with kernel/notlb
+mode. This has the opposite advantages and disadvantages compared to
+memprot.
+In the nomemprot environment, an object can access the memory area of other
+objects without using shared memory. However, if you use the API for shared
+memory in a nomemprot environment, your code can be used both in memprot
+and nomemprot environments without any changes. In the nomemprot
+environment, most of the API functions for managing shared memory are
+implemented as dummy functions, which work at high speed.
+
+4.2 Files to be set
+Some setting files should be customized to run your object(s) on AIBO. The
+following shows how to write files such as OBJECT.CFG, CONNECT.CFG and
+DESIGNDB.CFG.
+These files are located in the directory OPEN-R/MW/CONF on the AIBO
+Programming Memory Stick.
+
+4.2.1 OBJECT.CFG
+Enumerate the executable files corresponding to the object(s) that you want to
+execute.
+____________________________________________________________________
+/MS/OPEN-R/MW/OBJS/XXX.BIN
+/MS/OPEN-R/MW/OBJS/YYY.BIN
+
+____________________________________________________________________
+/MS/ indicates the root directory on an AIBO Programming Memory Stick.
+
+4.2.2 CONNECT.CFG
+The connection between a subject and an object is described.
+____________________________________________________________________
+Class1.Func1.Data1.S Class2.Func2.Data1.O
+Class1.Func3.Data2.S Class3.Func4.Data2.O
+
+____________________________________________________________________
+
+Each line includes the following items.
+"a subject service" (.S) ,"a space", "an observer service (.O)"
+The data name in the subject service and the data name in the observer service must
+be the same.
+
+Programmer’s Guide
+
+22
+
+4.2.3 DESIGNDB.CFG
+You can change the files to be loaded depending on the type of a robot that your
+program is running on. We describe keywords to find the file.
+____________________________________________________________________
+#
+# DESIGNDB.CFG
+#
+[ERS-210]
+KEYWORD1
+KEYWORD2
+
+/MS/OPEN-R/MW/CONF/ERS-210.TXT
+/MS/OPEN-R/MW/DATA/P/210.WAV
+
+[ERS-220]
+KEYWORD1
+KEYWORD2
+
+/MS/OPEN-R/MW/CONF/ERS-220.TXT
+/MS/OPEN-R/MW/DATA/P/220.WAV
+
+____________________________________________________________________
+/MS/ indicates the root directory in an AIBO Programming Memory Stick.
+A keyword is used as a tag to identify each file, and it can be any word you like.
+This keyword is referred to when a data file is read using the OPEN-R API, as
+shown below.
+____________________________________________________________________
+OPENR::FindDesignData (“KEYWORD1”,
+(ODesignDataID*)&memID, &addr, &size)
+
+____________________________________________________________________
+
+23
+
+Programmer’s Guide
+
+4.3 Execution on AIBO
+4.3.1 Creation of AIBO Programming Memory Stick
+First, you should copy the OPEN-R directory to the root of an AIBO Programming
+Memory Stick. Then, you copy executable files (xxx.bin) to the AIBO Programming
+Memory Stick. The executable files are copied to the following directory.
+/OPEN-R/MW/OBJS/
+Content data such as LED, motion, and sound data are copied to the following
+directory on the AIBO Programming Memory Stick.
+/OPEN-R/MW/DATA/P/
+
+OPEN-R directory
+/OPEN-R/
+
+MW/
+
+CONF/
+DATA/
+OBJS/
+
+SYSTEM/
+
+Configuration
+E/
+P/
+
+Content-data
+Executable files
+System
+
+4.3.2 Execution of AIBO Programming Memory Stick
+After copying the OPEN-R directory and editing necessary files to your AIBO
+Programming Memory Stick, insert it into AIBO and press the pause button.
+Notes
+AIBO may not boot if the remaining battery capacity is low.
+
+Programmer’s Guide
