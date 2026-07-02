@@ -45,6 +45,7 @@ The companion explainer is:
 - [scripts/explain-ers7-system-delta.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/explain-ers7-system-delta.sh)
 - [features/boot-risk-audit/SYSTEM-CONFIG-LINEAGE-NOTES.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/boot-risk-audit/SYSTEM-CONFIG-LINEAGE-NOTES.md)
 - [scripts/analyze-retail-systemcfg.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/analyze-retail-systemcfg.sh)
+- [scripts/check-ers7-system-provenance.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/check-ers7-system-provenance.sh)
 
 It focuses specifically on the `SYSTEM` boot layer and answers:
 
@@ -63,6 +64,12 @@ The record-table analyzer goes one step lower:
 - it compares retail MIND 2 and MIND 3 record stability by position
 - it compares retail record counts against SDK `WLAN` and `WCONSOLE` entry
   counts
+
+The provenance checker answers a different question:
+
+- when a candidate uses SDK-style plain-text `CARDDRV.CFG` or `EXTOBJ.CFG`,
+  do the referenced `SYSTEM/OBJS` binaries actually come from the SDK overlay,
+  from the preserved retail baseline, or from a mixture of both?
 
 ## Example
 
@@ -104,6 +111,15 @@ For the retail `SYSTEM` record-table view:
   opt/AIBO7M3/OPEN-R/SYSTEM/CONF/EXTOBJ.CFG \
   sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WLAN/memprot/OPEN-R/SYSTEM/CONF/EXTOBJ.CFG \
   sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R/SYSTEM/CONF/EXTOBJ.CFG
+```
+
+For the mixed-provenance check:
+
+```bash
+./scripts/check-ers7-system-provenance.sh \
+  features/ers7m2-baseline/build/stick \
+  features/ers7m2-wconsole/build/stick \
+  sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R
 ```
 
 ## Current Limit

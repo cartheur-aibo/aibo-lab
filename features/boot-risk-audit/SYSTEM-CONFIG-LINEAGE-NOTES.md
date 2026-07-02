@@ -122,6 +122,39 @@ MIND 3:
 So these files are behaving like structured version-specific boot tables, not
 like containers with a large invariant core.
 
+## Mixed-Provenance Result In Current Staging Trees
+
+Using
+[scripts/check-ers7-system-provenance.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/check-ers7-system-provenance.sh),
+we now know the current staging trees are not pure SDK overlays.
+
+For `features/ers7m2-wlan/build/stick`:
+
+- `IPSTACK.BIN`: preserved retail MIND 2
+- `WLANENBL.BIN`: preserved retail MIND 2
+- `EMGCYMON.BIN`: SDK overlay
+- `NETCONFS.BIN`: preserved retail MIND 2
+
+For `features/ers7m2-wconsole/build/stick`:
+
+- `IPSTACK.BIN`: preserved retail MIND 2
+- `WLANENBL.BIN`: preserved retail MIND 2
+- `HOOK.BIN`: SDK overlay
+- `EMGCYMON.BIN`: SDK overlay
+- `NETCONFS.BIN`: preserved retail MIND 2
+- `ANTTCPIO.BIN`: SDK overlay
+- `HOOKACT.BIN`: SDK overlay
+
+This means the current candidates combine:
+
+- SDK plain-text boot config lists
+- preserved retail binaries for some referenced objects
+- SDK binaries for other referenced objects
+
+That mixed provenance is likely an additional risk factor beyond simple file
+drift, because it means the boot config representation and the referenced boot
+objects no longer come from a single known lineage.
+
 ## Current Best Interpretation
 
 - the preserved baseline's opaque `SYSTEM` config is a valid retail MIND 2
