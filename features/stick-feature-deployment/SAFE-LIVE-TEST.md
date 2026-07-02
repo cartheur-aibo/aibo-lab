@@ -118,6 +118,20 @@ If both baseline and TinyFTPD work:
 
 - you have a valid dev-stick path for OTA transfer and console debugging
 
+## Current Observed Result
+
+Current real-hardware result on the experimental M2:
+
+- baseline worked normally
+- TinyFTPD `WCONSOLE` produced `doo doo doo` and shutdown
+
+So the current safe conclusion is:
+
+- baseline remains the live-safe stick
+- pure SDK `TinyFTPD` `WCONSOLE` is not currently safe on this robot
+- future work should treat this as a runtime-family problem, not a copy-step
+  problem
+
 ## Related Docs
 
 - [features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md)

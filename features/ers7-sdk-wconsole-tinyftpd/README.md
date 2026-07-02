@@ -67,6 +67,23 @@ This is a pure SDK candidate:
 The staged tree keeps the SDK `CONNECT.CFG` and other base config files unless
 the sample overrides them.
 
+## Real Hardware Result On Experimental ERS-7 M2
+
+Observed result on the current experimental M2:
+
+- preserved `ers7m2-baseline` booted normally on the same stick
+- this pure SDK `TinyFTPD` `WCONSOLE/nomemprot` payload caused
+  `doo doo doo` and shutdown
+
+So this workflow is currently:
+
+- reproducible as a host-side build
+- useful as a pure SDK reference
+- not a safe live deployment path for this experimental M2 at this time
+
+That strongly suggests the failure is in runtime lineage and boot behavior, not
+in basic stick copying or a trivial sample-build mistake.
+
 ## FTP Behavior
 
 The sample source config defines:
@@ -119,7 +136,8 @@ What this feature tells us:
 What it does not yet prove:
 
 - that mixing `WCONSOLE` into the preserved retail MIND 2 runtime is safe
-- that a grinding real-robot boot can be solved by this feature alone
+- that a grinding or shutdown real-robot boot can be solved by this feature
+  alone
 
 ## Related Features
 
