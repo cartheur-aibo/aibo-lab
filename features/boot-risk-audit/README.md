@@ -51,6 +51,8 @@ That means we need a second safety layer:
 The first tool in this track is:
 
 - [scripts/audit-ers7-stick-risk.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/audit-ers7-stick-risk.sh)
+- [scripts/validate-ers7m2-candidate.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/validate-ers7m2-candidate.sh)
+- [features/boot-risk-audit/VALIDATOR.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/boot-risk-audit/VALIDATOR.md)
 
 It currently audits:
 
@@ -66,6 +68,12 @@ It currently audits:
 - retail `OBJECT.CFG` drift as a conservative signal
 - added or missing `OPEN-R/SYSTEM/OBJS/*`
 - missing file references from text `/MS/...` config entries
+
+The validator turns those signals into a conservative live-test gate for the
+current experimental M2:
+
+- baseline-like retail candidates may pass
+- SDK-family replacements currently fail
 
 ## Second Tool
 
