@@ -34,6 +34,16 @@ into:
 
 - `OPEN-R/SYSTEM/CONF/WLANCONF.TXT`
 
+To build the same full MIND 2 tree with the SDK's `WCONSOLE` extras added for
+wireless-console testing, run:
+
+```bash
+SYSTEM_FLAVOR=WCONSOLE ./scripts/prepare-ers7m2-test-stick.sh
+```
+
+That keeps the preserved MIND 2 runtime and app tree, but overlays the
+`WCONSOLE`-specific system files needed for the telnet console path.
+
 ## What It Uses
 
 The script copies from:
@@ -65,7 +75,7 @@ unchanged.
 
 `src/ERS7M2/WLANCONF.TXT` currently uses:
 
-- `HOSTNAME=AIBO`
+- `HOSTNAME=AIBOM2A`
 
 That is not descriptive enough for the current lab setup. With multiple ERS-7
 units, especially more than one MIND 2 robot, the repo should treat hostnames
@@ -123,6 +133,10 @@ One important caveat:
 
 - port `59000` was still closed during this test, so this proved MIND 2 HTTP
   reachability, not the OPEN-R wireless console
+
+If we need port `59000`, the staging tree should now be built with:
+
+- `SYSTEM_FLAVOR=WCONSOLE`
 
 ## Next App-Test Step
 
