@@ -155,6 +155,103 @@ That mixed provenance is likely an additional risk factor beyond simple file
 drift, because it means the boot config representation and the referenced boot
 objects no longer come from a single known lineage.
 
+## Pure-SDK SYSTEM Comparison Result
+
+We also built a pure-SDK `WCONSOLE` `SYSTEM` comparison candidate with:
+
+- [scripts/prepare-ers7m2-wconsole-sdk-system.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/prepare-ers7m2-wconsole-sdk-system.sh)
+
+That candidate does remove the mixed-provenance issue:
+
+- `IPSTACK.BIN`: SDK overlay
+- `WLANENBL.BIN`: SDK overlay
+- `HOOK.BIN`: SDK overlay
+- `EMGCYMON.BIN`: SDK overlay
+- `NETCONFS.BIN`: SDK overlay
+- `ANTTCPIO.BIN`: SDK overlay
+- `HOOKACT.BIN`: SDK overlay
+
+But it also reveals a distinct problem:
+
+- the SDK `WCONSOLE` `SYSTEM/OBJS` lineage omits `RRWH.BIN`
+- the preserved working baseline includes `RRWH.BIN`
+- the mixed `ers7m2-wconsole` tree kept `RRWH.BIN` only because it started
+  from the preserved MIND 2 runtime
+
+So the comparison is useful, but it does **not** show that "pure SDK" is
+automatically safer. It instead sharpens the real tradeoff:
+
+- mixed candidate: mixed lineage, but closer to the preserved real-runtime
+  object set
+- pure-SDK candidate: cleaner lineage, but farther from the preserved real
+  runtime because `RRWH.BIN` disappears
+
+## RRWH.BIN Check
+
+We also checked whether `RRWH.BIN` looks like a likely poison-pill object.
+
+Current evidence says no.
+
+What we observed:
+
+- `RRWH.BIN` exists in retail MIND 2 and retail MIND 3
+- the preserved baseline uses the retail MIND 2 `RRWH.BIN` unchanged
+- MIND 2 and MIND 3 `RRWH.BIN` have the same size: `7600` bytes
+- they share a stable suffix from byte `512` through byte `7599`
+- that stable suffix is `7088` bytes long
+- only the first `512` bytes differ across MIND 2 and MIND 3
+
+That makes `RRWH.BIN` look much more like:
+
+- a normal versioned runtime object with version-specific front matter
+- and a large shared implementation body
+
+than like:
+
+- a tiny one-off gate blob
+- or an object that exists only to block mismatched runtime layouts
+
+This does **not** prove `RRWH.BIN` is harmless.
+
+But it does weaken the specific "poison-pill" suspicion and strengthen the
+interpretation that the SDK `WCONSOLE` lineage is simply missing a real retail
+runtime component.
+
+## RRWH.BIN In The Wider SYSTEM Object Set
+
+We also compared `RRWH.BIN` against the broader retail `SYSTEM/OBJS` MIND 2 vs
+MIND 3 pattern.
+
+That comparison matters because if `RRWH.BIN` were uniquely suspicious, we
+would expect it to behave unlike most other retail runtime objects.
+
+Instead, it fits a recurring family pattern:
+
+- `IPSTACK.BIN`: first `512` bytes differ, large stable suffix
+- `NETCONFS.BIN`: first `512` bytes differ, large stable suffix
+- `RRWH.BIN`: first `512` bytes differ, large stable suffix
+- `SRVCMGR.BIN`: first `512` bytes differ, large stable suffix
+- `SYSLOG.BIN`: first `512` bytes differ, large stable suffix
+- `VRCOMM.BIN`: first `512` bytes differ, large stable suffix
+- `WLANDRV.BIN`: first `512` bytes differ, large stable suffix
+
+By contrast, some other retail system objects do **not** show that pattern and
+appear more fully versioned across MIND 2 and MIND 3:
+
+- `DR.BIN`
+- `POWERMGR.BIN`
+- `VR.BIN`
+- `VRAUCOMM.BIN`
+- `WLANENBL.BIN`
+
+So the comparative result is:
+
+- `RRWH.BIN` is not a unique anomaly
+- it behaves like one member of a normal versioned retail runtime-object
+  family
+- the stronger current concern is still the SDK lineage omitting it entirely,
+  not the object itself acting like a poison-pill
+
 ## Current Best Interpretation
 
 - the preserved baseline's opaque `SYSTEM` config is a valid retail MIND 2

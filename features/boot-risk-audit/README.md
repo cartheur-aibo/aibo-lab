@@ -70,6 +70,8 @@ The provenance checker answers a different question:
 - when a candidate uses SDK-style plain-text `CARDDRV.CFG` or `EXTOBJ.CFG`,
   do the referenced `SYSTEM/OBJS` binaries actually come from the SDK overlay,
   from the preserved retail baseline, or from a mixture of both?
+- and if we force a pure-SDK `SYSTEM` lineage, which real-runtime ERS-7
+  `SYSTEM/OBJS` files disappear?
 
 ## Example
 

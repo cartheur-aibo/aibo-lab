@@ -23,6 +23,8 @@ Environment variables:
                     Default: ./src/ERS7M2/WLANCONF.TXT
   SYSTEM_FLAVOR     preserved, WLAN, or WCONSOLE.
                     Default: WCONSOLE
+  SYSTEM_SOURCE     mixed or sdk.
+                    Default: mixed
 EOF
 }
 
@@ -41,6 +43,7 @@ OPENRSDK_ROOT="${OPENRSDK_ROOT:-$ROOT_DIR/sdk/local/OPEN_R_SDK}"
 SOURCE_STICK_DIR="${SOURCE_STICK_DIR:-$ROOT_DIR/features/aibo-mind2/build/stick}"
 WLANCONF_SOURCE="${WLANCONF_SOURCE:-$ROOT_DIR/src/ERS7M2/WLANCONF.TXT}"
 SYSTEM_FLAVOR="${SYSTEM_FLAVOR:-WCONSOLE}"
+SYSTEM_SOURCE="${SYSTEM_SOURCE:-mixed}"
 TARGET_MOUNT="${TARGET_MOUNT:-/media/$USER/YOUR_STICK_MOUNT}"
 FEATURE_DIR="${FEATURE_DIR:-$ROOT_DIR/features/ers7m2-wconsole}"
 OUTPUT_DIR="${1:-$FEATURE_DIR/build/stick}"
@@ -66,6 +69,14 @@ case "$SYSTEM_FLAVOR" in
     ;;
 esac
 
+case "$SYSTEM_SOURCE" in
+  mixed|sdk) ;;
+  *)
+    echo "error: SYSTEM_SOURCE must be mixed or sdk" >&2
+    exit 1
+    ;;
+esac
+
 rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 
@@ -83,19 +94,26 @@ if [ "$SYSTEM_FLAVOR" != "preserved" ]; then
 
   mkdir -p "$OUTPUT_DIR/OPEN-R/SYSTEM/OBJS" "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF"
 
-  # Keep the known-good MIND 2 runtime as the base and add only the SDK
-  # flavor's extra system objects that are not already present in the preserved
-  # tree. This preserves the narrow-overlay behavior for WCONSOLE and also lets
-  # the WLAN flavor stage correctly.
-  while IFS= read -r relpath; do
-    [ -z "$relpath" ] && continue
-    if [ ! -e "$OUTPUT_DIR/OPEN-R/SYSTEM/OBJS/$relpath" ]; then
-      cp -a "$FLAVOR_DIR/SYSTEM/OBJS/$relpath" \
-        "$OUTPUT_DIR/OPEN-R/SYSTEM/OBJS/$relpath"
-    fi
-  done < <(
-    find "$FLAVOR_DIR/SYSTEM/OBJS" -maxdepth 1 -type f -printf '%f\n' | sort
-  )
+  if [ "$SYSTEM_SOURCE" = "sdk" ]; then
+    # For pure-SDK comparison candidates, replace the entire SYSTEM object set
+    # with the flavor's SDK lineage before injecting the SDK config files.
+    rm -rf "$OUTPUT_DIR/OPEN-R/SYSTEM/OBJS"
+    mkdir -p "$OUTPUT_DIR/OPEN-R/SYSTEM/OBJS"
+    cp -a "$FLAVOR_DIR/SYSTEM/OBJS/." "$OUTPUT_DIR/OPEN-R/SYSTEM/OBJS/"
+  else
+    # Keep the known-good MIND 2 runtime as the base and add only the SDK
+    # flavor's extra system objects that are not already present in the
+    # preserved tree.
+    while IFS= read -r relpath; do
+      [ -z "$relpath" ] && continue
+      if [ ! -e "$OUTPUT_DIR/OPEN-R/SYSTEM/OBJS/$relpath" ]; then
+        cp -a "$FLAVOR_DIR/SYSTEM/OBJS/$relpath" \
+          "$OUTPUT_DIR/OPEN-R/SYSTEM/OBJS/$relpath"
+      fi
+    done < <(
+      find "$FLAVOR_DIR/SYSTEM/OBJS" -maxdepth 1 -type f -printf '%f\n' | sort
+    )
+  fi
 
   cp -a "$FLAVOR_DIR/SYSTEM/CONF/CARDDRV.CFG" \
     "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/CARDDRV.CFG"
@@ -126,6 +144,7 @@ $STICK_LABEL copy notes
 Source stick dir: $SOURCE_STICK_DIR
 Injected WLANCONF: $WLANCONF_SOURCE
 System flavor: $SYSTEM_FLAVOR
+System source: $SYSTEM_SOURCE
 Stick staging dir: $OUTPUT_DIR
 
 Active WLAN settings in this staged tree:
@@ -162,5 +181,6 @@ echo "Prepared $STICK_LABEL at: $OUTPUT_DIR"
 echo "Source stick dir: $SOURCE_STICK_DIR"
 echo "Injected WLANCONF: $WLANCONF_SOURCE"
 echo "System flavor: $SYSTEM_FLAVOR"
+echo "System source: $SYSTEM_SOURCE"
 echo "Size: ${SIZE_MIB} MiB (${SIZE_BYTES} bytes)"
 echo "Copy note: $COPY_NOTE_FILE"
