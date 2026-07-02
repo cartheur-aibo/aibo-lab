@@ -111,6 +111,8 @@ When a future agent needs the best known inputs, start here:
   describes the complete pure SDK ERS-7 WCONSOLE HelloWorld workflow
 - [features/ers7-sdk-wconsole-objectcomm/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-objectcomm/README.md)
   describes the complete pure SDK ERS-7 WCONSOLE/nomemprot ObjectComm workflow
+- [features/ers7-sdk-wconsole-tinyftpd/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-tinyftpd/README.md)
+  describes the pure SDK WCONSOLE/nomemprot FTP plus console workflow
 - [features/ers7m3-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m3-test-stick/README.md)
   describes the larger-stick MIND 3 workflow
 - [features/reference-sticks/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/README.md)
@@ -249,6 +251,12 @@ Prepare the pure SDK WCONSOLE HelloWorld tree:
 
 ```bash
 ./scripts/prepare-ers7-sdk-wconsole-helloworld.sh
+```
+
+Prepare the pure SDK WCONSOLE TinyFTPD tree:
+
+```bash
+./scripts/prepare-ers7-sdk-wconsole-tinyftpd.sh
 ```
 
 Prepare the camera-stream staging tree:

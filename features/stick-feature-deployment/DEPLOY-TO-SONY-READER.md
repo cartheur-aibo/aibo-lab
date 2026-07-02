@@ -29,6 +29,16 @@ This creates:
 
 - `features/ers7-sdk-wconsole-helloworld/build/stick`
 
+For the pure SDK TinyFTPD WCONSOLE sample:
+
+```bash
+./scripts/prepare-ers7-sdk-wconsole-tinyftpd.sh
+```
+
+This creates:
+
+- `features/ers7-sdk-wconsole-tinyftpd/build/stick`
+
 Set the staged source path you actually want to deploy:
 
 ```bash
@@ -39,6 +49,12 @@ or:
 
 ```bash
 STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-helloworld/build/stick
+```
+
+or:
+
+```bash
+STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-tinyftpd/build/stick
 ```
 
 The staged tree already contains the two items that must exist at the stick
@@ -128,10 +144,16 @@ Do not pull the reader or stick early.
 5. Find the robot IP from your hotspot or router.
 6. Test `ping AIBO_IP`.
 7. Test `http://AIBO_IP/`.
-8. If you deployed the pure SDK WCONSOLE HelloWorld variant, also test:
+8. If you deployed a pure SDK WCONSOLE variant, also test:
 
 ```bash
 telnet AIBO_IP 59000
+```
+
+9. If you deployed the TinyFTPD variant, also test:
+
+```bash
+ftp AIBO_IP
 ```
 
 ## Expected Wi-Fi Settings
@@ -169,4 +191,15 @@ rsync -a --delete \
   /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-helloworld/build/stick/ \
   /media/$USER/disk/
 sync
+```
+
+For the pure SDK WCONSOLE TinyFTPD deployment command:
+
+```bash
+./scripts/prepare-ers7-sdk-wconsole-tinyftpd.sh
+rsync -a --delete \
+  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-tinyftpd/build/stick/ \
+  /media/$USER/disk/
+sync
+umount /media/$USER/disk
 ```

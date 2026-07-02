@@ -39,6 +39,7 @@ For preserved-only stock MIND 2 bring-up:
 For pure SDK WCONSOLE sample testing:
 
 - `features/ers7-sdk-wconsole-helloworld/build/stick`
+- `features/ers7-sdk-wconsole-tinyftpd/build/stick`
 
 For camera-stream testing:
 
@@ -155,6 +156,29 @@ Expected success pattern:
 - robot joins Wi-Fi
 - `ping` succeeds
 - port `59000` responds if the wireless console path is working
+
+### Sequence A3: SDK WCONSOLE TinyFTPD
+
+1. Prepare `features/ers7-sdk-wconsole-tinyftpd/build/stick`.
+2. Copy it to the new larger stick.
+3. Boot the robot.
+4. Join the same compatible Wi-Fi network from the host.
+5. Find the robot IP.
+6. Test:
+
+```bash
+ping AIBO_IP
+telnet AIBO_IP 59000
+ftp AIBO_IP
+```
+
+Expected success pattern:
+
+- robot stays on
+- robot joins Wi-Fi
+- `ping` succeeds
+- port `59000` responds
+- FTP on port `21` responds
 
 ### Sequence B: Camera Stream
 
@@ -281,6 +305,12 @@ Prepare the pure SDK WCONSOLE HelloWorld sample:
 
 ```bash
 ./scripts/prepare-ers7-sdk-wconsole-helloworld.sh
+```
+
+Prepare the pure SDK WCONSOLE TinyFTPD sample:
+
+```bash
+./scripts/prepare-ers7-sdk-wconsole-tinyftpd.sh
 ```
 
 Prepare camera stream:
