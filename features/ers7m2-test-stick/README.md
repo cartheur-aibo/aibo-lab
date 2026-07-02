@@ -6,12 +6,19 @@ sticks you ordered.
 It avoids the 8 MB bring-up path entirely and instead starts from the preserved
 known-good AIBO MIND 2 stick tree we captured from the real robot.
 
+If you want the lowest-risk first hardware boot path, start with:
+
+- [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/README.md)
+
+and only return here once the preserved-only baseline is stable.
+
 ## Goal
 
 Prepare a full MIND 2 stick for app testing with:
 
 - the known-good MIND 2 file tree
 - the lab-operational Wi-Fi config from `src/ERS7M2/WLANCONF.TXT`
+- the SDK's `WCONSOLE` system overlay for wireless-console testing
 - a repeatable staging directory under `features/`
 
 ## Build The Staging Tree
@@ -34,15 +41,25 @@ into:
 
 - `OPEN-R/SYSTEM/CONF/WLANCONF.TXT`
 
-To build the same full MIND 2 tree with the SDK's `WCONSOLE` extras added for
-wireless-console testing, run:
+The default `ers7m2-test-stick` build now includes the SDK's `WCONSOLE` extras
+for wireless-console testing.
+
+If you need a narrower preserved-only first boot instead, use:
 
 ```bash
-SYSTEM_FLAVOR=WCONSOLE ./scripts/prepare-ers7m2-test-stick.sh
+./scripts/prepare-ers7m2-baseline.sh
 ```
 
-That keeps the preserved MIND 2 runtime and app tree, but overlays the
-`WCONSOLE`-specific system files needed for the telnet console path.
+If you want to override the test-stick build back to a non-`WCONSOLE` flavor,
+run:
+
+```bash
+SYSTEM_FLAVOR=preserved ./scripts/prepare-ers7m2-test-stick.sh
+```
+
+The standard test-stick path keeps the preserved MIND 2 runtime and app tree,
+but overlays the `WCONSOLE`-specific system files needed for the telnet
+console path.
 
 ## What It Uses
 
@@ -101,13 +118,13 @@ sync
 
 Then eject the stick cleanly before inserting it into the ERS-7.
 
-## Why This Is The Preferred Path
+## Why This Is The Preferred WCONSOLE Path
 
 - the full MIND 2 layout already works on the robot
 - `Aibonet` is already proven live on the working 32 MB stick
 - the new 64 MB sticks remove the 8 MB capacity pressure
-- this is the cleanest path for testing real apps without fighting low-level
-  8 MB media behavior
+- this is the cleanest path for testing real apps and the wireless console
+  without fighting low-level 8 MB media behavior
 
 ## Verified Milestone
 
@@ -134,9 +151,7 @@ One important caveat:
 - port `59000` was still closed during this test, so this proved MIND 2 HTTP
   reachability, not the OPEN-R wireless console
 
-If we need port `59000`, the staging tree should now be built with:
-
-- `SYSTEM_FLAVOR=WCONSOLE`
+That is why this feature now defaults to `SYSTEM_FLAVOR=WCONSOLE`.
 
 ## Next App-Test Step
 

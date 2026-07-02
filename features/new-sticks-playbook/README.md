@@ -105,7 +105,11 @@ When a future agent needs the best known inputs, start here:
 - the intended hostname naming convention for the current lab is:
   `AIBO-M2A`, `AIBO-M2B`, `AIBO-M3A`
 - [features/ers7m2-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-test-stick/README.md)
-  describes the larger-stick MIND 2 workflow
+  describes the larger-stick MIND 2 `WCONSOLE` workflow for post-baseline
+  testing
+- [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/README.md)
+  describes the preserved-only first-boot MIND 2 baseline that should come
+  before `WCONSOLE`
 - [features/ers7m3-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m3-test-stick/README.md)
   describes the larger-stick MIND 3 workflow
 - [features/reference-sticks/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/README.md)
@@ -129,17 +133,17 @@ the robot joins Wi-Fi and serves the stock HTTP UI.
 Run:
 
 ```bash
-./scripts/prepare-ers7m2-test-stick.sh
+./scripts/prepare-ers7m2-baseline.sh
 ```
 
 This produces:
 
-- `features/ers7m2-test-stick/build/stick`
+- `features/ers7m2-baseline/build/stick`
 
 ### Copy To The Mounted Stick
 
 ```bash
-rsync -a --delete /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-test-stick/build/stick/ /path/to/mounted-stick/
+rsync -a --delete /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/build/stick/ /path/to/mounted-stick/
 sync
 ```
 
@@ -161,6 +165,9 @@ sync
 - stock MIND 2 page opens
 
 If this fails, stop and debug that before trying custom payloads.
+
+Do not use `SYSTEM_FLAVOR=WCONSOLE` for this first hardware test. Treat that as
+a later boot-overlay experiment only after the preserved baseline is stable.
 
 ## Phase 2: Safe App-Overlay Workflow
 
@@ -223,16 +230,22 @@ If a future agent opens this repo cold, the best order is:
 
 1. Read this playbook.
 2. Read [features/new-sticks-playbook/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/new-sticks-playbook/TROUBLESHOOTING.md).
-3. Read [features/ers7m2-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-test-stick/README.md).
+3. Read [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/README.md).
 4. Verify the preserved baseline exists at
    [features/aibo-mind2/build/stick](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/aibo-mind2/build/stick).
-5. Prepare the larger-stick MIND 2 tree.
+5. Prepare the larger-stick MIND 2 baseline tree.
 6. Test stock boot and stock HTTP first.
-7. Only then move to app overlays or `W3AIBO`.
+7. Only then move to `WCONSOLE`, app overlays, or `W3AIBO`.
 
 ## Minimal Command Set
 
 Prepare the known-good MIND 2 staging tree:
+
+```bash
+./scripts/prepare-ers7m2-baseline.sh
+```
+
+Prepare the `WCONSOLE` MIND 2 test tree:
 
 ```bash
 ./scripts/prepare-ers7m2-test-stick.sh
