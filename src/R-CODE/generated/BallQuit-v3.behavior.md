@@ -21,7 +21,7 @@
   lines 11: `IF:=:stat:1:200`
   lines 12: `MOVE:LEGS:WALK:SLOW:FORWARD:0`
   lines 13: `GO:100`
-- `State 200`: Act, Recover
+- `Quit Behavior`: Act, Recover
   lines 16: `QUIT:AIBO`
 
 ## Transitions
@@ -36,7 +36,7 @@
 flowchart TD
     S_INIT["Boot"]
     S_100["Sense Fall State"]
-    S_200["State 200"]
+    S_200["Quit Behavior"]
     S_100_CHECK{"Fall?"}
     S_100 --> S_100_CHECK
     S_100_CHECK -->|fallen| S_200

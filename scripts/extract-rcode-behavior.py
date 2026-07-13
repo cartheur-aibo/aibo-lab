@@ -246,6 +246,8 @@ def clean_state_comment(comment: str) -> str:
 def infer_action_title(state: State) -> str:
     text_set = [inst.text for inst in state.instructions if inst.text]
 
+    if any(inst.command == "QUIT" for inst in state.instructions):
+        return "Quit Behavior"
     if any(inst.command == "RESUME" for inst in state.instructions):
         return "Resume Listener"
     if any("SET:mode:0" in text for text in text_set):
@@ -324,6 +326,12 @@ def infer_action_title(state: State) -> str:
         return "Scan Left And Right"
     if any("SET:dd:d" in text for text in text_set):
         return "Record Best Opening"
+    if any("SET:count:0" in text for text in text_set):
+        return "Reset Sample Count"
+    if any("LET:pan:ave1" in text for text in text_set):
+        return "Select First Average"
+    if any("LET:loop_cnt:0" in text for text in text_set):
+        return "Reset Scan Counter"
     if any("PLAY:AIBO:Think" in text for text in text_set):
         return "Idle Thought"
     if any("PLAY:AIBO:Wake" in text for text in text_set):

@@ -42,7 +42,7 @@
   lines 37: `MOVE:HEAD:ABS:0:0:0:1000`
 - `Sense / Decide`: Sense/Decide
   lines 40: `IF:=:Wait:0:1100`
-- `State 1011`: Initialize State
+- `Reset Sample Count`: Initialize State
   lines 43: `SET:count:0`
 - `Sense / Decide`: Sense/Decide, Loop/Transition
   lines 45: `IF:<:Distance:300:1040`
@@ -70,10 +70,10 @@
   lines 70: `IF:<=:ave2:temp_ave:1110`
   lines 71: `LET:pan:ave2`
   ... `1` more instructions
-- `State 1110`: Loop/Transition
+- `Select First Average`: Loop/Transition
   lines 74: `LET:pan:ave1`
   lines 75: `GO:1200`
-- `State 1200`: Action
+- `Reset Scan Counter`: Action
   lines 77: `LET:loop_cnt:0`
 - `Sense / Decide`: Sense/Decide, Loop/Transition
   lines 80: `IF:>:pan:50:3010`
@@ -203,15 +203,15 @@ flowchart TD
     S_120["When there was an obstacle in front"]
     S_130["Head Scan Position"]
     S_1010["Sense / Decide"]
-    S_1011["State 1011"]
+    S_1011["Reset Sample Count"]
     S_1020["Sense / Decide"]
     S_1040["When Distance became less than 300"]
     S_1041["Sense / Decide"]
     S_1042["At the time of loop_cnt=1"]
     S_1043["At the time of loop_cnt=2"]
     S_1100["Wait loop end"]
-    S_1110["State 1110"]
-    S_1200["State 1200"]
+    S_1110["Select First Average"]
+    S_1200["Reset Scan Counter"]
     S_2000["Sense / Decide"]
     S_133["Action Loop"]
     S_2010["Action Loop"]
