@@ -1,21 +1,179 @@
 # Behavior Aggregate
 
-This note summarizes the state titles currently present across the
-generated `R-CODE` behavior diagrams under
-`src/R-CODE/generated/*.behavior.md`.
+Technical note.
 
-Scope:
+This document presents a consolidated examination of the generated
+`ERS-111` `R-CODE` behavior diagrams by comparing their named states
+across the corpus rather than considering each script in isolation. Its
+purpose is to identify the common control vocabulary that structures the
+sample set, distinguishing recurring foundational states from those that
+appear only within more specialized variants.
 
-- includes all generated `*.behavior.md` files except `Football-Behavior.md`
-- reflects the current normalized family and variant set
-- reflects the most recent cleanup of placeholder state titles
+This technical note summarizes the state titles presently identified
+across behavior diagrams derived from Sony's `R-CODE` sample
+distribution for the `ERS-111`. The objective is not merely to count
+the labels that occur most frequently, but to demonstrate how the
+sample set repeatedly reuses a compact vocabulary of control states
+across distinct behaviors. Considered in aggregate, the diagrams make
+it possible to distinguish recurrent embodied structures such as
+sensing, iterative action, synchronization, and recovery from narrower
+states associated with more specialized families such as pursuit,
+kicking, or contact response.
 
-## Corpus Totals
+This framing is useful in part because many contemporary robotics
+systems still exhibit a persistent imbalance between deliberation and
+embodiment. They may perform well in perception benchmarks, scripted
+manipulation pipelines, or high-level planning tasks, yet remain
+comparatively weak in the continuous background competencies that allow
+an animal or human to remain viable in the world while doing something
+else. As a heuristic analogy, one may think here of a layered
+`System 1` and `System 2` organization: fast, low-latency, embodied
+monitoring and response on one side, and slower, more reflective or
+task-selective decision processes on the other. Many current robot
+architectures are still stronger on the deliberative side than on the
+deep integration of these everyday embodied loops. The value of the
+`R-CODE` corpus, therefore, is not that it solves that modern problem
+in full, but that it gives a compact historical example of behavior
+being organized around persistent bodily monitoring, recovery, local
+branching, and return-to-loop coordination rather than around isolated
+commands alone.
+
+## The Behavior Corpus
+
+These totals provide the first numerical outline of the corpus. Their
+value is not solely descriptive. They help determine whether the sample
+set is broad but structurally diffuse, or whether many distinct scripts
+are constructed from a comparatively compact set of recurring state
+forms. In this respect, the totals establish a baseline for assessing
+how much behavioral variation is produced from how little underlying
+control vocabulary.
+
+The following corpus totals are included as a compact numerical
+reference point for the discussion that follows. They identify the size
+of the diagram set, the total number of state occurrences observed
+across it, and the number of distinct state titles from which that
+behavioral variation is constructed.
 
 - diagrams counted: `54`
 - total state instances: `292`
 - unique state titles: `47`
-- raw placeholder titles remaining: `0`
+
+The state-title aggregate makes it possible to treat the Sony `ERS-111`
+`R-CODE` samples as a behavioral corpus rather than as an assortment of
+independent scripts. The most immediate result is the repeated reuse of
+a small control vocabulary. The most common titles, especially
+`Sense / Decide`, `Action Loop`, `Boot / Safe Pose`, `Synchronize`,
+`Boot`, `Sense Fall State`, and `Recover`, indicate that the dominant
+form in the corpus is not an extended linear routine. Instead, it is a
+recurrent embodied loop in which the robot establishes a viable
+posture, samples some portion of its body or local environment,
+selects an action, allows that action to settle, and then returns to
+monitoring.
+
+This finding is significant because it indicates that the surface
+diversity of the scripts exceeds their structural diversity. A football
+behavior, an obstacle routine, a contact-response behavior, and a
+locomotion loop may differ in immediate purpose, yet the aggregate
+shows that they are often composed from the same recurring internal
+elements. The corpus is therefore not simply a set of demonstrations of
+what AIBO can do; it is also evidence of how Sony's `R-CODE` sample
+distribution organized behavior. The repetition of these core titles
+suggests a practical design grammar in which behavior is assembled
+through recombination of a small number of stable state-types.
+
+The highest-frequency title, `Sense / Decide`, is particularly
+important. Its prominence suggests that much of the corpus is organized
+around conditional interpretation rather than predetermined motion
+playback alone. The scripts repeatedly evaluate the present situation
+and determine which state should follow. This places the sample set
+closer to reactive robotics than to simple animation. When considered
+alongside the strong presence of `Action Loop` and `Synchronize`, it
+points to a common sequence: evaluate, act, wait for bodily completion,
+and reevaluate. This is a compact yet robust pattern for embodied
+behavior.
+
+The frequent appearance of `Boot` and `Boot / Safe Pose` is likewise
+meaningful. These states show that initialization is not treated as an
+incidental preface but as part of the logic of behavior itself. The
+robot is repeatedly brought into a known physical and control condition
+before more specific behavior begins. Even these relatively early or
+simple scripts therefore assume that behavior depends on a stable
+bodily baseline. In robotics terms, the robot's initial pose and
+internal setup form part of the control architecture rather than a
+mere setup convenience.
+
+The recurring appearance of `Sense Fall State` and `Recover` is among
+the most revealing findings. It indicates that bodily failure is not
+peripheral within the corpus. The robot's viability as a moving body is
+part of the logic that organizes behavior. The code does not merely
+issue movements and assume continued stability; it repeatedly checks
+whether posture has degraded and routes control through recovery when
+necessary. This reflects a strongly embodied orientation in the sample
+set. The robot is managing itself as a physical agent in the world, not
+merely executing isolated commands.
+
+The lower-frequency state titles are equally informative because they
+show where specialization enters the corpus. Titles such as
+`Left Kick`, `Right Kick`, `Start Ball Tracking`, and
+`It approaches a ball by the angle of the head` belong to narrower
+families such as `Football` and related variants. Their lower counts
+indicate that these states do not belong to the corpus-wide backbone.
+Instead, they function as family-specific elaborations layered onto the
+more common loop of sensing, action, synchronization, and recovery.
+This distinction helps separate general architecture from
+task-specific extension.
+
+The same holds for titles such as `Happy Hug Response`, `Idle Thought`,
+`Baby Sway Forward`, `Select First Average`, and `Reset Sample Count`.
+These are analytically useful because they show how the shared control
+vocabulary is directed toward different ends: social contact,
+expressive motion, temporary local computation, and directional
+averaging, among others. Their rarity, however, indicates that they are
+local elaborations rather than dominant organizational principles. In
+aggregate, the sample set is therefore less a collection of unrelated
+unique behaviors than a set of behaviors constructed from a relatively
+compact repertoire of reusable state-forms.
+
+This is why the elimination of placeholder titles was analytically
+important. When raw names such as `State 200`, `State 1011`,
+`State 1110`, or `State 1200` remained in place, they obscured the
+meaning the aggregate was intended to reveal. Renaming them to titles
+such as `Quit Behavior`, `Reset Sample Count`,
+`Select First Average`, and `Reset Scan Counter` made those states
+analytically legible. Once the placeholders were removed, the count no
+longer mixed structural meaning with accidental label residue from the
+original scripts. The aggregate consequently became not merely a
+quantitative list, but a more reliable semantic map of the corpus.
+
+Taken together, the aggregate supports a clear interpretation: the
+`ERS-111` `R-CODE` samples are organized around a compact embodied state
+vocabulary that is repeatedly recombined across different behavior
+families. The counts show that the common foundation is reactive and
+bodily grounded, while the rarer states indicate where the families
+diverge into specialized task or expressive behavior. This provides a
+clearer basis for discussing the material in both historical and
+technical terms. Historically, it suggests that Sony's samples already
+embodied a recognizable control grammar. Technically, it indicates that
+many apparently distinct behaviors can be understood as variations on a
+shared loop of setup, sensing, decision, action, stabilization, and
+recovery.
+
+The aggregate also carries broader significance for robotics. State
+titles and transitions are not useful only for analyzing legacy AIBO
+scripts; they express a more general principle of robot control.
+Advanced systems likewise distinguish among modes such as searching,
+tracking, avoiding, recovering, and interacting. What changes over time
+is the richness of those states, the sophistication of their triggers,
+and the layering of control above and below them. In this respect, the
+`ERS-111` sample corpus offers a small but concrete example of how
+complex robotic behavior can emerge through repeated reuse of a compact
+state-transition architecture.
+
+The tables below make that distinction easier to see directly. The first
+table captures the high-frequency state titles that form the recurring
+structural backbone of the corpus. The second table gathers the
+lower-frequency titles that appear more locally, often within narrower
+behavior families or single specialized variants.
 
 ## Most Common State Titles
 
@@ -33,6 +191,13 @@ Scope:
 | `4` | `Left Kick` |
 | `4` | `Right Kick` |
 | `3` | `It approaches a ball by the angle of the head` |
+
+These more common titles provide the clearest expression of the shared
+behavioral grammar that runs through the sample set. They show where
+Sony's examples repeatedly return to the same embodied control
+concerns: establishing posture, assessing conditions, selecting
+actions, waiting for movement to settle, and recovering when the body
+is no longer in a viable state.
 
 ## Secondary State Titles
 
@@ -74,19 +239,189 @@ Scope:
 | `1` | `Clear Light Playback` |
 | `1` | `Power Down` |
 
+Taken together, the secondary titles show where the common architecture
+branches into more specific local roles. They capture narrower aspects
+of the corpus: expressive reactions, temporary counters, intermediate
+scan steps, branch-specific motor decisions, and other states that are
+important within individual families without dominating the corpus as a
+whole.
+
 ## Interpretation
 
 The aggregate is dominated by `Sense / Decide`, `Action Loop`, and
-`Synchronize`. That suggests the preserved `ERS-111` sample set is best
-read as a family of small reactive loops rather than long scripted
-sequences.
+`Synchronize`. This suggests that the preserved `ERS-111` sample set is
+best understood as a family of small reactive loops rather than as a
+collection of extended scripted sequences.
 
 `Boot`, `Boot / Safe Pose`, `Sense Fall State`, and `Recover` are also
-strong recurring elements. This shows that initialization and bodily
-stability are not marginal concerns in the sample corpus; they are part
-of its common behavioral architecture.
+strong recurring elements. Their frequency shows that initialization
+and bodily stability are not marginal concerns in the sample corpus;
+they are integral components of its common behavioral architecture.
 
 More specialized state titles such as `Left Kick`, `Right Kick`, and
-`Start Ball Tracking` appear much less often. Those belong to narrower
+`Start Ball Tracking` appear much less often. These belong to narrower
 families such as `Football` and related pursuit variants rather than to
 the overall baseline structure of the corpus.
+
+## Representative Behavior Diagrams
+
+This section presents three representative behavior diagrams selected
+to support the central claims of the note. Considered together, they
+show the relationship between corpus-level structure, baseline
+locomotor control, and specialized task extension. The first figure
+corresponds to the aggregate argument by presenting a generalized view
+of the recurrent state vocabulary identified across the corpus. The
+second corresponds to the claim that many behaviors are organized as
+compact reactive loops grounded in bodily monitoring. The third
+corresponds to the claim that more specialized routines are constructed
+by extending that same control foundation rather than replacing it.
+
+![Embodied behavior aggregate](export/pdf/EmbodiedBehaviors.pdf)
+
+*Figure 1. The embodied behavior aggregate provides a corpus-level view
+of the recurring control vocabulary. It makes visible the repeated
+dependence on shared states such as sensing, looping, synchronization,
+and recovery across otherwise distinct behaviors.*
+
+![Move behavior diagram](export/pdf/Move.pdf)
+
+*Figure 2. The `Move` diagram illustrates the compact reactive loop that
+appears throughout the corpus. It shows how forward locomotion is
+organized around repeated movement, fall sensing, and recovery rather
+than around a single uninterrupted motor sequence.*
+
+![Football behavior diagram](export/pdf/Football.pdf)
+
+*Figure 3. The `Football` diagram shows how specialized pursuit and kick
+states are layered onto the same embodied control foundation. Its value
+within the note is comparative: it demonstrates that task-specific
+complexity extends the common architecture rather than replacing it.*
+
+## Aggregate Purpose
+
+This aggregate is intended to show which control structures are broadly
+shared across the `ERS-111` `R-CODE` set and which belong only to
+narrower behavior families. The counts are analytically useful not
+because they rank scripts by popularity, but because they reveal the
+shared behavioral grammar of the corpus: the points at which the code
+repeatedly returns to sensing, looping, synchronization, and recovery
+before adding more specialized states for pursuit, contact response, or
+expressive variation.
+
+This analysis is relevant beyond `AIBO`, because the same pattern
+appears in many embodied robotic systems: a stable loop of sensing,
+deciding, acting, and rechecking the body and local environment before
+continuing. Viewed in this way, the `ERS-111` samples are not only
+historically interesting artifacts. They also provide an early
+small-scale example of how robotics often develops in practice, by
+building richer task-specific states on top of a compact base of
+posture control, environmental monitoring, transition handling, and
+recovery.
+
+The principal result is not simply that one state title appears more
+often than another. The stronger result is that the diagram set
+repeatedly converges on the same architectural pattern:
+
+`initialize -> sense -> decide -> act -> synchronize -> repeat`
+
+This indicates that the preserved `ERS-111` samples already express a
+recognizable embodied control style. Even when the surface behaviors
+appear different, the underlying workflow is usually a compact reactive
+cycle rather than a one-shot animation or an extended scripted
+narrative.
+
+A second important result is that bodily maintenance appears within the
+recurring structure itself. The regular presence of `Sense Fall State`
+and `Recover` shows that the robot's posture and stability are treated
+as part of behavior control rather than as external exceptions. In
+analytical terms, the corpus concerns not only the issuance of motion,
+but the maintenance of viable motion in the body.
+
+A third result is that the more specialized behaviors remain legible
+because they are layered on top of that common base. Pursuit and kick
+states in the `Football` family, for example, do not replace the core
+reactive loop; they extend it. Complexity in the sample set tends to
+accumulate by adding narrower decision and action states to an already
+stable embodied architecture.
+
+Taken together, these findings clarify the central purpose of this
+technical note. The `R-CODE` sample set can be read as an early
+behavioral design vocabulary in which a limited number of state-types
+are repeatedly recombined to produce locomotion, orientation, contact
+response, recovery, and more specialized goal-directed action. The
+importance of the aggregate, therefore, lies not simply in documenting
+individual scripts, but in revealing the shared organizational logic
+that makes those scripts analytically comparable. What may initially
+appear to be a heterogeneous collection of sample behaviors instead
+emerges as a coherent control corpus whose recurring state structures
+offer a foundation for historical interpretation, comparative analysis,
+and broader discussion of embodied robot behavior.
+
+This approach is also constructive rather than merely descriptive. Once
+the common structure of a behavior corpus has been made explicit, those
+states can be treated as reusable design units for new robotic systems.
+Instead of writing a new routine as a monolithic block of control code,
+one can begin from a small library of encapsulated behavioral forms:
+initialize posture, sense local conditions, branch by event, execute a
+bounded action, verify bodily state, and return to a monitoring loop.
+The diagrams therefore function not only as retrospective analysis, but
+as a practical intermediate representation for synthesis. They help make
+clear which elements should remain stable across platforms and which may
+be replaced to accommodate different sensors, actuators, timing models,
+or task domains.
+
+That design value becomes especially important in native-hardware
+robotics developed in a polyForth style. In such environments, behavior
+is often assembled from compact words, explicit stacks, direct device
+access, and tightly bounded control loops rather than from large
+framework abstractions. A state-based representation is well matched to
+that discipline because each state can be implemented as a small,
+testable routine with clear entry conditions, side effects, and exit
+transitions. The transition structure then serves as the behavioral
+scheduler. This makes it easier to preserve determinism, reason about
+timing, and isolate hardware-specific code inside a limited number of
+sensing and actuation words while leaving the higher-level behavioral
+organization intact.
+
+For newer classes of robot systems, this means the method supports both
+portability and invention. A locomotion platform, a manipulator, or a
+socially interactive robot may differ greatly in embodiment, but each
+still benefits from an architecture that separates posture management,
+environmental interpretation, action execution, exception handling, and
+return-to-loop coordination. By treating those elements as explicit
+behavioral compartments, developers can introduce characteristic new
+routines without losing architectural clarity. In practical terms, one
+can retain the same behavioral skeleton while substituting new state
+contents for vision, force sensing, gait control, manipulation,
+dialogue, or safety recovery. The result is a disciplined path for
+building novel robot behavior on constrained native systems without
+collapsing all control logic into a single opaque procedure.
+
+## Conclusion
+
+States and transitions are significant because they provide a robot
+with a means of organizing time, context, and response rather than
+reacting through a flat sequence of commands. A state indicates the
+mode in which the robot is currently operating, and a transition
+indicates the condition sufficient to move it into another mode. This
+structure becomes a foundation for more advanced robotics because
+sensing, motion, recovery, and task logic can remain coordinated rather
+than collapsing into an undifferentiated control stream.
+
+This framework also helps explain how richer behavior and even
+personality constructs can emerge from the same underlying machinery. A
+robot that remains longer in interaction states, abandons pursuit more
+slowly, or returns more readily to contact-response states will appear
+different in temperament even if its hardware is unchanged. In this
+sense, personality is often expressed not as a separate layer, but as a
+structured pattern of preferred states, biased transitions, distinct
+thresholds, and differing persistence times imposed upon the same
+embodied control architecture.
+
+## Bibliography
+
+- Arkin, Ronald C. *Behavior-Based Robotics*. MIT Press, 1998.
+- Brooks, Rodney A. “Intelligence without Representation.” *Artificial Intelligence* 47, no. 1-3 (1991): 139-159.
+- Kahneman, Daniel. *Thinking, Fast and Slow*. Farrar, Straus and Giroux, 2011.
+- Kawaharazuka, Kento, Tatsuya Matsushima, Andrew Gambardella, Jiaxian Guo, Chris Paxton, and Andy Zeng. “Real-World Robot Applications of Foundation Models: A Review.” arXiv, 2024. https://arxiv.org/abs/2402.05741
+- Xu, Zhiyuan, Kun Wu, Junjie Wen, Jinming Li, Ning Liu, Zhengping Che, and Jian Tang. “A Survey on Robotics with Foundation Models: toward Embodied AI.” arXiv, 2024. https://arxiv.org/abs/2402.02385

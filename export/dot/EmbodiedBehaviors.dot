@@ -1,0 +1,64 @@
+digraph EmbodiedBehaviors {
+  graph [
+    bgcolor="white",
+    rankdir=TB,
+    pad="0.25",
+    nodesep="0.5",
+    ranksep="0.8",
+    splines=true
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fillcolor="white",
+    color="#222222",
+    fontcolor="#111111",
+    fontname="Helvetica",
+    penwidth=1.4,
+    margin="0.16,0.10"
+  ];
+
+  edge [
+    color="#222222",
+    fontcolor="#222222",
+    fontname="Helvetica",
+    penwidth=1.4,
+    arrowsize=0.8
+  ];
+
+  A [label="Boot And Safe Pose"];
+  B [label="Embodied Monitoring Loop"];
+  C [label="Body Or World Event?", shape=diamond, style="filled", margin="0.12,0.08"];
+  D [label="Recover Posture"];
+  E [label="Pause Forward Motion"];
+  F [label="Social Contact Response"];
+  G [label="Roam Or Advance"];
+  H [label="Resume Ordinary Monitoring"];
+  I [label="Scan Left And Right"];
+  J [label="Open Direction?", shape=diamond, style="filled", margin="0.12,0.08"];
+  K [label="Turn Left"];
+  L [label="Turn Right"];
+  M [label="Retry Or Back Away"];
+  N [label="Check Posture And Space"];
+
+  A -> B;
+  B -> C;
+  C -> D [label="fallen or overturned"];
+  C -> E [label="obstacle ahead"];
+  C -> F [label="touch or nearby person"];
+  C -> G [label="no immediate issue"];
+  D -> H;
+  E -> I;
+  I -> J;
+  J -> K [label="left"];
+  J -> L [label="right"];
+  J -> M [label="still blocked"];
+  K -> H;
+  L -> H;
+  M -> H;
+  F -> H;
+  G -> N;
+  N -> C;
+  H -> C;
+}

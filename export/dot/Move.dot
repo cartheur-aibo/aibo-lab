@@ -1,0 +1,42 @@
+digraph Move {
+  graph [
+    bgcolor="white",
+    rankdir=TB,
+    pad="0.2",
+    nodesep="0.5",
+    ranksep="0.7",
+    splines=true
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fillcolor="white",
+    color="#222222",
+    fontcolor="#111111",
+    fontname="Helvetica",
+    penwidth=1.4,
+    margin="0.16,0.10"
+  ];
+
+  edge [
+    color="#222222",
+    fontcolor="#222222",
+    fontname="Helvetica",
+    penwidth=1.4,
+    arrowsize=0.8
+  ];
+
+  init [label="Boot / Safe Pose"];
+  walk [label="Repeat Forward Walk"];
+  sense [label="Sense Fall State"];
+  check [label="Fall?", shape=diamond, style="filled", margin="0.10,0.06"];
+  recover [label="Recover"];
+
+  init -> walk [label="entry"];
+  walk -> sense [label="continue to monitor"];
+  sense -> check;
+  check -> recover [label="fallen"];
+  check -> sense [label="upright"];
+  recover -> sense [label="resume monitor"];
+}

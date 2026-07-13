@@ -1,0 +1,64 @@
+digraph Football {
+  graph [
+    bgcolor="white",
+    rankdir=TB,
+    pad="0.25",
+    nodesep="0.5",
+    ranksep="0.8",
+    splines=true
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fillcolor="white",
+    color="#222222",
+    fontcolor="#111111",
+    fontname="Helvetica",
+    penwidth=1.4,
+    margin="0.16,0.10"
+  ];
+
+  edge [
+    color="#222222",
+    fontcolor="#222222",
+    fontname="Helvetica",
+    penwidth=1.4,
+    arrowsize=0.8
+  ];
+
+  A [label="Boot / Initialize Mode Variables"];
+  B [label="Main Monitor Loop"];
+  C [label="Fall?", shape=diamond, style="filled", margin="0.12,0.08"];
+  R [label="Recover"];
+  D [label="Mode", shape=diamond, style="filled", margin="0.12,0.08"];
+  E [label="Search Block"];
+  F [label="Scan Head Positions"];
+  G [label="Ball Visible?", shape=diamond, style="filled", margin="0.12,0.08"];
+  H [label="Pursuit Block"];
+  I [label="Tracking Lost?", shape=diamond, style="filled", margin="0.12,0.08"];
+  J [label="Kick Range?", shape=diamond, style="filled", margin="0.12,0.08"];
+  K [label="Kick"];
+  L [label="Approach Ball"];
+  M [label="Wait / Return To Main Loop"];
+
+  A -> B [label="entry"];
+  B -> C;
+  C -> R [label="fallen"];
+  C -> D [label="upright"];
+  R -> B [label="resume main loop"];
+  D -> E [label="search"];
+  D -> H [label="pursuit"];
+  E -> F [label="rotate and scan"];
+  F -> G;
+  G -> M [label="no"];
+  G -> H [label="yes"];
+  H -> I;
+  I -> E [label="yes"];
+  I -> J [label="no"];
+  J -> K [label="yes"];
+  J -> L [label="no"];
+  K -> M;
+  L -> M;
+  M -> B [label="repeat"];
+}
