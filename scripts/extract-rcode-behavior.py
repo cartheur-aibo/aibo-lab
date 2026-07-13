@@ -14,6 +14,16 @@ from pathlib import Path
 
 LABEL_RE = re.compile(r"^:(\S+)(?:\s*//\s*(.*))?$")
 COMMAND_RE = re.compile(r"^([A-Z_]+)(?::(.*))?$")
+GENERATED_NAME_MAP = {
+    "C-Tracking1": "C-Tracking",
+    "MoveAIBO": "Move",
+    "Maze1": "Maze",
+    "SoccerDog1": "Football",
+}
+
+
+def display_name(path: Path) -> str:
+    return GENERATED_NAME_MAP.get(path.stem, path.stem)
 
 
 @dataclass
@@ -291,9 +301,41 @@ def render_markdown(path: Path, states: list[State], transitions: list[tuple[str
     return "\n".join(lines)
 
 
-def render_html(path: Path, mermaid: str) -> str:
-    title = html.escape(f"R-Code Behavior Diagram: {path.name}")
+def render_html_summary(states: list[State], transitions: list[tuple[str, str, str]]) -> str:
+    block_order = [
+        "Boot",
+        "Initialize State",
+        "Assume Safe Pose",
+        "Sense/Decide",
+        "Act",
+        "Synchronize",
+        "Recover",
+        "Loop/Transition",
+    ]
+    blocks_present: list[str] = []
+    for block in block_order:
+        if any(block in state.blocks for state in states):
+            blocks_present.append(block)
+
+    parts = [
+        f"This diagram shows {len(states)} extracted state{'s' if len(states) != 1 else ''}",
+        f"and {len(transitions)} transition{'s' if len(transitions) != 1 else ''}.",
+    ]
+
+    if blocks_present:
+        shown = ", ".join(blocks_present[:5])
+        parts.append(f"It includes {shown} block{'s' if len(blocks_present[:5]) != 1 else ''}.")
+
+    if any("Recover" in state.blocks for state in states):
+        parts.append("A recovery path is present in the extracted control flow.")
+
+    return " ".join(parts)
+
+
+def render_html(path: Path, mermaid: str, states: list[State], transitions: list[tuple[str, str, str]]) -> str:
+    title = html.escape(f"R-Code Behavior Diagram: {display_name(path)}")
     mermaid_html = html.escape(mermaid)
+    summary = html.escape(render_html_summary(states, transitions))
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -344,10 +386,7 @@ def render_html(path: Path, mermaid: str) -> str:
 <body>
   <main>
     <h1>{title}</h1>
-    <p>
-      If this page stays blank in your viewer, open the sibling <code>.mmd</code>
-      file with your Mermaid extension instead.
-    </p>
+    <p>{summary}</p>
     <div class="panel">
       <pre class="mermaid">{mermaid_html}</pre>
     </div>
@@ -357,14 +396,32 @@ def render_html(path: Path, mermaid: str) -> str:
 """
 
 
-def write_sidecars(path: Path, markdown: str, mermaid: str) -> tuple[Path, Path]:
-    md_sidecar = path.with_suffix(".behavior.md")
-    mmd_sidecar = path.with_suffix(".mmd")
-    html_sidecar = path.with_suffix(".html")
+def sidecar_paths(path: Path) -> tuple[Path, Path, Path]:
+    if "src/R-CODE/sample" in path.as_posix():
+        generated_dir = path.parents[1] / "generated"
+        generated_dir.mkdir(parents=True, exist_ok=True)
+        base_name = display_name(path)
+        base = generated_dir / base_name
+        return (
+            base.with_suffix(".behavior.md"),
+            base.with_suffix(".mmd"),
+            base.with_suffix(".html"),
+        )
+
+    base = path.with_suffix("")
+    return (
+        base.with_suffix(".behavior.md"),
+        base.with_suffix(".mmd"),
+        base.with_suffix(".html"),
+    )
+
+
+def write_sidecars(path: Path, markdown: str, mermaid: str, states: list[State], transitions: list[tuple[str, str, str]]) -> tuple[Path, Path]:
+    md_sidecar, mmd_sidecar, html_sidecar = sidecar_paths(path)
 
     md_sidecar.write_text(markdown, encoding="utf-8")
     mmd_sidecar.write_text(mermaid, encoding="utf-8")
-    html_sidecar.write_text(render_html(path, mermaid), encoding="utf-8")
+    html_sidecar.write_text(render_html(path, mermaid, states, transitions), encoding="utf-8")
     return mmd_sidecar, html_sidecar
 
 
@@ -390,7 +447,7 @@ def main(argv: list[str]) -> int:
     mermaid = render_mermaid(states, transitions)
 
     if args.write_sidecars:
-        mmd_path, html_path = write_sidecars(args.script, markdown, mermaid)
+        mmd_path, html_path = write_sidecars(args.script, markdown, mermaid, states, transitions)
         print(f"wrote {mmd_path}")
         print(f"wrote {html_path}")
         return 0

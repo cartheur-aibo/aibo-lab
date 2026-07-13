@@ -67,7 +67,7 @@ These are closer to scripted demonstrations than reactive autonomy.
 
 ### 2. Motion Loop With Safety Recovery
 
-Used by samples like `MoveAIBO.R`, `WalkDog2.R`, and `StepDog2.R`.
+Used by samples like `Move` (from `MoveAIBO.R`), `WalkDog2.R`, and `StepDog2.R`.
 
 ```text
 Boot -> Safe Pose -> Repeat Motion -> Wait -> Check Fall Sensor
@@ -78,7 +78,7 @@ This is a simple action loop with a protective interrupt.
 
 ### 3. Sense-Decide-Act Loop
 
-Used by samples like `SoccerDog1.R`, `Maze1.R`, and `C-Tracking*`.
+Used by samples like `Football` (from `SoccerDog1.R`), `Maze` (from `Maze1.R`), and `C-Tracking`.
 
 ```text
 Boot -> Init State -> Sense -> Decide -> Act -> Wait -> Sense again
@@ -96,7 +96,12 @@ Boot -> Register/enter loop -> Event occurs -> Handler runs -> Resume
 
 This is closer to a tiny behavior runtime than a plain script.
 
-## Sample 1: `MoveAIBO.R`
+## Sample 1: `Move`
+
+Files:
+
+- preserved source: [../sample/MoveAIBO.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/sample/MoveAIBO.R:1)
+- generated viewer: [../generated/Move.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Move.html:1)
 
 Raw behavior:
 
@@ -125,7 +130,13 @@ This is best described as:
 
 `locomotion demo + fall monitoring + automatic recovery`
 
-## Sample 2: `SoccerDog1.R`
+## Sample 2: `Football`
+
+Files:
+
+- preserved source: [../sample/SoccerDog1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/sample/SoccerDog1.R:1)
+- generated analysis: [../generated/Football-Behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Football-Behavior.md:1)
+- generated viewer: [../generated/Football.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Football.html:1)
 
 Raw behavior:
 
@@ -167,7 +178,12 @@ This is best described as:
 
 `two-mode finite-state behavior: search -> pursue -> kick/recover`
 
-## Sample 3: `Maze1.R`
+## Sample 3: `Maze`
+
+Files:
+
+- preserved source: [../sample/Maze1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/sample/Maze1.R:1)
+- generated viewer: [../generated/Maze.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Maze.html:1)
 
 Raw behavior:
 
@@ -227,7 +243,7 @@ labels:
 - `Playback`
 - `Scan`
 
-For example, `SoccerDog1.R` can be described as:
+For example, `Football` can be described as:
 
 `Recover`, `Search`, `Track`, `Approach`, and `Kick` states connected by
 sensor-driven transitions.
@@ -240,12 +256,22 @@ sensor-driven transitions.
 - it stays faithful to the original `ERS-111` material while giving us a
   clearer analysis vocabulary
 
-## Possible Next Step
+## Extractor Workflow
 
-A natural follow-on would be a small extractor that turns `.R` scripts
-into:
+The repo now includes a working extractor:
 
-- a block summary
-- a state list from labels
-- a transition list from `IF` and `GO`
-- a generated Mermaid diagram
+- [../../../scripts/extract-rcode-behavior.py](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/extract-rcode-behavior.py:1)
+
+Use it to write sidecars for preserved sample scripts:
+
+```bash
+python3 scripts/extract-rcode-behavior.py --write-sidecars \
+  src/R-CODE/sample/MoveAIBO.R
+```
+
+For scripts under `src/R-CODE/sample/`, the tool now writes generated
+outputs to:
+
+- `src/R-CODE/generated/*.behavior.md`
+- `src/R-CODE/generated/*.mmd`
+- `src/R-CODE/generated/*.html`

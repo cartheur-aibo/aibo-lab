@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>R-Code Behavior Diagram: C-Tracking1.R</title>
+  <title>R-Code Behavior Diagram: Move</title>
   <style>
     :root {
       color-scheme: dark;
@@ -47,14 +47,19 @@
 </head>
 <body>
   <main>
-    <h1>R-Code Behavior Diagram: C-Tracking1.R</h1>
-    <p>
-      If this page stays blank in your viewer, open the sibling <code>.mmd</code>
-      file with your Mermaid extension instead.
-    </p>
+    <h1>R-Code Behavior Diagram: Move</h1>
+    <p>This diagram shows 4 extracted states and 5 transitions. It includes Boot, Initialize State, Assume Safe Pose, Sense/Decide, Act blocks. A recovery path is present in the extracted control flow.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
     S_INIT[&quot;INIT&quot;]
+    S_100[&quot;State 100&quot;]
+    S_200[&quot;State 200&quot;]
+    S_9000[&quot;State 9000&quot;]
+    S_INIT --&gt;|fallthrough| S_100
+    S_100 --&gt;|fallthrough| S_200
+    S_200 --&gt;|if stat = 1| S_9000
+    S_200 --&gt;|go| S_200
+    S_9000 --&gt;|go| S_200
 </pre>
     </div>
   </main>
