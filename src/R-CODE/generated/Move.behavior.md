@@ -10,22 +10,22 @@
 
 ## State Blocks
 
-- `INIT`: Boot, Assume Safe Pose
+- `Boot / Safe Pose`: Boot, Assume Safe Pose
   lines 5: `SET:Power:1`
   lines 6: `POSE:AIBO:slp_slp`
-- `State 100`: Act, Synchronize
+- `Repeat Forward Walk`: Act, Synchronize
   lines 9: `PLAY:SOUND:trk4_xxx:50`
   lines 10: `MOVE:LEGS:WALK:SLOW:FORWARD:10`
   lines 11: `WAIT`
   lines 13: `PLAY:SOUND:trk4_xxx:50`
   lines 14: `MOVE:LEGS:WALK:SLOW:FORWARD:10`
   ... `11` more instructions
-- `State 200`: Initialize State, Sense/Decide, Loop/Transition
+- `Sense Fall State`: Initialize State, Sense/Decide, Loop/Transition
   lines 32: `SET:stat:Gsensor_status`
   lines 33: `AND:stat:1`
   lines 34: `IF:=:stat:1:9000`
   lines 35: `GO:200`
-- `State 9000`: Act, Synchronize, Recover, Loop/Transition
+- `Recover`: Act, Synchronize, Recover, Loop/Transition
   lines 38: `MOVE:AIBO:ReactiveGU`
   lines 39: `WAIT`
   lines 40: `GO:200`
@@ -34,21 +34,21 @@
 
 - `INIT` -> `100`: fallthrough
 - `100` -> `200`: fallthrough
-- `200` -> `9000`: if stat = 1
-- `200` -> `200`: go
-- `9000` -> `200`: go
+- `200` -> `9000`: fallen
+- `200` -> `200`: upright
+- `9000` -> `200`: resume monitor
 
 ## Mermaid
 
 ```mermaid
 flowchart TD
-    S_INIT["INIT"]
-    S_100["State 100"]
-    S_200["State 200"]
-    S_9000["State 9000"]
+    S_INIT["Boot / Safe Pose"]
+    S_100["Repeat Forward Walk"]
+    S_200["Sense Fall State"]
+    S_9000["Recover"]
     S_INIT -->|fallthrough| S_100
     S_100 -->|fallthrough| S_200
-    S_200 -->|if stat = 1| S_9000
-    S_200 -->|go| S_200
-    S_9000 -->|go| S_200
+    S_200 -->|fallen| S_9000
+    S_200 -->|upright| S_200
+    S_9000 -->|resume monitor| S_200
 ```

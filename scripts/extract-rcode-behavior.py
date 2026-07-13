@@ -152,6 +152,36 @@ def state_node_id(key: str) -> str:
     return f"S_{safe}"
 
 
+def inferred_state_title(state: State) -> str:
+    commands = [inst.command for inst in state.instructions if inst.command]
+    command_set = set(commands)
+    text_set = {inst.text for inst in state.instructions if inst.text}
+
+    if state.key == "INIT":
+        if any(inst.text.startswith("SET:Power:1") for inst in state.instructions) and "POSE" in command_set:
+            return "Boot / Safe Pose"
+        return "Boot"
+
+    if any("ReactiveGU" in text for text in text_set):
+        return "Recover"
+
+    if "MOVE" in command_set and "WAIT" in command_set and "Gsensor_status" not in " ".join(text_set):
+        if any("MOVE:LEGS:WALK" in text for text in text_set):
+            return "Repeat Forward Walk"
+        return "Action Loop"
+
+    if any("Gsensor_status" in text for text in text_set):
+        return "Sense Fall State"
+
+    if {"IF", "ONCALL", "SWITCH"} & command_set:
+        return "Sense / Decide"
+
+    if "WAIT" in command_set and "MOVE" not in command_set:
+        return "Synchronize"
+
+    return human_title(state)
+
+
 def human_title(state: State) -> str:
     if state.key == "INIT":
         return "INIT"
@@ -166,17 +196,28 @@ def extract_transitions(states: list[State]) -> list[tuple[str, str, str]]:
     for index, state in enumerate(states):
         next_state = states[index + 1].key if index + 1 < len(states) else ""
         seen_explicit = False
+        state_text = " ".join(inst.text for inst in state.instructions if inst.text)
+        monitors_fall = "Gsensor_status" in state_text
+        recovery_state = any("ReactiveGU" in inst.text for inst in state.instructions if inst.text)
 
         for inst in state.instructions:
             if inst.command == "GO" and inst.args:
-                transitions.append((state.key, inst.args[0], "go"))
+                label = "go"
+                if monitors_fall and inst.args[0] == state.key:
+                    label = "upright"
+                elif recovery_state:
+                    label = "resume monitor"
+                transitions.append((state.key, inst.args[0], label))
                 seen_explicit = True
                 continue
 
             if inst.command == "IF":
                 if len(inst.args) >= 4:
                     condition = fmt_condition(inst)
-                    transitions.append((state.key, inst.args[3], f"if {condition}"))
+                    label = f"if {condition}"
+                    if monitors_fall and inst.args[:3] == ["=", "stat", "1"]:
+                        label = "fallen"
+                    transitions.append((state.key, inst.args[3], label))
                     seen_explicit = True
                 if len(inst.args) >= 5:
                     condition = fmt_condition(inst)
@@ -246,7 +287,7 @@ def render_mermaid(states: list[State], transitions: list[tuple[str, str, str]])
     lines.append("flowchart TD")
     for state in states:
         node_id = state_node_id(state.key)
-        label = human_title(state).replace('"', "'")
+        label = inferred_state_title(state).replace('"', "'")
         lines.append(f'    {node_id}["{label}"]')
     for src, dst, label in transitions:
         src_id = state_node_id(src)
@@ -279,7 +320,7 @@ def render_markdown(path: Path, states: list[State], transitions: list[tuple[str
 
     for state in states:
         block_text = ", ".join(state.blocks)
-        title = human_title(state)
+        title = inferred_state_title(state)
         lines.append(f"- `{title}`: {block_text}")
         for inst in state.instructions[:5]:
             snippet = inst.text if inst.text else f"comment: {inst.comment}"
@@ -302,6 +343,7 @@ def render_markdown(path: Path, states: list[State], transitions: list[tuple[str
 
 
 def render_html_summary(states: list[State], transitions: list[tuple[str, str, str]]) -> str:
+    titles = [inferred_state_title(state) for state in states]
     block_order = [
         "Boot",
         "Initialize State",
@@ -321,6 +363,9 @@ def render_html_summary(states: list[State], transitions: list[tuple[str, str, s
         f"This diagram shows {len(states)} extracted state{'s' if len(states) != 1 else ''}",
         f"and {len(transitions)} transition{'s' if len(transitions) != 1 else ''}.",
     ]
+
+    if "Repeat Forward Walk" in titles and "Sense Fall State" in titles:
+        parts.append("It captures a repeated forward-walk loop with fall monitoring.")
 
     if blocks_present:
         shown = ", ".join(blocks_present[:5])

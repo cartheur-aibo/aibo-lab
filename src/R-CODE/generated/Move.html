@@ -48,18 +48,18 @@
 <body>
   <main>
     <h1>R-Code Behavior Diagram: Move</h1>
-    <p>This diagram shows 4 extracted states and 5 transitions. It includes Boot, Initialize State, Assume Safe Pose, Sense/Decide, Act blocks. A recovery path is present in the extracted control flow.</p>
+    <p>This diagram shows 4 extracted states and 5 transitions. It captures a repeated forward-walk loop with fall monitoring. It includes Boot, Initialize State, Assume Safe Pose, Sense/Decide, Act blocks. A recovery path is present in the extracted control flow.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
-    S_INIT[&quot;INIT&quot;]
-    S_100[&quot;State 100&quot;]
-    S_200[&quot;State 200&quot;]
-    S_9000[&quot;State 9000&quot;]
+    S_INIT[&quot;Boot / Safe Pose&quot;]
+    S_100[&quot;Repeat Forward Walk&quot;]
+    S_200[&quot;Sense Fall State&quot;]
+    S_9000[&quot;Recover&quot;]
     S_INIT --&gt;|fallthrough| S_100
     S_100 --&gt;|fallthrough| S_200
-    S_200 --&gt;|if stat = 1| S_9000
-    S_200 --&gt;|go| S_200
-    S_9000 --&gt;|go| S_200
+    S_200 --&gt;|fallen| S_9000
+    S_200 --&gt;|upright| S_200
+    S_9000 --&gt;|resume monitor| S_200
 </pre>
     </div>
   </main>
