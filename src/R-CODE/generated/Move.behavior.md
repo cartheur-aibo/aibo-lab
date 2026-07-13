@@ -32,8 +32,8 @@
 
 ## Transitions
 
-- `INIT` -> `100`: fallthrough
-- `100` -> `200`: fallthrough
+- `INIT` -> `100`: entry
+- `100` -> `200`: continue to monitor
 - `200` -> `9000`: fallen
 - `200` -> `200`: upright
 - `9000` -> `200`: resume monitor
@@ -46,9 +46,11 @@ flowchart TD
     S_100["Repeat Forward Walk"]
     S_200["Sense Fall State"]
     S_9000["Recover"]
-    S_INIT -->|fallthrough| S_100
-    S_100 -->|fallthrough| S_200
-    S_200 -->|fallen| S_9000
-    S_200 -->|upright| S_200
+    S_200_CHECK{"Fall?"}
+    S_200 --> S_200_CHECK
+    S_200_CHECK -->|fallen| S_9000
+    S_200_CHECK -->|upright| S_200
+    S_INIT -->|entry| S_100
+    S_100 -->|continue to monitor| S_200
     S_9000 -->|resume monitor| S_200
 ```

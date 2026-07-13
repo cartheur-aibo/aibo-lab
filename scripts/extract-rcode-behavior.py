@@ -236,7 +236,12 @@ def extract_transitions(states: list[State]) -> list[tuple[str, str, str]]:
                 seen_explicit = True
 
         if not seen_explicit and next_state:
-            transitions.append((state.key, next_state, "fallthrough"))
+            label = "next labeled block"
+            if state.key == "INIT":
+                label = "entry"
+            elif inferred_state_title(state) == "Repeat Forward Walk":
+                label = "continue to monitor"
+            transitions.append((state.key, next_state, label))
 
     return dedupe_transitions(transitions)
 
@@ -289,7 +294,29 @@ def render_mermaid(states: list[State], transitions: list[tuple[str, str, str]])
         node_id = state_node_id(state.key)
         label = inferred_state_title(state).replace('"', "'")
         lines.append(f'    {node_id}["{label}"]')
+
+    consumed: set[tuple[str, str, str]] = set()
+    by_source: dict[str, list[tuple[str, str, str]]] = {}
+    for transition in transitions:
+        by_source.setdefault(transition[0], []).append(transition)
+
+    for state in states:
+        outgoing = by_source.get(state.key, [])
+        fallen = next((t for t in outgoing if t[2] == "fallen"), None)
+        upright = next((t for t in outgoing if t[2] == "upright" and t[1] == state.key), None)
+        if fallen and upright:
+            state_id = state_node_id(state.key)
+            decision_id = f"{state_id}_CHECK"
+            lines.append(f'    {decision_id}{{"Fall?"}}')
+            lines.append(f"    {state_id} --> {decision_id}")
+            lines.append(f'    {decision_id} -->|fallen| {state_node_id(fallen[1])}')
+            lines.append(f'    {decision_id} -->|upright| {state_id}')
+            consumed.add(fallen)
+            consumed.add(upright)
+
     for src, dst, label in transitions:
+        if (src, dst, label) in consumed:
+            continue
         src_id = state_node_id(src)
         dst_id = state_node_id(dst)
         edge_label = label.replace('"', "'")

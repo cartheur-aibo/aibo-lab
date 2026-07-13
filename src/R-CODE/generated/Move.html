@@ -55,10 +55,12 @@
     S_100[&quot;Repeat Forward Walk&quot;]
     S_200[&quot;Sense Fall State&quot;]
     S_9000[&quot;Recover&quot;]
-    S_INIT --&gt;|fallthrough| S_100
-    S_100 --&gt;|fallthrough| S_200
-    S_200 --&gt;|fallen| S_9000
-    S_200 --&gt;|upright| S_200
+    S_200_CHECK{&quot;Fall?&quot;}
+    S_200 --&gt; S_200_CHECK
+    S_200_CHECK --&gt;|fallen| S_9000
+    S_200_CHECK --&gt;|upright| S_200
+    S_INIT --&gt;|entry| S_100
+    S_100 --&gt;|continue to monitor| S_200
     S_9000 --&gt;|resume monitor| S_200
 </pre>
     </div>
