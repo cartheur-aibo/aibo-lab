@@ -1,0 +1,10 @@
+flowchart TD
+    S_INIT["INIT"]
+    S_100["State 100"]
+    S_200["State 200"]
+    S_9000["State 9000"]
+    S_INIT -->|fallthrough| S_100
+    S_100 -->|fallthrough| S_200
+    S_200 -->|if stat = 1| S_9000
+    S_200 -->|go| S_200
+    S_9000 -->|go| S_200

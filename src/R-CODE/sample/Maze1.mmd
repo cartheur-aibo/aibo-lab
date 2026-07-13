@@ -1,0 +1,34 @@
+flowchart TD
+    S_INIT["INIT"]
+    S_100["State 100"]
+    S_110["State 110"]
+    S_120["State 120"]
+    S_130["State 130"]
+    S_131["State 131"]
+    S_132["State 132"]
+    S_133["State 133"]
+    S_200["State 200"]
+    S_210["State 210"]
+    S_300["State 300"]
+    S_310["State 310"]
+    S_INIT -->|fallthrough| S_100
+    S_100 -->|fallthrough| S_110
+    S_110 -->|if Distance < 300| S_120
+    S_110 -->|if t > 100| S_120
+    S_110 -->|go| S_110
+    S_120 -->|fallthrough| S_130
+    S_130 -->|fallthrough| S_131
+    S_131 -->|if Wait = 0| S_132
+    S_131 -->|if d < dd| S_131
+    S_131 -->|go| S_131
+    S_132 -->|if pan < -15| S_200
+    S_132 -->|if pan > 15| S_300
+    S_132 -->|if dd < 300| S_133
+    S_132 -->|go| S_100
+    S_133 -->|go| S_130
+    S_200 -->|fallthrough| S_210
+    S_210 -->|if Distance > 500| S_100
+    S_210 -->|go| S_210
+    S_300 -->|fallthrough| S_310
+    S_310 -->|if Distance > 500| S_100
+    S_310 -->|go| S_310
