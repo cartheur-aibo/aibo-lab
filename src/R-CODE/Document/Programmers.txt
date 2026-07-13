@@ -1,0 +1,518 @@
+===========================================================================
+
+	R-CODE110/111 for ERS-110/111
+
+	Copyright (C) 2002 Sony Corporation
+
+	All Rights Reserved.
+
+===========================================================================
+
+
+
+Table of Contents
+
+Programmer's Manual
+  [ Features ]
+  [ System Environment required to use R-CODE ]
+  [ HELLO AIBO ]
+  [ Coding of R-CODE ]
+  [ Motion Commands ]
+  [ Pose of AIBO ]
+  [ System Variables ]
+  [ R-CODE Error Information Output ]
+  [ How to Create Motions ]
+  [ Tutorial ]
+
+
+Programmer's Manual
+[ Features ]
+1. R-CODE is a programming language similar to BASIC.
+2. You can make AIBO walk, turn, kick, touch, change head directions and track a pink ball.
+3. You can make AIBO recognize certain types of sound.
+4. You can make AIBO detect obstacles (recognize the distance up to obstacles) and fetch the touch sensor information.
+5. You can use program control statements such as IF and FOR statements.
+6. You can use subroutines.
+7. You can use variables (16bit integers only).
+8. You can use addition/subtraction arithmetic.
+9. You can use "PUSH to stacks" and "POP from stacks".
+10.NOTE: This program does not have compatibility with R-CODE 1.2 used for AIBO Master Studio Version 1.1.
+
+
+
+[ System Environment required to use R-CODE ]
+1. A computer with which you can edit text files
+2. AIBO ERS-110/111
+3. AIBO Programming Memory Stick (ERA-MS008/MS016),
+   NOTE: The blue "Memory Stick" is also usable.
+   (Use an 8MB or 16MB Memory Stick.  A 16MB or greater Memory Stick is
+    not usable due to the limitations of hardware.)
+4. System that can read data from and write it to "Memory Stick"
+
+
+
+[ HELLO AIBO ]
+First of all, let's take a look at a simple program in R-CODE.
+
+SET:Power:1
+POSE:AIBO:slp_slp
+WAIT
+PLAY:ESC:4BANZ2_SIT3
+WAIT
+
+The program above makes AIBO perform "banzai".
+
+
+Explanation of the program
+
+Prog 1-1
+R-CODE.R   <- File name
+------------------------------------------------
+SET:Power:1                      <- (a)
+POSE:AIBO:slp_slp                <- (b)
+WAIT                             <- (c)
+PLAY:ESC:4BANZ2_SIT3             <- (d)
+WAIT                             <- (e)
+------------------------------------------------
+
+(a) This statement turns on AIBO's motors.
+     It sets Power, a system variable, to 1 using the SET command.
+(b) It changes the posture of AIBO to the sitting pose.
+    As the posture of AIBO is unknown at startup, the use of this command changes the posture.
+(c) Entering the WAIT command here makes AIBO wait for the completion of the posture change in (b).
+(d) It plays back semantics.
+    The use of the PLAY:ESC command plays back the 4BANZ2_SIT3 semantics.
+(e) It makes AIBO wait for the completion of the motion in (d).
+
+* The power supply of the motors activates AIBO's joints.
+   This motor is not turned on at startup.
+   It is different from the power supply that can be turned on with the pause button on AIBO's chest.
+
+
+Now, let's try this R-CODE on AIBO.
+
+1. Copy all the OPEN-R folders contained in the package to a "Memory Stick" to create the OPEN-R folders on the "Memory Stick".
+
+2. Save the statements of Prog 1-1 (in text format) using the file name "R-CODE.R" (R-CODE script file).
+
+3. Copy R-CODE.R saved in (2) to the directory \OPEN-R\ on the "Memory Stick".
+
+4. Insert the "Memory Stick" into AIBO.
+
+5. Press AIBO's pause button.
+    After AIBO boots, he changes to the sitting pose and then performs "banzai".
+
+    To turn off the power, press the pause button.
+
+
+[ Coding of R-CODE ]
+
+
+Coding Conventions
+   1) Spaces or tab characters at the beginning of lines are ignored (for indenting).
+
+   2) Lines that do not begin with an alphanumeric character or a colon (:) are ignored as comment lines.
+
+   3) If a line contains a double slash (//), characters after the double slash in the line are ignored as comments.  
+
+   4) As colons (:), spaces, tabs and linefeed characters are treated as separators, you cannot use them in names (such as variables).
+
+   5) The R-CODE commands consist of words separated with colons (:).
+
+   6) Lines beginning with a colon (:) are considered as label lines.
+
+   7) Words starting with the following symbols/numbers are treated as values: +, -, 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9.
+      Numbers which first two characters are 0x or 0X are treated as hexadecimal numbers.
+      Numbers which first two characters are 0o or 00 are treated as octal numbers.
+      Numbers which first two characters are 0b or 0B are treated as binary numbers.
+
+   8) You may use characters that do not correspond to the above conventions.  We recommend that you use only alphanumeric characters and an underscore (_) for maximum compatibility with higher-order applications.
+
+   9) Words in all capitals are reserved for the use of the R-CODE system. Do not use them for user variables, etc.
+
+
+[ Motion Commands ]
+The commands that control the "behavior" of AIBO are roughly classified into five basic patterns.
+
+   POSE   makes AIBO assume a certain pose (pose of starting a motion)
+   MOVE   makes AIBO perform a certain motion.  Use it to execute other commands
+          that require parameters (e.g. walking or tilting the head).
+   PLAY   makes AIBO perform a motion.  You can use this command to make AIBO perform
+         motions created with "AIBO Performer Kit ERF-510/511"
+(hereinafter referred to as "AIBO Performer Kit").
+   STOP   stops a motion (after completing the currently performing motion).
+   QUIT   stops a motion urgently (immediately).
+
+
+   Difference between MOVE and PLAY
+   Both MOVE and PLAY have the same function in terms of making AIBO perform motions.  Motions activated by the MOVE command, however, cannot be customized, as they are built into the R-CODE interpreter.  However, parameters for motions can be specified in detail.  
+Motions activated by the PLAY command are defined in the ODA file and do not accept parameters, but they can be newly created or replaced with the use of AIBO Performer Kit.
+
+   POSE:<region>:<name>[:<opt1>:<opt2>:<opt3>:<opt4>]
+   PLAY:<region>:<name>[:<opt1>:<opt2>:<opt3>:<opt4>]
+   MOVE:<region>:<name>[:<opt1>:<opt2>:<opt3>:<opt4>]
+   STOP:<region>
+   QUIT:<region>
+
+   <region> specifies a region of AIBO.
+            You can specify the following regions.
+
+              AIBO  Motions of the entire body
+              HEAD  Motions of the head
+              LEGS  Motions of the 4 legs
+              TAIL  Motions of the tail
+
+   <name>   specifies the name of the motion specified with <region>.
+
+   <opt1 to 4> specifies an option.  The actual options used vary depending on the command used.  For example, when you use the PLAY command, specify sound and light (eye light) that you want to synchronize with a motion command.
+ 
+ 
+             PLAY:AIBO:Akubi_sit:aku1_xxx:ang1_eye:1
+
+             If you write the program as above, AIBO moves its entire body while performing the Akubi_sit motion in sync with the aku1_xxx sound and the ang1_eye eye light.
+
+
+[ Pose of AIBO ]
+The still posture of AIBO includes the following three basic poses.
+
+Sitting, Standing, Sleeping
+
+When AIBO performs a motion, it starts with the starting pose, and ends with the ending pose when it completes the motion.
+
+
+Starting pose                      Ending pose
+Sitting  -> Performing a motion -> Sitting
+
+Standing -> Performing a motion -> Standing
+
+Sleeping -> Performing a motion -> Sleeping
+
+
+If AIBO in the sitting pose performs a motion starting from the standing pose, for example, it changes the pose to the standing pose first and then performs the specified motion.
+
+In this case, the poses of AIBO transition from Sitting -> Standing -> Performing a motion -> Standing.
+
+
+[ System Variables ]
+System variables are special variables prepared for fetching the joint angles and the sensor information of AIBO.
+
+Let's explain how to use the system variables by taking Melody_id (melody ID) as an example.
+
+The melody that AIBO recognized is converted to an ID, which is automatically assigned to the Melody_id variable. 
+When the command type of Sound Commander is A, the sound played back by pressing the 00aSEND button is CDE (do, re and mi).  In this case, 1 is assigned to Melody_id.
+
+
+Prog 1-2
+------------------------------------------------
+:100                  <- (a)
+IF:=:Melody_id:1:200  <- (b)
+GO:100                <- (c)
+
+:200                  <- (d)
+PLAY:AIBO:Akubi_sit   <- (e)
+SET:Melody_id:0       <- (f)
+GO:100                <- (g)
+------------------------------------------------
+
+(a) Definition of the label
+(b) The program branches to the label 200 when Melody_id is 1.
+    When AIBO recognizes the sound of do, re and mi, 1 is assigned to Melody_id.
+(c) The program jumps to the label 100.
+(d) Definition of the label
+(e) It makes AIBO perform a motion.
+   In this case, the motion name is "Akubi_sit", a motion of the entire body.
+(f) It initializes Melody_id to 0 as AIBO retains the detected value.
+(g) The program jumps to the label 100.
+
+When AIBO recognizes the sound of do, re and mi under this program, 1 is assigned to Melody_id and the program jumps to the label 200.  Then AIBO performs the Akubi_sit motion in compliance with the PLAY command. 
+
+The system variables of R-CODE include other variables such as Melody_id.  For details, refer to the "List of System Variables" in the Reference Manual.
+
+
+[ R-CODE Error Information Output ]
+When you try to make AIBO perform a motion that does not exist, the error information is logged to \OPEN-R\Error.log.
+
+
+[ How to Create Motions ]
+The use of AIBO Performer Kit allows you to edit motions called from semantics.  The number of editable semantics is 86.  For the list of semantics names, refer to "List of Semantics of AIBO Performer Kit" in the Reference Manual.
+
+For example, if the semantics edited with AIBO Performer Kit is P1P1, the statement with R-CODE becomes:
+
+PLAY:ESC:P1P1
+
+This statement makes AIBO perform the motion assigned to P1P1 from the sitting pose and plays back the sound "pero1ttp.mid" at the same time.
+
+
+
+Extract from "List of Semantics of AIBO Performer Kit" of Reference Manual
+---------------------------------------------------------------------
+Semantics          Pose          Sound
+P1P1              Sitting        pero1ttp.mid
+P1P2              Sitting        bow1_ttp.wav
+P1P3              Sleeping       scrt3ppp.wav
+P1P4              Standing       nobi1ddp.mid
+P1P5              Standing       gari1ddp.mid
+P1I1              Standing       look1ddp.mid
+  .                 .              .
+  .                 .              .
+  .                 .              .
+  .                 .              .
+  .                 .              .
+---------------------------------------------------------------------
+
+* Semantics of R-CODE stands for the combination of Motions, Sounds and Light.
+
+
+1. Create a motion using AIBO Performer Kit.
+
+    For details, refer to the following pages of the Performer Kit Manual.
+
+    To create a motion (TRAINING): P26
+    To replace a motion file (to replace a motion): P31
+    To edit a motion file (to edit a motion): P33
+
+2. Write the created motion to a "Memory Stick".
+
+    For details, refer to page 59 in the Performer Kit Manual.
+
+    * To write the created motion, use a "Memory Stick" for R-CODE instead of that for AIBO Performer Kit.
+ 
+NOTE: On page 60 of the Performer Kit manual, keep in mind the following change:
+-------------------------------------------------------------------------------
+4. Insert "Memory Stick" into the computer (P15).
+     You may use "Memory Stick" supplied with this kit or AIBO ERS-111.
+
+      |
+      V
+
+     You should use the "Memory Stick" image of R-CODE for this "Memory Stick".
+-------------------------------------------------------------------------------
+
+
+[ Tutorial ]
+Let's write an actual program with R-CODE!
+
+
+1. To operate AIBO with Sound Commander
+Simple specifications
+When AIBO hears the sound produced by pressing a button of Sound Commander, AIBO performs a motion corresponding to it.
+
+Let's associate the buttons of Sound Commander with motions as follows.
+
+Button of Sound Commander      Motion to perform
+Advance (2)          -------> AIBO advances.
+Stop (5)             -------> AIBO stops.
+Left turn (4)        -------> AIBO turns leftwards.
+Right turn (6)       -------> AIBO turns rightwards.
+Happy pose (#)       -------> AIBO takes a happy pose.
+Sad pose (*)         -------> AIBO takes a sad pose.
+
+
+When AIBO recognizes a sound from the Sound Commander, the number of the recognized sound is assigned to "Melody_id", one of the system variables.
+
+The following is the list of values to be assigned to Melody_id when the sound of Sound Commander is of type "A".
+
+Button of Sound Commander    Value to be assigned to Melody_id
+Advance (2)                    49
+Stop (5)                      119
+Back (8)                       56
+Left turn (4)                  70
+Right turn (6)                 63
+Happy pose (#)                 91
+Sad pose (*)                   98
+
+
+
+
+Now, let's write a simple flow chart.
+
+
+      +--------+
+      | Start  |
+      +--------+
+           |
+           |<----------------------------------------------+
+           |                                               |
+           v                                               |
++--------------------------+     +--------------------+    |
+|Melody_id=49?( Advance)   +---->| Advance command    +--->|
++--------------------------+     +--------------------+    |
+           V                                               |
++--------------------------+     +--------------------+    |
+|Melody_id=119?( Stop)     +---->| Stop command       +--->|
++--------------------------+     +--------------------+    |
+           V                                               |
++--------------------------+     +--------------------+    |
+|Melody_id=56?( Back)      +---->| Back command       +--->|
++--------------------------+     +--------------------+    |
+           V                                               |
++--------------------------+     +--------------------+    |
+|Melody_id=70?( Left turn)-+---->| Left turn command  +--->|
++--------------------------+     +--------------------+    |
+           V                                               |
++--------------------------+     +--------------------+    |
+|Melody_id=63?( Right turn)+---->| Right turn command +--->|
++--------------------------+     +--------------------+    |
+           V                                               |
++--------------------------+     +--------------------+    |
+|Melody_id=91?(#)          +---->| Happy command      +--->|
++--------------------------+     +--------------------+    |
+           V                                               |
++--------------------------+     +--------------------+    |
+|Melody_id=98?(*)          +---->| Sad command        +--->|
++--------------------------+     +--------------------+    |
+           V                                               |
+           +-----------------------------------------------+
+
+
+This is a simple program consisting of a set of similar components.  That is, it starts from Start, returns to Start after executing the advance command when Melody_id is 49 and executes the back command when Melody_id is 56.
+
+In reference to the flow, let's write an actual program with a text editor.
+You may, of course, use Notepad, one of the standard applications of Windows, instead of a text editor.
+
+First of all, write a comment at the beginning of the program.
+Start the line with a double slash (//) and the line is treated as a comment line up to its end.
+---------------------------------------------------------------------------
+// Program to operate AIBO with Sound Commander
+//
+// Created by AIBO Taro   <substitute your name here!>
+---------------------------------------------------------------------------
+
+To make AIBO perform motions, you must turn on its motor.
+Use the SET command to assign '1' to Power.
+
+Writing this single line supplies power to AIBO's motors.
+---------------------------------------------------------------------------
+SET:Power:1
+---------------------------------------------------------------------------
+(NOTE: you can write SET:Power:0 to turn off the motor.)
+
+Next, let's change the commands to be executed depending on the values of Melody_id.  
+To have the program branch amongst different alternatives, you can use commands such as IF, SWITCH, CSET, and others.  In this case, we'll use SWITCH.
+
+The syntax of SWITCH is as follows.
+
+SWITCH:x
+CASE:1:<if x is 1, this statement is executed.>
+CASE:2:<if x is 2, this statement is executed.>
+CASE:3:<if x is 3, this statement is executed.>
+
+Assign Melody_id to "x" and also add the PLAY command to the above.  The above statements become:.
+---------------------------------------------------------------------------
+SWITCH:Melody_id
+CASE:49:MOVE:LEGS:WALK:0:1:1
+CASE:119:PLAY:LEGS:WSToStand
+CASE:56:MOVE:LEGS:WALK:0:6:1
+CASE:70:MOVE:LEGS:WALK:13::
+CASE:63:MOVE:LEGS:WALK:12::
+CASE:91:PLAY:ESC:BANZ_SIT3_C
+CASE:98:PLAY:ESC:3SAD2B_STA
+---------------------------------------------------------------------------
+
+As the value of Melody_id is retained until it is changed, let's initialize it around here.
+---------------------------------------------------------------------------
+SET:Melody_id:0
+---------------------------------------------------------------------------
+
+When you execute a PLAY command, the system does not wait for the motion to complete.  Instead, it executes the next line immediately.  If you have more than one PLAY command executed consecutively, some of your commands may be lost.
+
+To avoid this situation, let's use the WAIT command.
+---------------------------------------------------------------------------
+WAIT
+---------------------------------------------------------------------------
+
+
+
+To repeat the process once again, use the GO statement to jump to the beginning.  
+---------------------------------------------------------------------------
+GO:Start
+---------------------------------------------------------------------------
+
+The destination "Start" has not been defined.  Define a label next to SET:Power:1 at the beginning of the program.
+---------------------------------------------------------------------------
+SET:Power:1
+
+:Start
+---------------------------------------------------------------------------
+
+
+Let's take a look of the whole program.
+---------------------------------------------------------------------------
+// Program to operate AIBO with Sound Commander
+//
+// Created by AIBO Taro
+
+SET:Power:1
+
+:Start
+
+SWITCH:Melody_id
+CASE:49:MOVE:LEGS:WALK:0:1:1
+CASE:119:PLAY:LEGS:WSToStand
+CASE:56:MOVE:LEGS:WALK:0:6:1
+CASE:70:MOVE:LEGS:WALK:13::
+CASE:63:MOVE:LEGS:WALK:12::
+CASE:91:PLAY:ESC:BANZ_SIT3_C
+CASE:98:PLAY:ESC:3SAD2B_STA
+
+
+SET:Melody_id:0
+WAIT
+
+GO: Start
+---------------------------------------------------------------------------
+
+Taking a look of the whole program tells us that it has time to recognize sound during the execution of the PLAY command, but it may be soon be lost when SET:Melody_id:0 is executed.  To avoid this situation, let's enter a WAIT command to gain time for the recognition of sound.
+Adding [ms] as the second argument to the WAIT command allows you to specify a specific time delay.  Let's add 2000 (2 seconds) to WAIT.
+---------------------------------------------------------------------------
+WAIT:2000
+---------------------------------------------------------------------------
+
+Now, let's take a look at the completed program.
+---------------------------------------------------------------------------
+// Program to operate AIBO with Sound Commander
+//
+// Created by AIBO Taro
+
+SET:Power:1
+
+:Start
+
+SWITCH:Melody_id
+CASE:49:MOVE:LEGS:WALK:0:1:1
+CASE:119:PLAY:LEGS:WSToStand
+CASE:56:MOVE:LEGS:WALK:0:6:1
+CASE:70:MOVE:LEGS:WALK:13::
+CASE:63:MOVE:LEGS:WALK:12::
+CASE:91:PLAY:ESC:BANZ_SIT3_C
+CASE:98:PLAY:ESC:3SAD2B_STA
+
+SET:Melody_id:0
+WAIT
+WAIT:2000
+
+GO: Start
+---------------------------------------------------------------------------
+
+Save the completed program with a file name of "R-CODE.R".
+
+
+The next step is the execution of the program. 
+To execute the program, we need the OPEN-R folder containing R-CODE 110 and the program created right now.
+
+Execution procedure
+1. Copy the entire OPEN-R folder to a "Memory Stick".
+2. Copy the created R-CODE.R program to the OPEN-R folder copied with the procedure (1).
+
+   Copy to   E:\OPEN-R\R-CODE.R
+
+   Depending on computers, the drive name of "Memory Stick" may vary.  (In this case, our Memory Stick drive is Drive E.)
+
+3. Insert the "Memory Stick" in AIBO.
+
+4. Press AIBO's pause button.
+
+5. When AIBO assumes a sitting pose, check that the command type of Sound Commander is A.  Press the GAME button and then press the buttons of 2, 4, 5, 8, * and #.  AIBO should recognize them and execute the assigned commands.  
+
+Did your AIBO move properly?  If it didn't, check if any misspelling exists in your program located in R-CODE.R.
+

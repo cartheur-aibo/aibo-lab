@@ -1,0 +1,26 @@
+//-------------------------------------------
+// Kick
+//-------------------------------------------
+
+SET:Power:1
+
+:100
+MOVE:LEGS:KICK:RIGHT_KICK:0
+WAIT
+
+MOVE:LEGS:KICK:RIGHT_KICK:-30
+WAIT
+
+MOVE:LEGS:KICK:RIGHT_KICK:-60
+WAIT
+
+MOVE:LEGS:KICK:LEFT_KICK:0
+WAIT
+
+MOVE:LEGS:KICK:LEFT_KICK:30
+WAIT
+
+MOVE:LEGS:KICK:LEFT_KICK:60
+WAIT
+GO:100
+

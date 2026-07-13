@@ -1,0 +1,1795 @@
+===========================================================================
+
+	R-CODE110/111 for ERS-110/111
+
+	Copyright (C) 2002 Sony Corporation
+
+	All Rights Reserved.
+
+===========================================================================
+
+
+Reference Manual
+
+
+[ List of R-CODE Commands ]
+[ R-CODE Commands ]
+[ List of R-CODE System Variables ]
+[ Quick Reference of R-CODE Operators ]
+[ List of Semantics of AIBO Performer Kit ]
+[ ESC File ]
+[ Motion Definition File ]
+[ Musical Scale Recognition File ]
+
+
+
+[ List of R-CODE Commands ]
+
+Controls
+
+   HALT          finishes the program and shuts down AIBO.
+   DEF           registers poses/motions.
+   SET           specifies joint angles individually.
+   SET_MOVE      updates part of a motion.
+   SET_POSE      changes the angle data of the joints of poses.
+   REC           records a motion.
+   LOAD_POSE     loads poses from the "Memory Stick".
+   SAVE_POSE     saves poses to the "Memory Stick".
+   LIMITTER      controls motion.
+
+Motions
+
+   POSE          takes a pose.
+   PLAY          performs a motion.
+   MOVE          performs a motion.
+   STOP          stops a motion.
+   QUIT          stops a motion abruptly.
+   WAIT          waits.
+   PLAY:APK      performs a registered motion.
+   POSE:APK      takes a registered pose.
+
+Control Structures
+
+   :             defines a line to be a label.
+   GO            jumps the process to the specified label.
+   IF            conditional test statement.
+   SWITCH        branches the process.
+   CSET          sets a context value.
+   CASE          branches the process.
+   FOR           generates a FOR loop.
+   NEXT          terminates a FOR Loop.
+   WHILE         generates a WHILE loop.
+   WEND          terminates a WHILE Loop.
+   REPEAT        generates a REPEAT loop.
+   UNTIL         terminates a REPEAT Loop.
+   DO            generates a DO loop.
+   LOOP          terminates a DO loop.
+   BREAK         breaks a loop.
+   CALL          calls a subroutine.
+   ARG           fetches an argument of a subroutine.
+   RETURN        returns from a subroutine.
+   RET           returns from a subroutine (for context version).
+   ONCALL        registers an interrupt routine.
+   RESUME        returns from an interrupt routine.
+
+Variables
+
+   GLOBAL        declares a variable as a global variable.
+   LOCAL         declares a variable as a local variable.
+   LET           assigns a value (simple assignment).
+   SET           assigns a value (assignment with a special function)
+
+Operation
+
+   ADD           Addition
+   SUB           Subtraction
+   MUL           Multiplication
+   DIV           Division
+   MOD           Remainder
+   AND           Logical AND
+   IOR           Logical OR
+   XOR           Exclusive OR
+   NOT           Negation
+   LAND          Logical AND (Boolean operation)
+   LIOR          Logical OR (Boolean operation)
+   LNOT          Negation (Boolean operation)
+   EQ            Equal to
+   NE            Not equal to
+   LT            Less than
+   LE            Less than or equal to
+   GT            Greater than
+   GE            Greater than or equal to
+   RND           Random number
+
+Stack Operation
+
+   PUSH          pushes data onto a stack.
+   POP           pops data from a stack.
+   DUP           copies the top entry on a stack.
+   JT            jumps if the top entry on a stack is true.
+   JF            jumps if the top entry on a stack is false.
+
+
+
+
+
+
+[ R-CODE Commands ]
+---------------------------------------------------------------------------
+
+Name
+         HALT - finishes the program and shuts down AIBO.
+
+Format
+         HALT
+
+Argument
+         None
+
+Description
+         This command will stop the running program and shutdown AIBO.
+         It will take a few seconds for AIBO to shutdown.
+
+Example
+         EDIT
+         SET:Power:1
+         FOR:i:1:10
+           PLAY:SOUND:xxx:100
+           WAIT:SOUND
+         NEXT
+         HALT
+         END
+
+---------------------------------------------------------------------------
+
+Name-
+         POSE - moves AIBO to the starting pose of a motion.
+
+Format
+     Common format
+     POSE:<region>:<motion>:<sound>:<light>:<wait>
+
+     POSE:AIBO:<aibo>[:<sound>:<light>:<wait>] To the starting pose of a motion
+     POSE:HEAD:<head>[:<sound>:<light>:<wait>] To the starting pose of a motion
+     POSE:LEGS:<legs>[:<sound>:<light>:<wait>] To the starting pose of a motion
+     POSE:TAIL:<tail>[:<sound>:<light>:<wait>] To the starting pose of a motion
+
+     POSE:HLT:<head>:<legs>:<tail>:<sound>:<light>:<wait>  HEAD+LEGS+TAIL
+
+         POSE:ESC:<semantics>:<wait>:<semantics>:<semantics>:<semantics>
+
+Arguments
+         <region>        Regions [ AIBO | HEAD | LEGS | TAIL ]
+
+         <motion>        Motion name
+           <aibo>        Motion name of the whole body
+           <head>        Motion name of the head
+           <legs>        Motion name of the 4 legs
+           <tail>        Motion name of the tail
+
+         <sound>         Sound name
+         <light>         Name of the LED light pattern
+
+         <semantics>     Semantics name
+
+         <wait>          Wait flag for the end of a motion [0: Don't wait, 1: Wait]
+
+Description
+         This command makes AIBO move to the starting pose of the specified <motion>.
+         The motion names, specified with <motion>, varies depending on <region>.
+         Refer to the following files for the motion names specified to each region, and for the starting pose of each motion.
+
+             <region>          .cfg file
+             AIBO (Motion of the whole body)  /OPEN-R/SONY/CONF/monet_01(00).cfg
+             HEAD (Motion of the head)        /OPEN-R/SONY/CONF/head_01(00).cfg
+             LEGS (Motion of the 4 legs)      /OPEN-R/SONY/CONF/legs_01(00).cfg
+             TAIL (Motion of the tail)        /OPEN-R/SONY/CONF/tail_01(00).cfg
+
+         The 01.cfg files can be modified to change the motion name.
+	 The 00.cfg files are not editable.  These are the only motions
+	 that are included as system motions.
+	 NOTE: The system motion names should not be changed.
+
+         You can specify <sound>/<light>, the sound and the light that should
+         be played back while AIBO moves to the starting pose of a motion.
+         The synchronization of the motion and sound/light is not controllable, because
+         the transition from the current posture to the
+         starting one varies depending on the current posture.
+         The sound and the light are played back when you execute the POSE command.
+
+         Specify 1 to <wait> and the sound/light is not played back until AIBO
+         moves to the starting pose of a motion.
+
+         * When you turn on AIBO, it is in an unknown pose.  To change the pose
+           from the unknown, specify the sleep pose so that the front and the rear
+           legs do not collide with each other.
+Example
+         POSE:AIBO:slp_slp:::1
+
+---------------------------------------------------------------------------
+
+Name
+         PLAY - makes AIBO perform a motion.
+
+Format
+         Common format
+         PLAY:<region>:<motion>:<sound>:<light>:<wait>
+
+         PLAY:AIBO:<aibo>[:<sound>:<light>:<wait>]     Motion of the whole body
+         PLAY:HEAD:<head>[:<sound>:<light>:<wait>]     Motion of the head
+         PLAY:LEGS:<legs>[:<sound>:<light>:<wait>]     Motion of the legs
+         PLAY:TAIL:<tail>[:<sound>:<light>:<wait>]     Motion of the tail
+
+         PLAY:HLT:<head>:<legs>:<tail>:<sound>:<light>:<wait>   HEAD+LEGS+TAIL
+
+         PLAY:ESC:<semantics>[:<wait>:<semantics>:<semantics>:<semantics>]
+
+         PLAY:SOUND:<sound>[:<volume>:<if_not_busy>:<wait>] Playback of sound
+         PLAY:LIGHT:<light>[:<repeat>:<if_not_busy>:<wait>] Playback of light (LED pattern) 
+Argument
+         <region>        Regions [ AIBO | HEAD | LEGS | TAIL ]
+
+         <motion>        Motion name
+         <aibo>          Motion name of the whole body
+         <head>          Motion name of the head
+         <legs>          Motion name of the 4 legs
+         <tail>          Motion name of the tail
+
+         <sound>         Sound name
+
+           volume = 0 to 100  Default = Sound_volume
+
+           It is possible to specify the volume of sound by entering a value next to "<" in <sound>.
+                 Example:
+                      PLAY:SOUND:Test1<100 --> PLAY:SOUND:Test1:100.
+
+         <light>         Name of the LED light pattern.
+
+                 repeat = 0 to 16 (0:Default 16:Loop) Default = Light_repeat
+
+                 It is possible to specify "repeat" by entering a value next to "*" in <light>.
+                 Example:
+                      PLAY:LIGHT:Test*3 --> PLAY:LIGHT:Test1:3.
+
+         <semantics>     Semantics name
+
+         <wait>         Wait flag for the end of a motion [0: Don't wait, 1: Wait]
+
+Description
+         This command makes AIBO perform the specified <motion>.
+         The motion names, specified with <motion>, vary depending on <region>.
+         Refer to the following files for the motion names specified to each <region>, 
+         and the starting pose of each <motion>.
+
+             <region>          .cfg file
+             AIBO (Motion of the whole body)  /OPEN-R/SONY/CONF/monet_01(00).cfg
+             HEAD (Motion of the head)        /OPEN-R/SONY/CONF/head_01(00).cfg
+             LEGS (Motion of the 4 legs)      /OPEN-R/SONY/CONF/legs_01(00).cfg
+             TAIL (Motion of the tail)        /OPEN-R/SONY/CONF/tail_01(00).cfg
+
+         The 01.cfg files define the list of external motions.
+         The 00.cfg files define the list of internal motions.
+
+         To let AIBO make a specific motion, you can check if AIBO is currently
+         in the starting pose of that motion.
+         If it is not in the starting pose, the pose automatically changes to the
+         starting pose.
+         AIBO only performs <motion> when it is in the starting pose.
+
+         You can specify <sound>/<light>, the sound and the light to be played
+         back in sync with <motion>.
+         <sound>/<light> is played back in sync with <motion> when AIBO is in the
+         starting pose.
+
+Specify 1 to <wait> and the processes are blocked until AIBO finishes the motion.
+
+Example
+         PLAY:AIBO:oStanding:::1
+
+---------------------------------------------------------------------------
+
+Name
+         MOVE - makes AIBO perform a built-in motion.
+
+Format
+         Common format
+         MOVE:<region>:<motion>:<arg1>:<arg2>:<arg3>:<arg4>
+
+         MOVE:AIBO:<aibo>           AIBO performs built-in motions (e.g. getting up from the fall-down state)
+
+         MOVE:LEGS:WALK:<w_style>:<dir>            Walks.
+         MOVE:LEGS:STEP:<w_style>:<dir>:<steps>    Walks.  (StepWalk)
+         MOVE:LEGS:KICK:<k_style>:<deg>            Performs a kick motion.
+
+         MOVE:HEAD:HOME                            Moves the head to the home position.
+         MOVE:HEAD:ABS:<tilt>:<pan>:<roll>:<time>  Moves the head to the absolute position.
+         MOVE:HEAD:REL:<tilt>:<pan>:<roll>:<time>  Moves the head to a relative position.
+         MOVE:HEAD:C-TRACKING                      Moves the head in the track of a color.
+         MOVE:HEAD:C-TRACKING:<time>               Moves the head in the track of a color.
+         MOVE:TAIL:HOME                            Moves the tail to the home position.
+         MOVE:TAIL:ABS:<tilt>:<pan>:<time>         Moves the tail to the absolute position.
+         MOVE:TAIL:SWING:<tilt>:<pan>:<time>       Swings the tail.
+
+Argument
+         <region>        Region [ AIBO | HEAD | LEGS | TAIL ]
+
+         <motion>        Motion name
+         <arg1> to <arg4>  Argument (depending on commands)
+
+         <aibo>          Built-in motion name of the whole body
+
+                         NToStand    From an unknown pose to the standing pose
+                         NToSleep    From an unknown pose to the sleeping pose
+                         NToSit      From an unknown pose to the sitting pose
+                         NToPStation From an unknown pose to the station preparation pose
+                         PSToStation From the station preparation pose to the station pose
+                         ReactiveGU  AIBO recovers from the fallen down (FD) state to the standing pose.
+                         NToFD       From an unknown pose to the fallen down state: No motion takes place.
+
+         <w_style>       Walking style      [ 0 to 10 | 12(R-Turn) | 13(L-Turn) ]
+         <k_style>       Kicking style      [         14(R-Kick) | 15(L-Kick) ]
+         <dir>           Advancing direction [ 1 to 6 ] 1: Front 2: Right-front 3: Left-front 4: Right side 5: Left side 6: Move backward
+         <deg>           Kicking direction (angle)    [ -90 to 90 ] Unit:[degree]
+         <steps>         The number of repeated steps  [ 0 to 9999 ]
+
+         <tilt>          Tilting angle     [ -180 to 180 ] Unit:[degree]
+         <pan>           Panning angle     [ -180 to 180 ] Unit:[degree]
+         <roll>          Rolling angle     [ -180 to 180 ] Unit:[degree]
+         <time>          Moving time       [  0 to 30000 ] Unit:[ms]
+
+Description
+	This command makes AIBO perform the built-in motion specified with <motion>.
+
+Example
+         MOVE:LEGS:WALK:1:1
+
+---------------------------------------------------------------------------
+
+Name
+         STOP - stops a motion.
+
+Format
+         Common format
+         STOP:<region>
+
+         STOP:AIBO                          stops the whole body.
+         STOP:LEGS                          stops the motion of the legs.
+         STOP:HEAD                          stops the motion of the head.
+         STOP:TAIL                          stops the motion of the tail.
+
+         STOP:SOUND                         stops the playback of sound.
+         STOP:LIGHT                         stops the playback of sound.
+
+Argument
+         <region>        Regions [ AIBO | HEAD | LEGS | TAIL ]
+
+Description
+         This command stops the motion of AIBO.
+         Motions kept in the queue are all discarded.
+
+         When AIBO is performing a motion, it stops motions after completing it.
+
+Example
+         STOP:AIBO
+
+---------------------------------------------------------------------------
+
+Name
+         QUIT - stops a motion abruptly.
+
+Format
+         Common format
+         QUIT:<region>
+
+         QUIT:AIBO                abruptly stops the motion of the whole body.
+         QUIT:LEGS                abruptly stops the 4 legs.
+         QUIT:HEAD                abruptly stops the head.
+         QUIT:TAIL                abruptly stops the tail.
+
+         QUIT:SOUND    (equals STOP:SOUND)           stops the sound.
+         QUIT:LIGHT    (equals STOP:LIGHT)           stops the light.
+
+Argument
+         <region>        Regions [ AIBO | HEAD | LEGS | TAIL ]
+
+Description
+         This command stops a motion abruptly.
+         Motions kept in the queue are all discarded.
+         It also abruptly stops the currently performing motion.
+
+         
+         *When you execute the "QUIT" command to those except SOUND/LIGHT,
+         the posture of AIBO is reset to oNEUTRAL.
+
+Example
+         QUIT:AIBO
+
+---------------------------------------------------------------------------
+
+Name
+         WAIT - makes AIBO wait for the completion of a motion (Sync).
+
+Format
+         WAIT           waits for the completion of a given motion currently being executed.
+
+         WAIT:AIBO      waits for the completion of the motion of the whole body currently being executed.
+         WAIT:HEAD      waits for the completion of the motion of the head currently being executed 
+         WAIT:LEGS      waits for the completion of the motion of the legs currently being executed 
+         WAIT:TAIL      waits for the completion of the motion of the tail currently being executed 
+
+         WAIT:SOUND     waits for the completion of the playback of sound (Also able to check whether sound is currently being played back or not).
+         WAIT:LIGHT     waits for the completion of the playback of light (Also able to check whether light is currently begin played back or not).
+
+         WAIT:<ms>      waits for the specified amount of time.
+
+Argument
+         <ms>        Millisecond  [1 to 30000]   Note: The resolution is 32[ms].
+
+Description
+         This command is used to suspend AIBO's next motion until a specified condition is met.
+         The execution of the program is suspended until the condition is met.
+
+         If you execute <WAIT> when nothing is in the queue, the process is suspended, but restarted in about 32[ms].
+
+Example
+         WAIT:AIBO
+
+---------------------------------------------------------------------------
+
+Name
+         :<label> - defines a line to be a label.
+
+Format
+         :<label>
+
+Argument
+         <label>          A given character string
+
+Description
+         This command defines a label to be used for a destination to which the process jumps to by using <GO> or <IF>.
+         It can be used also for the name of a subroutine called by <CALL>.
+
+         <label> cannot exist by itself. 
+         <label> is valid for the entire program (globally).
+
+Example
+         GO:Skip
+         PLAY:AIBO:Banzai_sit_C  //"Never reach this line."
+         :Skip
+         PLAY:AIBO:Banzai_sit_C  //"Skipped!"
+
+---------------------------------------------------------------------------
+
+Name
+         GO - jumps the process to the specified label.
+
+Format
+         GO:<label>
+
+Argument
+         <label>          Label of the destination to which the process will jump to
+
+Description
+         This command jumps the process to the line with <label>.
+
+         It is prohibited to use <GO> across subroutines or scopes. 
+Using it in such a way would destroy the stack, and the program would run out of control. You may use it to break a loop structure.
+
+         Refrain from using <GO> as much as possible.
+
+Example
+         GO:Skip
+         PLAY:AIBO:Banzai_sit_C  //"Never reach this line."
+         :Skip
+         PLAY:AIBO:Banzai_sit_C  //"Skipped!"
+
+---------------------------------------------------------------------------
+
+Name
+         IF - conditional test statement.
+
+Format
+         Format1
+         IF:<v1>:<op>:<v2>:THEN
+          THEN Block
+         ELSE
+          ELSE Block
+         ENDIF
+
+         Format2
+         IF:<v1>:<op>:<v2>:CALL:<label>[:<argc>]
+
+         Format3
+         IF:<v1>:<op>:<v2>:BREAK
+
+         Format4
+         IF:<v1>:<op>:<v2>:<then>[:<else>]
+
+Argument
+         <v1>             Operand 1
+         <op>             Comparison operator
+         <v2>             Operand 2
+
+
+         List of comparison operators 
+
+             =            Equal to
+             <>           Not equal to
+             <            Less than
+             <=           Less than or equal to
+             >            Greater than
+             >=           Greater than or equal to
+             &            Bitwise logical AND
+             |            Bitwise logical OR
+             ^            Bitwise exclusive OR
+             &&           Logical AND (The operand is handled as a Boolean value. 0 is false. Any other case is true.)
+             ||           Logical OR (The operand is handled as a Boolean value. 0 is false. Any other case is true.)
+
+
+         <label>          Label of a subroutine
+         <argc>           The number of the arguments of a subroutine
+
+         <then>           Label of the jump destination when conditions are met
+         <else>           Label of the jump destination when conditions are not met
+
+Description
+         This command evaluates a conditional expression consisting of <v1>, <op> and <v2>, and to carry out processes in accordance with the results.
+
+         In the case of Format 1:
+         If the conditional express is true, the program executes <THEN Block>.
+         If the conditional express is false, it executes <ELSE Block>.
+         <ELSE~> and <ELSE Block~> can be omitted.
+         Make sure to terminate the statement with ENDIF.
+
+         In the case of Format 2:
+         If the conditional expression is true, it calls the function <label>.
+         For the arguments subsequent to <label>, refer to the description of CALL.
+
+         In the case of Format 3:
+         If the conditional expression is true, it executes BREAK.
+         It is used for exiting a loop.
+         For further details, refer to the description of BREAK.
+
+         In the case of Format 4:
+         If the conditional expression is true, it jumps the process to the <then> label.
+         If the conditional expression is false, it jumps the process to the <else> label. 
+         Refer to the note of GO. 
+         Refrain from using this format as much as possible.
+
+Example
+         IF:x:=:0:THEN
+           //"x is 0"
+         ELSE
+           //"x is not 0"
+         ENDIF
+
+---------------------------------------------------------------------------
+
+Name
+         SWITCH - branches the process. (Sets the context value)
+
+Format
+         SWITCH:<v>
+
+Argument
+         <v>              Variable names or constants
+
+Description
+         This command sets the value of <v> as a context value. 
+It implements multi-way branching conditions together with CASE statements.
+
+Example
+         SWITCH:x
+         CASE:1:PLAY:AIBO:Akubi_sit  //"x = 1"
+         CASE:2:PLAY:AIBO:Akubi_sit  //"x = 2"
+         CASE:2:PLAY:AIBO:Akubi_sit  //"(two)"
+         CASE:3:PLAY:AIBO:Akubi_sit  //"x = 3"
+         CASE:ELSE:PLAY:AIBO:Akubi_sit  //"x is not 1"
+         CASE:ELSE:PLAY:AIBO:Akubi_sit  //"x is not 2"
+         CASE:ELSE:PLAY:AIBO:Akubi_sit  //"x is not 3"
+
+---------------------------------------------------------------------------
+
+Name
+         CSET - branches the process. (Sets the context value)
+
+Format
+         CSET:<v1>:<op>:<v2>:<v3>
+
+Argument
+         <v1>             Operand 1
+         <op>             Comparison operator
+         <v2>             Operand 2
+
+         <v3>             Variable names or constants
+
+Description
+         This command evaluates the conditional expression consisting of <v1>, <op> and <v2>.  If the results of the evaluation turn out to be true, the program sets the value of <3> as the context value.
+
+         CSET is a "skip" command.
+When CSET appears in succession, the program ignores all CSET's except the first one that turns out to be true. 
+It implements multi-way branching conditions together with CASE statements.
+
+Example
+         CSET:x:<:10:1
+         CSET:x:<:20:2
+         CSET:x:<:30:3
+         CSET:x:<:40:4
+         CSET:x:<:50:5
+         CASE:1:PLAY:AIBO:Akubi_sit  //"x < 10"
+         CASE:2:PLAY:AIBO:Akubi_sit  //"x < 20"
+         CASE:3:PLAY:AIBO:Akubi_sit  //"x < 30"
+         CASE:4:PLAY:AIBO:Akubi_sit  //"x < 40"
+         CASE:5:PLAY:AIBO:Akubi_sit  //"x < 50"
+
+---------------------------------------------------------------------------
+
+Name
+         CASE - branches the process.
+
+Format
+         CASE:<const>:<command>
+
+         CASE:ELSE:<command>
+
+Argument
+         <const>          Context value (It must be a constant.)
+
+         <command>        Given R-CODE command (excluding CASE)
+
+Description
+         This command executes <command> when the context value equals <const>.
+You can specify CASE:ELSE at the end of the contiguous CASE statements as well.
+If the context value does not equal <const> of any CASE statements, the program executes <command> of ELSE.
+
+Example
+         SWITCH:x
+         CASE:1:PLAY:AIBO:Akubi_sit  //"x = 1"
+         CASE:2:PLAY:AIBO:Akubi_sit  //"x = 2"
+         CASE:2:PLAY:AIBO:Akubi_sit  //"(two)"
+         CASE:3:PLAY:AIBO:Akubi_sit  //"x = 3"
+         CASE:ELSE:PLAY:AIBO:Akubi_sit  //"x is not 1"
+         CASE:ELSE:PLAY:AIBO:Akubi_sit  //"x is not 2"
+         CASE:ELSE:PLAY:AIBO:Akubi_sit  //"x is not 3"
+
+---------------------------------------------------------------------------
+
+Name
+         FOR - NEXT - constitutes a loop structure.
+
+Format
+         FOR:<var>:<from>:<to>[:<step>]
+           commands
+         NEXT
+
+Argument
+         <var>            Loop variable
+         <from>           Start value
+         <to>             End value
+         <step>           Increment value
+
+Description
+         This command executes the command statements up to NEXT repeatedly by incrementing the value of a variable in steps of <step> from <from> to <to>.
+
+Example
+         FOR:i:1:10
+           PLAY:AIBO:Akubi_sit
+           WAIT
+         NEXT
+
+         FOR:i:10:1:-1
+           PLAY:AIBO:Akubi_sit
+           WAIT
+         NEXT
+
+---------------------------------------------------------------------------
+
+Name
+         WHILE - WEND - constitutes a loop structure.
+
+Format
+         WHILE:<v1>:<op>:<v2>
+          commands
+         WEND
+
+Argument
+         <v1>             Operand 1
+         <op>             Comparison operator
+         <v2>             Operand 2
+
+Description
+         This command evaluates the conditional expression consisting of <v1>, <op> and <v2>, and executes the command statements up to WEND repeatedly as far as the evaluation results turn out to be true.
+
+Example
+         SET:i:0
+         WHILE:i:<:10
+           PLAY:AIBO:Akubi_sit
+           WAIT
+         WEND
+
+---------------------------------------------------------------------------
+
+Name
+         REPEAT - UNTIL - constitutes a loop structure.
+
+Format
+         REPEAT
+          commands
+         UNTIL:<v1>:<op>:<v2>
+
+Argument
+         <v1>             Operand 1
+         <op>             Comparison operator
+         <v2>             Operand 2
+
+Description
+         This command executes the command statements up to UNTIL repeatedly until the evaluation results turn out to be true.
+
+         It executes the command statements at least once.
+
+Example
+         SET:i:0
+         REPEAT
+           PLAY:AIBO:Akubi_sit
+           WAIT
+         UNTIL:i:>=:10
+
+---------------------------------------------------------------------------
+
+Name
+         DO - LOOP - constitutes a loop structure.
+
+Format
+         DO[:WHILE|UNTIL:<v1>:<op>:<v2>]
+          commands
+         LOOP[:WHILE|UNTIL:<v1>:<op>:<v2>]
+
+Argument
+         <v1>             Operand 1
+         <op>             Comparison operator
+         <v2>             Operand 2
+
+Description
+         This command executes the command statements between DO and LOOP repeatedly.
+
+         You can specify a conditional expression to DO and LOOP.  When the condition is met, the program exits from the loop.
+
+         In case that you specify WHILE, the loop continues while the value of a conditional expression remains true.
+         In case that you specify UNTIL, the program exits from the loop when the value of a conditional expression becomes true.
+
+         If you fail to specify a conditional expression to DO or LOOP, the program falls into an infinite loop.
+
+Example
+
+---------------------------------------------------------------------------
+
+Name
+         BREAK - breaks a loop structure.
+Format
+         BREAK[:<break_level>]
+
+
+Argument
+         <break_level>    This argument specifies the number of nests of the loop structure that you want to break out of.  
+         The number should be a constant. 
+         You cannot specify a variable <break_level>. 
+
+         If no value is specified, the program reads it as 1.
+
+Description
+         This command exits from the currently running loop structure. 
+You can use it for all loop structures in common.
+
+Example
+         FOR:i:1:100
+           IF:i:>:10:BREAK
+           PLAY:AIBO:Akubi_sit
+           WAIT
+         NEXT
+
+---------------------------------------------------------------------------
+
+Name
+         CALL - calls a subroutine.
+
+Format
+         CALL:<label>[:<argc>]
+
+Argument
+         <label>          Label of a subroutine to call
+         <argc>           The number of arguments PUSHed in advance
+
+Description
+         This command calls a subroutine with <label>. 
+         This command allows you to push a given number of arguments onto the stack with the PUSH command and pop them from the stack. 
+         You should specify to <argc> the number of arguments pushed onto the stack.
+
+         When this command calls a subroutine, the previous context value is saved to the stack.  It is restored when the execution of RETURN brings back the program to its previous location.
+
+Example
+         CALL:sub1
+
+         PUSH:10     // Argument1
+         PUSH:200    // Argument2
+         PUSH:3000   // Argument3
+         CALL:sub2:3
+
+---------------------------------------------------------------------------
+
+Name
+         ARG - fetches an argument of a subroutine.
+
+Format
+         ARG:<var>
+
+Argument
+         <var>            Variable name
+
+Description
+         This command fetches the value of the argument of a subroutine to the variable <var>. 
+         The same number of arguments as the number that were pushed to the stack with PUSH must be fetched with ARG.
+         The arguments should be fetched using the first-in, first-out basis of the order in which they were pushed to the stack.
+
+         Note that the order of fetch by this command is not done on the first-in, last-out basis, even though it is common for a normal stacks.
+
+Example
+         Calling from:
+         PUSH:10
+         PUSH:200
+         PUSH:3000
+         CALL:sub
+         ...
+         
+         Subroutine:
+         :sub
+         ARG:arg1    // arg1 <- 10
+         ARG:arg2    // arg2 <- 200
+         ARG:arg3    // arg3 <- 3000
+         ...         // arg 1~3 are created as LOCAL variables.
+                     // It is not necessary to declare them as LOCAL variables.
+
+---------------------------------------------------------------------------
+
+Name
+         RETURN - returns the program from a subroutine.
+
+Format
+         RETURN[:<return_value>]
+
+Argument
+         <return_value>   Return value
+
+Description
+         This command returns the program from a subroutine.
+         You can specify a return value with <return_value>.
+         The calling source fetches a return value with POP.
+
+Example
+         Calling from:
+         CALL:sub
+         POP:rc     // A return value (123) is fetched to the variable rc.
+         ...        // This is always required when you call a subroutine that returns a return value.
+
+         Subroutine:
+         :sub
+         ...
+         RETURN:123
+
+---------------------------------------------------------------------------
+
+Name
+         RET - returns the program from a subroutine (Switching version of context values)
+
+Format
+         RET:<context>
+
+Argument
+         <context>        Context value
+
+Description
+         This command returns the program from a subroutine. 
+         After the return from the subroutine, a context value is set to <context>.
+         When the value of <context> is 0, the context value at the time of having called the subroutine is set there again.
+
+Example
+         Calling from:
+         CALL:sub
+         CASE:1:PLAY:AIBO:Akubi_sit  //"case 1..."
+         CASE:2:PLAY:AIBO:Akubi_sit  //"case 2..."
+         CASE:3:PLAY:AIBO:Akubi_sit  //"case 3..."
+         ...
+
+         Subroutine:
+         :sub
+         ...
+         RET:1
+         ...
+         RET:2
+         ...
+         RET:3
+
+---------------------------------------------------------------------------
+
+Name
+         ONCALL - registers/deletes an interrupt processing routine.
+
+Format
+         ONCALL:<v1>:<op>:<v2>:<label>[:<resume_type>:<resume_label>]
+
+         ONCALL:<-n>
+
+Argument
+         <v1>             Operand 1
+         <op>             Comparison operator
+         <v2>             Operand 2
+
+         <label>          Label of an interrupt processing routine
+
+         <resume_type>    Type of return
+         <resume_label>   Label of the destination of jump after return
+
+         <-n>            The number of interrupt processing routines that should be registered/deleted
+
+Description
+         This command registers an interrupt processing routine that should be called when the condition based on <v1>, <op> and <v2> is met. 
+         The method of specifying a condition is the same as that of IF.
+
+         Return from an interrupt processing routine is done as follows.
+         <resume_type>
+           0  The program returns to the statement where the interrupt took place.
+           1  It returns to the statement where the interrupt took place and then GOes to <resume_label>.
+           2  It returns to the location of the ONCALL statement.
+           3  It returns to the location of the ONCALL statement and then GOes to <resume_label>.
+           4  It returns to the beginning of the program (all the stacks are cleared).
+           5  It returns to the beginning of the program and then GOes to <resume_label>.
+
+         In the cases of above (2) ~ (5), the ONCALL commands registered after the corresponding ONCALL are deleted.
+         In the cases of (3) and (5), however, the ONCALL commands registered at the same level as the return location are stored.
+
+         The evaluation of conditions is done for each execution of statements (one line of R-CODE).
+
+         Nested interrupts are prohibited (ignored).
+
+         ONCALL is affected nested subroutines. 
+         ONCALL registered in a given subroutine is disabled once the program exits from that subroutine.
+
+
+         Specifying <-n> deletes the "n" pieces of ONCALL's registered right before the specification.
+         <-n> should be a negative number.
+
+Example
+         ONCALL:Leg_RF_sw:=:1:9000 
+---------------------------------------------------------------------------
+
+Name
+         RESUME - returns the program from an interrupt routine.
+
+Format
+         RESUME
+
+Argument
+         None
+
+Description
+         This command returns the program from an interrupt routine.
+It functions similarly to RETURN from a CALL.
+You should not use RETURN to return the program from the execution of an interrupt routine. 
+The returning location relies on <resume_type> of ONCALL.
+
+Example
+         RESUME
+
+---------------------------------------------------------------------------
+
+Name
+         GLOBAL - declares a variable as a global variable.
+
+Format
+         GLOBAL:<var>[:<init_value>]
+
+Argument
+         <var>            Variable name
+         <init_value>      Initial value
+
+Description
+         This command declares a global variable <var>. 
+         When you specify <init_value> as a global variable, that value is set as an initial value.
+
+         If you use a variable name not declared either as a global or local variable, the R-CODE system automatically generates a global variable with that particular name.
+
+Example
+         GLOBAL:x:0
+
+---------------------------------------------------------------------------
+
+Name
+         LOCAL - declares a variable as a local variable.
+
+Format
+         LOCAL:<var>[:<init_value>]
+
+Argument
+         <var>            Variable name
+         <init_value>      Initial value
+
+Description
+         This command declares a local variable <var>. 
+         When you specify <init_value> as a local variable, that value is set as an initial value.
+
+         A local variable is prepared on a stack. 
+         When the execution of the program exits from a subroutine or a scope, the space for the local variable is released.
+
+Example
+         LOCAL:y:0
+
+---------------------------------------------------------------------------
+
+Name
+         LET - assigns a value to a variable.
+Format
+         LET:<var>:<value>
+
+Argument
+         <var>            Variable name
+         <value>          Value (a variable name or a constant)
+
+Description
+         This command assigns a value to a variable. 
+         It does not have special functions like SET does.
+
+Example
+         LET:x:1
+
+---------------------------------------------------------------------------
+
+Name
+         SET - assigns a value to a variable.
+
+Format
+         SET:<var>:<value>
+
+         SET:COLOR:<color>
+
+         SET:<joint>:<angle>
+
+Argument
+         <var>            Variable name
+         <value>          Value (a variable name or a constant)
+
+         <color>          Color name
+                          ORANGE  
+                          PINK    
+                          YELLOW  
+                          BLUE    
+                          GREEN   
+
+         <joint>          Joint name to be set
+         <angle>          New angle
+
+
+Description
+         This command sets a value to a variable. 
+         Some variables have the following special functions.
+
+         Power            controls On/Off of the power supply of motors.
+
+         Head_tilt        moves a joint to the specified angle.
+         Head_pan         is mainly used for debugging.
+         Head_roll        Note that no consideration is given to the
+         Head_mouth       concurrent use of this command with PLAY/MOVE.
+         Tail_1
+         Tail_2
+         Leg_RF_1
+         Leg_RF_2
+         Leg_RF_3
+         Leg_LF_1
+         Leg_LF_2
+         Leg_LF_3
+         Leg_RR_1
+         Leg_RR_2
+         Leg_RR_3
+         Leg_LR_1
+         Leg_LR_2
+         Leg_LR_3
+
+Example
+         SET:Power:1
+
+---------------------------------------------------------------------------
+
+
+Name
+         DEF:POSE - registers a pose.
+
+Format
+         DEF:POSE:<pose>
+           <joint>:<angle>
+           <joint>:<angle>
+           ...
+         END
+
+         DEF:POSE:<pose>[:<N>]
+
+Argument
+         <pose>              Pose name to be registered to pose_list
+         <joint>             Joint name
+         <angle>             Angle
+
+
+         <pose>              Characters of a pose name to register
+         <N>                 The number of poses to register
+
+Description
+         This command registers the pose, which is taken by setting the angle specified with <angle> to the joint specified with <joint>, to pose_list. 
+         You do not need to set all 18 joints. 
+         You can complete the settings with END.
+
+         You can register poses from <pose>1 to <pose> N all together with the use of <pose>:N.
+         Assign 0 to <pose> to initialize it.  
+         In this case, you do not need to state END.
+
+Example
+         DEF:POSE:pose1
+           Head_pan:40
+           Head_roll:50
+           Leg_LF_1:90
+         END
+
+         DEF:POSE:p:10  // <- The poses from p1 to p10 are registered to pose_list.
+
+---------------------------------------------------------------------------
+
+Name
+         DEF:MOVE - defines MOVE.
+
+Format
+         DEF:MOVE:<move>
+           <time>:<pose1>
+           <time>:<pose2>
+           ...
+         END
+
+Argument
+         <move>              Motion name to register
+         <time>              Transition time from the current pose to <pose1>
+         <pose1>             Name of a pose to take
+
+Description
+         This command registers <move>, with which AIBO takes the pose specified with <pose> within the time specified with <time>, to move_list. 
+         You can complete the settings with END.
+
+Example
+         DEF:MOVE:move1
+           1000:pose1
+           1000:pose2
+           1000:pose3
+         END
+
+---------------------------------------------------------------------------
+
+Name
+         POSE:APK - takes a pose.  
+
+Format
+         POSE:APK:<pose>[:<time>]
+
+Argument
+         <pose>              Pose name to take
+         <time>              Transition time from the current pose to <pose>
+
+Description
+         This command finds the pose name, specified with <pose>, from pose_list and makes AIOB take that pose. 
+         You can specify the transition time from the current pose to the specific one with <time>.
+
+Example
+         POSE:APK:pose1:5000
+
+---------------------------------------------------------------------------
+
+Name
+         PLAY:APK - performs a motion.
+
+Format
+         PLAY:APK:<move>
+
+Argument
+         <move>              Name of a motion to perform
+
+Description
+         This command finds the motion name corresponding to an argument from move_list and makes AIBO perform that motion.
+           
+Example
+         PLAY:APK:move1
+
+---------------------------------------------------------------------------
+
+Name
+         SET_POSE - updates part of a pose.
+
+Format
+         SET_POSE:<pose>:<joint>:<angle>
+
+Argument
+         <pose>              Pose name to update
+         <joint>             Joint name which angle is to be updated
+         <angle>             New angle
+
+Description
+         This command updates the joint angle specified with <joint> of <pose> to <angle>.
+
+Example
+         SET_POSE:pose1:Head_pan:50 // <- Changes Head_pan of pose1 to a new angle of 50 degrees
+
+---------------------------------------------------------------------------
+
+Name
+         SET_MOVE - updates part of a motion.  
+
+Format
+         SET_MOVE:<move>:<index>:<time>:<pose>
+
+Argument
+         <move>              Motion name to update
+         <index>             Pose name to update
+         <time>              New time
+         <pose>              New pose
+
+Description
+         This command changes the pose referred to by pose number <index> of <move> to <pose> with <time>.
+
+Example
+         DEF:MOVE:move1
+           1000:pose1
+           1000:pose3
+         END
+         SET_MOVE:move1:1:5000:pose2 // <- To change 1000:pose3 to 5000:pose2
+
+---------------------------------------------------------------------------
+
+Name
+         REC - records the joint angles of AIBO.
+
+Format
+         REC:POSE:<pose>[:<I>]
+
+Argument
+         <pose>              Pose name to record
+         <I>
+
+Description
+         This command reads and records the joint angles of AIBO.
+         When you specify <I>, this command records the current joint angles of AIBO to poseI where the number I is the pose number defined with DEF:POSE:<pose>:N.
+
+Example
+         REC:POSE:pose1
+
+---------------------------------------------------------------------------
+
+Name
+         LOAD_POSE - loads a pose.
+
+Format
+         LOAD_POSE:<pose>
+
+Argument
+         <pose>              Pose name to load
+
+Description
+         This command loads <pose>.apk stored in OPEN-R\DATA\APK on the "Memory Stick" and adds it to pose_list.
+When the loaded <pose>.apk has the pose name already defined in pose_list, it is overwritten.
+
+Example
+         LOAD_POSE:pose1
+
+---------------------------------------------------------------------------
+
+Name
+         SAVE_POSE - saves a pose.
+
+Format
+         SAVE_POSE:<pose>
+
+Argument
+         <pose>              Pose name to save
+
+Description
+         This command saves a registered pose to OPEN-R\DATA\APK on the "Memory Stick" as <pose>.apk.
+
+Example
+         SAVE_POSE:pose1  // <- pose1 in this statement is saved as pose1.apk on the "Memory Stick".
+
+---------------------------------------------------------------------------
+
+Name
+         LIMITTER - controls the limiter.  
+
+Format
+         SET:LIMMITER:ON/OFF
+
+Argument
+         None
+
+Description
+         This command controls the limiter.
+Turning off the limiter allows AIBO to perform motions more quickly, but it has negative impacts such as additional loads to AIBO.
+
+         When AIBO moves from the angle A to B in time "t", its momentum per unit of time is expressed as (B-A)/t.  If the limiter is turned on, however, the maximum value of its operating angle per unit of time is limited to a certain degree.  If the limiter is turned off for the transition from the above A to B, you can set a shorter time to "t".
+
+Example
+         SET:LIMITER:ON
+
+---------------------------------------------------------------------------
+
+
+
+[ List of R-CODE System Variables ]
+
+         Head_tilt       Head: Angle of the first joint [degree]
+         Head_pan        Head: Angle of the second joint [degree]
+         Head_roll       Head: Angle of the third joint [degree]
+         Head_mouth      Head: Angle of the mouth joint [degree]
+         Tail_1          Tail: Angle of the first joint [degree]
+         Tail_2          Tail: Angle of the second joint [degree]
+         Leg_RF_1        Right-front leg: Angle of the first joint [degree]
+         Leg_RF_2        Right-front leg: Angle of the second joint [degree]
+         Leg_RF_3        Right-front leg: Angle of the third joint [degree]
+         Leg_LF_1        Left-front leg: Angle of the first joint [degree]
+         Leg_LF_2        Left-front leg: Angle of the second joint [degree]
+         Leg_LF_3        Left-front leg: Angle of the third joint [degree]
+         Leg_RR_1        Right-hind leg: Angle of the first joint [degree]
+
+         Leg_RR_2        Right-hind leg: Angle of the second joint [degree]
+         Leg_RR_3        Right-hind leg: Angle of the third joint [degree]
+         Leg_LR_1        Left-hind leg: Angle of the first joint [degree]
+         Leg_LR_2        Left-hind leg: Angle of the second joint [degree]
+         Leg_LR_3        Left-hind leg: Angle of the third joint [degree]
+         Head_sw         Head: Pressure sensor [10^-3Pa]
+         Distance        Head: Obstacle sensor [mm]
+         Leg_RF_sw       Right-front leg: Paw sensor [On:-1 Off:0]
+         Leg_LF_sw       Left-front leg: Paw sensor [On:-1 Off:0]
+         Leg_RR_sw       Right-hind leg: Paw sensor [On:-1 Off:0]
+         Leg_LR_sw       Left-hind leg: Paw sensor [On:-1 Off:0]
+
+         Gsensor_status  G sensor: Status 16bit flag (*3)
+         Gsensor_roll    G sensor: Roll angle [degree]
+         Gsensor_pitch   G sensor: Pitch angle [degree]
+         Gsensor_yaw     G sensor: Yaw angle [degree]
+         Cdt_npixel      Color sensor: The number of pixels [Pixels]
+         Touch_head      Head touch sensor
+         Touch_head_time  Head touch sensor: Length of time of the head's being pressed
+         Touch_head_press    Head touch sensor: Average pressure
+         Touch_RF        Right-front leg: Paw sensor to detect ON->OFF OFF->ON 
+         Touch_LF        Left-front leg: Paw sensor to detect ON->OFF OFF->ON
+         Touch_RR        Right-hind leg: Paw sensor to detect ON->OFF OFF->ON 
+         Touch_LR        Left-hind leg: Paw sensor to detect ON->OFF OFF->ON 
+
+         Tone_num        Tone detection 	Tone number
+         Tone_level                  Tone level
+         Tone_dir                    Direction of tone detection
+         Melody_id       Melody detection 	Melody ID
+         Melody_num                  The number of tones (1 to 3)
+         Tone1_num                   Tone1 Tone number
+         Tone1_level                 Tone1 Tone level
+         Tone1_dir                   Tone1 Direction of the detected tone
+         Tone2_num                   Tone2 Tone number
+         Tone2_level                 Tone2 Tone level
+         Tone2_dir                   Tone2 Direction of the detected tone
+         Tone3_num                   Tone3 Tone number
+         Tone3_level                 Tone3 Tone level
+         Tone3_dir                   Tone3 Direction of the detected tone
+         Sound_status    Sound detection: Status (*4)
+         Sound_num                   Tone number
+         Sound_level                 Tone level
+         Sound_dir                   Direction of the detected tone
+
+         Sound_busy      1: Playing back sound  0: No sound
+         Light_busy      1: Lighting  0: No light
+
+         Sound_volume    Default sound level at the time of sound playback 
+         Light_repeat    Default number of lighting repetition at the time of PLAY:LIGHT
+
+         Power           Power supply of the motor  0:OFF 1:ON
+
+         Status          Normal status    *1
+         Emergency       Emergency        *2
+
+         Context         Context value
+         Wait            The number of motions to wait for completion
+
+         Trace           Trace level (reserved for a special tracer)
+         Debug           Debug level (reserved for a special debugger)
+
+         Clock           Clock (to be incremented by 1 every 32ms)
+
+         Wait_mode       For system inspection  * Users are not allowed to use it.
+
+
+   *1     Status: Meaning of each bit
+
+           bit
+           0x0001  VIBRATION_DETECT        Detection of vibration
+           0x0002  KEY_SW                  Pause button on the chest
+           0x0004  CONNECT_TO_STATION      Connection to a station
+           0x0008  BATTERY_CHARGING        Charging of the battery
+           0x0010  BATTERY_DISCHARGING     Discharging of the battery
+           0x0020  CONNECT_TO_EX_POWER     Connection to the external power supply
+           0x0040  MOTOR_POWER             Power supply of the motor
+           0x0080  LOW_BATTERY             Recharging is required (warning!).
+           0x0100  FULL_BATTERY            The battery is fully charged.
+           0x0200  80_BATTERY              Remaining capacity of the battery: 80%
+           0x0400  60_BATTERY              Remaining capacity of the battery: 60%
+           0x0800  OVER_HEAT_40            Over-heated (40 degrees)
+
+   *2     Emergency: Meaning of each bit
+
+           bit
+           0x0001  LOW_LOW_BATTERY         Remaining capacity of the battery: less than 20%
+           0x0002  OVER_HEAT_RELEASE       Over-heated due to discharging (60 degree)
+           0x0004  OVER_HEAT_CHARGE        Over-heated due to recharging (40 degree)
+           0x0008  LOW_VOLTAGE             Low voltage
+           0x0010  OVER_CURRENT            Over current (reserved)
+           0x0020  FAN_STOP                Stop of the internal fan
+
+   *3     Gsensor_status: Meaning of each bit
+
+           bit     OMGsensor status
+           0x0001  FALL_DOWN_FRONT         (Frontward) Fall-down
+           0x0001  FALL_DOWN_RIGHT         (Rightward) Fall-down
+           0x0001  FALL_DOWN_LEFT          (Leftward) Fall-down
+           0x0001  FALL_DOWN_REAR          (Backward) Fall-down
+           0x0002  HOLD_UP                 Holding-up
+           0x0004  HOLD_DOWN               Holding-down
+           0x0400  GET_UP                  Getting-up from a fall-down state
+           0x0800  JOINT_DANGER            Pinch of joints
+           0x1000  JOINT_GAIN_ENABLED      Gain On
+           0x2000  JOINT_GAIN_DISABLED     Gain Off
+
+   *4     Sound_status
+
+           0       omtonePEAK              Tone with a peak
+           1       omtoneNOPEAK            Tone without a peak
+           2       omtoneNOPOWER           Low sound level
+           3       omtoneCALC              Calculating
+           4       omtoneOVERFLOW          Overflow
+
+
+   ** Some sensor values always reflect the latest status, while some others are updated when an event takes place and are kept from that time on. 
+In the latter case, the conditional test becomes true repeatedly depending on programming, and as a result, the same process may be repeated more than necessary.  In that case, use SET or AND to reset a sensor value and you can avoid this kind of a problem.
+
+
+   *x  Sound cannot be detected for about 5 seconds right after the execution of PLAY:SOUND. 
+This is because AIBO cannot carry out the playback and the detection of sound concurrently, nor detect the completion of the playback of sound precisely.  (It is the completion of the transmission of the sound data that AIBO can detect.)   
+
+
+
+
+
+
+[ Quick Reference of R-CODE Operators ]
+
+
+
+   Operator
+
+         Operators carry out arithmetic operations and store the results to the variable <var>.
+
+         <var>                    Variable name
+         <value>                  Value (a variable name or a constant)
+
+         ADD:<var>:<value>   <var> <- <var> + <value>   Addition
+         SUB:<var>:<value>   <var> <- <var> - <value>   Subtraction
+         MUL:<var>:<value>   <var> <- <var> * <value>   Multiplication
+         DIV:<var>:<value>   <var> <- <var> / <value>   Division
+         MOD:<var>:<value>   <var> <- <var> % <value>   Remainder
+
+         AND:<var>:<value>   <var> <- <var> & <value>   Bitwise logical AND
+         IOR:<var>:<value>   <var> <- <var> | <value>   Bitwise logical OR
+         XOR:<var>:<value>   <var> <- <var> ^ <value>   Bitwise exclusive OR
+         NOT:<var>:<value>   <var> <-       ~ <value>   Bitwise logical NOT
+
+         LAND:<var>:<value>       <var> <- <var> AND <value>   Logical AND
+         LIOR:<var>:<value>       <var> <- <var> OR  <value>   Logical OR
+         LNOT:<var>:<value>       <var> <-       NOT <value>   Logical NOT
+
+         RND:<var>:<from>:<to>    <var> <- Value of a uniform random number in the range between <from> and <to>
+
+
+         In addition to the above operators, the following stack operators are provided. 
+They pop operands from the stack and push the results onto the stack.
+
+         ADD             <push> <- <pop1> + <pop2>   Addition
+         SUB             <push> <- <pop1> - <pop2>   Subtraction
+         MUL             <push> <- <pop1> * <pop2>   Multiplication
+         DIV             <push> <- <pop1> / <pop2>   Division
+         MOD             <push> <- <pop1> % <pop2>   Remainder
+
+         AND             <push> <- <pop1> & <pop2>   Bitwise logical AND
+         IOR             <push> <- <pop1> | <pop2>   Bitwise logical OR
+         XOR             <push> <- <pop1> ^ <pop2>   Bitwise exclusive OR
+         NOT             <push> <-        ~ <pop2>   Bitwise logical NOT
+
+         LAND            <push> <- <pop1> AND <pop2> Logical AND
+         LIOR            <push> <- <pop1> OR  <pop2> Logical OR
+         LNOT            <push> <-        NOT <pop2> Logical NOT
+
+         EQ              <push> <- <pop1> == <pop2>  Equal to
+         NE              <push> <- <pop1> <> <pop2>  Not equal to
+         LT              <push> <- <pop1> <  <pop2>  Less than
+         LE              <push> <- <pop1> <= <pop2>  Less than or equal to
+         GT              <push> <- <pop1> >  <pop2>  Greater than
+         GE              <push> <- <pop1> >= <pop2>  Greater than or equal to
+
+         RND:<from>:<to>   <push> <- Values of uniform random numbers in the range between <from> and <to>
+         RND:<to>          <push> <- Values of uniform random numbers in the range from 0 to <to>
+
+
+   Stack
+
+         PUSH:<var>     pushes a variable value or a constant onto the stack.
+
+         POP[:<var>]    pops a value from the stack to a variable.
+                        If <var> is not specified, the fetched value is discarded.
+
+         DUP            copies the top data element of the stack and pushes it back onto the stack.
+
+         JT:<label>     pops a value from the stack. If the value is true, the program jumps to <label>.
+
+         JF:<label>     pops a value from the stack. If the value is false, the program jumps to <label>.
+
+
+         Note: Stack operations across subroutines or scopes are not possible.
+
+
+
+
+[ List of Semantics of AIBO Performer Kit ]
+This list allows you to edit motions with AIBO Performer Kit.
+
+Semantics : Name callable with the R-CODE system
+Pose      : Posture for starting and finishing a motion
+Sound     : Sound played back in sync with a motion
+
+
+Calling method on the R-CODE system
+
+PLAY:ESC:P1P1
+         ^^^^
+         The following are the descriptions of semantics.
+
+
+Semantics           Pose           Sound
+P1P1               Sitting        pero1ttp.mid
+P1P2               Sitting        bow1_ttp.wav
+P1P3               Sleeping       scrt3ppp.wav
+P1P4               Standing       nobi1ddp.mid
+P1P5               Standing       gari1ddp.mid
+P1I1               Standing       look1ddp.mid
+P1I2               Standing       bow1_ddp.wav
+P1I3               Standing       mark1ddp.wav
+P1I4               Sleeping       yawn5ppp.wav
+P1I5               Sleeping       tail4ppp.mid
+P1I6               Sitting        yawn1xxp.wav
+P1I7               Sitting        dig1_ttp.mid
+P1I8               Sitting        tilt1ttp.mid
+P1I9               Sleeping       gari1ppp.mid
+P2P1               Sitting        bye1_ddp.wav
+P2P2               Sitting        strg1ttp.wav
+P2P3               Sleeping       nobi2ppp.mid
+P2P4               Sleeping       flwr2ppp.mid
+P2P5               Standing       bend1ddp.mid
+P2I1               Standing       yura1ddp.mid
+P2I2               Standing       swng1ddp.mid
+P2I3               Standing       swng2ddp.mid
+P2I4               Sleeping       flwr1ppp.mid
+P2I5               Sitting        kyor1ttp.mid
+P2I6               Sitting        pose1ttp.mid
+P2I7               Sitting        yawn2xxp.wav
+P3P1               Sitting        kiss1ttp.wav
+P3P2               Sitting        banz1ttp.wav
+P3P3               Sleeping       thnk1ppp.mid
+P3P4               Sleeping       find1ppp.mid
+P3P5               Standing       smel1ddp.wav
+P3I1               Standing       tilt2ddp.mid
+P3I2               Sleeping       sigh1ppp.wav
+P3I3               Sleeping       yawn4xxp.wav
+P3I4               Sleeping       bata1ppp.wav
+P3I5               Sitting        exec1ttp.mid
+P3I6               Sitting        what1ttp.mid
+P3I7               Sitting        yawn3xxp.wav
+P4P1               Sitting        usr#1.wav
+P4P2               Sitting        usr#2.wav
+P4P3               Sleeping       usr#3.wav
+P4P4               Standing       usr#4.wav
+P4P5               Standing       usr#5.wav
+P4I1               Standing       usrd#1.wav
+P4I2               Standing       usrd#2.wav
+P4I3               Sleeping       usrp#1.wav
+P4I4               Sleeping       usrp#2.wav
+P4I5               Sitting        usrt#1.wav
+P4I6               Sitting        usrt#2.wav
+G_L1               Sitting        lose1ttg.wav
+G_L2               Sitting        lose2ttg.wav
+G_L3               Sitting        lose3ttg.wav
+G_W1               Sitting        win1_ttg.wav
+G_W2               Sitting        win2_ttg.wav
+G_W3               Sitting        win3_ttg.wav
+AAN1               Sitting        kyor4ttx.mid
+AAN2               Sitting        nobi6ttx.mid
+AAN3               Sitting        Not Available
+AAN4               Sleeping       Not Available
+AAN5               Sitting        srch1ttx.mid
+AAN6               Sleeping       kyor5ppx.mid
+AAN7               Standing       kyor6ddx.mid
+AAN8               Standing       tilt3ddx.mid
+AAP1               Sitting        ltch1ttx.mid
+AAP2               Sleeping       ltch1ppx.mid
+AAP3               Standing       ltch1ddx.mid
+AAP4               Sitting        roll1ttx.mid
+AAP5               Standing       roll1ddx.mid
+AAP6               Sitting        stch1ttx.mid
+AAP7               Sleeping       stch1ppx.mid
+AAP8               Standing       stch1ddx.mid
+AAJ1               Standing       joy6_dda.mid
+AAJ2               Standing       joy7_ddy.mid
+AAF1               Standing       fer4_dda.mid
+AAF2               Sleeping       fer5_ppa.mid
+AAD1               Sitting        dsg4_tta.mid
+AAD2               Standing       dsg5_dda.mid
+AAD3               Sitting        dsg5_tty.mid
+AYJ1               Standing       joy6_ddy.mid
+AYW1               Sleeping       sup5_ppa.mid
+AYW2               Standing       sup4_ddy.mid
+AYW3               Standing       sup5_ddy.mid
+AYS1               Standing       sad5_ddy.mid
+AYF1               Standing       fer5_ddy.mid
+AYD1               Sleeping       dsg5_ppy.mid
+AYD2               Sitting        dsg5_ttc.mid
+
+
+
+[ ESC File ]
+Three types of data, "motion", "sound" and "light," are associated with one command in the ESC.CFG file, so all three can be executed with one command.
+
+A part of \OPEN-R\APP\CONF\ESC.CFG
+----------------------------------------------------
+2715
+GET_STPOS	motion	oAll:slp_stasm	NULL
+OFF_STPOS	motion	oAll:stasm_slp	NULL
+9AMAZING	sound	amz1_xxx	100
+9JITA_KYORO	motion	oAll:JitaKyoro_fall	NULL
+9JITA_KYORO	sound	risebxxx	100
+9JITA_LEG	motion	oAll:JitaLeg_fall	NULL
+9JITA_LEG	sound	risefxxx	100
+9JITA_PAKU1	motion	oAll:JitaPaku1_fall	NULL
+9JITA_PAKU1	sound	riselxxx	100
+9JITA_PAKU2	motion	oAll:JitaPaku2_fall	NULL
+9JITA_PAKU2	sound	riserxxx	100
+9RISE_FRONT	motion	oAll:GetupF_fall_std	NULL
+9RISE_LEFT	motion	oAll:GetupL_fall_std	NULL
+9RISE_READY	motion	oAll:E_Stop	NULL
+9RISE_REAR	motion	oAll:GetupB_fall_std	NULL
+9RISE_RIGHT	motion	oAll:GetupR_fall_std	NULL
+9SQUEEZE	sound	sqz1_xxx	100
+  .
+  .
+  .
+  .
+  .
+----------------------------------------------------
+
+2715 on the first line indicates the total number of lines that are after the first line in this file (total number of lines minus one).
+
+Association is done from the second line on.
+
+9AMAZING	sound	amz1_xxx	100
+    a            b       c
+ 
+a ESC name (a unique name)
+b Grouping consisting of a patterns of "motion", "sound" and "light"
+c The definition of "c" and the subsequent portion varies in its meaning depending on b.
+
+    In the case of "sound": Sound name
+
+                     Sound volume (normally 100)
+
+    In the case of "motion": Region: Motion name
+                     Region includes the following:
+                       oAll: Motion of the whole body
+                       oLegs: Motion of the 4 legs
+                       oTail: Motion of the tail
+                       oHead: Motion of the head
+ 
+       Argument of motion (NULL should be specified for a normal motion.)
+
+    In the case of "light": Name of LED light pattern
+                     The number of repetitions
+
+
+
+ 
+[ Motion Definition File ]
+The Motion Definition File includes the files for the head, the 4 legs, the tail and the whole body.
+
+They are grouped into the following 6 types:
+head_XX.cfg  <-- List of head motions
+legs_XX.cfg  <-- List of 4-leg motions
+tail_XX.cfg  <-- List of tail motions
+monet_XX.cfg <-- List of whole body motions
+
+XXXX_00.cfg <-- File listing motions defined externally
+                 The motions defined externally are those which data is defined in a separate file (*.oda).
+XXXX_01.cfg <-- File listing motions defined internally
+                 The motions defined internally are motions generated and performed by the program.
+
+File Path
+\OPEN-R\SONY\CONF\
+
+A part of head_01.cfg
+----------------------------------------------------
+oAll   <-- a
+136    <-- b
+Akubi_sit	oSitting	oSitting	dt#1_n   <-- c
+Akubi_sit_C	oSitting	oSitting	sitpc001
+Akubi_sit_D	oSitting	oSitting	dt#1
+Akubi_sit3	oSitting3	oSitting3	ct3#321_n
+  .
+  .
+  .
+----------------------------------------------------
+
+a Indicates the region name.
+    oHead: Head
+    oLegs: 4 legs
+    oTail: Tail
+    oAll : Whole body
+
+b The number of valid data
+
+c Definition of motions
+
+    Akubi_sit	oSitting	oSitting	dt#1_n
+    (a)          (b)         (c)         (d)
+
+    (a) Motion definition name
+    (b) Starting pose
+    (c) Ending pose
+    (d) Motion name
+
+
+
+[ Musical Scale Recognition File ]
+The musical scale recognizable with the R-CODE system is defined in the TD.CFG file.
+
+Location on the "Memory Stick" where the musical scale is placed:
+\OPEN-R\SONY\CONF\TD.CFG
+
+A part of TD.CFG 
+---------------------------
+CDE
+C#D#F
+DEF#
+D#FG
+EF#G#
+FGA
+F#G#A#
+GAB
+CED
+C#FD#
+---------------------------
+
+Contents
+
+C: do
+D: re
+E: me 
+F: fa
+G: so
+A: la
+B: ti
+#: Sharp
+~: Flat
+
+When AIBO recognizes the musical scale of do, re and me (CDE), the line number where the musical scale of do, re and me (CDE) is defined in the TD.CFG file, 1 in this example, is assigned to the R-CODE system variable Melody_id.
+
+For Melody_id, refer to the separate text file:  Musical Scale Recognition List.
+
