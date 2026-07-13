@@ -1,24 +1,29 @@
-# Behavior Aggregate
+# A Behavioral State Vocabulary in Sony ERS-111 R-CODE
 
-Technical note.
+## Abstract
 
-This document presents a consolidated examination of the generated
-`ERS-111` `R-CODE` behavior diagrams by comparing their named states
-across the corpus rather than considering each script in isolation. Its
-purpose is to identify the common control vocabulary that structures the
-sample set, distinguishing recurring foundational states from those that
-appear only within more specialized variants.
+This paper presents a corpus-level analysis of generated behavior
+diagrams derived from Sony's `R-CODE` sample distribution for the
+`ERS-111` `AIBO`. Rather than reading each script in isolation, the
+study compares named states across the corpus to identify the recurring
+control vocabulary that structures the sample set. The resulting
+aggregate shows that many superficially different routines are built
+from a compact embodied grammar centered on initialization, sensing,
+iterative action, synchronization, and recovery. In addition to
+historical analysis, the paper argues that this form of state-based
+abstraction is useful as an intermediate representation for
+constructing new encapsulated behavior routines, especially on
+constrained native robotic systems where deterministic control, direct
+hardware access, and modular behavioral composition remain important.
 
-This technical note summarizes the state titles presently identified
-across behavior diagrams derived from Sony's `R-CODE` sample
-distribution for the `ERS-111`. The objective is not merely to count
-the labels that occur most frequently, but to demonstrate how the
-sample set repeatedly reuses a compact vocabulary of control states
-across distinct behaviors. Considered in aggregate, the diagrams make
-it possible to distinguish recurrent embodied structures such as
-sensing, iterative action, synchronization, and recovery from narrower
-states associated with more specialized families such as pursuit,
-kicking, or contact response.
+## Introduction
+
+This paper examines the generated `ERS-111` `R-CODE` behavior diagrams
+as a single behavioral corpus rather than as an assortment of
+independent scripts. Its objective is to identify the common control
+vocabulary that structures the sample set, distinguishing recurring
+foundational states from those that appear only within more specialized
+variants.
 
 This framing is useful in part because many contemporary robotics
 systems still exhibit a persistent imbalance between deliberation and
@@ -29,16 +34,30 @@ an animal or human to remain viable in the world while doing something
 else. As a heuristic analogy, one may think here of a layered
 `System 1` and `System 2` organization: fast, low-latency, embodied
 monitoring and response on one side, and slower, more reflective or
-task-selective decision processes on the other. Many current robot
+task-selective decision processes on the other. In the psychological
+literature, these terms generally distinguish rapid, automatic, and
+largely background cognition from slower, more deliberative reasoning
+`(Kahneman, 2011)`.
+Many current robot
 architectures are still stronger on the deliberative side than on the
 deep integration of these everyday embodied loops. The value of the
 `R-CODE` corpus, therefore, is not that it solves that modern problem
 in full, but that it gives a compact historical example of behavior
 being organized around persistent bodily monitoring, recovery, local
 branching, and return-to-loop coordination rather than around isolated
-commands alone.
+commands alone `(Xu et al., 2024; Kawaharazuka et al., 2024)`.
 
-## The Behavior Corpus
+The paper makes three main contributions. First, it provides a corpus
+aggregate over the currently generated `ERS-111` diagrams and
+identifies the most common state titles and their frequencies. Second,
+it uses that aggregate to argue that the corpus is organized around a
+compact, reactive, embodied state vocabulary rather than around
+unrelated one-off routines. Third, it treats that abstraction not only
+as an analytic device for legacy code, but also as a practical design
+representation for constructing new behavior routines on native robotic
+systems `(Brooks, 1991; Arkin, 1998)`.
+
+## Method and Corpus
 
 These totals provide the first numerical outline of the corpus. Their
 value is not solely descriptive. They help determine whether the sample
@@ -53,6 +72,15 @@ reference point for the discussion that follows. They identify the size
 of the diagram set, the total number of state occurrences observed
 across it, and the number of distinct state titles from which that
 behavioral variation is constructed.
+
+The method used here is deliberately simple and explicit. Behavior
+diagrams were generated from the `ERS-111` sample corpus, state titles
+were normalized where placeholder labels still obscured their
+functional role, and the resulting state names were then counted
+across the generated set. The aim is not to claim that the titles
+alone exhaust the semantics of the original code, but to show that the
+state layer is already rich enough to expose a stable behavioral
+grammar at corpus scale.
 
 - diagrams counted: `54`
 - total state instances: `292`
@@ -90,7 +118,7 @@ closer to reactive robotics than to simple animation. When considered
 alongside the strong presence of `Action Loop` and `Synchronize`, it
 points to a common sequence: evaluate, act, wait for bodily completion,
 and reevaluate. This is a compact yet robust pattern for embodied
-behavior.
+behavior `(Brooks, 1991; Arkin, 1998)`.
 
 The frequent appearance of `Boot` and `Boot / Safe Pose` is likewise
 meaningful. These states show that initialization is not treated as an
@@ -134,16 +162,18 @@ aggregate, the sample set is therefore less a collection of unrelated
 unique behaviors than a set of behaviors constructed from a relatively
 compact repertoire of reusable state-forms.
 
-This is why the elimination of placeholder titles was analytically
-important. When raw names such as `State 200`, `State 1011`,
-`State 1110`, or `State 1200` remained in place, they obscured the
-meaning the aggregate was intended to reveal. Renaming them to titles
-such as `Quit Behavior`, `Reset Sample Count`,
+The elimination of placeholder titles was analytically important.
+Names such as `State 200`, `State 1011`, `State 1110`, and
+`State 1200` obscured the functional meaning the aggregate was meant to
+recover. These were temporary labels introduced during extraction when
+numeric state identifiers from the source scripts had not yet been
+resolved into functional names. Renaming them as `Quit Behavior`, `Reset Sample Count`,
 `Select First Average`, and `Reset Scan Counter` made those states
-analytically legible. Once the placeholders were removed, the count no
-longer mixed structural meaning with accidental label residue from the
-original scripts. The aggregate consequently became not merely a
-quantitative list, but a more reliable semantic map of the corpus.
+legible as behavioral units rather than residual labels from the
+original scripts. Once the placeholders were removed, the count no
+longer mixed structural meaning with accidental naming residue. The
+aggregate therefore became not merely a quantitative list, but a more
+reliable semantic map of the corpus.
 
 Taken together, the aggregate supports a clear interpretation: the
 `ERS-111` `R-CODE` samples are organized around a compact embodied state
@@ -167,7 +197,7 @@ is the richness of those states, the sophistication of their triggers,
 and the layering of control above and below them. In this respect, the
 `ERS-111` sample corpus offers a small but concrete example of how
 complex robotic behavior can emerge through repeated reuse of a compact
-state-transition architecture.
+state-transition architecture `(Brooks, 1991; Arkin, 1998)`.
 
 The tables below make that distinction easier to see directly. The first
 table captures the high-frequency state titles that form the recurring
@@ -246,23 +276,6 @@ scan steps, branch-specific motor decisions, and other states that are
 important within individual families without dominating the corpus as a
 whole.
 
-## Interpretation
-
-The aggregate is dominated by `Sense / Decide`, `Action Loop`, and
-`Synchronize`. This suggests that the preserved `ERS-111` sample set is
-best understood as a family of small reactive loops rather than as a
-collection of extended scripted sequences.
-
-`Boot`, `Boot / Safe Pose`, `Sense Fall State`, and `Recover` are also
-strong recurring elements. Their frequency shows that initialization
-and bodily stability are not marginal concerns in the sample corpus;
-they are integral components of its common behavioral architecture.
-
-More specialized state titles such as `Left Kick`, `Right Kick`, and
-`Start Ball Tracking` appear much less often. These belong to narrower
-families such as `Football` and related pursuit variants rather than to
-the overall baseline structure of the corpus.
-
 ## Representative Behavior Diagrams
 
 This section presents three representative behavior diagrams selected
@@ -316,7 +329,7 @@ historically interesting artifacts. They also provide an early
 small-scale example of how robotics often develops in practice, by
 building richer task-specific states on top of a compact base of
 posture control, environmental monitoring, transition handling, and
-recovery.
+recovery `(Xu et al., 2024; Kawaharazuka et al., 2024)`.
 
 The principal result is not simply that one state title appears more
 often than another. The stronger result is that the diagram set
@@ -345,7 +358,7 @@ accumulate by adding narrower decision and action states to an already
 stable embodied architecture.
 
 Taken together, these findings clarify the central purpose of this
-technical note. The `R-CODE` sample set can be read as an early
+paper. The `R-CODE` sample set can be read as an early
 behavioral design vocabulary in which a limited number of state-types
 are repeatedly recombined to produce locomotion, orientation, contact
 response, recovery, and more specialized goal-directed action. The
@@ -368,7 +381,7 @@ The diagrams therefore function not only as retrospective analysis, but
 as a practical intermediate representation for synthesis. They help make
 clear which elements should remain stable across platforms and which may
 be replaced to accommodate different sensors, actuators, timing models,
-or task domains.
+or task domains `(Arkin, 1998)`.
 
 That design value becomes especially important in native-hardware
 robotics developed in a polyForth style. In such environments, behavior
@@ -418,7 +431,7 @@ structured pattern of preferred states, biased transitions, distinct
 thresholds, and differing persistence times imposed upon the same
 embodied control architecture.
 
-## Bibliography
+## References
 
 - Arkin, Ronald C. *Behavior-Based Robotics*. MIT Press, 1998.
 - Brooks, Rodney A. “Intelligence without Representation.” *Artificial Intelligence* 47, no. 1-3 (1991): 139-159.
