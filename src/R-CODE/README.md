@@ -16,11 +16,16 @@ Treat this material as `ERS-111`-first.
 - acceptable secondary use: use it as background when comparing how Sony's scripting and stick conventions may have evolved into `ERS-210` era tooling
 - out of scope: treating this package as a direct `ERS-7` programming path
 
+For the later `ERS-7` SDK-hosted R-Code track, use
+[sdk/R_CODE_plugin_r1/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/sdk/R_CODE_plugin_r1/README.md).
+
 ## What Is Here
 
 - `Document/` contains the readme, programmer manual, reference manual, and support lists
 - `Document/readme.md`, `Document/Reference.md`, `Document/MTN-FFORM-E.md`, `Document/ODA-FFORM-E.md`, `Document/LED_Light_List.md`, `Document/Sound_List.md`, and `Document/Tone_List.md` are cleaned-up Markdown reading editions of the preserved text docs
 - `Document/Programmers.md` is a cleaned-up Markdown reading edition of the programmer manual
+- `Document/Behavior_Abstraction.md` lifts the sample scripts into higher-level behavior blocks and flow diagrams
+- `Document/Behavior_Abstraction.md` pairs well with the `ERS-7` plug-in sample extract under [sdk/R_CODE_plugin_r1/sample/RPlugIn/R-Code-Behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/sdk/R_CODE_plugin_r1/sample/RPlugIn/R-Code-Behavior.md)
 - `MSImage/OPEN-R/` contains the bootable image tree for a programming stick
 - `sample/` contains example `.R` scripts such as `AngryDog.R`, `MoveAIBO.R`, and `PlaySound.R`
 - `env.png` appears to be an environment or packaging image for the kit

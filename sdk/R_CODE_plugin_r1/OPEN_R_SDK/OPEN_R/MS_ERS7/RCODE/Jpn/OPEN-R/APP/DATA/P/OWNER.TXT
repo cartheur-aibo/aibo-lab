@@ -1,0 +1,2 @@
+OWNER=aibo
+OWNER_PASSWORD=aibo

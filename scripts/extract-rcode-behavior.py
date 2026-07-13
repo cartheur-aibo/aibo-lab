@@ -1,0 +1,303 @@
+#!/usr/bin/env python3
+"""Extract a higher-level behavior view from a Sony R-Code sample."""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from collections import Counter
+from dataclasses import dataclass, field
+from pathlib import Path
+
+
+LABEL_RE = re.compile(r"^:(\S+)(?:\s*//\s*(.*))?$")
+COMMAND_RE = re.compile(r"^([A-Z_]+)(?::(.*))?$")
+
+
+@dataclass
+class Instruction:
+    raw: str
+    text: str
+    line_no: int
+    comment: str = ""
+    command: str = ""
+    args: list[str] = field(default_factory=list)
+
+
+@dataclass
+class State:
+    key: str
+    title: str
+    comment: str = ""
+    instructions: list[Instruction] = field(default_factory=list)
+    blocks: list[str] = field(default_factory=list)
+
+
+def split_comment(line: str) -> tuple[str, str]:
+    if "//" not in line:
+        return line.rstrip(), ""
+    code, comment = line.split("//", 1)
+    return code.rstrip(), comment.strip()
+
+
+def parse_instruction(line: str, line_no: int) -> Instruction | None:
+    stripped = line.strip()
+    if not stripped:
+        return None
+
+    code, comment = split_comment(stripped)
+    if not code:
+        return Instruction(raw=line.rstrip("\n"), text="", line_no=line_no, comment=comment)
+
+    match = COMMAND_RE.match(code)
+    if not match:
+        return Instruction(raw=line.rstrip("\n"), text=code, line_no=line_no, comment=comment)
+
+    command = match.group(1)
+    arg_text = match.group(2) or ""
+    args = arg_text.split(":") if arg_text else []
+    return Instruction(
+        raw=line.rstrip("\n"),
+        text=code,
+        line_no=line_no,
+        comment=comment,
+        command=command,
+        args=args,
+    )
+
+
+def load_states(path: Path) -> list[State]:
+    states: list[State] = [State(key="INIT", title="INIT", comment="preamble before first label")]
+    current = states[0]
+
+    for line_no, line in enumerate(path.read_text(encoding="utf-8", errors="replace").splitlines(), start=1):
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if stripped.startswith("//"):
+            continue
+
+        label_match = LABEL_RE.match(stripped)
+        if label_match:
+            label = label_match.group(1)
+            comment = (label_match.group(2) or "").strip()
+            current = State(key=label, title=f"State {label}", comment=comment)
+            states.append(current)
+            continue
+
+        instruction = parse_instruction(line, line_no)
+        if instruction is not None:
+            current.instructions.append(instruction)
+
+    return [state for state in states if state.instructions or state.key != "INIT"]
+
+
+def classify_blocks(state: State) -> list[str]:
+    commands = {inst.command for inst in state.instructions if inst.command}
+    blocks: list[str] = []
+
+    if any(inst.text.startswith("SET:Power:1") for inst in state.instructions):
+        blocks.append("Boot")
+    if "SET" in commands and not any(inst.text.startswith("SET:Power:1") for inst in state.instructions):
+        blocks.append("Initialize State")
+    if "POSE" in commands:
+        blocks.append("Assume Safe Pose")
+    if {"IF", "ONCALL", "SWITCH", "CSET"} & commands:
+        blocks.append("Sense/Decide")
+    if {"MOVE", "PLAY", "STOP", "QUIT", "SAVE", "SEND", "LOAD"} & commands:
+        blocks.append("Act")
+    if "WAIT" in commands:
+        blocks.append("Synchronize")
+    if any(
+        inst.command == "QUIT" or "ReactiveGU" in inst.text or inst.command == "RESUME"
+        for inst in state.instructions
+    ):
+        blocks.append("Recover")
+    if any(inst.command in {"GO", "ONCALL", "RESUME"} for inst in state.instructions):
+        blocks.append("Loop/Transition")
+
+    return blocks or ["Action"]
+
+
+def summarize_state(state: State) -> None:
+    state.blocks = classify_blocks(state)
+
+
+def fmt_condition(inst: Instruction) -> str:
+    if not inst.args:
+        return inst.command
+    if inst.command == "IF" and len(inst.args) >= 4:
+        op, left, right = inst.args[0], inst.args[1], inst.args[2]
+        return f"{left} {op} {right}"
+    if inst.command == "ONCALL" and len(inst.args) >= 4:
+        op, left, right = inst.args[0], inst.args[1], inst.args[2]
+        return f"on {left} {op} {right}"
+    return ":".join([inst.command, *inst.args[:3]])
+
+
+def state_node_id(key: str) -> str:
+    safe = re.sub(r"[^A-Za-z0-9_]", "_", key)
+    return f"S_{safe}"
+
+
+def human_title(state: State) -> str:
+    if state.key == "INIT":
+        return "INIT"
+    if state.comment:
+        return f"{state.key} {state.comment}"
+    return state.title
+
+
+def extract_transitions(states: list[State]) -> list[tuple[str, str, str]]:
+    transitions: list[tuple[str, str, str]] = []
+
+    for index, state in enumerate(states):
+        next_state = states[index + 1].key if index + 1 < len(states) else ""
+        seen_explicit = False
+
+        for inst in state.instructions:
+            if inst.command == "GO" and inst.args:
+                transitions.append((state.key, inst.args[0], "go"))
+                seen_explicit = True
+                continue
+
+            if inst.command == "IF":
+                if len(inst.args) >= 4:
+                    condition = fmt_condition(inst)
+                    transitions.append((state.key, inst.args[3], f"if {condition}"))
+                    seen_explicit = True
+                if len(inst.args) >= 5:
+                    condition = fmt_condition(inst)
+                    transitions.append((state.key, inst.args[4], f"else {condition}"))
+                    seen_explicit = True
+                continue
+
+            if inst.command == "ONCALL" and len(inst.args) >= 4:
+                target = inst.args[3]
+                transitions.append((state.key, target, fmt_condition(inst)))
+                seen_explicit = True
+                continue
+
+            if inst.command == "RESUME":
+                transitions.append((state.key, state.key, "resume"))
+                seen_explicit = True
+
+        if not seen_explicit and next_state:
+            transitions.append((state.key, next_state, "fallthrough"))
+
+    return dedupe_transitions(transitions)
+
+
+def dedupe_transitions(transitions: list[tuple[str, str, str]]) -> list[tuple[str, str, str]]:
+    seen: set[tuple[str, str, str]] = set()
+    ordered: list[tuple[str, str, str]] = []
+    for transition in transitions:
+        if transition in seen:
+            continue
+        seen.add(transition)
+        ordered.append(transition)
+    return ordered
+
+
+def command_counts(states: list[State]) -> Counter[str]:
+    counts: Counter[str] = Counter()
+    for state in states:
+        for inst in state.instructions:
+            if inst.command:
+                counts[inst.command] += 1
+    return counts
+
+
+def extract_sensors(states: list[State]) -> list[str]:
+    sensors: set[str] = set()
+    interesting_prefixes = (
+        "Gsensor_",
+        "Touch_",
+        "Distance",
+        "Cdt_",
+        "Head_",
+        "Psd_",
+        "Sound_",
+        "Light_",
+        "Wait",
+    )
+    for state in states:
+        for inst in state.instructions:
+            for token in inst.args:
+                if token.startswith(interesting_prefixes):
+                    sensors.add(token)
+    return sorted(sensors)
+
+
+def render_markdown(path: Path, states: list[State], transitions: list[tuple[str, str, str]]) -> str:
+    counts = command_counts(states)
+    sensors = extract_sensors(states)
+
+    lines: list[str] = []
+    lines.append(f"# R-Code Behavior Extract: `{path.name}`")
+    lines.append("")
+    lines.append("## Summary")
+    lines.append("")
+    lines.append(f"- source: `{path}`")
+    lines.append(f"- states: `{len(states)}`")
+    lines.append(f"- transitions: `{len(transitions)}`")
+    lines.append(f"- commands: `{', '.join(f'{name}={count}' for name, count in counts.most_common(10))}`")
+    if sensors:
+        lines.append(f"- sensed variables: `{', '.join(sensors[:12])}`")
+    lines.append("")
+    lines.append("## State Blocks")
+    lines.append("")
+
+    for state in states:
+        block_text = ", ".join(state.blocks)
+        title = human_title(state)
+        lines.append(f"- `{title}`: {block_text}")
+        for inst in state.instructions[:5]:
+            snippet = inst.text if inst.text else f"comment: {inst.comment}"
+            lines.append(f"  lines {inst.line_no}: `{snippet}`")
+        if len(state.instructions) > 5:
+            lines.append(f"  ... `{len(state.instructions) - 5}` more instructions")
+    lines.append("")
+    lines.append("## Transitions")
+    lines.append("")
+    for src, dst, label in transitions:
+        lines.append(f"- `{src}` -> `{dst}`: {label}")
+    lines.append("")
+    lines.append("## Mermaid")
+    lines.append("")
+    lines.append("```mermaid")
+    lines.append("flowchart TD")
+    for state in states:
+        node_id = state_node_id(state.key)
+        label = human_title(state).replace('"', "'")
+        lines.append(f'    {node_id}["{label}"]')
+    for src, dst, label in transitions:
+        src_id = state_node_id(src)
+        dst_id = state_node_id(dst)
+        edge_label = label.replace('"', "'")
+        lines.append(f'    {src_id} -->|{edge_label}| {dst_id}')
+    lines.append("```")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def main(argv: list[str]) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("script", type=Path, help="Path to a Sony R-Code .R script")
+    args = parser.parse_args(argv)
+
+    if not args.script.exists():
+        print(f"error: script not found: {args.script}", file=sys.stderr)
+        return 1
+
+    states = load_states(args.script)
+    for state in states:
+        summarize_state(state)
+    transitions = extract_transitions(states)
+    sys.stdout.write(render_markdown(args.script, states, transitions))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))

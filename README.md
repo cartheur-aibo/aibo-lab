@@ -58,6 +58,8 @@ make -C samples/common/HelloWorld/HelloWorld \
 - preserves enough original sample structure to test assumptions against real Sony source
 - preserves real-stick images and recovery workflows for ERS-7 MIND 2 media
 - pivots from stick-making into behavior forensics on persistent MIND 2 state
+- now carries both an `ERS-111` R-Code preservation track under `src/R-CODE/`
+  and an `ERS-7` SDK R-Code plug-in track under `sdk/R_CODE_plugin_r1/`
 
 ## Aperios Work
 
@@ -140,6 +142,8 @@ The practical differences are:
 
 - [aperios/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/aperios/README.md) for the main OPEN-R / Aperios runtime notes, document map, and host-shim status
 - [sdk/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/sdk/README.md) for Debian SDK setup
+- [src/R-CODE/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/README.md) for the preserved `ERS-110/111` R-Code package and behavior abstraction notes
+- [sdk/R_CODE_plugin_r1/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/sdk/R_CODE_plugin_r1/README.md) for the `ERS-7` SDK-hosted R-Code plug-in track
 - [simulator/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/simulator/README.md) for simulator scope and plan
 - [features/ers7-wifi/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-wifi/README.md) for ERS-7 Wi-Fi setup from the bundled Sony docs
 - [features/aibo-mind2/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/aibo-mind2/README.md) for staging the bundled AIBO MIND 2 ERS-7 stick layout

@@ -25,6 +25,13 @@ Host-side SDK and toolchain inputs:
 
 This matches the file set listed near the top of the DogsBody page.
 
+Additional SDK-era research material now present locally:
+
+- `R_CODE_plugin_r1/`
+  Sony's `R-CODE Plug-in Release 1.0 for OPEN-R SDK`, including an
+  `MS_ERS7/RCODE` base tree, disclosed `RMain` source, and the `RPlugIn`
+  sample workflow for `ERS-7`
+
 What they are for:
 
 - `OPEN_R_SDK-1.1.5-r5.tar.gz`
@@ -35,6 +42,8 @@ What they are for:
   Sony sample projects
 - `gcc`, `binutils`, `newlib`
   older source releases used to build the AIBO cross-toolchain
+- `R_CODE_plugin_r1`
+  SDK-side `ERS-7` R-Code plug-in research and sample staging material
 
 ## Important Distinction
 
