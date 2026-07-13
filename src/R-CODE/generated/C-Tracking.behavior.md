@@ -9,7 +9,7 @@
 
 ## State Blocks
 
-- `INIT`: Boot, Assume Safe Pose, Act
+- `Boot / Safe Pose`: Boot, Assume Safe Pose, Act
   lines 5: `SET:Power:1`
   lines 6: `POSE:AIBO:slp_slp`
   lines 8: `SET:COLOR:PINK`
@@ -22,5 +22,11 @@
 
 ```mermaid
 flowchart TD
-    S_INIT["INIT"]
+    A["Boot"]
+    B["Assume Safe Pose"]
+    C["Set Target Color"]
+    D["Start Head Tracking"]
+    A -->|entry| B
+    B -->|configure| C
+    C -->|activate| D
 ```

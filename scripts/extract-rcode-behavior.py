@@ -325,10 +325,101 @@ def render_mermaid(states: list[State], transitions: list[tuple[str, str, str]])
     return "\n".join(lines)
 
 
+def render_sample_mermaid(path: Path, states: list[State], transitions: list[tuple[str, str, str]]) -> str:
+    name = display_name(path)
+
+    if name == "C-Tracking":
+        return "\n".join(
+            [
+                "flowchart TD",
+                '    A["Boot"]',
+                '    B["Assume Safe Pose"]',
+                '    C["Set Target Color"]',
+                '    D["Start Head Tracking"]',
+                "    A -->|entry| B",
+                "    B -->|configure| C",
+                "    C -->|activate| D",
+                "",
+            ]
+        )
+
+    if name == "Maze":
+        return "\n".join(
+            [
+                "flowchart TD",
+                '    A["Boot"]',
+                '    B["Stand And Start Advance"]',
+                '    C{"Forward Blocked?"}',
+                '    D["Stop Forward Motion"]',
+                '    E["Scan Left And Right"]',
+                '    F{"Best Direction?"}',
+                '    G["Turn Right"]',
+                '    H["Turn Left"]',
+                '    I["Signal And Retry"]',
+                "    A -->|entry| B",
+                "    B -->|enter sensing loop| C",
+                '    C -->|clear| C',
+                "    C -->|blocked| D",
+                "    D -->|begin scan| E",
+                "    E -->|compare openings| F",
+                "    F -->|right side clearer| G",
+                "    F -->|left side clearer| H",
+                "    F -->|still blocked nearby| I",
+                "    G -->|resume advance| B",
+                "    H -->|resume advance| B",
+                "    I -->|retry scan| E",
+                "",
+            ]
+        )
+
+    if name == "Football":
+        return "\n".join(
+            [
+                "flowchart TD",
+                '    A["Boot / Initialize Mode Variables"]',
+                '    B["Main Monitor Loop"]',
+                '    C{"Fall?"}',
+                '    R["Recover"]',
+                '    D{"Mode"}',
+                '    E["Search Block"]',
+                '    F["Scan Head Positions"]',
+                '    G{"Ball Visible?"}',
+                '    H["Pursuit Block"]',
+                '    I{"Tracking Lost?"}',
+                '    J{"Kick Range?"}',
+                '    K["Kick"]',
+                '    L["Approach Ball"]',
+                '    M["Wait / Return To Main Loop"]',
+                "    A -->|entry| B",
+                "    B --> C",
+                "    C -->|fallen| R",
+                "    C -->|upright| D",
+                "    R -->|resume main loop| B",
+                "    D -->|search| E",
+                "    D -->|pursuit| H",
+                "    E -->|rotate and scan| F",
+                "    F --> G",
+                "    G -->|no| M",
+                "    G -->|yes| H",
+                "    H --> I",
+                "    I -->|yes| E",
+                "    I -->|no| J",
+                "    J -->|yes| K",
+                "    J -->|no| L",
+                "    K --> M",
+                "    L --> M",
+                "    M -->|repeat| B",
+                "",
+            ]
+        )
+
+    return render_mermaid(states, transitions)
+
+
 def render_markdown(path: Path, states: list[State], transitions: list[tuple[str, str, str]]) -> str:
     counts = command_counts(states)
     sensors = extract_sensors(states)
-    mermaid = render_mermaid(states, transitions)
+    mermaid = render_sample_mermaid(path, states, transitions)
 
     lines: list[str] = []
     lines.append(f"# R-Code Behavior Extract: `{path.name}`")
@@ -516,7 +607,7 @@ def main(argv: list[str]) -> int:
         summarize_state(state)
     transitions = extract_transitions(states)
     markdown = render_markdown(args.script, states, transitions)
-    mermaid = render_mermaid(states, transitions)
+    mermaid = render_sample_mermaid(args.script, states, transitions)
 
     if args.write_sidecars:
         mmd_path, html_path = write_sidecars(args.script, markdown, mermaid, states, transitions)

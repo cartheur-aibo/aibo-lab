@@ -51,7 +51,13 @@
     <p>This diagram shows 1 extracted state and 0 transitions. It includes Boot, Assume Safe Pose, Act blocks.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
-    S_INIT[&quot;INIT&quot;]
+    A[&quot;Boot&quot;]
+    B[&quot;Assume Safe Pose&quot;]
+    C[&quot;Set Target Color&quot;]
+    D[&quot;Start Head Tracking&quot;]
+    A --&gt;|entry| B
+    B --&gt;|configure| C
+    C --&gt;|activate| D
 </pre>
     </div>
   </main>

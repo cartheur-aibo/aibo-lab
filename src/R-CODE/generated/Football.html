@@ -51,91 +51,39 @@
     <p>This diagram shows 31 extracted states and 54 transitions. It includes Boot, Initialize State, Sense/Decide, Act, Synchronize blocks. A recovery path is present in the extracted control flow.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
-    S_INIT[&quot;INIT&quot;]
-    S_100[&quot;State 100&quot;]
-    S_1000[&quot;State 1000&quot;]
-    S_1101[&quot;State 1101&quot;]
-    S_1102[&quot;State 1102&quot;]
-    S_1103[&quot;State 1103&quot;]
-    S_1104[&quot;State 1104&quot;]
-    S_1105[&quot;State 1105&quot;]
-    S_1106[&quot;State 1106&quot;]
-    S_1107[&quot;State 1107&quot;]
-    S_1108[&quot;State 1108&quot;]
-    S_1109[&quot;State 1109&quot;]
-    S_1200[&quot;State 1200&quot;]
-    S_1210[&quot;State 1210&quot;]
-    S_2000[&quot;State 2000&quot;]
-    S_2010[&quot;State 2010&quot;]
-    S_2020[&quot;State 2020&quot;]
-    S_2100[&quot;State 2100&quot;]
-    S_2110[&quot;State 2110&quot;]
-    S_2120[&quot;State 2120&quot;]
-    S_2210[&quot;State 2210&quot;]
-    S_2220[&quot;State 2220&quot;]
-    S_2300[&quot;2300 It approaches a ball by the angle of the head.&quot;]
-    S_2310[&quot;State 2310&quot;]
-    S_2320[&quot;State 2320&quot;]
-    S_2330[&quot;State 2330&quot;]
-    S_2340[&quot;State 2340&quot;]
-    S_2350[&quot;State 2350&quot;]
-    S_2360[&quot;State 2360&quot;]
-    S_2900[&quot;State 2900&quot;]
-    S_9000[&quot;State 9000&quot;]
-    S_INIT --&gt;|fallthrough| S_100
-    S_100 --&gt;|if stat = 1| S_9000
-    S_100 --&gt;|if mode = 0| S_1000
-    S_100 --&gt;|if mode = 1| S_2000
-    S_100 --&gt;|go| S_100
-    S_1000 --&gt;|if head = 0| S_1101
-    S_1000 --&gt;|if head = 1| S_1102
-    S_1000 --&gt;|if head = 2| S_1103
-    S_1000 --&gt;|if head = 3| S_1104
-    S_1000 --&gt;|if head = 4| S_1105
-    S_1000 --&gt;|if head = 5| S_1106
-    S_1000 --&gt;|if head = 6| S_1107
-    S_1000 --&gt;|if head = 7| S_1108
-    S_1000 --&gt;|if head = 8| S_1109
-    S_1101 --&gt;|go| S_1200
-    S_1102 --&gt;|go| S_1200
-    S_1103 --&gt;|go| S_1200
-    S_1104 --&gt;|go| S_1200
-    S_1105 --&gt;|go| S_1200
-    S_1106 --&gt;|go| S_1200
-    S_1107 --&gt;|go| S_1200
-    S_1108 --&gt;|go| S_1200
-    S_1109 --&gt;|go| S_1200
-    S_1200 --&gt;|if Cdt_npixel &lt; 32| S_1210
-    S_1200 --&gt;|go| S_100
-    S_1210 --&gt;|go| S_100
-    S_2000 --&gt;|if Cdt_npixel &lt; 32| S_2010
-    S_2000 --&gt;|else Cdt_npixel &lt; 32| S_2020
-    S_2010 --&gt;|go| S_2100
-    S_2020 --&gt;|go| S_2100
-    S_2100 --&gt;|if lost &gt; 0| S_2110
-    S_2100 --&gt;|else lost &gt; 0| S_2120
-    S_2110 --&gt;|go| S_100
-    S_2120 --&gt;|if Head_tilt &gt; -58| S_2300
-    S_2120 --&gt;|if Psd_range &gt; 9999| S_2300
-    S_2120 --&gt;|if Head_pan &gt; 0| S_2210
-    S_2120 --&gt;|else Head_pan &gt; 0| S_2220
-    S_2210 --&gt;|go| S_2900
-    S_2220 --&gt;|go| S_2900
-    S_2300 --&gt;|if Head_pan &gt; 60| S_2310
-    S_2300 --&gt;|if Head_pan &gt; 45| S_2320
-    S_2300 --&gt;|if Head_pan &gt; 15| S_2330
-    S_2300 --&gt;|if Head_pan &lt; -60| S_2340
-    S_2300 --&gt;|if Head_pan &lt; -45| S_2350
-    S_2300 --&gt;|if Head_pan &lt; -15| S_2360
-    S_2300 --&gt;|go| S_2900
-    S_2310 --&gt;|go| S_2900
-    S_2320 --&gt;|go| S_2900
-    S_2330 --&gt;|go| S_2900
-    S_2340 --&gt;|go| S_2900
-    S_2350 --&gt;|go| S_2900
-    S_2360 --&gt;|go| S_2900
-    S_2900 --&gt;|go| S_100
-    S_9000 --&gt;|go| S_100
+    A[&quot;Boot / Initialize Mode Variables&quot;]
+    B[&quot;Main Monitor Loop&quot;]
+    C{&quot;Fall?&quot;}
+    R[&quot;Recover&quot;]
+    D{&quot;Mode&quot;}
+    E[&quot;Search Block&quot;]
+    F[&quot;Scan Head Positions&quot;]
+    G{&quot;Ball Visible?&quot;}
+    H[&quot;Pursuit Block&quot;]
+    I{&quot;Tracking Lost?&quot;}
+    J{&quot;Kick Range?&quot;}
+    K[&quot;Kick&quot;]
+    L[&quot;Approach Ball&quot;]
+    M[&quot;Wait / Return To Main Loop&quot;]
+    A --&gt;|entry| B
+    B --&gt; C
+    C --&gt;|fallen| R
+    C --&gt;|upright| D
+    R --&gt;|resume main loop| B
+    D --&gt;|search| E
+    D --&gt;|pursuit| H
+    E --&gt;|rotate and scan| F
+    F --&gt; G
+    G --&gt;|no| M
+    G --&gt;|yes| H
+    H --&gt; I
+    I --&gt;|yes| E
+    I --&gt;|no| J
+    J --&gt;|yes| K
+    J --&gt;|no| L
+    K --&gt; M
+    L --&gt; M
+    M --&gt;|repeat| B
 </pre>
     </div>
   </main>

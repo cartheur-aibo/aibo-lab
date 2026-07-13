@@ -51,39 +51,27 @@
     <p>This diagram shows 12 extracted states and 21 transitions. It includes Boot, Initialize State, Assume Safe Pose, Sense/Decide, Act blocks.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
-    S_INIT[&quot;INIT&quot;]
-    S_100[&quot;State 100&quot;]
-    S_110[&quot;State 110&quot;]
-    S_120[&quot;State 120&quot;]
-    S_130[&quot;State 130&quot;]
-    S_131[&quot;State 131&quot;]
-    S_132[&quot;State 132&quot;]
-    S_133[&quot;State 133&quot;]
-    S_200[&quot;State 200&quot;]
-    S_210[&quot;State 210&quot;]
-    S_300[&quot;State 300&quot;]
-    S_310[&quot;State 310&quot;]
-    S_INIT --&gt;|fallthrough| S_100
-    S_100 --&gt;|fallthrough| S_110
-    S_110 --&gt;|if Distance &lt; 300| S_120
-    S_110 --&gt;|if t &gt; 100| S_120
-    S_110 --&gt;|go| S_110
-    S_120 --&gt;|fallthrough| S_130
-    S_130 --&gt;|fallthrough| S_131
-    S_131 --&gt;|if Wait = 0| S_132
-    S_131 --&gt;|if d &lt; dd| S_131
-    S_131 --&gt;|go| S_131
-    S_132 --&gt;|if pan &lt; -15| S_200
-    S_132 --&gt;|if pan &gt; 15| S_300
-    S_132 --&gt;|if dd &lt; 300| S_133
-    S_132 --&gt;|go| S_100
-    S_133 --&gt;|go| S_130
-    S_200 --&gt;|fallthrough| S_210
-    S_210 --&gt;|if Distance &gt; 500| S_100
-    S_210 --&gt;|go| S_210
-    S_300 --&gt;|fallthrough| S_310
-    S_310 --&gt;|if Distance &gt; 500| S_100
-    S_310 --&gt;|go| S_310
+    A[&quot;Boot&quot;]
+    B[&quot;Stand And Start Advance&quot;]
+    C{&quot;Forward Blocked?&quot;}
+    D[&quot;Stop Forward Motion&quot;]
+    E[&quot;Scan Left And Right&quot;]
+    F{&quot;Best Direction?&quot;}
+    G[&quot;Turn Right&quot;]
+    H[&quot;Turn Left&quot;]
+    I[&quot;Signal And Retry&quot;]
+    A --&gt;|entry| B
+    B --&gt;|enter sensing loop| C
+    C --&gt;|clear| C
+    C --&gt;|blocked| D
+    D --&gt;|begin scan| E
+    E --&gt;|compare openings| F
+    F --&gt;|right side clearer| G
+    F --&gt;|left side clearer| H
+    F --&gt;|still blocked nearby| I
+    G --&gt;|resume advance| B
+    H --&gt;|resume advance| B
+    I --&gt;|retry scan| E
 </pre>
     </div>
   </main>
