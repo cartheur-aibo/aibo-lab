@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/HyperBabyDog.R`
 - states: `21`
 - transitions: `40`

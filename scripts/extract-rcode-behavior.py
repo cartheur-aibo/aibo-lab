@@ -42,9 +42,58 @@ BEHAVIOR_CATEGORY_MAP = {
     "MotionRec": "Decider",
 }
 
+FAMILY_VARIANT_MAP = {
+    "C-Tracking": "C-Tracking",
+    "Guru": "Guru",
+    "Maze": "Maze",
+    "Quit": "Quit",
+    "QuitDog": "BallQuit",
+    "SoccerDog": "Football",
+    "StepDog": "Step",
+    "WalkDog": "Walk",
+}
+
 
 def display_name(path: Path) -> str:
-    return GENERATED_NAME_MAP.get(path.stem, path.stem)
+    stem = path.stem
+    if stem in GENERATED_NAME_MAP:
+        return GENERATED_NAME_MAP[stem]
+
+    family, variant = family_variant(stem)
+    if family and variant:
+        return f"{family}-v{variant}"
+
+    return stem
+
+
+def family_variant(stem: str) -> tuple[str, int]:
+    match = re.match(r"^(.*?)(\d+)$", stem)
+    if not match:
+        return "", 0
+
+    raw_family = match.group(1)
+    variant = int(match.group(2))
+    family = FAMILY_VARIANT_MAP.get(raw_family, "")
+    return family, variant
+
+
+def family_name(path: Path) -> str:
+    stem = path.stem
+    if stem in GENERATED_NAME_MAP:
+        mapped = GENERATED_NAME_MAP[stem]
+        if mapped.endswith("-v1"):
+            return mapped[:-3]
+        return mapped
+
+    family, _variant = family_variant(stem)
+    return family or display_name(path)
+
+
+def variant_label(path: Path) -> str:
+    _family, variant = family_variant(path.stem)
+    if variant > 1:
+        return f"v{variant}"
+    return "primary"
 
 
 def behavior_category(path: Path) -> str:
@@ -572,6 +621,8 @@ def render_markdown(path: Path, states: list[State], transitions: list[tuple[str
     sensors = extract_sensors(states)
     mermaid = render_sample_mermaid(path, states, transitions)
     category = behavior_category(path)
+    family = family_name(path)
+    variant = variant_label(path)
 
     lines: list[str] = []
     lines.append(f"# R-Code Behavior Extract: `{path.name}`")
@@ -579,6 +630,8 @@ def render_markdown(path: Path, states: list[State], transitions: list[tuple[str
     lines.append("## Summary")
     lines.append("")
     lines.append(f"- category: `{category}`")
+    lines.append(f"- family: `{family}`")
+    lines.append(f"- variant: `{variant}`")
     lines.append(f"- source: `{path}`")
     lines.append(f"- states: `{len(states)}`")
     lines.append(f"- transitions: `{len(transitions)}`")
@@ -648,11 +701,111 @@ def render_html_summary(states: list[State], transitions: list[tuple[str, str, s
     return " ".join(parts)
 
 
+def render_html_analysis(path: Path, states: list[State], transitions: list[tuple[str, str, str]]) -> str:
+    name = display_name(path)
+    titles = [inferred_state_title(state) for state in states]
+    title_set = set(titles)
+    blocks = {block for state in states for block in state.blocks}
+
+    if name == "C-Tracking":
+        return (
+            "This workflow is closer to capability activation than to a full autonomous behavior. "
+            "It powers the robot into a usable pose, configures the target color, and then hands control "
+            "to head tracking as a sustained sensorimotor routine rather than a multi-branch behavior loop."
+        )
+
+    if name == "Move":
+        return (
+            "This workflow is a compact locomotion loop organized around bodily safety. "
+            "The robot repeats forward walking as its ordinary action, interrupts that action to monitor fall state, "
+            "and routes control through a recovery routine whenever posture is lost before returning to ordinary movement."
+        )
+
+    if name == "Maze":
+        return (
+            "This workflow expresses obstacle avoidance as a repeated perceive-compare-reorient cycle. "
+            "The robot advances while space remains clear, pauses when forward motion is blocked, scans for a better opening, "
+            "and then turns back into locomotion so that movement remains coupled to ongoing spatial checking."
+        )
+
+    if name == "Football":
+        return (
+            "This workflow is a mode-based embodied state machine rather than a single motion script. "
+            "The robot alternates between search and pursuit, uses vision and head position to decide when to approach or kick, "
+            "and keeps the whole cycle grounded by returning through monitoring and fall recovery when tracking is lost or posture fails."
+        )
+
+    if name == "MotionRec":
+        return (
+            "This workflow behaves like a small decider that waits for symbolic input and dispatches stored handlers. "
+            "Instead of roaming on its own, it listens for command events, routes control into record, playback, load, or save paths, "
+            "and then resumes its listener state as a control hub for later action."
+        )
+
+    if "Recover" in title_set and "Sense Fall State" in title_set:
+        return (
+            "This workflow centers on maintaining ordinary action under bodily risk. "
+            "The robot cycles through its main movement or monitoring routine, checks whether posture has broken down, "
+            "and uses recovery as an interrupt path that restores the behavior to a usable ongoing loop."
+        )
+
+    if "Scan Left And Right" in title_set or "Record Best Opening" in title_set:
+        return (
+            "This workflow uses local sensing to choose how movement should continue. "
+            "Rather than executing a fixed motion sequence, it pauses to compare nearby openings, selects a direction, "
+            "and feeds that decision back into continued locomotion."
+        )
+
+    if "Left Kick" in title_set or "Right Kick" in title_set:
+        return (
+            "This workflow organizes action around target acquisition and directional commitment. "
+            "The robot evaluates where a target is relative to its body, commits to a side-specific motor response, "
+            "and then returns to monitoring so perception can govern the next action cycle."
+        )
+
+    if "Happy Response" in title_set or "Seek Attention" in title_set or "Happy Hug Response" in title_set:
+        return (
+            "This workflow treats contact or nearby social conditions as triggers for embodied response. "
+            "The robot monitors for touch, proximity, or simple interaction cues, performs an expressive motor or light response, "
+            "and then settles back into its ordinary loop so the interaction remains event-driven rather than continuous."
+        )
+
+    if "Start Ball Tracking" in title_set:
+        return (
+            "This workflow ties sensing directly to a pursuit-oriented action cycle. "
+            "The robot uses target visibility and body orientation to move between tracking, approach, and short action bursts, "
+            "keeping perception in control of when the behavior advances or resets."
+        )
+
+    if "Loop/Transition" in blocks and "Sense/Decide" in blocks and "Act" in blocks:
+        return (
+            "This workflow is best read as a sense-decide-act loop. "
+            "The robot repeatedly samples a small part of its world or body state, branches into an action block based on that reading, "
+            "and then returns to the loop so behavior remains continuously coupled to fresh conditions."
+        )
+
+    if "Act" in blocks and "Synchronize" in blocks:
+        return (
+            "This workflow is organized as an action chunk followed by a synchronization pause. "
+            "The robot performs a bounded motor or expressive sequence, waits for that sequence to settle, "
+            "and only then returns control to the next round of behavior."
+        )
+
+    return (
+        "This workflow presents a small embodied control routine rather than a linear script. "
+        "The behavior moves between setup, conditional checks, and action blocks, using repeated transitions to keep the robot's "
+        "next movement or response tied to current body state and immediate context."
+    )
+
+
 def render_html(path: Path, mermaid: str, states: list[State], transitions: list[tuple[str, str, str]]) -> str:
     title = html.escape(f"R-Code Behavior Diagram: {display_name(path)}")
     mermaid_html = html.escape(mermaid)
     category = html.escape(behavior_category(path))
+    family = html.escape(family_name(path))
+    variant = html.escape(variant_label(path))
     summary = html.escape(render_html_summary(states, transitions))
+    analysis = html.escape(render_html_analysis(path, states, transitions))
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -704,10 +857,12 @@ def render_html(path: Path, mermaid: str, states: list[State], transitions: list
   <main>
     <h1>{title}</h1>
     <p><strong>Category:</strong> {category}</p>
+    <p><strong>Family:</strong> {family} | <strong>Variant:</strong> {variant}</p>
     <p>{summary}</p>
     <div class="panel">
       <pre class="mermaid">{mermaid_html}</pre>
     </div>
+    <p>{analysis}</p>
   </main>
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/SosouDog.R`
 - states: `7`
 - transitions: `7`

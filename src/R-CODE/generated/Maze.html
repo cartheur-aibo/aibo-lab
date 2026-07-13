@@ -48,6 +48,7 @@
 <body>
   <main>
     <h1>R-Code Behavior Diagram: Maze</h1>
+    <p><strong>Category:</strong> Behavior</p>
     <p>This diagram shows 12 extracted states and 21 transitions. It includes Boot, Initialize State, Assume Safe Pose, Sense/Decide, Act blocks.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
@@ -74,6 +75,7 @@
     I --&gt;|retry scan| E
 </pre>
     </div>
+    <p>This workflow expresses obstacle avoidance as a repeated perceive-compare-reorient cycle. The robot advances while space remains clear, pauses when forward motion is blocked, scans for a better opening, and then turns back into locomotion so that movement remains coupled to ongoing spatial checking.</p>
   </main>
 </body>
 </html>

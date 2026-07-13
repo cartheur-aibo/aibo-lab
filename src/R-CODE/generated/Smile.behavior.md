@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/SmileDog.R`
 - states: `6`
 - transitions: `6`

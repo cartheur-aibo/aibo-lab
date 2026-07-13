@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R-Code Behavior Diagram: Guru-v2</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101418;
+      --fg: #e6edf3;
+      --muted: #94a3b8;
+      --panel: #161b22;
+      --border: #30363d;
+    }
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .mermaid {
+      overflow: auto;
+    }
+    p {
+      color: var(--muted);
+    }
+    code {
+      color: var(--fg);
+    }
+  </style>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "dark" });
+  </script>
+</head>
+<body>
+  <main>
+    <h1>R-Code Behavior Diagram: Guru-v2</h1>
+    <p><strong>Category:</strong> Behavior</p>
+    <p><strong>Family:</strong> Guru | <strong>Variant:</strong> v2</p>
+    <p>This diagram shows 9 extracted states and 14 transitions. It includes Boot, Assume Safe Pose, Sense/Decide, Act, Synchronize blocks.</p>
+    <div class="panel">
+      <pre class="mermaid">flowchart TD
+    S_INIT[&quot;Boot / Safe Pose&quot;]
+    S_100[&quot;Repeat Forward Walk&quot;]
+    S_110[&quot;Sense / Decide&quot;]
+    S_120[&quot;Synchronize&quot;]
+    S_130[&quot;Action Loop&quot;]
+    S_200[&quot;Action Loop&quot;]
+    S_210[&quot;Action Loop&quot;]
+    S_300[&quot;Action Loop&quot;]
+    S_310[&quot;Action Loop&quot;]
+    S_INIT --&gt;|entry| S_100
+    S_100 --&gt;|continue to monitor| S_110
+    S_110 --&gt;|if Distance &lt; 300| S_120
+    S_110 --&gt;|go| S_110
+    S_120 --&gt;|next labeled block| S_130
+    S_130 --&gt;|if Distance &gt; 300| S_200
+    S_130 --&gt;|if Distance &gt; 300| S_300
+    S_130 --&gt;|go| S_130
+    S_200 --&gt;|next labeled block| S_210
+    S_210 --&gt;|if Distance &gt; 300| S_100
+    S_210 --&gt;|go| S_210
+    S_300 --&gt;|next labeled block| S_310
+    S_310 --&gt;|if Distance &gt; 300| S_100
+    S_310 --&gt;|go| S_310
+</pre>
+    </div>
+    <p>This workflow is best read as a sense-decide-act loop. The robot repeatedly samples a small part of its world or body state, branches into an action block based on that reading, and then returns to the loop so behavior remains continuously coupled to fresh conditions.</p>
+  </main>
+</body>
+</html>

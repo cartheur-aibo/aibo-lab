@@ -48,6 +48,7 @@
 <body>
   <main>
     <h1>R-Code Behavior Diagram: Syogai</h1>
+    <p><strong>Category:</strong> Behavior</p>
     <p>This diagram shows 4 extracted states and 5 transitions. It includes Boot, Assume Safe Pose, Sense/Decide, Act, Synchronize blocks. A recovery path is present in the extracted control flow.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
@@ -62,6 +63,7 @@
     S_300 --&gt;|go| S_100
 </pre>
     </div>
+    <p>This workflow is best read as a sense-decide-act loop. The robot repeatedly samples a small part of its world or body state, branches into an action block based on that reading, and then returns to the loop so behavior remains continuously coupled to fresh conditions.</p>
   </main>
 </body>
 </html>

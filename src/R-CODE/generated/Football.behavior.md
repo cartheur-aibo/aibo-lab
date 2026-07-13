@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/SoccerDog1.R`
 - states: `31`
 - transitions: `54`

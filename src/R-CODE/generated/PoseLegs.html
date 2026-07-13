@@ -48,6 +48,7 @@
 <body>
   <main>
     <h1>R-Code Behavior Diagram: PoseLegs</h1>
+    <p><strong>Category:</strong> Behavior</p>
     <p>This diagram shows 2 extracted states and 1 transition. It includes Boot, Assume Safe Pose, Act, Synchronize blocks.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
@@ -56,6 +57,7 @@
     S_INIT --&gt;|entry| S_100
 </pre>
     </div>
+    <p>This workflow is organized as an action chunk followed by a synchronization pause. The robot performs a bounded motor or expressive sequence, waits for that sequence to settle, and only then returns control to the next round of behavior.</p>
   </main>
 </body>
 </html>

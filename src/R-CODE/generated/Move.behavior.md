@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/MoveAIBO.R`
 - states: `4`
 - transitions: `5`

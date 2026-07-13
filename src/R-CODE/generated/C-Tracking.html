@@ -48,6 +48,7 @@
 <body>
   <main>
     <h1>R-Code Behavior Diagram: C-Tracking</h1>
+    <p><strong>Category:</strong> Behavior</p>
     <p>This diagram shows 1 extracted state and 0 transitions. It includes Boot, Assume Safe Pose, Act blocks.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
@@ -60,6 +61,7 @@
     C --&gt;|activate| D
 </pre>
     </div>
+    <p>This workflow is closer to capability activation than to a full autonomous behavior. It powers the robot into a usable pose, configures the target color, and then hands control to head tracking as a sustained sensorimotor routine rather than a multi-branch behavior loop.</p>
   </main>
 </body>
 </html>

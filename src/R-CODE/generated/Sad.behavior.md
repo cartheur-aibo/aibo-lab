@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/SadDog.R`
 - states: `4`
 - transitions: `4`

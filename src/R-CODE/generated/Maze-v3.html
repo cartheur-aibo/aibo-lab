@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R-Code Behavior Diagram: Maze-v3</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101418;
+      --fg: #e6edf3;
+      --muted: #94a3b8;
+      --panel: #161b22;
+      --border: #30363d;
+    }
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .mermaid {
+      overflow: auto;
+    }
+    p {
+      color: var(--muted);
+    }
+    code {
+      color: var(--fg);
+    }
+  </style>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "dark" });
+  </script>
+</head>
+<body>
+  <main>
+    <h1>R-Code Behavior Diagram: Maze-v3</h1>
+    <p><strong>Category:</strong> Behavior</p>
+    <p><strong>Family:</strong> Maze | <strong>Variant:</strong> v3</p>
+    <p>This diagram shows 7 extracted states and 10 transitions. It includes Boot, Initialize State, Assume Safe Pose, Sense/Decide, Act blocks.</p>
+    <div class="panel">
+      <pre class="mermaid">flowchart TD
+    S_INIT[&quot;Boot / Safe Pose&quot;]
+    S_100[&quot;Repeat Forward Walk&quot;]
+    S_200[&quot;Head Scan Position&quot;]
+    S_300[&quot;Sense / Decide&quot;]
+    S_400[&quot;Action Loop&quot;]
+    S_500[&quot;Action Loop&quot;]
+    S_600[&quot;Action Loop&quot;]
+    S_INIT --&gt;|if = Back 0| S_CALL
+    S_INIT --&gt;|else = Back 0| S_100
+    S_INIT --&gt;|if &lt; pan -15| S_THEN
+    S_INIT --&gt;|if &gt; pan 15| S_THEN
+    S_INIT --&gt;|if &lt; dd 300| S_THEN
+    S_100 --&gt;|if &lt; Distance 300| S_BREAK
+    S_200 --&gt;|next labeled block| S_300
+    S_300 --&gt;|if &lt; d dd| S_300
+    S_400 --&gt;|next labeled block| S_500
+    S_500 --&gt;|next labeled block| S_600
+</pre>
+    </div>
+    <p>This workflow is organized as an action chunk followed by a synchronization pause. The robot performs a bounded motor or expressive sequence, waits for that sequence to settle, and only then returns control to the next round of behavior.</p>
+  </main>
+</body>
+</html>

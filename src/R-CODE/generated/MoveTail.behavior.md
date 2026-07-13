@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/MoveTail.R`
 - states: `2`
 - transitions: `1`

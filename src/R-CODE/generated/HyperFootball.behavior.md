@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/HyperSoccerDog.R`
 - states: `9`
 - transitions: `15`

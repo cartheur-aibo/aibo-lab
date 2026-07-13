@@ -48,6 +48,7 @@
 <body>
   <main>
     <h1>R-Code Behavior Diagram: Football</h1>
+    <p><strong>Category:</strong> Behavior</p>
     <p>This diagram shows 31 extracted states and 54 transitions. It includes Boot, Initialize State, Sense/Decide, Act, Synchronize blocks. A recovery path is present in the extracted control flow.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
@@ -86,6 +87,7 @@
     M --&gt;|repeat| B
 </pre>
     </div>
+    <p>This workflow is a mode-based embodied state machine rather than a single motion script. The robot alternates between search and pursuit, uses vision and head position to decide when to approach or kick, and keeps the whole cycle grounded by returning through monitoring and fall recovery when tracking is lost or posture fails.</p>
   </main>
 </body>
 </html>

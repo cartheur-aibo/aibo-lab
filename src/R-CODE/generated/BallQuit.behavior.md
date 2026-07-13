@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/QuitDog1.R`
 - states: `3`
 - transitions: `3`
@@ -14,7 +15,7 @@
   lines 5: `SET:Power:1`
   lines 6: `POSE:AIBO:slp_slp`
   lines 8: `SET:motion:0`
-- `Sense / Decide`: Sense/Decide, Synchronize, Loop/Transition
+- `Main`: Sense/Decide, Synchronize, Loop/Transition
   lines 11: `IF:>:Cdt_npixel:32:1000`
   lines 13: `SWITCH:motion`
   lines 14: `CASE:0:PLAY:AIBO:Yes_sit`
@@ -39,7 +40,7 @@
 ```mermaid
 flowchart TD
     S_INIT["Boot / Safe Pose"]
-    S_100["Sense / Decide"]
+    S_100["Main"]
     S_1000["Sense / Decide"]
     S_INIT -->|entry| S_100
     S_100 -->|if Cdt_npixel > 32| S_1000

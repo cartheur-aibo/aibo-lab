@@ -48,6 +48,7 @@
 <body>
   <main>
     <h1>R-Code Behavior Diagram: Sad</h1>
+    <p><strong>Category:</strong> Behavior</p>
     <p>This diagram shows 4 extracted states and 4 transitions. It includes Boot, Assume Safe Pose, Sense/Decide, Act, Synchronize blocks.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
@@ -61,6 +62,7 @@
     S_200 --&gt;|else Distance &lt; 500| S_200
 </pre>
     </div>
+    <p>This workflow is organized as an action chunk followed by a synchronization pause. The robot performs a bounded motor or expressive sequence, waits for that sequence to settle, and only then returns control to the next round of behavior.</p>
   </main>
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/Guru1.R`
 - states: `8`
 - transitions: `10`

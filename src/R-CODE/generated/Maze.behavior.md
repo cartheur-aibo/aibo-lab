@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/Maze1.R`
 - states: `12`
 - transitions: `21`

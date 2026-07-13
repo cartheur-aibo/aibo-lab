@@ -9,12 +9,23 @@ exact topology. The point is to create a higher-level research
 representation that gathers the ordinary body-level concerns already
 visible across the preserved `ERS-111` samples.
 
+This composite should now also be read as an umbrella over multiple
+generated behavior families and their linked variants, not only as a
+summary of one exemplar script per topic.
+
 Included behavior motifs:
 
 - locomotion and roaming from `Move`, `Walk`, and `WalkAround`
 - obstacle checking and reorientation from `Maze`
 - touch or nearby-person response from `Ote` and `HyperBaby`
 - fall or turnover recovery from `Move` and `Recover`
+
+Main contributing families:
+
+- `Move`, `Walk`, `Walk-v2`, `Walk-v3`, and `WalkAround`
+- `Maze`, `Maze-v2`, `Maze-v3`, `Maze-v4`, and `Maze-v5`
+- `Ote` and `HyperBaby`
+- `Recover`
 
 Excluded from this composite:
 
@@ -27,6 +38,14 @@ Files:
 - composite diagram: [../generated/EmbodiedBehaviors.mmd](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/EmbodiedBehaviors.mmd:1)
 - viewer: [../generated/EmbodiedBehaviors.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/EmbodiedBehaviors.html:1)
 - svg export: [../generated/EmbodiedBehaviors.svg](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/EmbodiedBehaviors.svg:1)
+
+Generated-viewer convention:
+
+- the HTML viewers retain a compact structural summary above each diagram
+- a fuller analytical paragraph now appears below each diagram discussing
+  the workflow exhibited by that specific behavior
+- related scripts beyond the first exemplar are named as linked family
+  variants such as `Maze-v2` or `Football-v2`
 
 Interpretation:
 
@@ -60,3 +79,5 @@ Why this is useful:
 - it gives us one analyzable umbrella representation for non-game bodily behavior
 - it separates everyday autonomy from specialized samples like ball play or playback
 - it creates a shared reference frame for comparing future diagrams
+- it gives us a stable umbrella above individual family variants, so new
+  related scripts can be added without losing the conceptual grouping

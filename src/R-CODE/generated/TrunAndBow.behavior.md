@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/TrunAndBow.R`
 - states: `3`
 - transitions: `3`

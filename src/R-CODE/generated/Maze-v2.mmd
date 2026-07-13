@@ -1,0 +1,80 @@
+flowchart TD
+    S_INIT["Boot / Safe Pose"]
+    S_100["Repeat Forward Walk"]
+    S_110["Sense / Decide"]
+    S_120["When there was an obstacle in front"]
+    S_130["Head Scan Position"]
+    S_1010["Sense / Decide"]
+    S_1011["State 1011"]
+    S_1020["Sense / Decide"]
+    S_1040["When Distance became less than 300"]
+    S_1041["Sense / Decide"]
+    S_1042["At the time of loop_cnt=1"]
+    S_1043["At the time of loop_cnt=2"]
+    S_1100["Wait loop end"]
+    S_1110["State 1110"]
+    S_1200["State 1200"]
+    S_2000["Sense / Decide"]
+    S_133["Action Loop"]
+    S_2010["Action Loop"]
+    S_2011["Action Loop"]
+    S_2020["Action Loop"]
+    S_2021["Action Loop"]
+    S_2030["Action Loop"]
+    S_2031["Action Loop"]
+    S_3010["Action Loop"]
+    S_3011["Action Loop"]
+    S_3020["Action Loop"]
+    S_3021["Action Loop"]
+    S_3030["Action Loop"]
+    S_3031["Action Loop"]
+    S_9000["Recover"]
+    S_INIT -->|on Gsensor_status & 1| S_9000
+    S_100 -->|continue to monitor| S_110
+    S_110 -->|if Distance < 300| S_120
+    S_110 -->|if t > 100| S_120
+    S_110 -->|go| S_110
+    S_120 -->|next labeled block| S_130
+    S_130 -->|next labeled block| S_1010
+    S_1010 -->|if Wait = 0| S_1100
+    S_1011 -->|next labeled block| S_1020
+    S_1020 -->|if Distance < 300| S_1040
+    S_1020 -->|if Wait = 0| S_100
+    S_1020 -->|go| S_1020
+    S_1040 -->|if count = 0| S_1010
+    S_1041 -->|if loop_cnt = 2| S_1043
+    S_1042 -->|go| S_1010
+    S_1043 -->|go| S_1010
+    S_1100 -->|if loop_cnt = 1| S_1110
+    S_1100 -->|if ave2 <= temp_ave| S_1110
+    S_1100 -->|go| S_1200
+    S_1110 -->|go| S_1200
+    S_1200 -->|next labeled block| S_2000
+    S_2000 -->|if pan > 50| S_3010
+    S_2000 -->|if pan > 20| S_3020
+    S_2000 -->|if pan > 0| S_3030
+    S_2000 -->|if pan > -20| S_2030
+    S_2000 -->|if pan > -50| S_2020
+    S_2000 -->|if pan > -90| S_2010
+    S_2000 -->|if Distance < 300| S_133
+    S_2000 -->|go| S_100
+    S_133 -->|go| S_130
+    S_2010 -->|next labeled block| S_2011
+    S_2011 -->|if Distance > 300| S_100
+    S_2011 -->|go| S_2030
+    S_2020 -->|next labeled block| S_2021
+    S_2021 -->|if Distance > 300| S_100
+    S_2021 -->|go| S_2030
+    S_2030 -->|next labeled block| S_2031
+    S_2031 -->|if Distance > 300| S_100
+    S_2031 -->|go| S_2030
+    S_3010 -->|next labeled block| S_3011
+    S_3011 -->|if Distance > 300| S_100
+    S_3011 -->|go| S_3030
+    S_3020 -->|next labeled block| S_3021
+    S_3021 -->|if Distance > 300| S_100
+    S_3021 -->|go| S_3030
+    S_3030 -->|next labeled block| S_3031
+    S_3031 -->|if Distance > 300| S_100
+    S_3031 -->|go| S_3030
+    S_9000 -->|resume| S_9000

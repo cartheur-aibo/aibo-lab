@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R-Code Behavior Diagram: Maze-v5</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101418;
+      --fg: #e6edf3;
+      --muted: #94a3b8;
+      --panel: #161b22;
+      --border: #30363d;
+    }
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .mermaid {
+      overflow: auto;
+    }
+    p {
+      color: var(--muted);
+    }
+    code {
+      color: var(--fg);
+    }
+  </style>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "dark" });
+  </script>
+</head>
+<body>
+  <main>
+    <h1>R-Code Behavior Diagram: Maze-v5</h1>
+    <p><strong>Category:</strong> Behavior</p>
+    <p><strong>Family:</strong> Maze | <strong>Variant:</strong> v5</p>
+    <p>This diagram shows 2 extracted states and 7 transitions. It includes Boot, Assume Safe Pose, Sense/Decide, Act, Synchronize blocks. A recovery path is present in the extracted control flow.</p>
+    <div class="panel">
+      <pre class="mermaid">flowchart TD
+    S_INIT[&quot;Boot / Safe Pose&quot;]
+    S_9000[&quot;Recover&quot;]
+    S_INIT --&gt;|on Gsensor_status &amp; 1| S_9000
+    S_INIT --&gt;|if &lt; Distance 300| S_BREAK
+    S_INIT --&gt;|if &gt; d dd| S_THEN
+    S_INIT --&gt;|if &lt; pan -15| S_THEN
+    S_INIT --&gt;|if &gt; pan 15| S_THEN
+    S_INIT --&gt;|if &lt; dd 300| S_THEN
+    S_9000 --&gt;|resume| S_9000
+</pre>
+    </div>
+    <p>This workflow is best read as a sense-decide-act loop. The robot repeatedly samples a small part of its world or body state, branches into an action block based on that reading, and then returns to the loop so behavior remains continuously coupled to fresh conditions.</p>
+  </main>
+</body>
+</html>

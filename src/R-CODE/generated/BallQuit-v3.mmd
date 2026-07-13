@@ -1,0 +1,9 @@
+flowchart TD
+    S_INIT["Boot"]
+    S_100["Sense Fall State"]
+    S_200["State 200"]
+    S_100_CHECK{"Fall?"}
+    S_100 --> S_100_CHECK
+    S_100_CHECK -->|fallen| S_200
+    S_100_CHECK -->|upright| S_100
+    S_INIT -->|entry| S_100

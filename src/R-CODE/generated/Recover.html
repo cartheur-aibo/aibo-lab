@@ -48,6 +48,7 @@
 <body>
   <main>
     <h1>R-Code Behavior Diagram: Recover</h1>
+    <p><strong>Category:</strong> Behavior</p>
     <p>This diagram shows 3 extracted states and 3 transitions. It includes Boot, Sense/Decide, Act, Synchronize, Recover blocks. A recovery path is present in the extracted control flow.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
@@ -59,6 +60,7 @@
     S_200 --&gt;|resume| S_200
 </pre>
     </div>
+    <p>This workflow is best read as a sense-decide-act loop. The robot repeatedly samples a small part of its world or body state, branches into an action block based on that reading, and then returns to the loop so behavior remains continuously coupled to fresh conditions.</p>
   </main>
 </body>
 </html>

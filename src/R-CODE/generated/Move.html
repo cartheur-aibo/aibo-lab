@@ -48,6 +48,7 @@
 <body>
   <main>
     <h1>R-Code Behavior Diagram: Move</h1>
+    <p><strong>Category:</strong> Behavior</p>
     <p>This diagram shows 4 extracted states and 5 transitions. It captures a repeated forward-walk loop with fall monitoring. It includes Boot, Initialize State, Assume Safe Pose, Sense/Decide, Act blocks. A recovery path is present in the extracted control flow.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
@@ -64,6 +65,7 @@
     S_9000 --&gt;|resume monitor| S_200
 </pre>
     </div>
+    <p>This workflow is a compact locomotion loop organized around bodily safety. The robot repeats forward walking as its ordinary action, interrupts that action to monitor fall state, and routes control through a recovery routine whenever posture is lost before returning to ordinary movement.</p>
   </main>
 </body>
 </html>

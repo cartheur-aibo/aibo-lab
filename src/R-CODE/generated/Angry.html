@@ -48,6 +48,7 @@
 <body>
   <main>
     <h1>R-Code Behavior Diagram: Angry</h1>
+    <p><strong>Category:</strong> Behavior</p>
     <p>This diagram shows 3 extracted states and 2 transitions. It includes Boot, Assume Safe Pose, Sense/Decide, Act, Synchronize blocks.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
@@ -58,6 +59,7 @@
     S_100 --&gt;|if Touch_head_press &lt; 200| S_100
 </pre>
     </div>
+    <p>This workflow is organized as an action chunk followed by a synchronization pause. The robot performs a bounded motor or expressive sequence, waits for that sequence to settle, and only then returns control to the next round of behavior.</p>
   </main>
 </body>
 </html>

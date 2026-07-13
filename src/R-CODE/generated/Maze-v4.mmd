@@ -1,0 +1,24 @@
+flowchart TD
+    S_INIT["Boot"]
+    S_100["Repeat Forward Walk"]
+    S_110["Sense / Decide"]
+    S_120["Synchronize"]
+    S_130["Sense / Decide"]
+    S_133["Action Loop"]
+    S_200["Action Loop"]
+    S_300["Action Loop"]
+    S_INIT -->|entry| S_100
+    S_100 -->|continue to monitor| S_110
+    S_110 -->|if < Distance 300| S_THEN
+    S_110 -->|if <> dd 0| S_BREAK
+    S_110 -->|if >= t 100| S_CALL
+    S_110 -->|else >= t 100| S_120
+    S_120 -->|next labeled block| S_130
+    S_130 -->|if > d dd| S_THEN
+    S_130 -->|if < pan -15| S_THEN
+    S_130 -->|if > Distance 500| S_BREAK
+    S_130 -->|if > pan 15| S_THEN
+    S_130 -->|if < dd 300| S_CALL
+    S_130 -->|else < dd 300| S_133
+    S_133 -->|next labeled block| S_200
+    S_200 -->|next labeled block| S_300

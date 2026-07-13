@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/Recover.R`
 - states: `3`
 - transitions: `3`

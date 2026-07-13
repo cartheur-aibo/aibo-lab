@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/StepDog1.R`
 - states: `3`
 - transitions: `4`

@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/Quit1.R`
 - states: `1`
 - transitions: `0`

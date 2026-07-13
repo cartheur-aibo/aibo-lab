@@ -48,6 +48,7 @@
 <body>
   <main>
     <h1>R-Code Behavior Diagram: Sosou</h1>
+    <p><strong>Category:</strong> Behavior</p>
     <p>This diagram shows 7 extracted states and 7 transitions. It includes Boot, Initialize State, Assume Safe Pose, Sense/Decide, Act blocks.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
@@ -67,6 +68,7 @@
     S_200 --&gt;|go| S_100
 </pre>
     </div>
+    <p>This workflow is best read as a sense-decide-act loop. The robot repeatedly samples a small part of its world or body state, branches into an action block based on that reading, and then returns to the loop so behavior remains continuously coupled to fresh conditions.</p>
   </main>
 </body>
 </html>

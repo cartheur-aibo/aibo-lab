@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/Syogai.R`
 - states: `4`
 - transitions: `5`

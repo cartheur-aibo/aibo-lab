@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/KickDog.R`
 - states: `2`
 - transitions: `2`

@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Behavior`
 - source: `src/R-CODE/sample/OteDog.R`
 - states: `5`
 - transitions: `8`

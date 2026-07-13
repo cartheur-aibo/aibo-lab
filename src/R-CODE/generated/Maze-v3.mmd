@@ -1,0 +1,18 @@
+flowchart TD
+    S_INIT["Boot / Safe Pose"]
+    S_100["Repeat Forward Walk"]
+    S_200["Head Scan Position"]
+    S_300["Sense / Decide"]
+    S_400["Action Loop"]
+    S_500["Action Loop"]
+    S_600["Action Loop"]
+    S_INIT -->|if = Back 0| S_CALL
+    S_INIT -->|else = Back 0| S_100
+    S_INIT -->|if < pan -15| S_THEN
+    S_INIT -->|if > pan 15| S_THEN
+    S_INIT -->|if < dd 300| S_THEN
+    S_100 -->|if < Distance 300| S_BREAK
+    S_200 -->|next labeled block| S_300
+    S_300 -->|if < d dd| S_300
+    S_400 -->|next labeled block| S_500
+    S_500 -->|next labeled block| S_600

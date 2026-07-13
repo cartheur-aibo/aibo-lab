@@ -1,0 +1,25 @@
+flowchart TD
+    S_INIT["Boot"]
+    S_100["Sense Fall State"]
+    S_1000["Action Loop"]
+    S_2000["Mode"]
+    S_2210["Left Kick"]
+    S_2220["Right Kick"]
+    S_2300["It approaches a ball by the angle of the head"]
+    S_2900["Synchronize"]
+    S_9000["Recover"]
+    S_INIT -->|entry| S_100
+    S_100 -->|if Gsensor_status & 1| S_9000
+    S_100 -->|if mode = 0| S_1000
+    S_100 -->|if mode = 1| S_2000
+    S_100 -->|upright| S_100
+    S_1000 -->|if Cdt_npixel < 32| S_100
+    S_2000 -->|if Cdt_npixel < 32| S_1000
+    S_2000 -->|if Head_tilt > -58| S_2300
+    S_2000 -->|if Head_pan > 0| S_2210
+    S_2000 -->|else Head_pan > 0| S_2220
+    S_2210 -->|go| S_2900
+    S_2220 -->|go| S_2900
+    S_2300 -->|next labeled block| S_2900
+    S_2900 -->|go| S_100
+    S_9000 -->|resume monitor| S_100
