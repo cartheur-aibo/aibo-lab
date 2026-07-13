@@ -25,6 +25,7 @@ For the later `ERS-7` SDK-hosted R-Code track, use
 - `Document/readme.md`, `Document/Reference.md`, `Document/MTN-FFORM-E.md`, `Document/ODA-FFORM-E.md`, `Document/LED_Light_List.md`, `Document/Sound_List.md`, and `Document/Tone_List.md` are cleaned-up Markdown reading editions of the preserved text docs
 - `Document/Programmers.md` is a cleaned-up Markdown reading edition of the programmer manual
 - `Document/Behavior_Abstraction.md` lifts the sample scripts into higher-level behavior blocks and flow diagrams
+- `Document/SoccerDog1-Behavior.md` is the first checked-in generated Mermaid state-diagram example from the extractor
 - `Document/Behavior_Abstraction.md` pairs well with the `ERS-7` plug-in sample extract under [sdk/R_CODE_plugin_r1/sample/RPlugIn/R-Code-Behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/sdk/R_CODE_plugin_r1/sample/RPlugIn/R-Code-Behavior.md)
 - `MSImage/OPEN-R/` contains the bootable image tree for a programming stick
 - `sample/` contains example `.R` scripts such as `AngryDog.R`, `MoveAIBO.R`, and `PlaySound.R`
