@@ -57,16 +57,16 @@
   lines 75: `PLAY:AIBO:Akubi_slp_D`
   lines 76: `POSE:AIBO:oSleeping5`
   lines 77: `WAIT`
-- `Sense / Decide`: Sense/Decide, Loop/Transition
+- `It sleeps until it is set up`: Sense/Decide, Loop/Transition
   lines 80: `IF:>:Touch_head_time:80:100`
   lines 81: `GO:1520`
-- `State 1530`: Act, Loop/Transition
+- `Idle Thought`: Act, Loop/Transition
   lines 85: `PLAY:AIBO:Think_slp_C`
   lines 86: `GO:100`
-- `State 1540`: Act, Loop/Transition
+- `Baby Sway Forward`: Act, Loop/Transition
   lines 90: `MOVE:LEGS:STEP:BABY:FORWARD:10`
   lines 91: `GO:100`
-- `State 1550`: Act, Loop/Transition
+- `Baby Sway Backward`: Act, Loop/Transition
   lines 95: `MOVE:LEGS:STEP:BABY:BACKWARD:10`
   lines 96: `GO:100`
 - `Sense / Decide`: Initialize State, Sense/Decide, Act
@@ -74,14 +74,14 @@
   lines 103: `IF:<:Cdt_npixel:1000:100`
   lines 104: `MOVE:HEAD:C-TRACKING:100`
   lines 105: `IF:>:Head_pan:0:2100:2200`
-- `State 2100`: Initialize State, Act, Loop/Transition
+- `Left Kick`: Initialize State, Act, Loop/Transition
   lines 109: `MOVE:HEAD:HOME`
   lines 110: `MOVE:LEGS:KICK:LEFT_KICK:0`
   lines 111: `MOVE:LEGS:STEP:BABY:FORWARD:1`
   lines 112: `SET:ball:2100`
   lines 113: `SET:ball:0`
   ... `1` more instructions
-- `State 2200`: Initialize State, Act, Loop/Transition
+- `Right Kick`: Initialize State, Act, Loop/Transition
   lines 118: `MOVE:HEAD:HOME`
   lines 119: `MOVE:LEGS:KICK:RIGHT_KICK:0`
   lines 120: `MOVE:LEGS:STEP:BABY:FORWARD:1`
@@ -176,13 +176,13 @@ flowchart TD
     S_1400["Sense / Decide"]
     S_1500["Sense / Decide"]
     S_1510["Synchronize"]
-    S_1520["Sense / Decide"]
-    S_1530["State 1530"]
-    S_1540["State 1540"]
-    S_1550["State 1550"]
+    S_1520["It sleeps until it is set up"]
+    S_1530["Idle Thought"]
+    S_1540["Baby Sway Forward"]
+    S_1550["Baby Sway Backward"]
     S_2000["Sense / Decide"]
-    S_2100["State 2100"]
-    S_2200["State 2200"]
+    S_2100["Left Kick"]
+    S_2200["Right Kick"]
     S_3000["Sense / Decide"]
     S_3100["Synchronize"]
     S_4000["Synchronize"]

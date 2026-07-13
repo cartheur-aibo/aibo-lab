@@ -30,7 +30,7 @@
   lines 26: `PLAY:TAIL:oSittingJoy2`
   lines 27: `PLAY:SOUND:joy1rxxy:30`
   ... `2` more instructions
-- `State 300`: Initialize State, Act, Recover
+- `Power Down`: Initialize State, Act, Recover
   lines 32: `QUIT:AIBO`
   lines 33: `SET:Power:0`
 
@@ -52,7 +52,7 @@ flowchart TD
     S_110["Sense / Decide"]
     S_120["Sense / Decide"]
     S_200["Sense / Decide"]
-    S_300["State 300"]
+    S_300["Power Down"]
     S_INIT -->|entry| S_100
     S_100 -->|if Sounc_busy > 0| S_110
     S_110 -->|if Light_busy > 0| S_120

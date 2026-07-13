@@ -18,8 +18,8 @@
 <!-- S_100 -->
 <g id="node2" class="node">
 <title>S_100</title>
-<path fill="#1a2028" stroke="#9aa4b2" stroke-width="1.2" d="M251,-252C251,-252 180,-252 180,-252 174,-252 168,-246 168,-240 168,-240 168,-228 168,-228 168,-222 174,-216 180,-216 180,-216 251,-216 251,-216 257,-216 263,-222 263,-228 263,-228 263,-240 263,-240 263,-246 257,-252 251,-252"/>
-<text text-anchor="middle" x="215.5" y="-230.2" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#e6edf3">State 100</text>
+<path fill="#1a2028" stroke="#9aa4b2" stroke-width="1.2" d="M287,-252C287,-252 144,-252 144,-252 138,-252 132,-246 132,-240 132,-240 132,-228 132,-228 132,-222 138,-216 144,-216 144,-216 287,-216 287,-216 293,-216 299,-222 299,-228 299,-228 299,-240 299,-240 299,-246 293,-252 287,-252"/>
+<text text-anchor="middle" x="215.5" y="-230.2" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#e6edf3">Slow Forward Walk</text>
 </g>
 <!-- S_INIT&#45;&gt;S_100 -->
 <g id="edge1" class="edge">

@@ -48,11 +48,12 @@
 <body>
   <main>
     <h1>R-Code Behavior Diagram: MotionRec</h1>
+    <p><strong>Category:</strong> Decider</p>
     <p>This diagram shows 19 extracted states and 35 transitions. It includes Boot, Initialize State, Assume Safe Pose, Sense/Decide, Act blocks. A recovery path is present in the extracted control flow.</p>
     <div class="panel">
       <pre class="mermaid">flowchart TD
     S_INIT[&quot;Boot / Safe Pose&quot;]
-    S_start[&quot;State start&quot;]
+    S_start[&quot;Start&quot;]
     S_100[&quot;Sense / Decide&quot;]
     S_200[&quot;Sense / Decide&quot;]
     S_300[&quot;Sense / Decide&quot;]
@@ -67,9 +68,9 @@
     S_3000[&quot;Synchronize&quot;]
     S_3100[&quot;Synchronize&quot;]
     S_3200[&quot;Synchronize&quot;]
-    S_4000[&quot;State 4000&quot;]
-    S_5000[&quot;State 5000&quot;]
-    S_9000[&quot;State 9000&quot;]
+    S_4000[&quot;Load Stored Poses&quot;]
+    S_5000[&quot;Save Current Poses&quot;]
+    S_9000[&quot;Resume Listener&quot;]
     S_INIT --&gt;|on = Melody_id 9| S_9000
     S_INIT --&gt;|on = Melody_id 17| S_9000
     S_INIT --&gt;|on = Melody_id 25| S_9000

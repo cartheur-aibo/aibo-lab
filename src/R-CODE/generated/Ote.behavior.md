@@ -15,12 +15,12 @@
   lines 7: `POSE:AIBO:slp_slp`
   lines 8: `SET:head:0`
   lines 9: `SET:ote:0`
-- `Sense / Decide`: Sense/Decide, Loop/Transition
+- `MainLoop`: Sense/Decide, Loop/Transition
   lines 13: `IF:>:Light_busy:0:120`
   lines 14: `IF:=:ote:0:1000`
   lines 15: `IF:=:ote:1:2000`
   lines 16: `GO:100`
-- `State 120`: Act, Loop/Transition
+- `Clear Light Playback`: Act, Loop/Transition
   lines 22: `STOP:LIGHT`
   lines 23: `GO:100`
 - `Sense / Decide`: Initialize State, Sense/Decide, Synchronize
@@ -54,8 +54,8 @@
 ```mermaid
 flowchart TD
     S_INIT["Boot / Safe Pose"]
-    S_100["Sense / Decide"]
-    S_120["State 120"]
+    S_100["MainLoop"]
+    S_120["Clear Light Playback"]
     S_1000["Sense / Decide"]
     S_2000["Action Loop"]
     S_INIT -->|entry| S_100

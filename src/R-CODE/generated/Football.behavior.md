@@ -29,31 +29,31 @@
   lines 23: `IF:=:head:2:1103`
   lines 24: `IF:=:head:3:1104`
   ... `5` more instructions
-- `State 1101`: Act, Loop/Transition
+- `Head Scan Position`: Act, Loop/Transition
   lines 31: `MOVE:HEAD:ABS:-15:0:0:500`
   lines 32: `GO:1200`
-- `State 1102`: Act, Loop/Transition
+- `Head Scan Position`: Act, Loop/Transition
   lines 34: `MOVE:HEAD:ABS:-15:-40:0:500`
   lines 35: `GO:1200`
-- `State 1103`: Act, Loop/Transition
+- `Head Scan Position`: Act, Loop/Transition
   lines 37: `MOVE:HEAD:ABS:-15:-80:0:500`
   lines 38: `GO:1200`
-- `State 1104`: Act, Loop/Transition
+- `Head Scan Position`: Act, Loop/Transition
   lines 40: `MOVE:HEAD:ABS:-45:-40:0:500`
   lines 41: `GO:1200`
-- `State 1105`: Act, Loop/Transition
+- `Head Scan Position`: Act, Loop/Transition
   lines 43: `MOVE:HEAD:ABS:-45:0:0:500`
   lines 44: `GO:1200`
-- `State 1106`: Act, Loop/Transition
+- `Head Scan Position`: Act, Loop/Transition
   lines 46: `MOVE:HEAD:ABS:-45:40:0:500`
   lines 47: `GO:1200`
-- `State 1107`: Act, Loop/Transition
+- `Head Scan Position`: Act, Loop/Transition
   lines 49: `MOVE:HEAD:ABS:-45:80:0:500`
   lines 50: `GO:1200`
-- `State 1108`: Act, Loop/Transition
+- `Head Scan Position`: Act, Loop/Transition
   lines 52: `MOVE:HEAD:ABS:-15:40:0:500`
   lines 53: `GO:1200`
-- `State 1109`: Act, Loop/Transition
+- `Head Scan Position`: Act, Loop/Transition
   lines 55: `MOVE:HEAD:ABS:-15:0:0:500`
   lines 56: `GO:1200`
 - `Sense / Decide`: Initialize State, Sense/Decide, Loop/Transition
@@ -67,15 +67,15 @@
   lines 65: `GO:100`
 - `Sense / Decide`: Sense/Decide
   lines 68: `IF:<:Cdt_npixel:32:2010:2020`
-- `State 2010`: Loop/Transition
+- `Increment Lost Counter`: Loop/Transition
   lines 70: `ADD:lost:1`
   lines 71: `GO:2100`
-- `State 2020`: Initialize State, Loop/Transition
+- `Reset Lost Counter`: Initialize State, Loop/Transition
   lines 73: `SET:lost:0`
   lines 74: `GO:2100`
 - `Sense / Decide`: Sense/Decide
   lines 76: `IF:>:lost:0:2110:2120`
-- `State 2110`: Initialize State, Loop/Transition
+- `Set Search Mode`: Initialize State, Loop/Transition
   lines 78: `SET:mode:0`
   lines 79: `GO:100`
 - `Sense / Decide`: Initialize State, Sense/Decide, Act
@@ -84,37 +84,37 @@
   lines 84: `IF:>:Head_tilt:-58:2300`
   lines 85: `IF:>:Psd_range:9999:2300`
   lines 87: `IF:>:Head_pan:0:2210:2220`
-- `State 2210`: Act, Loop/Transition
+- `Left Kick`: Act, Loop/Transition
   lines 89: `MOVE:LEGS:KICK:LEFT_KICK:0`
   lines 90: `MOVE:LEGS:STEP:SLOW:FORWARD:1`
   lines 91: `GO:2900`
-- `State 2220`: Act, Loop/Transition
+- `Right Kick`: Act, Loop/Transition
   lines 93: `MOVE:LEGS:KICK:RIGHT_KICK:0`
   lines 94: `MOVE:LEGS:STEP:SLOW:FORWARD:1`
   lines 95: `GO:2900`
-- `Sense / Decide`: Sense/Decide, Act, Loop/Transition
+- `It approaches a ball by the angle of the head`: Sense/Decide, Act, Loop/Transition
   lines 98: `IF:>:Head_pan:60:2310`
   lines 99: `IF:>:Head_pan:45:2320`
   lines 100: `IF:>:Head_pan:15:2330`
   lines 101: `IF:<:Head_pan:-60:2340`
   lines 102: `IF:<:Head_pan:-45:2350`
   ... `3` more instructions
-- `State 2310`: Act, Loop/Transition
+- `Turn Left`: Act, Loop/Transition
   lines 107: `MOVE:LEGS:STEP:LEFT_TURN:0:4`
   lines 108: `GO:2900`
-- `State 2320`: Act, Loop/Transition
+- `Shift Left`: Act, Loop/Transition
   lines 110: `MOVE:LEGS:STEP:SLOW:LEFT:4`
   lines 111: `GO:2900`
-- `State 2330`: Act, Loop/Transition
+- `Advance Left`: Act, Loop/Transition
   lines 113: `MOVE:LEGS:STEP:SLOW:LEFTFORWARD:4`
   lines 114: `GO:2900`
-- `State 2340`: Act, Loop/Transition
+- `Search Turn`: Act, Loop/Transition
   lines 116: `MOVE:LEGS:STEP:RIGHT_TURN:0:4`
   lines 117: `GO:2900`
-- `State 2350`: Act, Loop/Transition
+- `Shift Right`: Act, Loop/Transition
   lines 119: `MOVE:LEGS:STEP:SLOW:RIGHT:4`
   lines 120: `GO:2900`
-- `State 2360`: Act, Loop/Transition
+- `Advance Right`: Act, Loop/Transition
   lines 122: `MOVE:LEGS:STEP:SLOW:RIGHTFORWARD:4`
   lines 123: `GO:2900`
 - `Synchronize`: Synchronize, Loop/Transition

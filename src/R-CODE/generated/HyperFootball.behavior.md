@@ -30,24 +30,24 @@
   lines 24: `CASE:0:MOVE:HEAD:ABS:-15:0:0:500`
   lines 25: `CASE:1:MOVE:HEAD:ABS:-15:-40:0:500`
   ... `11` more instructions
-- `Sense / Decide`: Initialize State, Sense/Decide, Act
+- `Mode`: Initialize State, Sense/Decide, Act
   lines 39: `SET:mode:1`
   lines 40: `IF:<:Cdt_npixel:32:1000`
   lines 42: `MOVE:HEAD:C-TRACKING:100`
   lines 43: `PLAY:LIGHT:hppy1eye:0`
   lines 44: `PLAY:SOUND:bow1_ddp:50`
   ... `3` more instructions
-- `State 2210`: Act, Loop/Transition
+- `Left Kick`: Act, Loop/Transition
   lines 50: `MOVE:HEAD:HOME`
   lines 51: `MOVE:LEGS:KICK:LEFT_KICK:0`
   lines 52: `MOVE:LEGS:STEP:SLOW:FORWARD:1`
   lines 53: `GO:2900`
-- `State 2220`: Act, Loop/Transition
+- `Right Kick`: Act, Loop/Transition
   lines 55: `MOVE:HEAD:HOME`
   lines 56: `MOVE:LEGS:KICK:RIGHT_KICK:0`
   lines 57: `MOVE:LEGS:STEP:SLOW:FORWARD:1`
   lines 58: `GO:2900`
-- `2300 It approaches a ball by the angle of the head.`: Sense/Decide
+- `It approaches a ball by the angle of the head`: Sense/Decide
   lines 61: `CSET:>:Head_pan:60:1`
   lines 62: `CSET:>:Head_pan:45:2`
   lines 63: `CSET:>:Head_pan:15:3`
@@ -89,10 +89,10 @@ flowchart TD
     S_INIT["Boot / Safe Pose"]
     S_100["Sense Fall State"]
     S_1000["Action Loop"]
-    S_2000["Sense / Decide"]
-    S_2210["State 2210"]
-    S_2220["State 2220"]
-    S_2300["2300 It approaches a ball by the angle of the head."]
+    S_2000["Mode"]
+    S_2210["Left Kick"]
+    S_2220["Right Kick"]
+    S_2300["It approaches a ball by the angle of the head"]
     S_2900["Synchronize"]
     S_9000["Recover"]
     S_100_CHECK{"Fall?"}

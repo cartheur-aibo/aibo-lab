@@ -14,7 +14,7 @@
   lines 5: `SET:Power:1`
   lines 7: `POSE:AIBO:std_std`
   lines 8: `WAIT`
-- `State 100`: Act
+- `Slow Forward Walk`: Act
   lines 11: `MOVE:LEGS:WALK:SLOW:FORWARD:0`
 - `Sense / Decide`: Sense/Decide
   lines 14: `IF:<:Distance:500:300:200`
@@ -39,7 +39,7 @@
 ```mermaid
 flowchart TD
     S_INIT["Boot / Safe Pose"]
-    S_100["State 100"]
+    S_100["Slow Forward Walk"]
     S_200["Sense / Decide"]
     S_300["Action Loop"]
     S_INIT -->|entry| S_100

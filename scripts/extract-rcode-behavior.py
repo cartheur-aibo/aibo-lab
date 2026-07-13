@@ -38,9 +38,17 @@ GENERATED_NAME_MAP = {
     "WalkDog1": "Walk",
 }
 
+BEHAVIOR_CATEGORY_MAP = {
+    "MotionRec": "Decider",
+}
+
 
 def display_name(path: Path) -> str:
     return GENERATED_NAME_MAP.get(path.stem, path.stem)
+
+
+def behavior_category(path: Path) -> str:
+    return BEHAVIOR_CATEGORY_MAP.get(display_name(path), "Behavior")
 
 
 @dataclass
@@ -169,6 +177,120 @@ def state_node_id(key: str) -> str:
     return f"S_{safe}"
 
 
+def is_numeric_label(key: str) -> bool:
+    return key.isdigit()
+
+
+def clean_state_comment(comment: str) -> str:
+    text = comment.strip()
+    if not text:
+        return ""
+    text = re.sub(r"^[Ii]t is run after,\s*", "", text)
+    text = re.sub(r"^[Tt]he\s+", "", text)
+    text = text.strip(" .")
+    if not text:
+        return ""
+    text = text[0].upper() + text[1:]
+    return text
+
+
+def infer_action_title(state: State) -> str:
+    text_set = [inst.text for inst in state.instructions if inst.text]
+
+    if any(inst.command == "RESUME" for inst in state.instructions):
+        return "Resume Listener"
+    if any("SET:mode:0" in text for text in text_set):
+        return "Set Search Mode"
+    if any("SET:mode:1" in text for text in text_set):
+        return "Set Pursuit Mode"
+    if any("SET:lost:0" in text for text in text_set):
+        return "Reset Lost Counter"
+    if any("ADD:lost:1" in text for text in text_set):
+        return "Increment Lost Counter"
+    if any("MOVE:LEGS:KICK:LEFT_KICK" in text for text in text_set):
+        return "Left Kick"
+    if any("MOVE:LEGS:KICK:RIGHT_KICK" in text for text in text_set):
+        return "Right Kick"
+    if any("MOVE:HEAD:C-TRACKING" in text for text in text_set):
+        return "Start Ball Tracking"
+    if any("PLAY:SOUND:joy2_xxt:50" in text for text in text_set):
+        return "Happy Hug Response"
+    if any("MOVE:HEAD:ABS:30:-90:-90:500" in text for text in text_set):
+        return "Check Right"
+    if any("MOVE:HEAD:ABS:30:90:90:500" in text for text in text_set):
+        return "Check Left"
+    if any("MOVE:HEAD:ABS" in text for text in text_set):
+        return "Head Scan Position"
+    if any("PLAY:APK:move:1:200" in text for text in text_set):
+        return "Replay Motion Twice"
+    if any("PLAY:APK:move:1:50" in text for text in text_set):
+        return "Replay Motion Half-Speed"
+    if any("PLAY:APK:move" in text for text in text_set):
+        return "Replay Motion"
+    if any(inst.command == "LOAD_POSE" for inst in state.instructions):
+        return "Load Stored Poses"
+    if any(inst.command == "SAVE_POSE" for inst in state.instructions):
+        return "Save Current Poses"
+    if any("QUIT:AIBO" in text for text in text_set) and any("SET:Power:0" in text for text in text_set):
+        return "Power Down"
+    if any("STOP:LIGHT" in text for text in text_set):
+        return "Clear Light Playback"
+    if any("STOP:SOUND" in text for text in text_set):
+        return "Clear Sound Playback"
+    if any("STOP:AIBO" in text for text in text_set):
+        return "Stop And Signal"
+    if any("MOVE:LEGS:WALK:SLOW:FORWARD:0" in text for text in text_set):
+        return "Slow Forward Walk"
+    if any("MOVE:LEGS:WALK:0:FORWARD:0" in text for text in text_set):
+        return "Forward Walk"
+    if any("PLAY:LEGS:WalkToWS" in text for text in text_set):
+        return "Stop Forward Motion"
+    if any("MOVE:LEGS:STEP:RIGHT_TURN" in text for text in text_set):
+        return "Search Turn"
+    if any("MOVE:LEGS:STEP:LEFT_TURN" in text for text in text_set):
+        return "Turn Left"
+    if any("MOVE:LEGS:STEP:SLOW:LEFTFORWARD" in text for text in text_set):
+        return "Advance Left"
+    if any("MOVE:LEGS:STEP:SLOW:RIGHTFORWARD" in text for text in text_set):
+        return "Advance Right"
+    if any("MOVE:LEGS:STEP:SLOW:LEFT" in text for text in text_set):
+        return "Shift Left"
+    if any("MOVE:LEGS:STEP:SLOW:RIGHT" in text for text in text_set):
+        return "Shift Right"
+    if any("MOVE:LEGS:STEP:SLOW:BACKWARD" in text for text in text_set):
+        return "Back Away"
+    if any("MOVE:LEGS:STEP:11:0:10" in text for text in text_set):
+        return "Probe Dead End"
+    if any("MOVE:LEGS:STEP:12:0:1" in text for text in text_set):
+        return "Turn Left Through Gap"
+    if any("MOVE:LEGS:STEP:13:0:1" in text for text in text_set):
+        return "Turn Right Through Gap"
+    if any("MOVE:LEGS:STEP:SLOW:FORWARD" in text for text in text_set):
+        return "Advance"
+    if any("MOVE:LEGS:STEP:BABY:FORWARD:10" in text for text in text_set):
+        return "Baby Sway Forward"
+    if any("MOVE:LEGS:STEP:BABY:BACKWARD:10" in text for text in text_set):
+        return "Baby Sway Backward"
+    if any("SET:dd:0" in text for text in text_set):
+        return "Scan Left And Right"
+    if any("SET:dd:d" in text for text in text_set):
+        return "Record Best Opening"
+    if any("PLAY:AIBO:Think" in text for text in text_set):
+        return "Idle Thought"
+    if any("PLAY:AIBO:Wake" in text for text in text_set):
+        return "Help Signal"
+    if any("PLAY:AIBO:Biku_sit" in text for text in text_set):
+        return "Surprise Response"
+    if any("PLAY:AIBO:Cry" in text for text in text_set):
+        return "Cry Response"
+    if any("PLAY:AIBO:Please" in text for text in text_set):
+        return "Seek Attention"
+    if any("PLAY:LIGHT:joy" in text for text in text_set):
+        return "Happy Response"
+
+    return ""
+
+
 def inferred_state_title(state: State) -> str:
     commands = [inst.command for inst in state.instructions if inst.command]
     command_set = set(commands)
@@ -190,11 +312,19 @@ def inferred_state_title(state: State) -> str:
     if any("Gsensor_status" in text for text in text_set):
         return "Sense Fall State"
 
+    comment_title = clean_state_comment(state.comment)
+    if comment_title:
+        return comment_title
+
     if {"IF", "ONCALL", "SWITCH"} & command_set:
         return "Sense / Decide"
 
     if "WAIT" in command_set and "MOVE" not in command_set:
         return "Synchronize"
+
+    action_title = infer_action_title(state)
+    if action_title:
+        return action_title
 
     return human_title(state)
 
@@ -203,7 +333,11 @@ def human_title(state: State) -> str:
     if state.key == "INIT":
         return "INIT"
     if state.comment:
+        if is_numeric_label(state.key):
+            return state.comment
         return f"{state.key} {state.comment}"
+    if not is_numeric_label(state.key):
+        return state.key.replace("_", " ").title()
     return state.title
 
 
@@ -437,12 +571,14 @@ def render_markdown(path: Path, states: list[State], transitions: list[tuple[str
     counts = command_counts(states)
     sensors = extract_sensors(states)
     mermaid = render_sample_mermaid(path, states, transitions)
+    category = behavior_category(path)
 
     lines: list[str] = []
     lines.append(f"# R-Code Behavior Extract: `{path.name}`")
     lines.append("")
     lines.append("## Summary")
     lines.append("")
+    lines.append(f"- category: `{category}`")
     lines.append(f"- source: `{path}`")
     lines.append(f"- states: `{len(states)}`")
     lines.append(f"- transitions: `{len(transitions)}`")
@@ -515,6 +651,7 @@ def render_html_summary(states: list[State], transitions: list[tuple[str, str, s
 def render_html(path: Path, mermaid: str, states: list[State], transitions: list[tuple[str, str, str]]) -> str:
     title = html.escape(f"R-Code Behavior Diagram: {display_name(path)}")
     mermaid_html = html.escape(mermaid)
+    category = html.escape(behavior_category(path))
     summary = html.escape(render_html_summary(states, transitions))
     return f"""<!doctype html>
 <html lang="en">
@@ -566,6 +703,7 @@ def render_html(path: Path, mermaid: str, states: list[State], transitions: list
 <body>
   <main>
     <h1>{title}</h1>
+    <p><strong>Category:</strong> {category}</p>
     <p>{summary}</p>
     <div class="panel">
       <pre class="mermaid">{mermaid_html}</pre>

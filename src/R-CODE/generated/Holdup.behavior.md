@@ -18,7 +18,7 @@
   lines 11: `AND:stat:2`
   lines 12: `IF:<>:stat:0:9000`
   lines 13: `GO:100`
-- `State 9000`: Act
+- `Happy Hug Response`: Act
   lines 16: `PLAY:SOUND:joy2_xxt:50`
   lines 17: `PLAY:LIGHT:joy4_eye:16`
 
@@ -34,7 +34,7 @@
 flowchart TD
     S_INIT["Boot / Safe Pose"]
     S_100["Sense Fall State"]
-    S_9000["State 9000"]
+    S_9000["Happy Hug Response"]
     S_INIT -->|entry| S_100
     S_100 -->|if stat <> 0| S_9000
     S_100 -->|upright| S_100

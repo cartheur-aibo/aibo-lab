@@ -13,7 +13,7 @@
 - `Boot / Safe Pose`: Boot, Assume Safe Pose
   lines 5: `SET:Power:1`
   lines 6: `POSE:AIBO:slp_slp`
-- `State 100`: Act
+- `Forward Walk`: Act
   lines 10: `MOVE:LEGS:WALK:0:FORWARD:0`
 - `Sense / Decide`: Initialize State, Sense/Decide
   lines 13: `IF:>:Distance:200:100`
@@ -70,7 +70,7 @@
 ```mermaid
 flowchart TD
     S_INIT["Boot / Safe Pose"]
-    S_100["State 100"]
+    S_100["Forward Walk"]
     S_110["Sense / Decide"]
     S_120["Action Loop"]
     S_130["Action Loop"]

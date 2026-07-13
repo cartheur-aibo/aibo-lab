@@ -28,7 +28,7 @@
 - `Synchronize`: Act, Synchronize
   lines 24: `PLAY:LEGS:WalkToWS`
   lines 26: `WAIT`
-- `State 130`: Initialize State, Act
+- `Head Scan Position`: Initialize State, Act
   lines 29: `MOVE:HEAD:ABS:0:0:0:1000`
   lines 30: `MOVE:HEAD:ABS:0:-90:0:1000`
   lines 31: `MOVE:HEAD:ABS:0:90:0:2000`

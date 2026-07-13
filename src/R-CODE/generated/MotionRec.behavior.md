@@ -2,6 +2,7 @@
 
 ## Summary
 
+- category: `Decider`
 - source: `src/R-CODE/sample/MotionRec.R`
 - states: `19`
 - transitions: `35`
@@ -16,7 +17,7 @@
   lines 25: `1000:pose12`
   lines 26: `1000:pose13`
   ... `20` more instructions
-- `State start`: Action
+- `Start`: Action
   lines 53: `DO`
 - `Sense / Decide`: Initialize State, Sense/Decide, Loop/Transition
   lines 55: `IF:Melody_id:=:1:THEN`
@@ -103,21 +104,21 @@
   lines 138: `WAIT:1000`
   lines 139: `GO:start`
   lines 141: `LOOP`
-- `State 4000`: Loop/Transition
+- `Load Stored Poses`: Loop/Transition
   lines 144: `LOAD_POSE:pose11`
   lines 145: `LOAD_POSE:pose12`
   lines 146: `LOAD_POSE:pose13`
   lines 147: `LOAD_POSE:pose14`
   lines 148: `LOAD_POSE:pose15`
   ... `6` more instructions
-- `State 5000`: Loop/Transition
+- `Save Current Poses`: Loop/Transition
   lines 157: `SAVE_POSE:pose11`
   lines 158: `SAVE_POSE:pose12`
   lines 159: `SAVE_POSE:pose13`
   lines 160: `SAVE_POSE:pose14`
   lines 161: `SAVE_POSE:pose15`
   ... `7` more instructions
-- `State 9000`: Initialize State, Recover, Loop/Transition
+- `Resume Listener`: Initialize State, Recover, Loop/Transition
   lines 172: `SET:Melody_id:0`
   lines 173: `RESUME`
 
@@ -164,7 +165,7 @@
 ```mermaid
 flowchart TD
     S_INIT["Boot / Safe Pose"]
-    S_start["State start"]
+    S_start["Start"]
     S_100["Sense / Decide"]
     S_200["Sense / Decide"]
     S_300["Sense / Decide"]
@@ -179,9 +180,9 @@ flowchart TD
     S_3000["Synchronize"]
     S_3100["Synchronize"]
     S_3200["Synchronize"]
-    S_4000["State 4000"]
-    S_5000["State 5000"]
-    S_9000["State 9000"]
+    S_4000["Load Stored Poses"]
+    S_5000["Save Current Poses"]
+    S_9000["Resume Listener"]
     S_INIT -->|on = Melody_id 9| S_9000
     S_INIT -->|on = Melody_id 17| S_9000
     S_INIT -->|on = Melody_id 25| S_9000

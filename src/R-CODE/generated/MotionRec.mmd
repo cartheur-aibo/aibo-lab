@@ -1,6 +1,6 @@
 flowchart TD
     S_INIT["Boot / Safe Pose"]
-    S_start["State start"]
+    S_start["Start"]
     S_100["Sense / Decide"]
     S_200["Sense / Decide"]
     S_300["Sense / Decide"]
@@ -15,9 +15,9 @@ flowchart TD
     S_3000["Synchronize"]
     S_3100["Synchronize"]
     S_3200["Synchronize"]
-    S_4000["State 4000"]
-    S_5000["State 5000"]
-    S_9000["State 9000"]
+    S_4000["Load Stored Poses"]
+    S_5000["Save Current Poses"]
+    S_9000["Resume Listener"]
     S_INIT -->|on = Melody_id 9| S_9000
     S_INIT -->|on = Melody_id 17| S_9000
     S_INIT -->|on = Melody_id 25| S_9000

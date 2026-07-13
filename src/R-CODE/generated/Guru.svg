@@ -18,8 +18,8 @@
 <!-- S_100 -->
 <g id="node2" class="node">
 <title>S_100</title>
-<path fill="#1a2028" stroke="#9aa4b2" stroke-width="1.2" d="M297,-144C297,-144 226,-144 226,-144 220,-144 214,-138 214,-132 214,-132 214,-120 214,-120 214,-114 220,-108 226,-108 226,-108 297,-108 297,-108 303,-108 309,-114 309,-120 309,-120 309,-132 309,-132 309,-138 303,-144 297,-144"/>
-<text text-anchor="middle" x="261.5" y="-122.2" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#e6edf3">State 100</text>
+<path fill="#1a2028" stroke="#9aa4b2" stroke-width="1.2" d="M312,-144C312,-144 211,-144 211,-144 205,-144 199,-138 199,-132 199,-132 199,-120 199,-120 199,-114 205,-108 211,-108 211,-108 312,-108 312,-108 318,-108 324,-114 324,-120 324,-120 324,-132 324,-132 324,-138 318,-144 312,-144"/>
+<text text-anchor="middle" x="261.5" y="-122.2" font-family="Helvetica,sans-Serif" font-size="16.00" fill="#e6edf3">Forward Walk</text>
 </g>
 <!-- S_INIT&#45;&gt;S_100 -->
 <g id="edge1" class="edge">
@@ -37,7 +37,7 @@
 <!-- S_100&#45;&gt;S_110 -->
 <g id="edge2" class="edge">
 <title>S_100&#45;&gt;S_110</title>
-<path fill="none" stroke="#9aa4b2" d="M213.95,-110.2C199.35,-103.18 184.92,-93.13 176.5,-79 166.7,-62.56 179.57,-49.45 198.02,-39.73"/>
+<path fill="none" stroke="#9aa4b2" d="M209.49,-107.96C196.46,-101.08 184.06,-91.68 176.5,-79 166.7,-62.56 179.57,-49.45 198.02,-39.73"/>
 <polygon fill="#9aa4b2" stroke="#9aa4b2" points="199.65,-42.06 205.63,-36.04 197.21,-37.02 199.65,-42.06"/>
 <text text-anchor="middle" x="237.5" y="-68.6" font-family="Helvetica,sans-Serif" font-size="13.00" fill="#94a3b8">next labeled block</text>
 </g>
