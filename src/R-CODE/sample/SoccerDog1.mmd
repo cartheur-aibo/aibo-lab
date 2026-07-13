@@ -1,0 +1,86 @@
+flowchart TD
+    S_INIT["INIT"]
+    S_100["State 100"]
+    S_1000["State 1000"]
+    S_1101["State 1101"]
+    S_1102["State 1102"]
+    S_1103["State 1103"]
+    S_1104["State 1104"]
+    S_1105["State 1105"]
+    S_1106["State 1106"]
+    S_1107["State 1107"]
+    S_1108["State 1108"]
+    S_1109["State 1109"]
+    S_1200["State 1200"]
+    S_1210["State 1210"]
+    S_2000["State 2000"]
+    S_2010["State 2010"]
+    S_2020["State 2020"]
+    S_2100["State 2100"]
+    S_2110["State 2110"]
+    S_2120["State 2120"]
+    S_2210["State 2210"]
+    S_2220["State 2220"]
+    S_2300["2300 It approaches a ball by the angle of the head."]
+    S_2310["State 2310"]
+    S_2320["State 2320"]
+    S_2330["State 2330"]
+    S_2340["State 2340"]
+    S_2350["State 2350"]
+    S_2360["State 2360"]
+    S_2900["State 2900"]
+    S_9000["State 9000"]
+    S_INIT -->|fallthrough| S_100
+    S_100 -->|if stat = 1| S_9000
+    S_100 -->|if mode = 0| S_1000
+    S_100 -->|if mode = 1| S_2000
+    S_100 -->|go| S_100
+    S_1000 -->|if head = 0| S_1101
+    S_1000 -->|if head = 1| S_1102
+    S_1000 -->|if head = 2| S_1103
+    S_1000 -->|if head = 3| S_1104
+    S_1000 -->|if head = 4| S_1105
+    S_1000 -->|if head = 5| S_1106
+    S_1000 -->|if head = 6| S_1107
+    S_1000 -->|if head = 7| S_1108
+    S_1000 -->|if head = 8| S_1109
+    S_1101 -->|go| S_1200
+    S_1102 -->|go| S_1200
+    S_1103 -->|go| S_1200
+    S_1104 -->|go| S_1200
+    S_1105 -->|go| S_1200
+    S_1106 -->|go| S_1200
+    S_1107 -->|go| S_1200
+    S_1108 -->|go| S_1200
+    S_1109 -->|go| S_1200
+    S_1200 -->|if Cdt_npixel < 32| S_1210
+    S_1200 -->|go| S_100
+    S_1210 -->|go| S_100
+    S_2000 -->|if Cdt_npixel < 32| S_2010
+    S_2000 -->|else Cdt_npixel < 32| S_2020
+    S_2010 -->|go| S_2100
+    S_2020 -->|go| S_2100
+    S_2100 -->|if lost > 0| S_2110
+    S_2100 -->|else lost > 0| S_2120
+    S_2110 -->|go| S_100
+    S_2120 -->|if Head_tilt > -58| S_2300
+    S_2120 -->|if Psd_range > 9999| S_2300
+    S_2120 -->|if Head_pan > 0| S_2210
+    S_2120 -->|else Head_pan > 0| S_2220
+    S_2210 -->|go| S_2900
+    S_2220 -->|go| S_2900
+    S_2300 -->|if Head_pan > 60| S_2310
+    S_2300 -->|if Head_pan > 45| S_2320
+    S_2300 -->|if Head_pan > 15| S_2330
+    S_2300 -->|if Head_pan < -60| S_2340
+    S_2300 -->|if Head_pan < -45| S_2350
+    S_2300 -->|if Head_pan < -15| S_2360
+    S_2300 -->|go| S_2900
+    S_2310 -->|go| S_2900
+    S_2320 -->|go| S_2900
+    S_2330 -->|go| S_2900
+    S_2340 -->|go| S_2900
+    S_2350 -->|go| S_2900
+    S_2360 -->|go| S_2900
+    S_2900 -->|go| S_100
+    S_9000 -->|go| S_100

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import html
 import re
 import sys
 from collections import Counter
@@ -230,9 +231,26 @@ def extract_sensors(states: list[State]) -> list[str]:
     return sorted(sensors)
 
 
+def render_mermaid(states: list[State], transitions: list[tuple[str, str, str]]) -> str:
+    lines: list[str] = []
+    lines.append("flowchart TD")
+    for state in states:
+        node_id = state_node_id(state.key)
+        label = human_title(state).replace('"', "'")
+        lines.append(f'    {node_id}["{label}"]')
+    for src, dst, label in transitions:
+        src_id = state_node_id(src)
+        dst_id = state_node_id(dst)
+        edge_label = label.replace('"', "'")
+        lines.append(f'    {src_id} -->|{edge_label}| {dst_id}')
+    lines.append("")
+    return "\n".join(lines)
+
+
 def render_markdown(path: Path, states: list[State], transitions: list[tuple[str, str, str]]) -> str:
     counts = command_counts(states)
     sensors = extract_sensors(states)
+    mermaid = render_mermaid(states, transitions)
 
     lines: list[str] = []
     lines.append(f"# R-Code Behavior Extract: `{path.name}`")
@@ -267,24 +285,97 @@ def render_markdown(path: Path, states: list[State], transitions: list[tuple[str
     lines.append("## Mermaid")
     lines.append("")
     lines.append("```mermaid")
-    lines.append("flowchart TD")
-    for state in states:
-        node_id = state_node_id(state.key)
-        label = human_title(state).replace('"', "'")
-        lines.append(f'    {node_id}["{label}"]')
-    for src, dst, label in transitions:
-        src_id = state_node_id(src)
-        dst_id = state_node_id(dst)
-        edge_label = label.replace('"', "'")
-        lines.append(f'    {src_id} -->|{edge_label}| {dst_id}')
+    lines.append(mermaid.rstrip())
     lines.append("```")
     lines.append("")
     return "\n".join(lines)
 
 
+def render_html(path: Path, mermaid: str) -> str:
+    title = html.escape(f"R-Code Behavior Diagram: {path.name}")
+    mermaid_html = html.escape(mermaid)
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <style>
+    :root {{
+      color-scheme: dark;
+      --bg: #101418;
+      --fg: #e6edf3;
+      --muted: #94a3b8;
+      --panel: #161b22;
+      --border: #30363d;
+    }}
+    body {{
+      margin: 0;
+      padding: 24px;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }}
+    main {{
+      max-width: 1200px;
+      margin: 0 auto;
+    }}
+    .panel {{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }}
+    .mermaid {{
+      overflow: auto;
+    }}
+    p {{
+      color: var(--muted);
+    }}
+    code {{
+      color: var(--fg);
+    }}
+  </style>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({{ startOnLoad: true, theme: "dark" }});
+  </script>
+</head>
+<body>
+  <main>
+    <h1>{title}</h1>
+    <p>
+      If this page stays blank in your viewer, open the sibling <code>.mmd</code>
+      file with your Mermaid extension instead.
+    </p>
+    <div class="panel">
+      <pre class="mermaid">{mermaid_html}</pre>
+    </div>
+  </main>
+</body>
+</html>
+"""
+
+
+def write_sidecars(path: Path, markdown: str, mermaid: str) -> tuple[Path, Path]:
+    md_sidecar = path.with_suffix(".behavior.md")
+    mmd_sidecar = path.with_suffix(".mmd")
+    html_sidecar = path.with_suffix(".html")
+
+    md_sidecar.write_text(markdown, encoding="utf-8")
+    mmd_sidecar.write_text(mermaid, encoding="utf-8")
+    html_sidecar.write_text(render_html(path, mermaid), encoding="utf-8")
+    return mmd_sidecar, html_sidecar
+
+
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("script", type=Path, help="Path to a Sony R-Code .R script")
+    parser.add_argument(
+        "--write-sidecars",
+        action="store_true",
+        help="Write .behavior.md, .mmd, and .html files next to the source script",
+    )
     args = parser.parse_args(argv)
 
     if not args.script.exists():
@@ -295,7 +386,16 @@ def main(argv: list[str]) -> int:
     for state in states:
         summarize_state(state)
     transitions = extract_transitions(states)
-    sys.stdout.write(render_markdown(args.script, states, transitions))
+    markdown = render_markdown(args.script, states, transitions)
+    mermaid = render_mermaid(states, transitions)
+
+    if args.write_sidecars:
+        mmd_path, html_path = write_sidecars(args.script, markdown, mermaid)
+        print(f"wrote {mmd_path}")
+        print(f"wrote {html_path}")
+        return 0
+
+    sys.stdout.write(markdown)
     return 0
 
 
