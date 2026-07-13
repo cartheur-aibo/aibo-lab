@@ -1,0 +1,10 @@
+flowchart TD
+    S_INIT["Boot / Safe Pose"]
+    S_100["State 100"]
+    S_200["Sense / Decide"]
+    S_300["Action Loop"]
+    S_INIT -->|entry| S_100
+    S_100 -->|next labeled block| S_200
+    S_200 -->|if Distance < 500| S_300
+    S_200 -->|else Distance < 500| S_200
+    S_300 -->|go| S_100

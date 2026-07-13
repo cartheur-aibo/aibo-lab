@@ -1,0 +1,15 @@
+flowchart TD
+    S_INIT["Boot / Safe Pose"]
+    S_100["Sense / Decide"]
+    S_110["Sense / Decide"]
+    S_120["Synchronize"]
+    S_130["Sense / Decide"]
+    S_200["Sense / Decide"]
+    S_300["Action Loop"]
+    S_INIT -->|entry| S_100
+    S_100 -->|if Sound_busy > 0| S_110
+    S_110 -->|if Light_busy > 0| S_120
+    S_120 -->|next labeled block| S_130
+    S_130 -->|if Touch_head_press < 300| S_100
+    S_200 -->|if cont > 2| S_300
+    S_200 -->|go| S_100

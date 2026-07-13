@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R-Code Behavior Diagram: Ote</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101418;
+      --fg: #e6edf3;
+      --muted: #94a3b8;
+      --panel: #161b22;
+      --border: #30363d;
+    }
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .mermaid {
+      overflow: auto;
+    }
+    p {
+      color: var(--muted);
+    }
+    code {
+      color: var(--fg);
+    }
+  </style>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "dark" });
+  </script>
+</head>
+<body>
+  <main>
+    <h1>R-Code Behavior Diagram: Ote</h1>
+    <p>This diagram shows 5 extracted states and 8 transitions. It includes Boot, Initialize State, Assume Safe Pose, Sense/Decide, Act blocks.</p>
+    <div class="panel">
+      <pre class="mermaid">flowchart TD
+    S_INIT[&quot;Boot / Safe Pose&quot;]
+    S_100[&quot;Sense / Decide&quot;]
+    S_120[&quot;State 120&quot;]
+    S_1000[&quot;Sense / Decide&quot;]
+    S_2000[&quot;Action Loop&quot;]
+    S_INIT --&gt;|entry| S_100
+    S_100 --&gt;|if Light_busy &gt; 0| S_120
+    S_100 --&gt;|if ote = 0| S_1000
+    S_100 --&gt;|if ote = 1| S_2000
+    S_100 --&gt;|go| S_100
+    S_120 --&gt;|go| S_100
+    S_1000 --&gt;|if Distance &gt; 500| S_100
+    S_2000 --&gt;|go| S_100
+</pre>
+    </div>
+  </main>
+</body>
+</html>

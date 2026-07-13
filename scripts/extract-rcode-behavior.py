@@ -15,10 +15,27 @@ from pathlib import Path
 LABEL_RE = re.compile(r"^:(\S+)(?:\s*//\s*(.*))?$")
 COMMAND_RE = re.compile(r"^([A-Z_]+)(?::(.*))?$")
 GENERATED_NAME_MAP = {
+    "AngryDog": "Angry",
+    "BanzaiDog": "Banzai",
     "C-Tracking1": "C-Tracking",
+    "CrossingDog": "Crossing",
+    "FalldownDog": "Falldown",
+    "HoldupDog": "Holdup",
+    "HyperBabyDog": "HyperBaby",
+    "HyperSoccerDog": "HyperFootball",
+    "KickDog": "Kick",
     "MoveAIBO": "Move",
     "Maze1": "Maze",
+    "OteDog": "Ote",
     "SoccerDog1": "Football",
+    "Guru1": "Guru",
+    "Quit1": "Quit",
+    "QuitDog1": "BallQuit",
+    "SadDog": "Sad",
+    "SmileDog": "Smile",
+    "SosouDog": "Sosou",
+    "StepDog1": "Step",
+    "WalkDog1": "Walk",
 }
 
 

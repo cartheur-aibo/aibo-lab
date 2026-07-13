@@ -1,0 +1,62 @@
+flowchart TD
+    S_INIT["Boot / Safe Pose"]
+    S_100["Sense Fall State"]
+    S_1000["Synchronize"]
+    S_1100["Sense / Decide"]
+    S_1200["Sense / Decide"]
+    S_1300["Sense / Decide"]
+    S_1400["Sense / Decide"]
+    S_1500["Sense / Decide"]
+    S_1510["Synchronize"]
+    S_1520["Sense / Decide"]
+    S_1530["State 1530"]
+    S_1540["State 1540"]
+    S_1550["State 1550"]
+    S_2000["Sense / Decide"]
+    S_2100["State 2100"]
+    S_2200["State 2200"]
+    S_3000["Sense / Decide"]
+    S_3100["Synchronize"]
+    S_4000["Synchronize"]
+    S_5000["Synchronize"]
+    S_9000["Recover"]
+    S_INIT -->|entry| S_100
+    S_100 -->|if fall = 1| S_9000
+    S_100 -->|if ball = 1| S_2000
+    S_100 -->|if bang = 1| S_3000
+    S_100 -->|if amae = 1| S_4000
+    S_100 -->|if nade = 1| S_5000
+    S_100 -->|if ball = 0| S_1000
+    S_100 -->|upright| S_100
+    S_1000 -->|next labeled block| S_1100
+    S_1100 -->|if head = Touch_head_press| S_1300
+    S_1100 -->|if Touch_head_press < 300| S_1200
+    S_1100 -->|go| S_100
+    S_1200 -->|if Touch_head_press < 30| S_1300
+    S_1200 -->|go| S_100
+    S_1300 -->|if Distance > 200| S_1400
+    S_1300 -->|go| S_100
+    S_1400 -->|if Cdt_npixel < 1000| S_1500
+    S_1400 -->|go| S_100
+    S_1500 -->|if cntr > 10| S_1510
+    S_1500 -->|if rand = 1| S_1530
+    S_1500 -->|if rand = 2| S_1540
+    S_1500 -->|if rand = 3| S_1550
+    S_1500 -->|go| S_100
+    S_1510 -->|next labeled block| S_1520
+    S_1520 -->|if Touch_head_time > 80| S_100
+    S_1520 -->|go| S_1520
+    S_1530 -->|go| S_100
+    S_1540 -->|go| S_100
+    S_1550 -->|go| S_100
+    S_2000 -->|if Cdt_npixel < 1000| S_100
+    S_2000 -->|if Head_pan > 0| S_2100
+    S_2000 -->|else Head_pan > 0| S_2200
+    S_2100 -->|go| S_100
+    S_2200 -->|go| S_100
+    S_3000 -->|if cntb > 3| S_3100
+    S_3000 -->|go| S_100
+    S_3100 -->|go| S_100
+    S_4000 -->|go| S_100
+    S_5000 -->|go| S_100
+    S_9000 -->|resume monitor| S_100

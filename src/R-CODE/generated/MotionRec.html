@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R-Code Behavior Diagram: MotionRec</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101418;
+      --fg: #e6edf3;
+      --muted: #94a3b8;
+      --panel: #161b22;
+      --border: #30363d;
+    }
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .mermaid {
+      overflow: auto;
+    }
+    p {
+      color: var(--muted);
+    }
+    code {
+      color: var(--fg);
+    }
+  </style>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "dark" });
+  </script>
+</head>
+<body>
+  <main>
+    <h1>R-Code Behavior Diagram: MotionRec</h1>
+    <p>This diagram shows 19 extracted states and 35 transitions. It includes Boot, Initialize State, Assume Safe Pose, Sense/Decide, Act blocks. A recovery path is present in the extracted control flow.</p>
+    <div class="panel">
+      <pre class="mermaid">flowchart TD
+    S_INIT[&quot;Boot / Safe Pose&quot;]
+    S_start[&quot;State start&quot;]
+    S_100[&quot;Sense / Decide&quot;]
+    S_200[&quot;Sense / Decide&quot;]
+    S_300[&quot;Sense / Decide&quot;]
+    S_400[&quot;Sense / Decide&quot;]
+    S_500[&quot;Sense / Decide&quot;]
+    S_600[&quot;Sense / Decide&quot;]
+    S_700[&quot;Sense / Decide&quot;]
+    S_800[&quot;Sense / Decide&quot;]
+    S_900[&quot;Sense / Decide&quot;]
+    S_1000[&quot;Sense / Decide&quot;]
+    S_2000[&quot;Sense / Decide&quot;]
+    S_3000[&quot;Synchronize&quot;]
+    S_3100[&quot;Synchronize&quot;]
+    S_3200[&quot;Synchronize&quot;]
+    S_4000[&quot;State 4000&quot;]
+    S_5000[&quot;State 5000&quot;]
+    S_9000[&quot;State 9000&quot;]
+    S_INIT --&gt;|on = Melody_id 9| S_9000
+    S_INIT --&gt;|on = Melody_id 17| S_9000
+    S_INIT --&gt;|on = Melody_id 25| S_9000
+    S_INIT --&gt;|on = Melody_id 163| S_9000
+    S_INIT --&gt;|on = Melody_id 168| S_9000
+    S_INIT --&gt;|on = Melody_id 193| S_9000
+    S_INIT --&gt;|on = Melody_id 200| S_9000
+    S_start --&gt;|next labeled block| S_100
+    S_100 --&gt;|if = Melody_id 1| S_THEN
+    S_100 --&gt;|go| S_100
+    S_200 --&gt;|if = Melody_id 1| S_THEN
+    S_200 --&gt;|go| S_200
+    S_300 --&gt;|if = Melody_id 1| S_THEN
+    S_300 --&gt;|go| S_300
+    S_400 --&gt;|if = Melody_id 1| S_THEN
+    S_400 --&gt;|go| S_400
+    S_500 --&gt;|if = Melody_id 1| S_THEN
+    S_500 --&gt;|go| S_500
+    S_600 --&gt;|if = Melody_id 1| S_THEN
+    S_600 --&gt;|go| S_600
+    S_700 --&gt;|if = Melody_id 1| S_THEN
+    S_700 --&gt;|go| S_700
+    S_800 --&gt;|if = Melody_id 1| S_THEN
+    S_800 --&gt;|go| S_800
+    S_900 --&gt;|if = Melody_id 1| S_THEN
+    S_900 --&gt;|go| S_900
+    S_1000 --&gt;|if = Melody_id 1| S_THEN
+    S_1000 --&gt;|go| S_1000
+    S_2000 --&gt;|if &lt;&gt; Melody_id 9| S_2000
+    S_3000 --&gt;|go| S_start
+    S_3100 --&gt;|go| S_start
+    S_3200 --&gt;|go| S_start
+    S_4000 --&gt;|go| S_2000
+    S_5000 --&gt;|go| S_2000
+    S_9000 --&gt;|resume| S_9000
+</pre>
+    </div>
+  </main>
+</body>
+</html>

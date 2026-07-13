@@ -1,0 +1,55 @@
+flowchart TD
+    S_INIT["Boot / Safe Pose"]
+    S_start["State start"]
+    S_100["Sense / Decide"]
+    S_200["Sense / Decide"]
+    S_300["Sense / Decide"]
+    S_400["Sense / Decide"]
+    S_500["Sense / Decide"]
+    S_600["Sense / Decide"]
+    S_700["Sense / Decide"]
+    S_800["Sense / Decide"]
+    S_900["Sense / Decide"]
+    S_1000["Sense / Decide"]
+    S_2000["Sense / Decide"]
+    S_3000["Synchronize"]
+    S_3100["Synchronize"]
+    S_3200["Synchronize"]
+    S_4000["State 4000"]
+    S_5000["State 5000"]
+    S_9000["State 9000"]
+    S_INIT -->|on = Melody_id 9| S_9000
+    S_INIT -->|on = Melody_id 17| S_9000
+    S_INIT -->|on = Melody_id 25| S_9000
+    S_INIT -->|on = Melody_id 163| S_9000
+    S_INIT -->|on = Melody_id 168| S_9000
+    S_INIT -->|on = Melody_id 193| S_9000
+    S_INIT -->|on = Melody_id 200| S_9000
+    S_start -->|next labeled block| S_100
+    S_100 -->|if = Melody_id 1| S_THEN
+    S_100 -->|go| S_100
+    S_200 -->|if = Melody_id 1| S_THEN
+    S_200 -->|go| S_200
+    S_300 -->|if = Melody_id 1| S_THEN
+    S_300 -->|go| S_300
+    S_400 -->|if = Melody_id 1| S_THEN
+    S_400 -->|go| S_400
+    S_500 -->|if = Melody_id 1| S_THEN
+    S_500 -->|go| S_500
+    S_600 -->|if = Melody_id 1| S_THEN
+    S_600 -->|go| S_600
+    S_700 -->|if = Melody_id 1| S_THEN
+    S_700 -->|go| S_700
+    S_800 -->|if = Melody_id 1| S_THEN
+    S_800 -->|go| S_800
+    S_900 -->|if = Melody_id 1| S_THEN
+    S_900 -->|go| S_900
+    S_1000 -->|if = Melody_id 1| S_THEN
+    S_1000 -->|go| S_1000
+    S_2000 -->|if <> Melody_id 9| S_2000
+    S_3000 -->|go| S_start
+    S_3100 -->|go| S_start
+    S_3200 -->|go| S_start
+    S_4000 -->|go| S_2000
+    S_5000 -->|go| S_2000
+    S_9000 -->|resume| S_9000

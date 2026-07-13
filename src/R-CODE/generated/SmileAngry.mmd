@@ -1,0 +1,5 @@
+flowchart TD
+    S_INIT["Boot / Safe Pose"]
+    S_100["Synchronize"]
+    S_INIT -->|entry| S_100
+    S_100 -->|go| S_100

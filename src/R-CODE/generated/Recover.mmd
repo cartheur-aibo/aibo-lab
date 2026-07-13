@@ -1,0 +1,7 @@
+flowchart TD
+    S_INIT["Boot"]
+    S_100["Synchronize"]
+    S_200["Recover"]
+    S_INIT -->|on Gsensor_status & 1| S_200
+    S_100 -->|go| S_100
+    S_200 -->|resume| S_200

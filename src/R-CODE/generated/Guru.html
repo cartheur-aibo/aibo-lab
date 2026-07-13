@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R-Code Behavior Diagram: Guru</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101418;
+      --fg: #e6edf3;
+      --muted: #94a3b8;
+      --panel: #161b22;
+      --border: #30363d;
+    }
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .mermaid {
+      overflow: auto;
+    }
+    p {
+      color: var(--muted);
+    }
+    code {
+      color: var(--fg);
+    }
+  </style>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "dark" });
+  </script>
+</head>
+<body>
+  <main>
+    <h1>R-Code Behavior Diagram: Guru</h1>
+    <p>This diagram shows 8 extracted states and 10 transitions. It includes Boot, Initialize State, Assume Safe Pose, Sense/Decide, Act blocks.</p>
+    <div class="panel">
+      <pre class="mermaid">flowchart TD
+    S_INIT[&quot;Boot / Safe Pose&quot;]
+    S_100[&quot;State 100&quot;]
+    S_110[&quot;Sense / Decide&quot;]
+    S_120[&quot;Action Loop&quot;]
+    S_130[&quot;Action Loop&quot;]
+    S_140[&quot;Action Loop&quot;]
+    S_160[&quot;Action Loop&quot;]
+    S_170[&quot;Action Loop&quot;]
+    S_INIT --&gt;|entry| S_100
+    S_100 --&gt;|next labeled block| S_110
+    S_110 --&gt;|if Distance &gt; 200| S_100
+    S_120 --&gt;|if Distance &gt; 200| S_130
+    S_120 --&gt;|else Distance &gt; 200| S_140
+    S_130 --&gt;|go| S_100
+    S_140 --&gt;|if Distance &gt; 200| S_160
+    S_140 --&gt;|else Distance &gt; 200| S_170
+    S_160 --&gt;|go| S_100
+    S_170 --&gt;|go| S_100
+</pre>
+    </div>
+  </main>
+</body>
+</html>
