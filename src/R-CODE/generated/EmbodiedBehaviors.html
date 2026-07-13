@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R-Code Behavior Diagram: EmbodiedBehaviors</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101418;
+      --fg: #e6edf3;
+      --muted: #94a3b8;
+      --panel: #161b22;
+      --border: #30363d;
+    }
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .mermaid {
+      overflow: auto;
+    }
+    p {
+      color: var(--muted);
+    }
+  </style>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "dark" });
+  </script>
+</head>
+<body>
+  <main>
+    <h1>R-Code Behavior Diagram: EmbodiedBehaviors</h1>
+    <p>This composite diagram summarizes the ordinary embodied loop suggested by the non-game ERS-111 samples: posture maintenance, obstacle handling, simple roaming, social contact response, and fall recovery.</p>
+    <div class="panel">
+      <pre class="mermaid">flowchart TD
+    A["Boot And Safe Pose"]
+    B["Embodied Monitoring Loop"]
+    C{"Body Or World Event?"}
+    D["Recover Posture"]
+    E["Pause Forward Motion"]
+    F["Social Contact Response"]
+    G["Roam Or Advance"]
+    H["Resume Ordinary Monitoring"]
+    I["Scan Left And Right"]
+    J{"Open Direction?"}
+    K["Turn Left"]
+    L["Turn Right"]
+    M["Retry Or Back Away"]
+    N["Check Posture And Space"]
+
+    A --> B
+    B --> C
+    C -->|fallen or overturned| D
+    C -->|obstacle ahead| E
+    C -->|touch or nearby person| F
+    C -->|no immediate issue| G
+    D --> H
+    E --> I
+    I --> J
+    J -->|left| K
+    J -->|right| L
+    J -->|still blocked| M
+    K --> H
+    L --> H
+    M --> H
+    F --> H
+    G --> N
+    N --> C
+    H --> C</pre>
+    </div>
+  </main>
+</body>
+</html>
