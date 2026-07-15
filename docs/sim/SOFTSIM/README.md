@@ -20,5 +20,8 @@ Current contents include:
 - chapter notes extracted from `DB013` and `DB001`,
 - architecture and cadence notes,
 - the initial `SOFTSIM` cadence demo plan,
-- iterative cadence demo drafts from `v1` through `v3`,
-- an operator-facing programming sequence for the first `SOFTSIM` run.
+- iterative cadence demo drafts from `v1` through `v4`,
+- an operator-facing programming sequence for the first `SOFTSIM` run,
+- a dated execution log of the first confirmed live `SOFTSIM` session,
+- a recovered exact template for the small documented `1737` example,
+- a first one-node mutation draft derived directly from `1737`.

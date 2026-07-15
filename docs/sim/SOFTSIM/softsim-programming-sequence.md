@@ -143,6 +143,15 @@ The following pieces still need to be checked in the actual environment:
 - the exact visual path for inspecting node RAM markers
 - whether the current pseudo-source needs small syntax adjustments to assemble
 
+As of `2026-07-15`, the first two startup questions are now partly validated in
+practice:
+
+- the launcher exists and works,
+- `SOFTSIM LOAD`, `1698 LOAD`, and `1737 LOAD` all run in the installed
+  environment,
+- the remaining uncertainty is now centered on hand-entered custom source and
+  minimal custom BDL.
+
 ## Why this note matters
 
 This file is intentionally procedural. It gives us a bridge from:
