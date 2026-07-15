@@ -1,16 +1,21 @@
 # v.2 Notes Workspace
 
-This folder is for source-backed research notes, synthesis, and interpretation.
+This folder is now a light paper-adjacent staging area, not the main home for
+active `SOFTSIM` research work.
 
-Use this area to preserve valuable ideas without forcing them immediately into paper prose.
+Active simulator-facing notes now live in:
 
-Three note labels are recommended:
+- `docs/sim/SOFTSIM/`
 
-- `Established`: directly supported by documents, code, or measurements.
-- `Interpretive`: your synthesis across multiple sources.
-- `Speculative`: potentially valuable, but not yet strong enough for the paper.
+Use this folder when you need:
+
+- a short paper-side staging note,
+- a temporary bridge between source research and `paper/`,
+- small note fragments that are already close to publication wording.
 
 Working rule:
 
-- `paper/` may quote from `Established` and carefully phrased `Interpretive` notes.
-- `Speculative` material stays here or in `../scratch/` until it matures.
+- keep active `SOFTSIM` exploration in `docs/sim/SOFTSIM/`,
+- promote only distilled, paper-safe material into `arxiv/v.2/paper/`,
+- use `evidence-template.md` here only when a note genuinely belongs to the
+  paper-output workflow rather than the simulator research workflow.
