@@ -20,4 +20,5 @@ Current contents include:
 - chapter notes extracted from `DB013` and `DB001`,
 - architecture and cadence notes,
 - the initial `SOFTSIM` cadence demo plan,
-- iterative cadence demo drafts from `v1` through `v3`.
+- iterative cadence demo drafts from `v1` through `v3`,
+- an operator-facing programming sequence for the first `SOFTSIM` run.
