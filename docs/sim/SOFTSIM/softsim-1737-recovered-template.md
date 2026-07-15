@@ -122,6 +122,26 @@ The live recovered block changes our confidence profile:
 - our placeholder custom BDL shape was too speculative for the smallest case,
 - `1737` is now the most trustworthy template for custom startup structure.
 
+It also exposes a new practical constraint:
+
+- retyping the visible `1737` assembly text directly at the prompt does not
+  behave the same as loading the stored block
+
+In the live session, hand-entered re-entry of:
+
+```text
+: go   clc  begin begin  +  unext unext ;
+```
+
+stopped with:
+
+```text
+clc ?
+```
+
+That means the next custom experiment should assume that block-context loading
+matters, even when the visible text matches exactly.
+
 ## Best next use of this template
 
 The safest next move is:

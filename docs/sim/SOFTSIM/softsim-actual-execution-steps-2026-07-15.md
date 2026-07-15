@@ -173,7 +173,9 @@ Today we directly validated:
 - successful loading of block `1698`,
 - successful simulator stepping with `SUPER`,
 - successful loading of block `1737`,
-- successful stepping of the smaller `1737` example.
+- successful stepping of the smaller `1737` example,
+- successful recovery of the exact stored `1737` block text from disk,
+- failure of hand-entered retyping of the `1737` assembly body at `clc`.
 
 ## What remains unvalidated
 
@@ -183,14 +185,21 @@ We have not yet validated:
 - the first custom cadence example for nodes `000` and `001`,
 - the marker-inspection workflow for `x20` and `x21` in our own draft example.
 
+We also now know that one additional issue remains:
+
+- the exact difference between block-context execution and hand-entered prompt
+  execution for the `1737` assembly body
+
 ## Best next step
 
 The strongest next step is:
 
 1. compare the live `1737` interaction pattern with the notes in
    `softsim-programming-sequence.md`
-2. identify the minimal source and load assumptions implied by `1737`
-3. use that smaller path as the template for the first custom cadence test
+2. treat the recovered `1737` block as the authoritative baseline
+3. investigate why direct prompt re-entry fails at `clc`
+4. use block-context mutation, rather than freehand prompt entry, for the
+   first custom cadence test
 
 That keeps the next phase grounded in an example that is both documented and
 now close to the installed environment.

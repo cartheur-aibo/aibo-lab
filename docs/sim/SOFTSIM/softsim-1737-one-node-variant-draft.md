@@ -21,6 +21,11 @@ That way, if the custom variant fails, the likely causes stay narrow:
 - wrong assumptions about the changed entry body,
 - not the entire loading structure.
 
+As of the live `2026-07-15` session, we need one more constraint:
+
+- copying the visible text alone may not be sufficient if the example is not
+  executed in the same block-context style as `1737`
+
 ## Copied directly from `1737`
 
 These parts should stay structurally identical:
@@ -94,6 +99,9 @@ ASM[ # 0 NODE ERS # 0 org  +cy
 
 0 0 SV0 2!  0 SEE
 ```
+
+This should now be understood as a block-context mutation target, not as a
+prompt-typing target.
 
 ## Why this is the right next experiment
 
