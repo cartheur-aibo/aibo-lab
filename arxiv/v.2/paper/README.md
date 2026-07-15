@@ -15,3 +15,7 @@ Suggested contents:
 - figure captions that are ready for paper use,
 - paper-safe summaries derived from the notes,
 - claim tracking in `claim-ledger.md`.
+
+Current working title:
+
+- `From ERS-111 Behavior Diagrams to Distributed Embodiment: SOFTSIM and GA144 as an Executable Framework`

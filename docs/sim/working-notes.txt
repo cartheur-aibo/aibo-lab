@@ -12,3 +12,7 @@ What you should investigate next is the block-context difference, because that i
 4. If possible, inspect which editor/block commands are the safest for duplicating and editing a block in place. That is likely the cleanest route to the first custom SOFTSIM experiment.
 
 The key question to answer is: “What does block execution provide that prompt re-entry does not?” Once we know that, the path to a custom one-node variant should become much clearer.
+
+Operator check to add at the end of the human investigation:
+
+5. In the next live session, do not begin with more prompt-entry variants. First confirm `SOFTSIM LOAD`, `1737 LOAD`, and `10 SUPER` again, then inspect block `1737`, duplicate it into a fresh working block, verify the duplicate text, and change only one tiny part of `: go`. Load that duplicated block through the same stored-block path and record whether it steps successfully or exactly where it fails.
