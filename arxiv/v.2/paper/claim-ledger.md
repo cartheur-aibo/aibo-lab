@@ -62,3 +62,32 @@ Boundary:
 Promotion decision:
 
 - `Needs more support`
+
+### Claim
+
+Status: `Interpretive`
+
+Paper-safe wording:
+
+> Recent embodied-robotics work has already introduced explicit fast/slow or dual-system control architectures. The contribution of the present work is therefore not the abstract proposal of dual-process embodied control itself, but the exploration of how such a cadence may be instantiated on a distributed asynchronous substrate, functionally exercised in SOFTSIM, and related to deployment on GA144 hardware.
+
+Support:
+
+- `GR00T N1: An Open Foundation Model for Generalist Humanoid Robots`
+- `Hume: Introducing System-2 Thinking in Visual-Language-Action Model`
+- `Language-Conditioned Robotic Manipulation with Fast and Slow Thinking`
+- `Architecture Is All You Need: Diversity-Enabled Sweet Spots for Robust Humanoid Locomotion`
+- `DB001`
+- `DB013 Chapters 4, 6, and 7`
+
+Boundary:
+
+- What this claim does support:
+- The paper can validly position itself within an existing fast/slow robotics literature while still claiming a distinct implementation-oriented contribution.
+- What it does not support:
+- Priority over the general idea of dual-system or layered-timescale embodied control.
+- It does not yet prove that the proposed cadence is superior to current VLA-based architectures.
+
+Promotion decision:
+
+- `Ready for draft`
