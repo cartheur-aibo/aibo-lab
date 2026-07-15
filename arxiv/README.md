@@ -29,4 +29,4 @@ Published at: http://arxiv.org/abs/2607.12115
 
 ## Additional references
 
-https://ziegler.substack.com/p/ep108-1x-equips-neo-with-human-level?publication_id=1071177&post_id=207037341&isFreemail=true&r=20hk3e&triedRedirect=true&utm_source=substack&utm_medium=email
+https://ziegler.substack.com/p/ep108-1x-equips-neo-with-human-level
