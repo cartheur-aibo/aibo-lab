@@ -13,6 +13,11 @@ Use this folder when you need:
 - a temporary bridge between source research and `paper/`,
 - small note fragments that are already close to publication wording.
 
+Current note types here now include:
+
+- concept and evidence summaries
+- literature-positioning notes that help sharpen paper-safe claims
+
 Working rule:
 
 - keep active `SOFTSIM` exploration in `docs/sim/SOFTSIM/`,

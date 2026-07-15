@@ -24,4 +24,5 @@ Current contents include:
 - an operator-facing programming sequence for the first `SOFTSIM` run,
 - a dated execution log of the first confirmed live `SOFTSIM` session,
 - a recovered exact template for the small documented `1737` example,
-- a first one-node mutation draft derived directly from `1737`.
+- a first one-node mutation draft derived directly from `1737`,
+- an experiment matrix mapping claims to `SOFTSIM` and `GA144` evidence.
