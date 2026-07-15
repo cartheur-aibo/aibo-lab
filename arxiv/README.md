@@ -24,3 +24,5 @@ Suggested upload set:
 - `EmbodiedBehaviors.pdf`
 - `Move.pdf`
 - `Football.pdf`
+
+Published at: http://arxiv.org/abs/2607.12115
