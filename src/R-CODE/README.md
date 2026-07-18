@@ -14,6 +14,10 @@ earlier `OPEN-R v1` lineage. In this repo, that matters mostly as context:
 treated as early-generation platform work rather than as an `ERS-7`-style Wi-Fi
 development path.
 
+The dedicated `ERS-111` repo now lives at:
+
+- <https://github.com/cartheur-aibo/ERS-111>
+
 ## Scope In This Repo
 
 Treat this material as `ERS-111`-first.

@@ -44,6 +44,9 @@ This repo now spans two different AIBO programming lineages:
    * communication boundary: can expose WLAN services and `WCONSOLE` on
      compatible sticks
 
+`ERS-210` is currently a reference-only adjacent platform in this planning
+context, not an active substantive work track yet.
+
 The Sony AIBO ERS-7 supports several levels of programmability, ranging from simple behavior customization to complete low-level robot control.
 
 For an ERS-7 running **AIBO MIND 2**, there are three primary development approaches:
@@ -76,6 +79,18 @@ tone-recognition facilities. It should also be understood as part of the
 earlier `OPEN-R v1` lineage rather than as an `ERS-7`-style Wi-Fi-native
 development target.
 
+The dedicated `ERS-111` repo now lives at:
+
+- <https://github.com/cartheur-aibo/ERS-111>
+
+The dedicated `ERS-7` repo now lives at:
+
+- <https://github.com/cartheur-aibo/ERS-7>
+
+The dedicated `ERS-210` repo currently exists as a reference-only home at:
+
+- <https://github.com/cartheur-aibo/ERS-210>
+
 ## Platform Communication Boundary
 
 The communication story differs sharply across the two platforms:
@@ -93,6 +108,8 @@ This difference matters for planning:
   local scripted behavior as the practical interaction loop
 - shared research questions may still cross both platforms, but the operational
   interfaces are different
+- `ERS-210` should currently be treated as a documented comparison target and
+  future expansion point, not as an active implementation line in this repo
 
 ## Current Repo Position
 
@@ -128,6 +145,8 @@ So the relationship should be read like this:
 - `ERS-111` gives the repo a lower-risk scripting and behavior path with
   tone-based interaction
 - `ERS-7` remains the long-range native robotics destination
+- `ERS-210` is present for reference and comparison only, pending later
+  substantive work
 - the Mind 2 research and simulator work is the current operational precursor
 - both tracks belong in the same lab because they converge on controlled AIBO
   experimentation across different generations and interfaces
@@ -145,6 +164,8 @@ partially completed platform work, and still-open application goals.
 
 - preserved `ERS-110/111` `R-CODE` package, sample set, and behavior-analysis
   notes under `src/R-CODE/`
+- documented `ERS-210` as a reference-only adjacent platform with local Sony
+  manuals and a dedicated external repo home
 - OPEN-R SDK and preserved toolchain recovery sufficient for local build work
 - sample build and staging workflows for ERS-7 OPEN-R payloads
 - dedicated-stick discipline and preserved-baseline handling for experimental
