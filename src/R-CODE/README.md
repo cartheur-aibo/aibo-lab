@@ -8,6 +8,12 @@ programmer manual describes it as a language similar to `BASIC`. For
 this project, that makes it the most practical low-risk software path to
 try for `ERS-111` before deeper `OPEN-R` work.
 
+The `ERS-110/111` platform should also be understood as belonging to the
+earlier `OPEN-R v1` lineage. In this repo, that matters mostly as context:
+`R-CODE` is the practical bench path, while deeper `OPEN-R` analysis should be
+treated as early-generation platform work rather than as an `ERS-7`-style Wi-Fi
+development path.
+
 ## Scope In This Repo
 
 Treat this material as `ERS-111`-first.

@@ -1,11 +1,21 @@
-# Programming the Sony AIBO ERS-7 (MIND 2) 
+# Programming the Sony AIBO ERS-111 and ERS-7
 
 _A work plan_
 
 ## Summary
 
 ```
-ERS-7 “hello body” program
+Two active programming tracks
+
+ERS-111 `R-CODE` track
+
+1. Boot from `R-CODE` programming stick.
+2. Run a minimal `R-CODE.R` script.
+3. Trigger behavior through touch, pose, or musical-tone conditions.
+4. Observe motion, light, sound, and tone-response behavior.
+5. Use musical tones as the practical communication channel.
+
+ERS-7 `OPEN-R` / MIND 2 track
 
 1. Boot from OPEN-R stick.
 2. Set Illume-Face LEDs.
@@ -15,6 +25,24 @@ ERS-7 “hello body” program
 ```
 
 ## Overview
+
+This repo now spans two different AIBO programming lineages:
+
+1. `ERS-110/111`
+
+   * primary practical path in this repo: `R-CODE`
+   * platform lineage: early `OPEN-R` generation, associated with `OPEN-R v1`
+   * lower-risk scripting and behavior study
+   * communication boundary: no Wi-Fi path; practical signaling can occur
+     through motion, sound, light, and recognizable musical tones
+
+2. `ERS-7`
+
+   * primary practical paths in this repo: preserved MIND 2 study and
+     `OPEN-R`
+   * deeper native robotics access
+   * communication boundary: can expose WLAN services and `WCONSOLE` on
+     compatible sticks
 
 The Sony AIBO ERS-7 supports several levels of programmability, ranging from simple behavior customization to complete low-level robot control.
 
@@ -39,6 +67,133 @@ For an ERS-7 running **AIBO MIND 2**, there are three primary development approa
    * Intended for robotics research and advanced development.
 
 OPEN-R is the most powerful option and the focus of this guide.
+
+For `ERS-111`, the equivalent first-class path in this repo is the preserved
+`R-CODE` environment under
+[src/R-CODE/](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/README.md),
+where behavior can be scripted and observed with the robot's built-in media and
+tone-recognition facilities. It should also be understood as part of the
+earlier `OPEN-R v1` lineage rather than as an `ERS-7`-style Wi-Fi-native
+development target.
+
+## Platform Communication Boundary
+
+The communication story differs sharply across the two platforms:
+
+| Platform | Main programmable path here | Practical communication channel in this repo |
+| --- | --- | --- |
+| `ERS-111` | `R-CODE` | motion, lights, sounds, and musical-tone recognition/output |
+| `ERS-7` | MIND 2 research + `OPEN-R` | Wi-Fi, `WCONSOLE`, HTTP, and normal sensor/actuator paths |
+
+This difference matters for planning:
+
+- `ERS-7` work can treat wireless logging and interactive network observation as
+  normal milestones
+- `ERS-111` work should instead treat tone patterns, audible responses, and
+  local scripted behavior as the practical interaction loop
+- shared research questions may still cross both platforms, but the operational
+  interfaces are different
+
+## Current Repo Position
+
+This plan describes the longer-range destination for the repo: deliberate ERS-7
+programming through OPEN-R, beginning with simple controlled applications such
+as the `hello body` program and eventually reaching richer robotics work.
+
+The repo's current active center of gravity is slightly earlier in that path:
+
+- preservation and analysis of the `ERS-110/111` `R-CODE` package and samples
+- preservation and recovery of real ERS-7 MIND 2 media
+- behavior forensics over preserved persistent state
+- a host-side MIND 2 simulator used as a hypothesis engine for bench work
+- Debian-side OPEN-R lifecycle and boot-layout simulation
+
+That current work does not replace the OPEN-R goal. It de-risks it.
+
+In practical terms, the MIND 2 behavior and simulator track helps this plan by:
+
+- improving our understanding of how the retail system persists and expresses
+  behavior
+- sharpening which questions need real-hardware validation before deeper
+  programming claims are trusted
+- giving the repo a disciplined event-replay and scenario-comparison layer
+  before full OPEN-R applications are mature
+- building confidence with sticks, deployment paths, WLAN boundaries, and
+  host-side analysis workflows
+
+So the relationship should be read like this:
+
+- `PLAN.md` is now the combined planning surface for `ERS-111` `R-CODE` work
+  and `ERS-7` `OPEN-R` / MIND 2 work
+- `ERS-111` gives the repo a lower-risk scripting and behavior path with
+  tone-based interaction
+- `ERS-7` remains the long-range native robotics destination
+- the Mind 2 research and simulator work is the current operational precursor
+- both tracks belong in the same lab because they converge on controlled AIBO
+  experimentation across different generations and interfaces
+
+For the current quality plan of the MIND 2 simulator layer, see:
+
+- [simulator/MIND2-QUALITY-ROADMAP.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/simulator/MIND2-QUALITY-ROADMAP.md)
+
+## Status Snapshot
+
+As of July 18, 2026, this plan is best read as a mix of completed groundwork,
+partially completed platform work, and still-open application goals.
+
+### Completed
+
+- preserved `ERS-110/111` `R-CODE` package, sample set, and behavior-analysis
+  notes under `src/R-CODE/`
+- OPEN-R SDK and preserved toolchain recovery sufficient for local build work
+- sample build and staging workflows for ERS-7 OPEN-R payloads
+- dedicated-stick discipline and preserved-baseline handling for experimental
+  work
+- Debian-side boot-layout validation with
+  [scripts/simulate-openr-boot.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/simulate-openr-boot.sh)
+- first host-side OPEN-R lifecycle proof with the Sony `HelloWorld` sample
+- WLAN and `WCONSOLE` operational knowledge for ERS-7 staging and observation
+- preserved MIND 2 and MIND 3 reference-stick baselines
+- first host-side MIND 2 behavior simulator for higher-level research triage
+
+### Partially Completed
+
+- practical `ERS-111` bench workflow that closes the loop from preserved
+  `R-CODE.R` script to repeatable real-robot tone/behavior trials
+- real-hardware confirmation for the broader OPEN-R programming path
+- standardization of a single canonical OPEN-R development-stick workflow
+- practical mastery of the OPEN-R object model beyond first lifecycle proof
+- integration of simulator findings with repeated live-hardware validation
+
+### Not Yet Completed
+
+- a crisp end-to-end `ERS-111` minimal communication demo using musical tones
+  as the signaling channel
+- the full end-to-end `hello body` application described in this plan
+- verified live completion of the sequence:
+  - boot from OPEN-R stick
+  - set Illume-Face LEDs
+  - read touch input
+  - nod head
+  - log over wireless console
+- the later progression levels:
+  - Level 1 LED/touch/sound applications
+  - Level 2 head tracking and vision work
+  - Level 3 wireless control and multi-state behaviors
+  - Level 4 distributed and research-grade robotics behaviors
+
+### Immediate Efficiency Rule
+
+For current repo work, the most efficient interpretation is:
+
+- treat `ERS-111` `R-CODE` preservation and `ERS-7` infrastructure, staging,
+  preservation, and first simulation layers as already established
+- treat a minimal `ERS-111` tone-communication loop as one of the next
+  unfinished low-risk milestones
+- treat the `hello body` application and repeated live validation as the next
+  highest-value unfinished milestones
+- use the MIND 2 simulator and behavior-forensics track to de-risk those later
+  `ERS-7` `OPEN-R` milestones rather than treating them as separate projects
 
 ---
 

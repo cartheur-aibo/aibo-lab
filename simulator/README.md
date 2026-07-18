@@ -134,6 +134,19 @@ What it does not do:
 That makes it suitable for higher-level research triage: narrowing which
 persistent-state differences are worth a real-stick trial.
 
+The current Mind2-specific quality plan for that layer lives in:
+
+- [simulator/MIND2-QUALITY-ROADMAP.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/simulator/MIND2-QUALITY-ROADMAP.md)
+
+That roadmap intersects with this README in an important way:
+
+- this README explains where the MIND 2 simulator fits in the repo's broader
+  simulator stack
+- the roadmap explains how to improve the quality of that MIND 2 layer without
+  pretending it is a decoded Sony runtime
+- the immediate emphasis is validation, regression protection, and model
+  legibility rather than piling on new heuristic behavior
+
 ### 4. Device Capability Simulator
 
 This layer would not attempt full physics.
@@ -178,6 +191,17 @@ The next useful simulator work in this repo should be:
 2. add a scripted sensor-to-behavior demo on top of the OPEN-R host shim
 3. model a few named ERS-7 capabilities such as LEDs, posture, and sleep state
 4. connect simulated event traces back to observed persistent-state deltas
+
+For the current MIND 2 simulator specifically, the near-term engineering order
+should now be:
+
+1. define a machine-checkable verdict matrix for the current named trees and
+   scenarios
+2. add a regression runner so code changes cannot silently erase current result
+   boundaries
+3. refactor trace output so raw file evidence, derived signals, and verdict
+   logic are easier to inspect separately
+4. let live-hardware evidence drive further semantic tuning
 
 ## Relationship To Real Aperios Proof
 
