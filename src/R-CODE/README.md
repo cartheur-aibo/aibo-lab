@@ -93,7 +93,8 @@ container.
 - compare the original stick layout to `MSImage/OPEN-R`
 - confirm the exact media and adapter arrangement used on the real robot
 - prepare a separate test stick that matches the documented size limits
-- start with a minimal `R-CODE.R` script using simple sound or pose playback
+- start with the minimal tone-trigger demo in
+  [Document/ERS-111-TONE-DEMO.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/Document/ERS-111-TONE-DEMO.md)
 - only move to deeper `OPEN-R` analysis after the boot path is confirmed
 
 ## Deeper Analysis Options
