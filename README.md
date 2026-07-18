@@ -60,22 +60,24 @@ sed -n '1,220p' aperios/README.md
 make -C aperios run-hello-world
 ```
 
-3. Check the local boot layout:
+3. Check the adjacent `open-r-sdk` boot layout:
 
 ```bash
-scripts/simulate-openr-boot.sh samples/common/HelloWorld
+scripts/simulate-openr-boot.sh ../open-r-sdk/samples/common/HelloWorld
 ```
 
-4. If you want a real Memory Stick payload, build and stage `HelloWorld`:
+4. If you want a real Memory Stick payload, build and stage `HelloWorld` from
+the adjacent `open-r-sdk` repo:
 
 ```bash
 export OPENRSDK_ROOT="$PWD/local/OPEN_R_SDK"
+export OPENRSDK_SAMPLES="$PWD/../open-r-sdk/samples/common/HelloWorld"
 source scripts/env.sh
 ./scripts/check-openr.sh
-make -C samples/common/HelloWorld/HelloWorld \
+make -C "$OPENRSDK_SAMPLES/HelloWorld" \
   OPENRSDK_ROOT="$PWD/local/OPEN_R_SDK"
-mkdir -p samples/common/HelloWorld/MS/OPEN-R/MW/OBJS
-make -C samples/common/HelloWorld/HelloWorld \
+mkdir -p "$OPENRSDK_SAMPLES/MS/OPEN-R/MW/OBJS"
+make -C "$OPENRSDK_SAMPLES/HelloWorld" \
   OPENRSDK_ROOT="$PWD/local/OPEN_R_SDK" \
   install
 ```
@@ -124,29 +126,30 @@ Run the host-side lifecycle simulator for the original Sony `HelloWorld` sample:
 make -C aperios run-hello-world
 ```
 
-Check what a local OPEN-R stick tree would try to boot:
+Check what the adjacent `open-r-sdk` stick tree would try to boot:
 
 ```bash
-scripts/simulate-openr-boot.sh samples/common/HelloWorld
+scripts/simulate-openr-boot.sh ../open-r-sdk/samples/common/HelloWorld
 ```
 
 ## Build A Real Sample
 
 ```bash
 export OPENRSDK_ROOT="$PWD/local/OPEN_R_SDK"
+export OPENRSDK_SAMPLES="$PWD/../open-r-sdk/samples/common/HelloWorld"
 source scripts/env.sh
 ./scripts/check-openr.sh
-make -C samples/common/HelloWorld/HelloWorld \
+make -C "$OPENRSDK_SAMPLES/HelloWorld" \
   OPENRSDK_ROOT="$PWD/local/OPEN_R_SDK"
-mkdir -p samples/common/HelloWorld/MS/OPEN-R/MW/OBJS
-make -C samples/common/HelloWorld/HelloWorld \
+mkdir -p "$OPENRSDK_SAMPLES/MS/OPEN-R/MW/OBJS"
+make -C "$OPENRSDK_SAMPLES/HelloWorld" \
   OPENRSDK_ROOT="$PWD/local/OPEN_R_SDK" \
   install
 ```
 
 That produces:
 
-- `samples/common/HelloWorld/MS/OPEN-R/MW/OBJS/HELLO.BIN`
+- `../open-r-sdk/samples/common/HelloWorld/MS/OPEN-R/MW/OBJS/HELLO.BIN`
 
 ## MIND 2 vs MIND 3
 
