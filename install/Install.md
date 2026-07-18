@@ -1,1 +1,0 @@
-https://www.dogsbodynet.com/openr/install_openr_linux.html
