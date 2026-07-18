@@ -7,8 +7,8 @@ config decoding effort.
 
 The repo now carries:
 
-- [local-artifacts/cpu-docs/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/local-artifacts/cpu-docs/README.md)
-- [local-artifacts/cpu-docs/R4000_Preliminary_Users_Manual_1992.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/local-artifacts/cpu-docs/R4000_Preliminary_Users_Manual_1992.pdf)
+- [local-artifacts/cpu-docs/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/local-artifacts/cpu-docs/README.md)
+- [local-artifacts/cpu-docs/R4000_Preliminary_Users_Manual_1992.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/local-artifacts/cpu-docs/R4000_Preliminary_Users_Manual_1992.pdf)
 
 Why it matters:
 
@@ -59,9 +59,9 @@ independent ciphertext with random initialization. It is more consistent with:
 
 The repo now has two complementary analysis tools:
 
-- [scripts/analyze-retail-objectcfg.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/analyze-retail-objectcfg.sh)
-- [scripts/analyze-retail-config-family.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/analyze-retail-config-family.sh)
-- [scripts/compare-retail-config-pair.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/compare-retail-config-pair.sh)
+- [scripts/analyze-retail-objectcfg.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/analyze-retail-objectcfg.sh)
+- [scripts/analyze-retail-config-family.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/analyze-retail-config-family.sh)
+- [scripts/compare-retail-config-pair.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/compare-retail-config-pair.sh)
 
 The second and third tools are intended for the broader opaque retail config
 family, not just `OBJECT.CFG`.

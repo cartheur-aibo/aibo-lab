@@ -14,7 +14,7 @@ Checksum:
 
 Repo checksum record:
 
-- [sony-mind2-restored-2026-07-01.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/sony-mind2-restored-2026-07-01.img.sha256)
+- [sony-mind2-restored-2026-07-01.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/sony-mind2-restored-2026-07-01.img.sha256)
 
 ## What It Represents
 

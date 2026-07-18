@@ -62,9 +62,9 @@ For this repo, these five features are a good starting comparison frame.
 
 Files:
 
-- preserved source: [../sample/C-Tracking1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/sample/C-Tracking1.R:1)
-- generated sidecar: [../generated/C-Tracking.behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/C-Tracking.behavior.md:1)
-- viewer: [../generated/C-Tracking.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/C-Tracking.html:1)
+- preserved source: [../sample/C-Tracking1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/sample/C-Tracking1.R:1)
+- generated sidecar: [../generated/C-Tracking.behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/C-Tracking.behavior.md:1)
+- viewer: [../generated/C-Tracking.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/C-Tracking.html:1)
 
 Minimal reading:
 
@@ -87,9 +87,9 @@ a complete behavioral program.
 
 Files:
 
-- preserved source: [../sample/MoveAIBO.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/sample/MoveAIBO.R:1)
-- generated sidecar: [../generated/Move.behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Move.behavior.md:1)
-- viewer: [../generated/Move.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Move.html:1)
+- preserved source: [../sample/MoveAIBO.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/sample/MoveAIBO.R:1)
+- generated sidecar: [../generated/Move.behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Move.behavior.md:1)
+- viewer: [../generated/Move.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Move.html:1)
 
 Minimal reading:
 
@@ -111,9 +111,9 @@ This is a compact `action + monitor + recover` architecture.
 
 Files:
 
-- preserved source: [../sample/Maze1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/sample/Maze1.R:1)
-- generated sidecar: [../generated/Maze.behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Maze.behavior.md:1)
-- viewer: [../generated/Maze.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Maze.html:1)
+- preserved source: [../sample/Maze1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/sample/Maze1.R:1)
+- generated sidecar: [../generated/Maze.behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Maze.behavior.md:1)
+- viewer: [../generated/Maze.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Maze.html:1)
 
 Minimal reading:
 
@@ -135,10 +135,10 @@ This is a compact `perceive -> compare -> reorient` behavior.
 
 Files:
 
-- preserved source: [../sample/SoccerDog1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/sample/SoccerDog1.R:1)
-- working analysis: [../generated/Football-Behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Football-Behavior.md:1)
-- generated sidecar: [../generated/Football.behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Football.behavior.md:1)
-- viewer: [../generated/Football.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Football.html:1)
+- preserved source: [../sample/SoccerDog1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/sample/SoccerDog1.R:1)
+- working analysis: [../generated/Football-Behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Football-Behavior.md:1)
+- generated sidecar: [../generated/Football.behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Football.behavior.md:1)
+- viewer: [../generated/Football.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Football.html:1)
 
 Minimal reading:
 

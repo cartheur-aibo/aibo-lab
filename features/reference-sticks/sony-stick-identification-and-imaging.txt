@@ -57,7 +57,7 @@ Interpretation:
 3. Capture the raw image locally
 
 ```bash
-cd /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian
+cd /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab
 umount /dev/sdb1
 ```
 

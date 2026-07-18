@@ -27,7 +27,7 @@ Treat this material as `ERS-111`-first.
 - out of scope: treating this package as a direct `ERS-7` programming path
 
 For the later `ERS-7` SDK-hosted R-Code track, use
-[sdk/R_CODE_plugin_r1/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/sdk/R_CODE_plugin_r1/README.md).
+[sdk/R_CODE_plugin_r1/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/sdk/R_CODE_plugin_r1/README.md).
 
 ## What Is Here
 
@@ -38,7 +38,7 @@ For the later `ERS-7` SDK-hosted R-Code track, use
 - `Document/Behavior_Ladder.md` defines a simple-to-complex four-sample research ladder for analysis
 - `generated/` contains generated `behavior.md`, `.mmd`, and `.html` sidecars for working analysis
 - `generated/Football-Behavior.md` is the first checked-in generated Mermaid state-diagram example from the extractor
-- `Document/Behavior_Abstraction.md` pairs well with the `ERS-7` plug-in sample extract under [sdk/R_CODE_plugin_r1/sample/RPlugIn/R-Code-Behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/sdk/R_CODE_plugin_r1/sample/RPlugIn/R-Code-Behavior.md)
+- `Document/Behavior_Abstraction.md` pairs well with the `ERS-7` plug-in sample extract under [sdk/R_CODE_plugin_r1/sample/RPlugIn/R-Code-Behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/sdk/R_CODE_plugin_r1/sample/RPlugIn/R-Code-Behavior.md)
 - `MSImage/OPEN-R/` contains the bootable image tree for a programming stick
 - `sample/` contains example `.R` scripts such as `AngryDog.R`, `MoveAIBO.R`, and `PlaySound.R`
 - `env.png` appears to be an environment or packaging image for the kit
@@ -94,7 +94,7 @@ container.
 - confirm the exact media and adapter arrangement used on the real robot
 - prepare a separate test stick that matches the documented size limits
 - start with the minimal tone-trigger demo in
-  [Document/ERS-111-TONE-DEMO.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/Document/ERS-111-TONE-DEMO.md)
+  [Document/ERS-111-TONE-DEMO.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/Document/ERS-111-TONE-DEMO.md)
 - only move to deeper `OPEN-R` analysis after the boot path is confirmed
 
 ## Deeper Analysis Options

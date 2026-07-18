@@ -14,11 +14,11 @@ It follows the official Remote Processing OPEN-R AIBO-side pattern:
 
 The distilled local doc note is:
 
-- [docs/aperios-scrapes/WCONSOLE-SDK-BUILD-NOTES.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/aperios-scrapes/WCONSOLE-SDK-BUILD-NOTES.md)
+- [docs/aperios-scrapes/WCONSOLE-SDK-BUILD-NOTES.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios-scrapes/WCONSOLE-SDK-BUILD-NOTES.md)
 
 The specific Installation Guide excerpt is:
 
-- [docs/aperios-scrapes/InstallationGuide-WCONSOLE-RP-section.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/aperios-scrapes/InstallationGuide-WCONSOLE-RP-section.txt)
+- [docs/aperios-scrapes/InstallationGuide-WCONSOLE-RP-section.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios-scrapes/InstallationGuide-WCONSOLE-RP-section.txt)
 
 ## Build The AIBO-Side Stick
 
@@ -35,9 +35,9 @@ That creates:
 This workflow uses:
 
 - SDK base:
-  `sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/nomemprot/OPEN-R`
+  `local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/nomemprot/OPEN-R`
 - sample:
-  [samples/common/ObjectComm](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/samples/common/ObjectComm)
+  [samples/common/ObjectComm](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/samples/common/ObjectComm)
 
 ## What This Produces
 
@@ -92,7 +92,7 @@ script.
 
 Together with:
 
-- [features/ers7-sdk-wconsole-helloworld/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-helloworld/README.md)
+- [features/ers7-sdk-wconsole-helloworld/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-sdk-wconsole-helloworld/README.md)
 
 this gives us both:
 

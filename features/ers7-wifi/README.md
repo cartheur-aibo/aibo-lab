@@ -38,10 +38,10 @@ There are no WPA-related settings in the documented configuration format.
 
 The most useful files here are:
 
-- [docs/InstallationGuide_E.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/InstallationGuide_E.pdf)
-- [docs/AIBO-quickstart.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/AIBO-quickstart.pdf)
-- [opt/AIBO7M2/OPEN-R/SYSTEM/CONF/SAMPLE/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/opt/AIBO7M2/OPEN-R/SYSTEM/CONF/SAMPLE/WLANCONF.TXT:1)
-- [sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R/SYSTEM/CONF/WLANDFLT.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R/SYSTEM/CONF/WLANDFLT.TXT:1)
+- [docs/InstallationGuide_E.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/InstallationGuide_E.pdf)
+- [docs/AIBO-quickstart.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/AIBO-quickstart.pdf)
+- [opt/AIBO7M2/OPEN-R/SYSTEM/CONF/SAMPLE/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/opt/AIBO7M2/OPEN-R/SYSTEM/CONF/SAMPLE/WLANCONF.TXT:1)
+- [local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R/SYSTEM/CONF/WLANDFLT.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R/SYSTEM/CONF/WLANDFLT.TXT:1)
 
 ## Step 1: Use A Wireless-Capable OPEN-R Layout
 
@@ -56,10 +56,10 @@ For setup and debugging, `WCONSOLE` is the easiest choice.
 If you are preparing a fresh programmable stick from the SDK included in this
 repo, start from one of these:
 
-- `sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WLAN/memprot/OPEN-R`
-- `sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WLAN/nomemprot/OPEN-R`
-- `sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R`
-- `sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/nomemprot/OPEN-R`
+- `local/OPEN_R_SDK/OPEN_R/MS_ERS7/WLAN/memprot/OPEN-R`
+- `local/OPEN_R_SDK/OPEN_R/MS_ERS7/WLAN/nomemprot/OPEN-R`
+- `local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R`
+- `local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/nomemprot/OPEN-R`
 
 Copy the `OPEN-R` directory to the root of the programmable Memory Stick.
 
@@ -78,7 +78,7 @@ Start by copying:
 
 or use the example file in this folder:
 
-- [WLANCONF.example.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/ers7-wifi/WLANCONF.example.TXT)
+- [WLANCONF.example.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/ers7-wifi/WLANCONF.example.TXT)
 
 Place the finished file here on the stick:
 
@@ -180,11 +180,11 @@ If you do not know the IP yet:
 
 The AIBO MIND files on the stick include a browser UI under:
 
-- [opt/AIBO7M2/OPEN-R/APP/PC/INDEX.HTM](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/opt/AIBO7M2/OPEN-R/APP/PC/INDEX.HTM:1)
+- [opt/AIBO7M2/OPEN-R/APP/PC/INDEX.HTM](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/opt/AIBO7M2/OPEN-R/APP/PC/INDEX.HTM:1)
 
 That UI includes a "Connection Check" page:
 
-- [opt/AIBO7M2/OPEN-R/APP/PC/AIBOMAIL/AMNWSTAT.FRM](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/opt/AIBO7M2/OPEN-R/APP/PC/AIBOMAIL/AMNWSTAT.FRM:1)
+- [opt/AIBO7M2/OPEN-R/APP/PC/AIBOMAIL/AMNWSTAT.FRM](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/opt/AIBO7M2/OPEN-R/APP/PC/AIBOMAIL/AMNWSTAT.FRM:1)
 
 This is more about AIBO EYES mail connectivity than raw Wi-Fi association, but
 it is another clue that the network stack is alive.

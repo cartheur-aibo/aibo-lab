@@ -333,7 +333,7 @@ profile signals now split cleanly.
 
 To expose the row split at the verdict level, a sharper scenario was added:
 
-- [simulator/scenarios/mind2-shutdown-fatigue-probe.scn](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/simulator/scenarios/mind2-shutdown-fatigue-probe.scn)
+- [simulator/scenarios/mind2-shutdown-fatigue-probe.scn](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/simulator/scenarios/mind2-shutdown-fatigue-probe.scn)
 
 Sequence:
 
@@ -741,7 +741,7 @@ That richer event step has now been taken for sleep behavior.
 
 A sharper sleep scenario was added:
 
-- [simulator/scenarios/mind2-routine-sleep-probe.scn](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/simulator/scenarios/mind2-routine-sleep-probe.scn)
+- [simulator/scenarios/mind2-routine-sleep-probe.scn](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/simulator/scenarios/mind2-routine-sleep-probe.scn)
 
 Sequence:
 

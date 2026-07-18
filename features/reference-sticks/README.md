@@ -8,21 +8,21 @@ path.
 
 ## What Lives Here
 
-- [mind2-reader-capture.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/mind2-reader-capture.txt)
+- [mind2-reader-capture.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/mind2-reader-capture.txt)
   for the genuine ERS-7 MIND 2 stick record
-- [mind3-reader-capture.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/mind3-reader-capture.txt)
+- [mind3-reader-capture.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/mind3-reader-capture.txt)
   for the larger MIND 3-class stick record
-- [sony-mind2-reference.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/sony-mind2-reference.img.sha256)
+- [sony-mind2-reference.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/sony-mind2-reference.img.sha256)
   for the genuine MIND 2 raw-image digest
-- [sony-mind3-reference.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/sony-mind3-reference.img.sha256)
+- [sony-mind3-reference.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/sony-mind3-reference.img.sha256)
   for the MIND 3 raw-image digest
-- [sony-32mb-reference.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/sony-32mb-reference.img.sha256)
+- [sony-32mb-reference.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/sony-32mb-reference.img.sha256)
   for the Sony-formatted 32 MB reference-stick raw-image digest
-- [mind2-imaging.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/mind2-imaging.txt)
+- [mind2-imaging.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/mind2-imaging.txt)
   for the operator command set to inspect and capture a genuine MIND 2 stick
-- [mind3-imaging.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/mind3-imaging.txt)
+- [mind3-imaging.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/mind3-imaging.txt)
   for the operator command set to capture a MIND 3-class stick
-- [sony-stick-identification-and-imaging.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/sony-stick-identification-and-imaging.txt)
+- [sony-stick-identification-and-imaging.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/sony-stick-identification-and-imaging.txt)
   for the operator decision path when a newly found Sony stick is still unknown
 
 ## Local Raw Images
@@ -39,7 +39,7 @@ checksums and reference notes online.
 
 ## Relationship To Stick Forensics
 
-[features/ers7-stick-forensics/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-stick-forensics/README.md)
+[features/ers7-stick-forensics/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-stick-forensics/README.md)
 is now the historical/background record for low-level formatting differences
 and the deprioritized 8 MB path.
 

@@ -1,7 +1,7 @@
 # New Sticks Troubleshooting
 
 This guide is the operational companion to
-[features/stick-feature-deployment/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/README.md).
+[features/stick-feature-deployment/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/stick-feature-deployment/README.md).
 
 Use it when the process feels delicate, ambiguous, or easy to derail.
 

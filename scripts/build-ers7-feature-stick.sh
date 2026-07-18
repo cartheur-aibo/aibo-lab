@@ -10,7 +10,7 @@ using the SDK's WCONSOLE base plus the HelloWorld + PowerMonitor test payload.
 By default, build outputs live under features/<feature-slug>/.
 
 Environment variables:
-  OPENRSDK_ROOT   SDK root. Defaults to ./sdk/local/OPEN_R_SDK
+  OPENRSDK_ROOT   SDK root. Defaults to ./local/OPEN_R_SDK
   SAMPLE_DIR      Sample root. Default: ./samples/common/HelloWorld
   FEATURE_SLUG    Feature output folder name. Default: derived from SAMPLE_DIR
   PAYLOAD_MODE    base-only, hello-only, or hello-plus-powermon. Default: hello-plus-powermon
@@ -38,7 +38,7 @@ if [ "$#" -gt 1 ]; then
 fi
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-OPENRSDK_ROOT="${OPENRSDK_ROOT:-$ROOT_DIR/sdk/local/OPEN_R_SDK}"
+OPENRSDK_ROOT="${OPENRSDK_ROOT:-$ROOT_DIR/local/OPEN_R_SDK}"
 SAMPLE_DIR="${SAMPLE_DIR:-$ROOT_DIR/samples/common/HelloWorld}"
 PAYLOAD_MODE="${PAYLOAD_MODE:-hello-plus-powermon}"
 SYSTEM_SOURCE="${SYSTEM_SOURCE:-sdk}"

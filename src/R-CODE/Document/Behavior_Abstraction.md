@@ -100,8 +100,8 @@ This is closer to a tiny behavior runtime than a plain script.
 
 Files:
 
-- preserved source: [../sample/MoveAIBO.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/sample/MoveAIBO.R:1)
-- generated viewer: [../generated/Move.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Move.html:1)
+- preserved source: [../sample/MoveAIBO.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/sample/MoveAIBO.R:1)
+- generated viewer: [../generated/Move.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Move.html:1)
 
 Raw behavior:
 
@@ -134,9 +134,9 @@ This is best described as:
 
 Files:
 
-- preserved source: [../sample/SoccerDog1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/sample/SoccerDog1.R:1)
-- generated analysis: [../generated/Football-Behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Football-Behavior.md:1)
-- generated viewer: [../generated/Football.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Football.html:1)
+- preserved source: [../sample/SoccerDog1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/sample/SoccerDog1.R:1)
+- generated analysis: [../generated/Football-Behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Football-Behavior.md:1)
+- generated viewer: [../generated/Football.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Football.html:1)
 
 Raw behavior:
 
@@ -182,8 +182,8 @@ This is best described as:
 
 Files:
 
-- preserved source: [../sample/Maze1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/sample/Maze1.R:1)
-- generated viewer: [../generated/Maze.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Maze.html:1)
+- preserved source: [../sample/Maze1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/sample/Maze1.R:1)
+- generated viewer: [../generated/Maze.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Maze.html:1)
 
 Raw behavior:
 
@@ -260,7 +260,7 @@ sensor-driven transitions.
 
 The repo now includes a working extractor:
 
-- [../../../scripts/extract-rcode-behavior.py](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/extract-rcode-behavior.py:1)
+- [../../../scripts/extract-rcode-behavior.py](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/extract-rcode-behavior.py:1)
 
 Use it to write sidecars for preserved sample scripts:
 

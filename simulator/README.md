@@ -136,7 +136,7 @@ persistent-state differences are worth a real-stick trial.
 
 The current Mind2-specific quality plan for that layer lives in:
 
-- [simulator/MIND2-QUALITY-ROADMAP.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/simulator/MIND2-QUALITY-ROADMAP.md)
+- [simulator/MIND2-QUALITY-ROADMAP.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/simulator/MIND2-QUALITY-ROADMAP.md)
 
 That roadmap intersects with this README in an important way:
 

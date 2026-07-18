@@ -2,7 +2,7 @@
 
 This file was generated from:
 
-- preserved source: [../sample/SoccerDog1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/sample/SoccerDog1.R:1)
+- preserved source: [../sample/SoccerDog1.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/sample/SoccerDog1.R:1)
 
 using:
 
@@ -13,9 +13,9 @@ python3 scripts/extract-rcode-behavior.py --write-sidecars \
 
 The current generated sidecars for that preserved source live in:
 
-- [Football.behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Football.behavior.md:1)
-- [Football.mmd](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Football.mmd:1)
-- [Football.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/Football.html:1)
+- [Football.behavior.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Football.behavior.md:1)
+- [Football.mmd](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Football.mmd:1)
+- [Football.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/Football.html:1)
 
 ## Summary
 

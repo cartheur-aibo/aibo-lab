@@ -26,11 +26,11 @@ overlay.
 
 The local distilled doc note is:
 
-- [docs/aperios-scrapes/WCONSOLE-SDK-BUILD-NOTES.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/aperios-scrapes/WCONSOLE-SDK-BUILD-NOTES.md)
+- [docs/aperios-scrapes/WCONSOLE-SDK-BUILD-NOTES.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios-scrapes/WCONSOLE-SDK-BUILD-NOTES.md)
 
 The strongest local sample hint is:
 
-- [samples/common/ImageCapture/README_E.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/samples/common/ImageCapture/README_E.txt)
+- [samples/common/ImageCapture/README_E.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/samples/common/ImageCapture/README_E.txt)
 
 That sample says image data can be retrieved over wireless LAN if `TinyFTPd` is
 running.
@@ -50,9 +50,9 @@ That creates:
 This workflow uses:
 
 - SDK base:
-  `sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/nomemprot/OPEN-R`
+  `local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/nomemprot/OPEN-R`
 - sample:
-  [samples/common/TinyFTPD](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/samples/common/TinyFTPD)
+  [samples/common/TinyFTPD](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/samples/common/TinyFTPD)
 
 ## What This Produces
 
@@ -141,6 +141,6 @@ What it does not yet prove:
 
 ## Related Features
 
-- [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/README.md)
-- [features/ers7-sdk-wconsole-helloworld/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-helloworld/README.md)
-- [features/ers7-sdk-wconsole-objectcomm/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-objectcomm/README.md)
+- [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-baseline/README.md)
+- [features/ers7-sdk-wconsole-helloworld/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-sdk-wconsole-helloworld/README.md)
+- [features/ers7-sdk-wconsole-objectcomm/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-sdk-wconsole-objectcomm/README.md)

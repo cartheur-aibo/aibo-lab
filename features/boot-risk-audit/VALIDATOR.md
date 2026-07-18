@@ -5,7 +5,7 @@ ERS-7 M2.
 
 Script:
 
-- [scripts/validate-ers7m2-candidate.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/validate-ers7m2-candidate.sh)
+- [scripts/validate-ers7m2-candidate.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/validate-ers7m2-candidate.sh)
 
 ## What It Does
 

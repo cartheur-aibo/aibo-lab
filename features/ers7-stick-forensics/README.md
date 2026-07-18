@@ -108,7 +108,7 @@ formatting reference even though it is not an AIBO boot stick yet.
 
 Its recorded details live in:
 
-- [32mb-carte-capture.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-stick-forensics/32mb-carte-capture.txt)
+- [32mb-carte-capture.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-stick-forensics/32mb-carte-capture.txt)
 
 The important conclusion is that this media matches the same Sony low-level
 formatting pattern as the working 32 MB AIBO MIND 2 stick:
@@ -140,7 +140,7 @@ unformatted sticks.
 We preserved the raw image of the `CARTE` reference stick locally at:
 
 - `local-artifacts/sony-32mb-reference.img`
-- [sony-32mb-reference.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/sony-32mb-reference.img.sha256)
+- [sony-32mb-reference.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/sony-32mb-reference.img.sha256)
 
 The image is intentionally kept out of normal Git history for consistency with
 the larger MIND 3 reference image.
@@ -167,7 +167,7 @@ captured in a dirty state.
 
 The active baseline records for genuine MIND 2 and MIND 3 sticks now live in:
 
-- [features/reference-sticks/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/README.md)
+- [features/reference-sticks/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/README.md)
 
 This `ers7-stick-forensics` folder should now be read mainly as:
 

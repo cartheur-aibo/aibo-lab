@@ -36,7 +36,7 @@ That creates:
 
 and injects:
 
-- [src/ERS7M3/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/ERS7M3/WLANCONF.TXT)
+- [src/ERS7M3/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/ERS7M3/WLANCONF.TXT)
 
 into:
 
@@ -46,7 +46,7 @@ into:
 
 The script copies from:
 
-- [opt/AIBO7M3](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/opt/AIBO7M3)
+- [opt/AIBO7M3](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/opt/AIBO7M3)
 
 which is the preserved MIND 3 stick tree in this repo.
 
@@ -62,7 +62,7 @@ By default, staged output also strips common host-side junk such as:
 Once the Sony stick is mounted:
 
 ```bash
-rsync -a --delete /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m3-test-stick/build/stick/ /path/to/mounted-stick/
+rsync -a --delete /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m3-test-stick/build/stick/ /path/to/mounted-stick/
 sync
 ```
 

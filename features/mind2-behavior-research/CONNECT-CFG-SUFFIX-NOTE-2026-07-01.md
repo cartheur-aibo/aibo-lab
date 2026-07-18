@@ -133,8 +133,8 @@ less:
 
 Tool:
 
-- [scripts/decode-retail-connect-suffix.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/decode-retail-connect-suffix.sh)
-- [scripts/analyze-retail-connect-table.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/analyze-retail-connect-table.sh)
+- [scripts/decode-retail-connect-suffix.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/decode-retail-connect-suffix.sh)
+- [scripts/analyze-retail-connect-table.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/analyze-retail-connect-table.sh)
 
 Example:
 

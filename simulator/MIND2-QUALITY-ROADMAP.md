@@ -44,7 +44,7 @@ feedback loop between simulator predictions and live trials.
 Concrete work:
 
 - treat
-  [features/mind2-behavior-research/LIVE-HARDWARE-MATRIX-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/LIVE-HARDWARE-MATRIX-2026-07-01.md)
+  [features/mind2-behavior-research/LIVE-HARDWARE-MATRIX-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/mind2-behavior-research/LIVE-HARDWARE-MATRIX-2026-07-01.md)
   as the primary acceptance boundary for simulator changes
 - record, for each simulator distinction, which exact live observation would:
   - strengthen it
@@ -64,7 +64,7 @@ Success criteria:
 
 Right now much of the MIND 2 logic is understandable, but it still lives
 mostly as hand-authored semantics inside
-[aperios/src/mind2_behavior_sim.cpp](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/aperios/src/mind2_behavior_sim.cpp).
+[aperios/src/mind2_behavior_sim.cpp](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/aperios/src/mind2_behavior_sim.cpp).
 
 The next quality step is to separate the simulator into a clearer pipeline:
 
@@ -183,7 +183,7 @@ order is:
 ## How This Intersects With The Simulator README
 
 The top-level simulator plan in
-[simulator/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/simulator/README.md)
+[simulator/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/simulator/README.md)
 describes the layered simulator strategy for the repo as a whole:
 
 - boot-layout simulation

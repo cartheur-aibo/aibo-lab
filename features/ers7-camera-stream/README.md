@@ -52,13 +52,13 @@ That script:
 - stages the camera-stream stick under:
   `features/ers7-camera-stream/build/stick`
 - injects the known-good Wi-Fi config from:
-  [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/ERS7M2/WLANCONF.TXT)
+  [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/ERS7M2/WLANCONF.TXT)
 
 ## Build Requirements
 
 The script expects:
 
-- the local SDK at `sdk/local/OPEN_R_SDK`
+- the local SDK at `local/OPEN_R_SDK`
 - the sample source at `samples/common/W3AIBO`
 - `jpegsrc.v6b.tar.gz` at `samples/common/W3AIBO/jpegsrc.v6b.tar.gz`
 
@@ -86,7 +86,7 @@ The sample's `OBJECT.CFG` should boot:
 After the script succeeds:
 
 ```bash
-rsync -a --delete /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-camera-stream/build/stick/ /path/to/mounted-stick/
+rsync -a --delete /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-camera-stream/build/stick/ /path/to/mounted-stick/
 sync
 ```
 

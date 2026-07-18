@@ -15,7 +15,7 @@ By default this:
 - writes the staged stick tree under features/ers7-camera-stream/build/stick
 
 Environment variables:
-  OPENRSDK_ROOT    SDK root. Default: ./sdk/local/OPEN_R_SDK
+  OPENRSDK_ROOT    SDK root. Default: ./local/OPEN_R_SDK
   SAMPLE_DIR       Sample root. Default: ./samples/common/W3AIBO
   JPEG_ARCHIVE     Path to jpegsrc.v6b.tar.gz
                    Default: ./samples/common/W3AIBO/jpegsrc.v6b.tar.gz
@@ -35,7 +35,7 @@ if [ "$#" -gt 1 ]; then
 fi
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-OPENRSDK_ROOT="${OPENRSDK_ROOT:-$ROOT_DIR/sdk/local/OPEN_R_SDK}"
+OPENRSDK_ROOT="${OPENRSDK_ROOT:-$ROOT_DIR/local/OPEN_R_SDK}"
 SAMPLE_DIR="${SAMPLE_DIR:-$ROOT_DIR/samples/common/W3AIBO}"
 JPEG_ARCHIVE="${JPEG_ARCHIVE:-$SAMPLE_DIR/jpegsrc.v6b.tar.gz}"
 WLANCONF_SOURCE="${WLANCONF_SOURCE:-$ROOT_DIR/src/ERS7M2/WLANCONF.TXT}"

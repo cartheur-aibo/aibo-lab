@@ -42,19 +42,19 @@ This creates:
 Set the staged source path you actually want to deploy:
 
 ```bash
-STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/build/stick
+STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-baseline/build/stick
 ```
 
 or:
 
 ```bash
-STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-helloworld/build/stick
+STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-sdk-wconsole-helloworld/build/stick
 ```
 
 or:
 
 ```bash
-STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-tinyftpd/build/stick
+STAGED_STICK=/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-sdk-wconsole-tinyftpd/build/stick
 ```
 
 The staged tree already contains the two items that must exist at the stick
@@ -168,7 +168,7 @@ The staged test-stick workflow injects:
 
 Those values come from:
 
-- [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/ERS7M2/WLANCONF.TXT)
+- [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/ERS7M2/WLANCONF.TXT)
 
 ## One-Line Copy Commands
 
@@ -178,7 +178,7 @@ baseline deployment command:
 ```bash
 ./scripts/prepare-ers7m2-baseline.sh
 rsync -a --delete \
-  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/build/stick/ \
+  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-baseline/build/stick/ \
   /media/$USER/disk/
 sync
 ```
@@ -188,7 +188,7 @@ For the pure SDK WCONSOLE HelloWorld deployment command:
 ```bash
 ./scripts/prepare-ers7-sdk-wconsole-helloworld.sh
 rsync -a --delete \
-  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-helloworld/build/stick/ \
+  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-sdk-wconsole-helloworld/build/stick/ \
   /media/$USER/disk/
 sync
 ```
@@ -198,7 +198,7 @@ For the pure SDK WCONSOLE TinyFTPD deployment command:
 ```bash
 ./scripts/prepare-ers7-sdk-wconsole-tinyftpd.sh
 rsync -a --delete \
-  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-tinyftpd/build/stick/ \
+  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-sdk-wconsole-tinyftpd/build/stick/ \
   /media/$USER/disk/
 sync
 umount /media/$USER/disk

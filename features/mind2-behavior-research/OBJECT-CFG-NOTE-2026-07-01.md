@@ -112,8 +112,8 @@ For simulator/tooling work, the current best characterization is:
 To support lower-level interpretation, the repo now also carries a CPU-family
 reference manual:
 
-- [local-artifacts/cpu-docs/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/local-artifacts/cpu-docs/README.md)
-- [local-artifacts/cpu-docs/R4000_Preliminary_Users_Manual_1992.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/local-artifacts/cpu-docs/R4000_Preliminary_Users_Manual_1992.pdf)
+- [local-artifacts/cpu-docs/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/local-artifacts/cpu-docs/README.md)
+- [local-artifacts/cpu-docs/R4000_Preliminary_Users_Manual_1992.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/local-artifacts/cpu-docs/R4000_Preliminary_Users_Manual_1992.pdf)
 
 Why it is relevant:
 

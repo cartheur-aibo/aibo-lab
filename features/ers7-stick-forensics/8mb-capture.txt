@@ -6,7 +6,7 @@ sda    /dev/sda  476.9G                         INTENSO SSD sata
 └─sda3 /dev/sda3   976M swap         [SWAP]                 
 sdb    /dev/sdb    7.7M                         MSAC-US40   usb
 └─sdb1 /dev/sdb1   7.7M vfat                                
-root@persephone:/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian# sudo /sbin/fdisk -l /dev/sdb
+root@persephone:/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab# sudo /sbin/fdisk -l /dev/sdb
 Disk /dev/sdb: 7.73 MiB, 8110080 bytes, 15840 sectors
 Disk model: MSAC-US40       
 Units: sectors of 1 * 512 = 512 bytes
@@ -17,7 +17,7 @@ Disk identifier: 0xa656bfe7
 
 Device     Boot Start   End Sectors  Size Id Type
 /dev/sdb1  *       25 15807   15783  7.7M  1 FAT12
-root@persephone:/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian# sudo /sbin/fsck.fat -vn /dev/sdb1
+root@persephone:/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab# sudo /sbin/fsck.fat -vn /dev/sdb1
 fsck.fat 4.2 (2021-01-31)
 Checking we can access the last sector of the filesystem
 Boot sector contents:
@@ -38,7 +38,7 @@ Data area starts at byte 19968 (sector 39)
      15783 sectors total
 Checking for unused clusters.
 /dev/sdb1: 47 files, 174/984 clusters
-root@persephone:/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian# sudo dd if=/dev/sdb bs=512 count=64 | hexdump -C | head -200
+root@persephone:/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab# sudo dd if=/dev/sdb bs=512 count=64 | hexdump -C | head -200
 00000000  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
 *
 000001b0  00 00 00 00 00 00 00 00  e7 bf 56 a6 00 00 80 01  |..........V.....|
@@ -129,7 +129,7 @@ root@persephone:/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/open
 000040a0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
 *
 00008000
-root@persephone:/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian# sudo dd if=/dev/sdb1 bs=512 count=32 | hexdump -C | head -200
+root@persephone:/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab# sudo dd if=/dev/sdb1 bs=512 count=32 | hexdump -C | head -200
 00000000  eb 3c 90 6d 6b 66 73 2e  66 61 74 00 02 10 01 00  |.<.mkfs.fat.....|
 00000010  02 00 02 a7 3d f8 03 00  10 00 02 00 19 00 00 00  |....=...........|
 00000020  00 00 00 00 80 00 29 87  54 27 30 4e 4f 20 4e 41  |......).T'0NO NA|

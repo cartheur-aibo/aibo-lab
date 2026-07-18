@@ -36,7 +36,7 @@ Copy it to the mounted dev stick:
 
 ```bash
 rsync -a --delete \
-  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/build/stick/ \
+  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-baseline/build/stick/ \
   /media/$USER/AIBOM2DEV/
 sync
 umount /media/$USER/AIBOM2DEV
@@ -72,7 +72,7 @@ Copy it to the same mounted dev stick:
 
 ```bash
 rsync -a --delete \
-  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-tinyftpd/build/stick/ \
+  /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-sdk-wconsole-tinyftpd/build/stick/ \
   /media/$USER/AIBOM2DEV/
 sync
 umount /media/$USER/AIBOM2DEV
@@ -134,8 +134,8 @@ So the current safe conclusion is:
 
 ## Related Docs
 
-- [features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md)
-- [features/stick-feature-deployment/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/TROUBLESHOOTING.md)
-- [features/boot-risk-audit/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/boot-risk-audit/README.md)
-- [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/README.md)
-- [features/ers7-sdk-wconsole-tinyftpd/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-tinyftpd/README.md)
+- [features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md)
+- [features/stick-feature-deployment/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/stick-feature-deployment/TROUBLESHOOTING.md)
+- [features/boot-risk-audit/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/boot-risk-audit/README.md)
+- [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-baseline/README.md)
+- [features/ers7-sdk-wconsole-tinyftpd/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-sdk-wconsole-tinyftpd/README.md)

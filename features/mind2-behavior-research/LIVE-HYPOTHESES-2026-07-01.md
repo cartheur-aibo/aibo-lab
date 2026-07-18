@@ -163,7 +163,7 @@ Run each with:
 
 The newer dynamic bench matrix is tracked separately here:
 
-- [LIVE-HARDWARE-MATRIX-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/LIVE-HARDWARE-MATRIX-2026-07-01.md)
+- [LIVE-HARDWARE-MATRIX-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/mind2-behavior-research/LIVE-HARDWARE-MATRIX-2026-07-01.md)
 
 ## What Would Falsify The Current Model
 

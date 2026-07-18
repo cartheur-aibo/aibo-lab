@@ -7,16 +7,16 @@ answer to:
 
 The full text scrapes live alongside this note:
 
-- [ProgrammersGuide.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/aperios-scrapes/ProgrammersGuide.txt)
-- [InstallationGuide_E.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/aperios-scrapes/InstallationGuide_E.txt)
-- [ModelInformation_7_E.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/aperios-scrapes/ModelInformation_7_E.txt)
-- [InternetProtocolVersion4.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/aperios-scrapes/InternetProtocolVersion4.txt)
+- [ProgrammersGuide.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios-scrapes/ProgrammersGuide.txt)
+- [InstallationGuide_E.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios-scrapes/InstallationGuide_E.txt)
+- [ModelInformation_7_E.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios-scrapes/ModelInformation_7_E.txt)
+- [InternetProtocolVersion4.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios-scrapes/InternetProtocolVersion4.txt)
 
 Focused excerpt files:
 
-- [ProgrammersGuide-WCONSOLE-OPENR-section.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/aperios-scrapes/ProgrammersGuide-WCONSOLE-OPENR-section.txt)
-- [InstallationGuide-WCONSOLE-HelloWorld-section.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/aperios-scrapes/InstallationGuide-WCONSOLE-HelloWorld-section.txt)
-- [InstallationGuide-WCONSOLE-RP-section.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/aperios-scrapes/InstallationGuide-WCONSOLE-RP-section.txt)
+- [ProgrammersGuide-WCONSOLE-OPENR-section.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios-scrapes/ProgrammersGuide-WCONSOLE-OPENR-section.txt)
+- [InstallationGuide-WCONSOLE-HelloWorld-section.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios-scrapes/InstallationGuide-WCONSOLE-HelloWorld-section.txt)
+- [InstallationGuide-WCONSOLE-RP-section.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios-scrapes/InstallationGuide-WCONSOLE-RP-section.txt)
 
 ## Core Doc Answer
 

@@ -73,7 +73,7 @@ OPEN-R is the most powerful option and the focus of this guide.
 
 For `ERS-111`, the equivalent first-class path in this repo is the preserved
 `R-CODE` environment under
-[src/R-CODE/](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/README.md),
+[src/R-CODE/](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/README.md),
 where behavior can be scripted and observed with the robot's built-in media and
 tone-recognition facilities. It should also be understood as part of the
 earlier `OPEN-R v1` lineage rather than as an `ERS-7`-style Wi-Fi-native
@@ -153,7 +153,7 @@ So the relationship should be read like this:
 
 For the current quality plan of the MIND 2 simulator layer, see:
 
-- [simulator/MIND2-QUALITY-ROADMAP.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/simulator/MIND2-QUALITY-ROADMAP.md)
+- [simulator/MIND2-QUALITY-ROADMAP.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/simulator/MIND2-QUALITY-ROADMAP.md)
 
 ## Status Snapshot
 
@@ -171,7 +171,7 @@ partially completed platform work, and still-open application goals.
 - dedicated-stick discipline and preserved-baseline handling for experimental
   work
 - Debian-side boot-layout validation with
-  [scripts/simulate-openr-boot.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/simulate-openr-boot.sh)
+  [scripts/simulate-openr-boot.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/simulate-openr-boot.sh)
 - first host-side OPEN-R lifecycle proof with the Sony `HelloWorld` sample
 - WLAN and `WCONSOLE` operational knowledge for ERS-7 staging and observation
 - preserved MIND 2 and MIND 3 reference-stick baselines

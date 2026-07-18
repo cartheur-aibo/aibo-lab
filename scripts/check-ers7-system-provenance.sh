@@ -13,8 +13,8 @@ Accepted inputs for <baseline-ms-root> and <candidate-ms-root>:
   - a sample directory containing MS/OPEN-R/
 
 Example SDK roots:
-  sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WLAN/memprot/OPEN-R
-  sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R
+  local/OPEN_R_SDK/OPEN_R/MS_ERS7/WLAN/memprot/OPEN-R
+  local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R
 EOF
 }
 

@@ -14,7 +14,7 @@ It exists to answer the simpler question:
 
 The local document distillation is here:
 
-- [docs/aperios-scrapes/WCONSOLE-SDK-BUILD-NOTES.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/aperios-scrapes/WCONSOLE-SDK-BUILD-NOTES.md)
+- [docs/aperios-scrapes/WCONSOLE-SDK-BUILD-NOTES.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios-scrapes/WCONSOLE-SDK-BUILD-NOTES.md)
 
 The short official pattern is:
 
@@ -39,9 +39,9 @@ That creates:
 This workflow uses:
 
 - SDK base:
-  `sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R`
+  `local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R`
 - sample:
-  [samples/common/HelloWorld](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/samples/common/HelloWorld)
+  [samples/common/HelloWorld](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/samples/common/HelloWorld)
 
 ## What This Produces
 
@@ -66,7 +66,7 @@ By default the wrapper uses:
 
 You can override those with the same environment variables supported by:
 
-- [scripts/build-ers7-feature-stick.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/build-ers7-feature-stick.sh)
+- [scripts/build-ers7-feature-stick.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/build-ers7-feature-stick.sh)
 
 ## Copy To The Stick
 

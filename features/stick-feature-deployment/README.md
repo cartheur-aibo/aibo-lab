@@ -8,17 +8,17 @@ start from the right baseline without repeating dead ends.
 
 Operational troubleshooting lives here:
 
-- [features/stick-feature-deployment/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/TROUBLESHOOTING.md)
-- [features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md)
-- [features/stick-feature-deployment/SAFE-LIVE-TEST.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/SAFE-LIVE-TEST.md)
+- [features/stick-feature-deployment/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/stick-feature-deployment/TROUBLESHOOTING.md)
+- [features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/stick-feature-deployment/DEPLOY-TO-SONY-READER.md)
+- [features/stick-feature-deployment/SAFE-LIVE-TEST.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/stick-feature-deployment/SAFE-LIVE-TEST.md)
 
 Mixed retail-MIND-2-plus-SDK deployment artifacts are intentionally not part of
 this playbook anymore.
 
 If you need the reasoning behind that, read:
 
-- [features/boot-risk-audit/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/boot-risk-audit/README.md)
-- [features/boot-risk-audit/SYSTEM-CONFIG-LINEAGE-NOTES.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/boot-risk-audit/SYSTEM-CONFIG-LINEAGE-NOTES.md)
+- [features/boot-risk-audit/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/boot-risk-audit/README.md)
+- [features/boot-risk-audit/SYSTEM-CONFIG-LINEAGE-NOTES.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/boot-risk-audit/SYSTEM-CONFIG-LINEAGE-NOTES.md)
 
 ## Mission
 
@@ -53,12 +53,12 @@ The practical result is:
 
 Canonical tools for that closed problem:
 
-- [scripts/scan-sony-stick-image.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/scan-sony-stick-image.sh)
-- [scripts/restore-mind2-stick.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/restore-mind2-stick.sh)
-- [features/aibo-mind2/RESTORE-SONY-32MB-STICK.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/aibo-mind2/RESTORE-SONY-32MB-STICK.md)
-- [features/reference-sticks/MILESTONE-2026-07-01-mind2-recovery.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/MILESTONE-2026-07-01-mind2-recovery.md)
-- [features/reference-sticks/REPAIRED-MIND2-PRESERVATION.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/REPAIRED-MIND2-PRESERVATION.md)
-- [features/reference-sticks/sony-mind2-restored-2026-07-01.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/sony-mind2-restored-2026-07-01.img.sha256)
+- [scripts/scan-sony-stick-image.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/scan-sony-stick-image.sh)
+- [scripts/restore-mind2-stick.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/restore-mind2-stick.sh)
+- [features/aibo-mind2/RESTORE-SONY-32MB-STICK.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/aibo-mind2/RESTORE-SONY-32MB-STICK.md)
+- [features/reference-sticks/MILESTONE-2026-07-01-mind2-recovery.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/MILESTONE-2026-07-01-mind2-recovery.md)
+- [features/reference-sticks/REPAIRED-MIND2-PRESERVATION.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/REPAIRED-MIND2-PRESERVATION.md)
+- [features/reference-sticks/sony-mind2-restored-2026-07-01.img.sha256](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/sony-mind2-restored-2026-07-01.img.sha256)
 
 ## What Is Already Proven
 
@@ -75,7 +75,7 @@ These points are no longer guesses:
 This means:
 
 - the lab robot-side WLAN configuration in
-  [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/ERS7M2/WLANCONF.TXT)
+  [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/ERS7M2/WLANCONF.TXT)
   is a credible operational baseline
 - access-point compatibility matters a lot
 - the 8 MB failures should not be treated as proof that our higher-level app
@@ -107,28 +107,28 @@ These lessons should guide all future work:
 
 When a future agent needs the best known inputs, start here:
 
-- [features/aibo-mind2/build/stick](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/aibo-mind2/build/stick)
+- [features/aibo-mind2/build/stick](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/aibo-mind2/build/stick)
   is the preserved staged copy of the real known-good 32 MB ERS-7 MIND 2 stick
-- [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/ERS7M2/WLANCONF.TXT)
+- [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/ERS7M2/WLANCONF.TXT)
   is the lab-operational WLAN config used for current multi-robot testing, not
   necessarily the preserved specimen WLAN state
 - the intended hostname naming convention for the current lab is:
   `AIBO-M2A`, `AIBO-M2B`, `AIBO-M3A`
-- [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/README.md)
+- [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-baseline/README.md)
   describes the preserved-only first-boot MIND 2 baseline
-- [features/ers7-sdk-wconsole-helloworld/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-helloworld/README.md)
+- [features/ers7-sdk-wconsole-helloworld/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-sdk-wconsole-helloworld/README.md)
   describes the complete pure SDK ERS-7 WCONSOLE HelloWorld workflow
-- [features/ers7-sdk-wconsole-objectcomm/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-objectcomm/README.md)
+- [features/ers7-sdk-wconsole-objectcomm/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-sdk-wconsole-objectcomm/README.md)
   describes the complete pure SDK ERS-7 WCONSOLE/nomemprot ObjectComm workflow
-- [features/ers7-sdk-wconsole-tinyftpd/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-sdk-wconsole-tinyftpd/README.md)
+- [features/ers7-sdk-wconsole-tinyftpd/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-sdk-wconsole-tinyftpd/README.md)
   describes the pure SDK WCONSOLE/nomemprot FTP plus console workflow
-- [features/ers7m3-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m3-test-stick/README.md)
+- [features/ers7m3-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m3-test-stick/README.md)
   describes the larger-stick MIND 3 workflow
-- [features/reference-sticks/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/README.md)
+- [features/reference-sticks/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/README.md)
   is the active baseline for preserved genuine MIND 2 and MIND 3 stick records
-- [features/ers7-camera-stream/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-camera-stream/README.md)
+- [features/ers7-camera-stream/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-camera-stream/README.md)
   describes the programmable camera-serving workflow
-- [features/ers7-stick-forensics/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-stick-forensics/README.md)
+- [features/ers7-stick-forensics/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-stick-forensics/README.md)
   captures the low-level background and why the 8 MB recreation path was deprioritized
 
 ## Phase 1: First Bring-Up On New Sticks
@@ -155,7 +155,7 @@ This produces:
 ### Copy To The Mounted Stick
 
 ```bash
-rsync -a --delete /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/build/stick/ /path/to/mounted-stick/
+rsync -a --delete /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-baseline/build/stick/ /path/to/mounted-stick/
 sync
 ```
 
@@ -240,10 +240,10 @@ So the remaining unknown is robot/media behavior, not the basic host build.
 If a future agent opens this repo cold, the best order is:
 
 1. Read this playbook.
-2. Read [features/stick-feature-deployment/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/stick-feature-deployment/TROUBLESHOOTING.md).
-3. Read [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m2-baseline/README.md).
+2. Read [features/stick-feature-deployment/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/stick-feature-deployment/TROUBLESHOOTING.md).
+3. Read [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-baseline/README.md).
 4. Verify the preserved baseline exists at
-   [features/aibo-mind2/build/stick](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/aibo-mind2/build/stick).
+   [features/aibo-mind2/build/stick](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/aibo-mind2/build/stick).
 5. Prepare the larger-stick MIND 2 baseline tree.
 6. Test stock boot and stock HTTP first.
 7. Only then move to complete SDK sample workflows, app overlays, or `W3AIBO`.
@@ -295,4 +295,4 @@ It is this:
 
 That next phase now lives in:
 
-- [features/mind2-behavior-research/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/README.md)
+- [features/mind2-behavior-research/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/mind2-behavior-research/README.md)

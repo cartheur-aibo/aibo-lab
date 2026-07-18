@@ -35,9 +35,9 @@ Excluded from this composite:
 
 Files:
 
-- composite diagram: [../generated/EmbodiedBehaviors.mmd](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/EmbodiedBehaviors.mmd:1)
-- viewer: [../generated/EmbodiedBehaviors.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/EmbodiedBehaviors.html:1)
-- svg export: [../generated/EmbodiedBehaviors.svg](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/generated/EmbodiedBehaviors.svg:1)
+- composite diagram: [../generated/EmbodiedBehaviors.mmd](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/EmbodiedBehaviors.mmd:1)
+- viewer: [../generated/EmbodiedBehaviors.html](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/EmbodiedBehaviors.html:1)
+- svg export: [../generated/EmbodiedBehaviors.svg](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/generated/EmbodiedBehaviors.svg:1)
 
 Generated-viewer convention:
 

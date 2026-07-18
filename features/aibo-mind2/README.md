@@ -10,7 +10,7 @@ is better than trusting the bundled repo copy blindly.
 
 The bundled AIBO MIND 2 tree at:
 
-- [opt/AIBO7M2](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/opt/AIBO7M2)
+- [opt/AIBO7M2](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/opt/AIBO7M2)
 
 is about 19.7 MB on disk in this repo. That means it does **not** fit on a
 blank 8 MB Sony Memory Stick as-is.
@@ -42,7 +42,7 @@ so we have a local staged copy of what is really on the known-good media.
 
 The ERS-7 AIBO MIND 2 files live here:
 
-- [opt/AIBO7M2](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/opt/AIBO7M2)
+- [opt/AIBO7M2](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/opt/AIBO7M2)
 
 That tree already looks like a Memory Stick dump, including:
 

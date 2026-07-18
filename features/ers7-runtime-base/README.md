@@ -57,7 +57,7 @@ to the root of the mounted Memory Stick:
 Example:
 
 ```bash
-rsync -rltD --delete /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-runtime-base/build/stick/ /tmp/aibo-stick/
+rsync -rltD --delete /home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-runtime-base/build/stick/ /tmp/aibo-stick/
 sync
 ```
 

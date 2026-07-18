@@ -1,7 +1,7 @@
 # Programmer's Guide Notes For Stick Preflight
 
 This note captures the pieces of Sony's
-[docs/aperios/ProgrammersGuide.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/aperios/ProgrammersGuide.pdf)
+[docs/aperios/ProgrammersGuide.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios/ProgrammersGuide.pdf)
 that matter most for safer pre-deployment auditing.
 
 ## Why This Matters

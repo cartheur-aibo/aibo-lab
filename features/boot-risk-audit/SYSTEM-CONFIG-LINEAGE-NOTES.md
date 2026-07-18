@@ -94,7 +94,7 @@ But it is now a plausible hypothesis worth testing, especially because:
   significant
 
 Using
-[scripts/analyze-retail-systemcfg.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/analyze-retail-systemcfg.sh),
+[scripts/analyze-retail-systemcfg.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/analyze-retail-systemcfg.sh),
 we now have a sharper count result:
 
 - retail `EXTOBJ.CFG` has `4` aligned `24`-byte records
@@ -125,7 +125,7 @@ like containers with a large invariant core.
 ## Mixed-Provenance Result In Current Staging Trees
 
 Using
-[scripts/check-ers7-system-provenance.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/check-ers7-system-provenance.sh),
+[scripts/check-ers7-system-provenance.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/check-ers7-system-provenance.sh),
 we now know the current staging trees are not pure SDK overlays.
 
 For the retired experimental mixed `WLAN` candidate:

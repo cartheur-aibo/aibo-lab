@@ -22,7 +22,7 @@ if [ "$#" -gt 1 ]; then
 fi
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-OPENRSDK_ROOT="${OPENRSDK_ROOT:-$ROOT_DIR/sdk/local/OPEN_R_SDK}"
+OPENRSDK_ROOT="${OPENRSDK_ROOT:-$ROOT_DIR/local/OPEN_R_SDK}"
 SAMPLE_DIR="$ROOT_DIR/samples/common/ObjectComm"
 POWERMON_DIR="$ROOT_DIR/samples/common/PowerMonitor"
 FEATURE_DIR="$ROOT_DIR/features/ers7-sdk-wconsole-objectcomm"

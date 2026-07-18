@@ -50,9 +50,9 @@ That means we need a second safety layer:
 
 The first tool in this track is:
 
-- [scripts/audit-ers7-stick-risk.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/audit-ers7-stick-risk.sh)
-- [scripts/validate-ers7m2-candidate.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/validate-ers7m2-candidate.sh)
-- [features/boot-risk-audit/VALIDATOR.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/boot-risk-audit/VALIDATOR.md)
+- [scripts/audit-ers7-stick-risk.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/audit-ers7-stick-risk.sh)
+- [scripts/validate-ers7m2-candidate.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/validate-ers7m2-candidate.sh)
+- [features/boot-risk-audit/VALIDATOR.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/boot-risk-audit/VALIDATOR.md)
 
 It currently audits:
 
@@ -79,10 +79,10 @@ current experimental M2:
 
 The companion explainer is:
 
-- [scripts/explain-ers7-system-delta.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/explain-ers7-system-delta.sh)
-- [features/boot-risk-audit/SYSTEM-CONFIG-LINEAGE-NOTES.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/boot-risk-audit/SYSTEM-CONFIG-LINEAGE-NOTES.md)
-- [scripts/analyze-retail-systemcfg.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/analyze-retail-systemcfg.sh)
-- [scripts/check-ers7-system-provenance.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/scripts/check-ers7-system-provenance.sh)
+- [scripts/explain-ers7-system-delta.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/explain-ers7-system-delta.sh)
+- [features/boot-risk-audit/SYSTEM-CONFIG-LINEAGE-NOTES.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/boot-risk-audit/SYSTEM-CONFIG-LINEAGE-NOTES.md)
+- [scripts/analyze-retail-systemcfg.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/analyze-retail-systemcfg.sh)
+- [scripts/check-ers7-system-provenance.sh](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/scripts/check-ers7-system-provenance.sh)
 
 It focuses specifically on the `SYSTEM` boot layer and answers:
 
@@ -159,8 +159,8 @@ For the retail `SYSTEM` record-table view:
 ./scripts/analyze-retail-systemcfg.sh \
   features/ers7m2-baseline/build/stick/OPEN-R/SYSTEM/CONF/EXTOBJ.CFG \
   opt/AIBO7M3/OPEN-R/SYSTEM/CONF/EXTOBJ.CFG \
-  sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WLAN/memprot/OPEN-R/SYSTEM/CONF/EXTOBJ.CFG \
-  sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R/SYSTEM/CONF/EXTOBJ.CFG
+  local/OPEN_R_SDK/OPEN_R/MS_ERS7/WLAN/memprot/OPEN-R/SYSTEM/CONF/EXTOBJ.CFG \
+  local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R/SYSTEM/CONF/EXTOBJ.CFG
 ```
 
 For the mixed-provenance check:
@@ -169,7 +169,7 @@ For the mixed-provenance check:
 ./scripts/check-ers7-system-provenance.sh \
   features/ers7m2-baseline/build/stick \
   features/ers7-sdk-wconsole-helloworld/build/stick \
-  sdk/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R
+  local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R
 ```
 
 ## Current Limit

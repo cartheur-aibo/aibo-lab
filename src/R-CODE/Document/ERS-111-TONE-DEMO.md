@@ -30,7 +30,7 @@ That gives us the first practical communication milestone for `ERS-111`:
 
 Use:
 
-- [sample/ToneHello.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/sample/ToneHello.R)
+- [sample/ToneHello.R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/sample/ToneHello.R)
 
 This script is a near-direct repo-native version of the Sony manual's
 `Melody_id` example:
@@ -49,8 +49,8 @@ The preserved tone list and programmer manual both support this mapping:
 
 Relevant references:
 
-- [Programmers.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/Document/Programmers.md)
-- [Tone_List.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/Document/Tone_List.md)
+- [Programmers.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/Document/Programmers.md)
+- [Tone_List.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/Document/Tone_List.md)
 
 ## Why `Akubi_sit`
 
@@ -67,7 +67,7 @@ We want:
 ## Stick Preparation
 
 1. Start from the preserved `R-CODE` programming image tree under:
-   - [MSImage/OPEN-R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/src/R-CODE/MSImage/OPEN-R)
+   - [MSImage/OPEN-R](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/MSImage/OPEN-R)
 2. Copy the script to:
    - `\OPEN-R\R-CODE.R`
 3. Keep the original preserved image unchanged; prepare a separate sacrificial

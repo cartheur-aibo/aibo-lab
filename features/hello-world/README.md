@@ -210,7 +210,7 @@ If it worked, the main proof point is:
 ```
 
 That comes from the sample's `DoStart()` handler in
-[samples/common/HelloWorld/HelloWorld/HelloWorld.cc](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/samples/common/HelloWorld/HelloWorld/HelloWorld.cc:18).
+[samples/common/HelloWorld/HelloWorld/HelloWorld.cc](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/samples/common/HelloWorld/HelloWorld/HelloWorld.cc:18).
 
 ## What This Stick Actually Boots
 
@@ -223,12 +223,12 @@ This stick boots:
 That matters because the object names on the stick, not the host folder names,
 control what the robot runs. The boot list lives in:
 
-- [samples/common/HelloWorld/MS/OPEN-R/MW/CONF/OBJECT.CFG](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/samples/common/HelloWorld/MS/OPEN-R/MW/CONF/OBJECT.CFG)
+- [samples/common/HelloWorld/MS/OPEN-R/MW/CONF/OBJECT.CFG](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/samples/common/HelloWorld/MS/OPEN-R/MW/CONF/OBJECT.CFG)
 
 `PowerMonitor` is there to handle pause and low-battery shutdown cleanly. Its
 logic is in:
 
-- [samples/common/PowerMonitor/PowerMonitor/PowerMonitor.cc](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/samples/common/PowerMonitor/PowerMonitor/PowerMonitor.cc:22)
+- [samples/common/PowerMonitor/PowerMonitor/PowerMonitor.cc](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/samples/common/PowerMonitor/PowerMonitor/PowerMonitor.cc:22)
 
 ## Useful Knowledge
 
@@ -238,7 +238,7 @@ logic is in:
 - The SDK `WCONSOLE` base is small, about `1.1 MiB` before adding the sample
   payload, so this fits easily on an 8 MB Memory Stick.
 - Wi-Fi here follows the old Sony constraints in
-  [features/ers7-wifi/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-wifi/README.md):
+  [features/ers7-wifi/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-wifi/README.md):
   open or WEP-era networking, not WPA/WPA2/WPA3.
 
 ## Debugging Path
