@@ -10,7 +10,7 @@ Use this before camera-serving or any other runtime overlay work.
 Prepare a full MIND 2 stick for first boot validation with:
 
 - the preserved known-good MIND 2 file tree
-- the lab-operational Wi-Fi config from `src/ERS7M2/WLANCONF.TXT`
+- the lab-operational Wi-Fi config from `out/ERS7M2/WLANCONF.TXT`
 - no SDK system overlay beyond that WLAN injection
 - a repeatable staging directory under `features/`
 
@@ -36,7 +36,7 @@ That creates:
 
 and injects:
 
-- [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/ERS7M2/WLANCONF.TXT)
+- [out/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/out/ERS7M2/WLANCONF.TXT)
 
 into:
 

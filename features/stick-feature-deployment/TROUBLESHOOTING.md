@@ -51,7 +51,7 @@ Preserved known-good reference tree:
 
 Known-good live WLAN config:
 
-- `src/ERS7M2/WLANCONF.TXT`
+- `out/ERS7M2/WLANCONF.TXT`
 
 ## Known-Good Network Baseline
 

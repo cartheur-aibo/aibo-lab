@@ -11,7 +11,7 @@ Memory Stick tree under features/ers7-camera-stream/.
 By default this:
 - uses the ERS-7 SDK WCONSOLE/nomemprot base
 - builds W3AIBO and PowerMonitor from samples/common/W3AIBO
-- injects src/ERS7M2/WLANCONF.TXT when present
+- injects out/ERS7M2/WLANCONF.TXT when present
 - writes the staged stick tree under features/ers7-camera-stream/build/stick
 
 Environment variables:
@@ -20,7 +20,7 @@ Environment variables:
   JPEG_ARCHIVE     Path to jpegsrc.v6b.tar.gz
                    Default: ./samples/common/W3AIBO/jpegsrc.v6b.tar.gz
   WLANCONF_SOURCE  WLAN config to inject.
-                   Default: ./src/ERS7M2/WLANCONF.TXT
+                   Default: ./out/ERS7M2/WLANCONF.TXT
 EOF
 }
 
@@ -38,7 +38,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OPENRSDK_ROOT="${OPENRSDK_ROOT:-$ROOT_DIR/local/OPEN_R_SDK}"
 SAMPLE_DIR="${SAMPLE_DIR:-$ROOT_DIR/samples/common/W3AIBO}"
 JPEG_ARCHIVE="${JPEG_ARCHIVE:-$SAMPLE_DIR/jpegsrc.v6b.tar.gz}"
-WLANCONF_SOURCE="${WLANCONF_SOURCE:-$ROOT_DIR/src/ERS7M2/WLANCONF.TXT}"
+WLANCONF_SOURCE="${WLANCONF_SOURCE:-$ROOT_DIR/out/ERS7M2/WLANCONF.TXT}"
 POWERMON_SOURCE_DIR="$ROOT_DIR/samples/common/PowerMonitor"
 
 FEATURE_DIR="$ROOT_DIR/features/ers7-camera-stream"

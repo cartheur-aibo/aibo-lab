@@ -75,7 +75,7 @@ These points are no longer guesses:
 This means:
 
 - the lab robot-side WLAN configuration in
-  [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/ERS7M2/WLANCONF.TXT)
+  [out/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/out/ERS7M2/WLANCONF.TXT)
   is a credible operational baseline
 - access-point compatibility matters a lot
 - the 8 MB failures should not be treated as proof that our higher-level app
@@ -109,7 +109,7 @@ When a future agent needs the best known inputs, start here:
 
 - [features/aibo-mind2/build/stick](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/aibo-mind2/build/stick)
   is the preserved staged copy of the real known-good 32 MB ERS-7 MIND 2 stick
-- [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/ERS7M2/WLANCONF.TXT)
+- [out/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/out/ERS7M2/WLANCONF.TXT)
   is the lab-operational WLAN config used for current multi-robot testing, not
   necessarily the preserved specimen WLAN state
 - the intended hostname naming convention for the current lab is:

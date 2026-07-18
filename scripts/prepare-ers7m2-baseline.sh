@@ -19,7 +19,7 @@ Environment variables:
   SOURCE_STICK_DIR  Source staged stick tree.
                     Default: ./features/aibo-mind2/build/stick
   WLANCONF_SOURCE   WLAN config to inject.
-                    Default: ./src/ERS7M2/WLANCONF.TXT
+                    Default: ./out/ERS7M2/WLANCONF.TXT
 EOF
 }
 
@@ -35,7 +35,7 @@ fi
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SOURCE_STICK_DIR="${SOURCE_STICK_DIR:-$ROOT_DIR/features/aibo-mind2/build/stick}"
-WLANCONF_SOURCE="${WLANCONF_SOURCE:-$ROOT_DIR/src/ERS7M2/WLANCONF.TXT}"
+WLANCONF_SOURCE="${WLANCONF_SOURCE:-$ROOT_DIR/out/ERS7M2/WLANCONF.TXT}"
 TARGET_MOUNT="${TARGET_MOUNT:-/media/$USER/YOUR_STICK_MOUNT}"
 FEATURE_DIR="$ROOT_DIR/features/ers7m2-baseline"
 OUTPUT_DIR="${1:-$FEATURE_DIR/build/stick}"

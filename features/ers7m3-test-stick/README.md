@@ -12,7 +12,7 @@ overlay work.
 Prepare a full MIND 3 stick for app testing with:
 
 - the preserved MIND 3 file tree from `opt/AIBO7M3`
-- a repo-controlled Wi-Fi config from `src/ERS7M3/WLANCONF.TXT`
+- a repo-controlled Wi-Fi config from `out/ERS7M3/WLANCONF.TXT`
 - a repeatable staging directory under `features/`
 
 ## Build The Staging Tree
@@ -36,7 +36,7 @@ That creates:
 
 and injects:
 
-- [src/ERS7M3/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/ERS7M3/WLANCONF.TXT)
+- [out/ERS7M3/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/out/ERS7M3/WLANCONF.TXT)
 
 into:
 

@@ -10,14 +10,14 @@ Memory Sticks such as 32 MB or 64 MB media.
 
 By default this:
 - copies the preserved MIND 3 stick tree from opt/AIBO7M3
-- replaces OPEN-R/SYSTEM/CONF/WLANCONF.TXT with src/ERS7M3/WLANCONF.TXT
+- replaces OPEN-R/SYSTEM/CONF/WLANCONF.TXT with out/ERS7M3/WLANCONF.TXT
 - writes the result under features/ers7m3-test-stick/build/stick
 
 Environment variables:
   SOURCE_STICK_DIR  Source staged stick tree.
                     Default: ./opt/AIBO7M3
   WLANCONF_SOURCE   WLAN config to inject.
-                    Default: ./src/ERS7M3/WLANCONF.TXT
+                    Default: ./out/ERS7M3/WLANCONF.TXT
   STRICT_AIBO_LAYOUT  If set to 1, stage only MEMSTICK.IND and OPEN-R/.
                       Default: 0
   STRIP_HOST_METADATA If set to 1, remove macOS/host metadata from output.
@@ -37,7 +37,7 @@ fi
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SOURCE_STICK_DIR="${SOURCE_STICK_DIR:-$ROOT_DIR/opt/AIBO7M3}"
-WLANCONF_SOURCE="${WLANCONF_SOURCE:-$ROOT_DIR/src/ERS7M3/WLANCONF.TXT}"
+WLANCONF_SOURCE="${WLANCONF_SOURCE:-$ROOT_DIR/out/ERS7M3/WLANCONF.TXT}"
 STRICT_AIBO_LAYOUT="${STRICT_AIBO_LAYOUT:-0}"
 STRIP_HOST_METADATA="${STRIP_HOST_METADATA:-1}"
 FEATURE_DIR="$ROOT_DIR/features/ers7m3-test-stick"

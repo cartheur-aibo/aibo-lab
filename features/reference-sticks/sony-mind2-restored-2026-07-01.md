@@ -31,7 +31,7 @@ lab-operational staging workflow.
 In particular:
 
 - the specimen's own `WLANCONF.TXT` is part of the preserved image state
-- the lab testing workflow may instead inject `src/ERS7M2/WLANCONF.TXT`
+- the lab testing workflow may instead inject `out/ERS7M2/WLANCONF.TXT`
 - those two should not be treated as interchangeable without intent
 
 ## Why It Matters

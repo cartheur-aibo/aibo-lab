@@ -17,7 +17,7 @@ directory with stable numbered names and writes a manifest.
 
 Environment variables:
   INJECT_LAB_WLAN=1   Replace WLANCONF.TXT in each prepared tree with
-                      src/ERS7M2/WLANCONF.TXT
+                      out/ERS7M2/WLANCONF.TXT
 EOF
 }
 
@@ -30,8 +30,8 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUTPUT_ROOT="${1:-$ROOT_DIR/features/mind2-behavior-research/build/live-hardware-matrix-2026-07-01}"
 INJECT_LAB_WLAN="${INJECT_LAB_WLAN:-0}"
 
-if [ "$INJECT_LAB_WLAN" = "1" ] && [ ! -f "$ROOT_DIR/src/ERS7M2/WLANCONF.TXT" ]; then
-  echo "error: src/ERS7M2/WLANCONF.TXT not found for lab WLAN injection" >&2
+if [ "$INJECT_LAB_WLAN" = "1" ] && [ ! -f "$ROOT_DIR/out/ERS7M2/WLANCONF.TXT" ]; then
+  echo "error: out/ERS7M2/WLANCONF.TXT not found for lab WLAN injection" >&2
   exit 1
 fi
 
@@ -51,7 +51,7 @@ prepare_one() {
   chmod -R u+w "$target_dir"
 
   if [ "$INJECT_LAB_WLAN" = "1" ]; then
-    cp -a "$ROOT_DIR/src/ERS7M2/WLANCONF.TXT" \
+    cp -a "$ROOT_DIR/out/ERS7M2/WLANCONF.TXT" \
       "$target_dir/OPEN-R/SYSTEM/CONF/WLANCONF.TXT"
   fi
 }

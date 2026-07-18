@@ -19,7 +19,7 @@ Accepted specimen/baseline inputs:
 
 Environment variables:
   INJECT_LAB_WLAN=1   Also replace OPEN-R/SYSTEM/CONF/WLANCONF.TXT with
-                      src/ERS7M2/WLANCONF.TXT for lab testing.
+                      out/ERS7M2/WLANCONF.TXT for lab testing.
 EOF
 }
 
@@ -126,8 +126,8 @@ if [ "$MODE" = "sensitive" ]; then
 fi
 
 if [ "$INJECT_LAB_WLAN" = "1" ]; then
-  require_path "$ROOT_DIR/src/ERS7M2/WLANCONF.TXT"
-  cp -a "$ROOT_DIR/src/ERS7M2/WLANCONF.TXT" "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT"
+  require_path "$ROOT_DIR/out/ERS7M2/WLANCONF.TXT"
+  cp -a "$ROOT_DIR/out/ERS7M2/WLANCONF.TXT" "$OUTPUT_DIR/OPEN-R/SYSTEM/CONF/WLANCONF.TXT"
 fi
 
 MANIFEST="$OUTPUT_DIR/BEHAVIOR-TRANSPLANT.txt"
@@ -161,7 +161,7 @@ if [ "$INJECT_LAB_WLAN" = "1" ]; then
   cat >> "$MANIFEST" <<'EOF'
 
 Lab WLAN override:
-- OPEN-R/SYSTEM/CONF/WLANCONF.TXT from src/ERS7M2/WLANCONF.TXT
+- OPEN-R/SYSTEM/CONF/WLANCONF.TXT from out/ERS7M2/WLANCONF.TXT
 EOF
 fi
 

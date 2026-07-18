@@ -52,7 +52,7 @@ That script:
 - stages the camera-stream stick under:
   `features/ers7-camera-stream/build/stick`
 - injects the known-good Wi-Fi config from:
-  [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/ERS7M2/WLANCONF.TXT)
+  [out/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/out/ERS7M2/WLANCONF.TXT)
 
 ## Build Requirements
 

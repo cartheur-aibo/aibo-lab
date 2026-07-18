@@ -140,7 +140,7 @@ Do not pull the reader or stick early.
 2. Insert the programmed stick.
 3. Boot the robot.
 4. Put your host on the same Wi-Fi network defined by
-   `src/ERS7M2/WLANCONF.TXT`.
+   `out/ERS7M2/WLANCONF.TXT`.
 5. Find the robot IP from your hotspot or router.
 6. Test `ping AIBO_IP`.
 7. Test `http://AIBO_IP/`.
@@ -168,7 +168,7 @@ The staged test-stick workflow injects:
 
 Those values come from:
 
-- [src/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/ERS7M2/WLANCONF.TXT)
+- [out/ERS7M2/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/out/ERS7M2/WLANCONF.TXT)
 
 ## One-Line Copy Commands
 
