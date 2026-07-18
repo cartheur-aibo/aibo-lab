@@ -7,11 +7,6 @@ work.
 
 The main effort in this repo is OPEN-R / Aperios runtime work under `aperios/`: documenting the original execution model from Sony's manuals, building a small host-side shim on Debian, and using original sample code to prove lifecycle behavior before attempting deeper simulation.
 
-This repository has outgrown the narrower `openr-debian` name. The working
-identity is now `aibo-lab`: the umbrella workspace where platform knowledge,
-bench procedures, simulation, preserved artifacts, and experiment workflows
-meet.
-
 ## Repo Charter
 
 This repo is the experimenter's laboratory for AIBO:
