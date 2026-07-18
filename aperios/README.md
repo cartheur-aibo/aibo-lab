@@ -210,7 +210,7 @@ That host run exercises:
 3. `DoStop`
 4. `DoDestroy`
 
-using the original `../samples/common/HelloWorld/HelloWorld/HelloWorld.cc` source.
+using the original `../../open-r-sdk/samples/common/HelloWorld/HelloWorld/HelloWorld.cc` source.
 
 ## Next Step
 

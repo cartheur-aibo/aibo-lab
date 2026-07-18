@@ -66,6 +66,10 @@ make -C aperios run-hello-world
 scripts/simulate-openr-boot.sh ../open-r-sdk/samples/common/HelloWorld
 ```
 
+This reports the raw sample tree only. Before the sample is merged into a base
+OPEN-R stick image, missing object binaries such as `HELLO.BIN` and
+`POWERMON.BIN` are expected.
+
 4. If you want a real Memory Stick payload, build and stage `HelloWorld` from
 the adjacent `open-r-sdk` repo:
 
@@ -132,6 +136,9 @@ Check what the adjacent `open-r-sdk` stick tree would try to boot:
 scripts/simulate-openr-boot.sh ../open-r-sdk/samples/common/HelloWorld
 ```
 
+As above, the unmerged sample tree will report missing runtime object binaries
+until it is staged onto a base OPEN-R stick layout.
+
 ## Build A Real Sample
 
 ```bash
@@ -175,8 +182,8 @@ The practical differences are:
   content such as `OPEN-R/APP/PC/DIARY`, `OPEN-R/APP/OBJS/SA.BIN`, and
   `OPEN-R/APP/OBJS/STM.BIN`.
 - For repeatable testing, the repo now exposes both paths as separate staging
-  workflows: [features/ers7m2-wconsole/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-wconsole/README.md)
-  for MIND 2 and [features/ers7m3-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m3-test-stick/README.md)
+  workflows: [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-baseline/README.md)
+  for preserved MIND 2 baseline work and [features/ers7m3-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m3-test-stick/README.md)
   for MIND 3.
 
 ## Where To Look
@@ -188,11 +195,10 @@ The practical differences are:
 - [features/stick-feature-deployment/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/stick-feature-deployment/README.md) for the handoff workflow and proven conclusions for new 64 MB Sony sticks
 - [features/stick-feature-deployment/TROUBLESHOOTING.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/stick-feature-deployment/TROUBLESHOOTING.md) for the operational checklist and failure-triage guide during delicate stick bring-up
 - [features/ers7m2-baseline/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-baseline/README.md) for the preserved-only first-boot MIND 2 baseline on larger Sony sticks
-- [features/ers7m2-wconsole/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-wconsole/README.md) for the larger-stick full MIND 2 `WCONSOLE` app-testing workflow
+- [features/ers7m2-wconsole/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m2-baseline/README.md) for the larger-stick full MIND 2 `WCONSOLE` app-testing workflow
 - [features/ers7m3-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7m3-test-stick/README.md) for the larger-stick full MIND 3 app-testing workflow
 - [features/reference-sticks/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/reference-sticks/README.md) for the active baseline records of preserved genuine MIND 2 and MIND 3 sticks
 - [features/mind2-behavior-research/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/mind2-behavior-research/README.md) for the new behavior-forensics research loop, candidate files, and research questions
-- [docs/sim/SOFTSIM/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/sim/SOFTSIM/README.md) for the remaining local `SOFTSIM` notes that stay here only as lab-side research context
 - [features/ers7-camera-stream/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-camera-stream/README.md) for the ERS-7 `W3AIBO` camera-serving workflow on port `60080`
 - [features/hello-world/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/hello-world/README.md) for a scratch-built ERS-7 Wi-Fi test stick
 - [features/ers7-runtime-base/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-runtime-base/README.md) for a runtime-system hybrid ERS-7 test stick

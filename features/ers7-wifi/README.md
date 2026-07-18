@@ -38,8 +38,8 @@ There are no WPA-related settings in the documented configuration format.
 
 The most useful files here are:
 
-- [docs/InstallationGuide_E.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/InstallationGuide_E.pdf)
-- [docs/AIBO-quickstart.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/AIBO-quickstart.pdf)
+- [docs/InstallationGuide_E.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/aperios/InstallationGuide_E.pdf)
+- [docs/AIBO-quickstart.pdf](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/papers/AIBO-quickstart.pdf)
 - [opt/AIBO7M2/OPEN-R/SYSTEM/CONF/SAMPLE/WLANCONF.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/opt/AIBO7M2/OPEN-R/SYSTEM/CONF/SAMPLE/WLANCONF.TXT:1)
 - [local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R/SYSTEM/CONF/WLANDFLT.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R/SYSTEM/CONF/WLANDFLT.TXT:1)
 
@@ -78,7 +78,7 @@ Start by copying:
 
 or use the example file in this folder:
 
-- [WLANCONF.example.TXT](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/docs/ers7-wifi/WLANCONF.example.TXT)
+- `WLANCONF.example.TXT` (maintain locally alongside your deployment notes if needed)
 
 Place the finished file here on the stick:
 

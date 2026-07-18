@@ -37,7 +37,7 @@ This workflow uses:
 - SDK base:
   `local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/nomemprot/OPEN-R`
 - sample:
-  [samples/common/ObjectComm](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/samples/common/ObjectComm)
+  [samples/common/ObjectComm](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/open-r-sdk/samples/common/ObjectComm)
 
 ## What This Produces
 

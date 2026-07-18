@@ -1,6 +1,6 @@
 # Next Session
 
-This note intersects the long-range development intent in [PLAN.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/PLAN.md) with the current MIND 2 behavior-forensics state of the repo.
+This note intersects the long-range development intent in [PLAN.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/PLAN.md) with the current MIND 2 behavior-forensics state of the repo.
 
 ## Where We Are
 
@@ -29,7 +29,7 @@ The current repo is furthest along on the second track.
   - `1200` as socially cued persistence
   - specimen-side `IEG.CFG` as routine-preserving persistence
 - four first-pass hardware trial trees are prepared under
-  [trials](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/trials)
+  [trials](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/trials)
 
 ## WLAN Programming Boundary
 
@@ -75,7 +75,7 @@ Start with the prepared sticks in `trials/`:
 4. `04-0400-plus-ieg`
 
 Use the matrix in
-[features/mind2-behavior-research/LIVE-HARDWARE-MATRIX-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/LIVE-HARDWARE-MATRIX-2026-07-01.md).
+[features/mind2-behavior-research/LIVE-HARDWARE-MATRIX-2026-07-01.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/mind2-behavior-research/LIVE-HARDWARE-MATRIX-2026-07-01.md).
 
 Recommended first run order:
 
@@ -114,7 +114,7 @@ Recommended first run order:
 ## Required Artifacts During The Next Session
 
 - one observation record per live run using
-  [features/mind2-behavior-research/OBSERVATION-TEMPLATE.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/OBSERVATION-TEMPLATE.md)
+  [features/mind2-behavior-research/OBSERVATION-TEMPLATE.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/mind2-behavior-research/OBSERVATION-TEMPLATE.md)
 - stick identity and robot identity recorded every time
 - whether the behavior survived a second cycle
 - whether the outcome changed with cue salience

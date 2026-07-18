@@ -2,9 +2,9 @@ CXX ?= g++
 CXXFLAGS ?= -std=c++17 -O2 -Wall -Wextra -pedantic
 
 APERIOS_INCLUDE := $(CURDIR)/include
-HELLO_WORLD_SRC := ../samples/common/HelloWorld/HelloWorld/HelloWorld.cc
+HELLO_WORLD_SRC := ../../open-r-sdk/samples/common/HelloWorld/HelloWorld/HelloWorld.cc
 HELLO_WORLD_RUNNER := src/hello_world_lifecycle.cpp
-HELLO_WORLD_INCLUDES := -I$(APERIOS_INCLUDE) -I../samples/common/HelloWorld/HelloWorld
+HELLO_WORLD_INCLUDES := -I$(APERIOS_INCLUDE) -I../../open-r-sdk/samples/common/HelloWorld/HelloWorld
 MIND2_SIM_SRC := src/mind2_behavior_sim.cpp
 MIND2_SIM := mind2-behavior-sim
 MIND2_TREE ?= ../features/mind2-behavior-research/build/sensitive-stick

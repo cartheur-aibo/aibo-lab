@@ -30,7 +30,7 @@ The local distilled doc note is:
 
 The strongest local sample hint is:
 
-- [samples/common/ImageCapture/README_E.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/samples/common/ImageCapture/README_E.txt)
+- [samples/common/ImageCapture/README_E.txt](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/open-r-sdk/samples/common/ImageCapture/README_E.txt)
 
 That sample says image data can be retrieved over wireless LAN if `TinyFTPd` is
 running.
@@ -52,7 +52,7 @@ This workflow uses:
 - SDK base:
   `local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/nomemprot/OPEN-R`
 - sample:
-  [samples/common/TinyFTPD](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/samples/common/TinyFTPD)
+  [samples/common/TinyFTPD](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/open-r-sdk/samples/common/TinyFTPD)
 
 ## What This Produces
 

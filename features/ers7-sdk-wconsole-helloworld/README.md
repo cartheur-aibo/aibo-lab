@@ -41,7 +41,7 @@ This workflow uses:
 - SDK base:
   `local/OPEN_R_SDK/OPEN_R/MS_ERS7/WCONSOLE/memprot/OPEN-R`
 - sample:
-  [samples/common/HelloWorld](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/samples/common/HelloWorld)
+  [samples/common/HelloWorld](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/open-r-sdk/samples/common/HelloWorld)
 
 ## What This Produces
 
