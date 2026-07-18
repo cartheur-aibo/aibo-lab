@@ -1,5 +1,6 @@
 .DS_Store
 ._*
+sdk/
 sdk/binutils-2.15/
 sdk/gcc-3.3.6/
 sdk/newlib-1.15.0/
@@ -15,6 +16,7 @@ samples/common/HelloWorld/HelloWorld/*.bin
 aperios/hello-world-host
 aperios/mind2-behavior-sim
 features/*/build/
+local/
 local-artifacts/
 # LaTeX build byproducts
 paper/*.aux
