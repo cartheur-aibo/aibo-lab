@@ -1,8 +1,9 @@
 # aibo-lab
 
 Experimental laboratory for AIBO platform research across preserved hardware,
-OPEN-R / Aperios runtime reconstruction, ERS-111 R-CODE study, ERS-7 MIND 2
-and MIND 3 experimentation, and host-side simulator work.
+OPEN-R / Aperios runtime reconstruction, ERS-7 MIND 2 and MIND 3
+experimentation, cross-repo ERS-111 R-CODE study, and host-side simulator
+work.
 
 The main effort in this repo is OPEN-R / Aperios runtime work under `aperios/`: documenting the original execution model from Sony's manuals, building a small host-side shim on Debian, and using original sample code to prove lifecycle behavior before attempting deeper simulation.
 
@@ -23,7 +24,15 @@ This repo is the experimenter's laboratory for AIBO:
 The scope boundary is intentional:
 
 - if something helps run, observe, analyze, or reproduce experiments, it belongs here
+- if something is canonical sample code or SDK-packaged source material, it belongs in the dedicated component repos
 - if something primarily exists as publication packaging, paper drafting, or behavior-diagram monograph work, it belongs in the sibling publication repos under `../monographs/`
+
+The current canonical upstream repos are:
+
+- `OPEN-R` samples and SDK-oriented source material:
+  <https://github.com/cartheur-aibo/open-r-sdk>
+- `ERS-110/111` `R-CODE` source material:
+  <https://github.com/cartheur-aibo/r-code>
 
 This repo may still produce a Mind 2-specific paper if the experiments uncover a strong result, but publication-first organization is no longer the main structure here.
 
@@ -34,7 +43,8 @@ This repo may still produce a Mind 2-specific paper if the experiments uncover a
 - validating assumptions by compiling and running the Sony `HelloWorld` sample on Debian
 - using that runtime understanding to guide later simulator and tooling work
 - preserving, restoring, and behaviorally studying real ERS-7 MIND 2 stick state
-- extending the lab to include ERS-111 tone-trigger R-CODE bench work and cross-platform comparison
+- extending the lab to include ERS-111 tone-trigger bench work and
+  cross-platform comparison through the dedicated `r-code` repo
 
 ## Start Here
 
@@ -75,15 +85,18 @@ make -C samples/common/HelloWorld/HelloWorld \
 - studies and documents the OPEN-R / Aperios runtime model using Sony manuals and companion papers
 - builds a first host-side OPEN-R lifecycle shim under `aperios/`
 - builds legacy OPEN-R tools on Debian when a local SDK/toolchain install is available
-- builds real OPEN-R sample payloads for Memory Stick deployment
+- builds and stages real OPEN-R sample payloads for Memory Stick deployment
 - simulates OPEN-R boot layout from `OBJECT.CFG`
 - distinguishes plain-text sample `OBJECT.CFG` files from unsupported retail
   encoded configs so zero-object reports are not misread
-- preserves enough original sample structure to test assumptions against real Sony source
+- treats [`cartheur-aibo/open-r-sdk`](https://github.com/cartheur-aibo/open-r-sdk)
+  as the canonical home for sample trees and SDK-oriented source material
 - preserves real-stick images and recovery workflows for ERS-7 MIND 2 media
 - pivots from stick-making into behavior forensics on persistent MIND 2 state
-- now carries both an `ERS-111` R-Code preservation track under `src/R-CODE/`
-  and an `ERS-7` SDK R-Code plug-in research track documented from preserved sources
+- treats [`cartheur-aibo/r-code`](https://github.com/cartheur-aibo/r-code)
+  as the canonical home for `ERS-110/111` `R-CODE` source material
+- keeps only the lab-side notes, generated findings, bench procedures, and
+  cross-repo integration context needed for experiments
 - treats publication repos in `../monographs/` as the home for paper-shaped outputs that grow out of this lab work
 
 ## Aperios Work
@@ -166,7 +179,6 @@ The practical differences are:
 ## Where To Look
 
 - [aperios/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/aperios/README.md) for the main OPEN-R / Aperios runtime notes, document map, and host-shim status
-- [src/R-CODE/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/README.md) for the preserved `ERS-110/111` R-Code package and behavior abstraction notes
 - [simulator/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/simulator/README.md) for simulator scope and plan
 - [features/ers7-wifi/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-wifi/README.md) for ERS-7 Wi-Fi setup from the bundled Sony docs
 - [features/aibo-mind2/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/aibo-mind2/README.md) for staging the bundled AIBO MIND 2 ERS-7 stick layout
@@ -182,6 +194,10 @@ The practical differences are:
 - [features/hello-world/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/hello-world/README.md) for a scratch-built ERS-7 Wi-Fi test stick
 - [features/ers7-runtime-base/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-runtime-base/README.md) for a runtime-system hybrid ERS-7 test stick
 - [features/ers7-stick-forensics/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/features/ers7-stick-forensics/README.md) for the older low-level forensics/background notes and raw-layout differences
+- <https://github.com/cartheur-aibo/open-r-sdk> for the canonical OPEN-R
+  sample and SDK-material repo
+- <https://github.com/cartheur-aibo/r-code> for the canonical `ERS-110/111`
+  `R-CODE` source repo
 
 ## Rule
 

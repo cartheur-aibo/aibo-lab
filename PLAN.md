@@ -71,25 +71,23 @@ For an ERS-7 running **AIBO MIND 2**, there are three primary development approa
 
 OPEN-R is the most powerful option and the focus of this guide.
 
-For `ERS-111`, the equivalent first-class path in this repo is the preserved
-`R-CODE` environment under
-[src/R-CODE/](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/aibo-lab/src/R-CODE/README.md),
-where behavior can be scripted and observed with the robot's built-in media and
-tone-recognition facilities. It should also be understood as part of the
-earlier `OPEN-R v1` lineage rather than as an `ERS-7`-style Wi-Fi-native
+For `ERS-111`, the equivalent first-class path for this lab now lives in the
+dedicated [`cartheur-aibo/r-code`](https://github.com/cartheur-aibo/r-code)
+repo, where behavior can be scripted and observed with the robot's built-in
+media and tone-recognition facilities. It should also be understood as part of
+the earlier `OPEN-R v1` lineage rather than as an `ERS-7`-style Wi-Fi-native
 development target.
 
-The dedicated `ERS-111` repo now lives at:
+The canonical component repos now live at:
 
-- <https://github.com/cartheur-aibo/ERS-111>
+- `R-CODE` source: <https://github.com/cartheur-aibo/r-code>
+- `OPEN-R` samples and SDK source: <https://github.com/cartheur-aibo/open-r-sdk>
 
-The dedicated `ERS-7` repo now lives at:
+The dedicated platform repos now live at:
 
-- <https://github.com/cartheur-aibo/ERS-7>
-
-The dedicated `ERS-210` repo currently exists as a reference-only home at:
-
-- <https://github.com/cartheur-aibo/ERS-210>
+- `ERS-111`: <https://github.com/cartheur-aibo/ERS-111>
+- `ERS-7`: <https://github.com/cartheur-aibo/ERS-7>
+- `ERS-210` (reference only): <https://github.com/cartheur-aibo/ERS-210>
 
 ## Platform Communication Boundary
 
@@ -119,7 +117,8 @@ as the `hello body` program and eventually reaching richer robotics work.
 
 The repo's current active center of gravity is slightly earlier in that path:
 
-- preservation and analysis of the `ERS-110/111` `R-CODE` package and samples
+- integration of the dedicated `ERS-110/111` `R-CODE` repo with lab-side
+  bench and analysis workflows
 - preservation and recovery of real ERS-7 MIND 2 media
 - behavior forensics over preserved persistent state
 - a host-side MIND 2 simulator used as a hypothesis engine for bench work
@@ -140,8 +139,8 @@ In practical terms, the MIND 2 behavior and simulator track helps this plan by:
 
 So the relationship should be read like this:
 
-- `PLAN.md` is now the combined planning surface for `ERS-111` `R-CODE` work
-  and `ERS-7` `OPEN-R` / MIND 2 work
+- `PLAN.md` is now the combined planning surface for cross-repo `ERS-111`
+  `R-CODE` work and `ERS-7` `OPEN-R` / MIND 2 work
 - `ERS-111` gives the repo a lower-risk scripting and behavior path with
   tone-based interaction
 - `ERS-7` remains the long-range native robotics destination
@@ -162,8 +161,10 @@ partially completed platform work, and still-open application goals.
 
 ### Completed
 
-- preserved `ERS-110/111` `R-CODE` package, sample set, and behavior-analysis
-  notes under `src/R-CODE/`
+- dedicated `ERS-110/111` `R-CODE` source repo established at
+  <https://github.com/cartheur-aibo/r-code>
+- dedicated `OPEN-R` samples and SDK source repo established at
+  <https://github.com/cartheur-aibo/open-r-sdk>
 - documented `ERS-210` as a reference-only adjacent platform with local Sony
   manuals and a dedicated external repo home
 - OPEN-R SDK and preserved toolchain recovery sufficient for local build work
