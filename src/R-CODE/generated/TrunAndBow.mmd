@@ -1,7 +1,0 @@
-flowchart TD
-    S_INIT["Boot / Safe Pose"]
-    S_100["Repeat Forward Walk"]
-    S_200["Synchronize"]
-    S_INIT -->|entry| S_100
-    S_100 -->|continue to monitor| S_200
-    S_200 -->|go| S_100

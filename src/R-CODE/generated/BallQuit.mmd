@@ -1,7 +1,0 @@
-flowchart TD
-    S_INIT["Boot / Safe Pose"]
-    S_100["Main"]
-    S_1000["Sense / Decide"]
-    S_INIT -->|entry| S_100
-    S_100 -->|if Cdt_npixel > 32| S_1000
-    S_100 -->|go| S_100

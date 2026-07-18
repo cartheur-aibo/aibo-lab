@@ -1,7 +1,0 @@
-flowchart TD
-    S_INIT["Boot / Safe Pose"]
-    S_100["Sense Fall State"]
-    S_9000["Happy Hug Response"]
-    S_INIT -->|entry| S_100
-    S_100 -->|if stat <> 0| S_9000
-    S_100 -->|upright| S_100
