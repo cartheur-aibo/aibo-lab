@@ -2,6 +2,12 @@
 
 This area is the pivot from stick recovery into behavior forensics.
 
+It belongs in this repo because it is still experiment work: specimen
+preservation, hypothesis generation, simulator support, and real-hardware
+validation. If this track matures into a paper, the publication packaging should
+live in the sibling monograph repos under `../monographs/`, while the bench
+workflow and reproducibility material stay here.
+
 The repo's original stick-making question is now closed enough for normal
 operations:
 

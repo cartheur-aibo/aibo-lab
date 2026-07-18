@@ -4,6 +4,22 @@ Debian workspace for developing existing and creating new (modern) Aibo ERS-7 OP
 
 The main effort in this repo is OPEN-R / Aperios runtime work under `aperios/`: documenting the original execution model from Sony's manuals, building a small host-side shim on Debian, and using original sample code to prove lifecycle behavior before attempting deeper simulation.
 
+## Repo Charter
+
+This repo is the experimenter's laboratory for AIBO:
+
+- generate and study real ERS-7 physical experiments
+- build host-side OPEN-R and MIND 2 simulation paths
+- preserve sticks, stage test media, and compare observed outcomes
+- keep the scripts, notes, artifacts, and workflows needed to reproduce bench work
+
+The scope boundary is intentional:
+
+- if something helps run, observe, analyze, or reproduce experiments, it belongs here
+- if something primarily exists as publication packaging, paper drafting, or behavior-diagram monograph work, it belongs in the sibling publication repos under `../monographs/`
+
+This repo may still produce a Mind 2-specific paper if the experiments uncover a strong result, but publication-first organization is no longer the main structure here.
+
 ## Current Focus
 
 - documenting the OPEN-R / Aperios object model, lifecycle, and messaging behavior from the Sony manuals
@@ -60,6 +76,7 @@ make -C samples/common/HelloWorld/HelloWorld \
 - pivots from stick-making into behavior forensics on persistent MIND 2 state
 - now carries both an `ERS-111` R-Code preservation track under `src/R-CODE/`
   and an `ERS-7` SDK R-Code plug-in track under `sdk/R_CODE_plugin_r1/`
+- treats publication repos in `../monographs/` as the home for paper-shaped outputs that grow out of this lab work
 
 ## Aperios Work
 
@@ -154,6 +171,7 @@ The practical differences are:
 - [features/ers7m3-test-stick/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7m3-test-stick/README.md) for the larger-stick full MIND 3 app-testing workflow
 - [features/reference-sticks/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/reference-sticks/README.md) for the active baseline records of preserved genuine MIND 2 and MIND 3 sticks
 - [features/mind2-behavior-research/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/mind2-behavior-research/README.md) for the new behavior-forensics research loop, candidate files, and research questions
+- [docs/sim/SOFTSIM/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/docs/sim/SOFTSIM/README.md) for the remaining local `SOFTSIM` notes that stay here only as lab-side research context
 - [features/ers7-camera-stream/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-camera-stream/README.md) for the ERS-7 `W3AIBO` camera-serving workflow on port `60080`
 - [features/hello-world/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/hello-world/README.md) for a scratch-built ERS-7 Wi-Fi test stick
 - [features/ers7-runtime-base/README.md](/home/cartheur/ame/aiventure/aiventure-github/cartheur-aibo/openr-debian/features/ers7-runtime-base/README.md) for a runtime-system hybrid ERS-7 test stick

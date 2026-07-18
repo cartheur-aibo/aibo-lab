@@ -1,19 +1,25 @@
 # SOFTSIM Working Folder
 
-This folder is the working area for `SOFTSIM`-focused research, notes, and
-prototype planning.
+This folder keeps the remaining local `SOFTSIM`-focused lab notes, research
+context, and prototype planning that still help the experiment workflow in this
+repo.
+
+It is not the publication home for the behavior-diagram or `SOFTSIM` paper
+track. That publication-oriented work now belongs in the sibling monograph repos
+under `../monographs/`.
 
 Purpose:
 
 - keep simulator-facing working material close to the simulator documents,
-- keep `arxiv/` reserved for paper output and paper-ready staging,
+- preserve local research context that still informs bench and simulation work,
 - separate implementation exploration from publication wording.
 
 Suggested use:
 
 - keep DB-derived notes, architecture comparisons, and demo plans here,
 - treat this folder as the source-side research workspace,
-- only promote distilled, paper-safe text into `arxiv/v.2/paper/` when ready.
+- move publication-shaped writeups into the appropriate repo under
+  `../monographs/` when they stop being lab notes and start being paper assets.
 
 Current contents include:
 
