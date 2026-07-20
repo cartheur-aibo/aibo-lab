@@ -1,0 +1,87 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{AIBO's First Words -- Appendix I}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\paragraph{Summary}
+This appendix explains how the paper uses the expectation-maximization (EM) algorithm to discover clusters in unlabeled data. It first reviews the mean and standard deviation of a Gaussian cluster, then shows how to compute the probability that an instance belongs to a given cluster. It next describes the two alternating EM steps: estimating cluster-membership probabilities and re-estimating cluster parameters from those probabilities. The appendix closes by defining likelihood as the optimization target and noting that EM converges to a local maximum, so multiple runs with different initializations may be needed to find the most natural number of clusters.
+
+\section*{Appendix I}
+
+This appendix briefly describes the EM clustering algorithm used for the experiments in unsupervised learning of classification concepts \cite{witten_eibe_2000}. The algorithm is based on a statistical model called \emph{finite mixture}. A mixture is a set of $k$ probability distributions, representing $k$ clusters.
+
+In the case of Gaussian distributions, each distribution is determined by two parameters, its mean $\mu_D$ and its standard deviation $\sigma_D$. If we know that $x_1, x_2, \ldots, x_n$ belong to cluster $D$, then $\mu_D$ and $\sigma_D$ are very easy to compute. For instance, in the simple case in which there is only one numeric attribute $x$:
+
+\begin{equation}
+\mu_D = \frac{\sum_{i=1}^{n} x_i}{n}
+\end{equation}
+
+\begin{equation}
+\sigma_D =
+\sqrt{\frac{\sum_{i=1}^{n} (x_i - \mu_D)^2}{n}}
+\end{equation}
+
+If we know $\mu$ and $\sigma$ for the different clusters, it is also easy to compute the probabilities that a given instance comes from each distribution. Given an instance $x$, the probability that it belongs to cluster $D$ is:
+
+\begin{equation}
+P(D \mid x) =
+\frac{p(x \mid \mu_D, \sigma_D)}
+{\sum_j p(x \mid \mu_j, \sigma_j)}
+\end{equation}
+
+where $p(x \mid \mu_D, \sigma_D)$ is the normal distribution function for cluster $D$:
+
+\begin{equation}
+p(x \mid \mu_D, \sigma_D) =
+\frac{1}{\sqrt{2\pi}\sigma_D}
+\exp\left(
+-\frac{(x - \mu_D)^2}{2\sigma_D^2}
+\right)
+\end{equation}
+
+The EM algorithm stands for ``expectation-maximization.'' Given an initial set of distributions, the first step is the calculation of the cluster probabilities (the ``expected'' class values). The second step is the calculation of the distribution parameters by the ``maximization'' of the likelihood of the distributions given the data. These two steps are iterated like in a $k$-means algorithm.
+
+For the estimation of $\mu_D$ and $\sigma_D$, a slight adjustment must be made compared to equations 1 and 2 due to the fact that only cluster probabilities, not the clusters themselves, are known for each instance. These probabilities act like weights:
+
+\begin{equation}
+\mu_D = \frac{\sum_i p_i x_i}{\sum_i p_i}
+\end{equation}
+
+\begin{equation}
+\sigma_D =
+\sqrt{
+\frac{\sum_i p_i (x_i - \mu_D)^2}
+{\sum_i p_i}
+}
+\end{equation}
+
+where the $x_i$ are now all the instances and $p_i$ is the probability that instance $i$ belongs to cluster $D$.
+
+The overall likelihood of a distribution set is obtained by multiplying the probabilities of the individual instances $i$:
+
+\begin{equation}
+Q = \prod_i P(x_i)
+\end{equation}
+
+where $P(x_i)$ is determined from $p(x \mid \mu_D, \sigma_D)$. $Q$ is an indicator of the quality of the distribution. $Q$ increases at each iteration. The algorithm stops when the increase of the log-likelihood becomes negligible, for example less than $10^{-6}$ for ten successive iterations.
+
+The EM algorithm is guaranteed to converge to a maximum but not necessarily to the global maximum. The algorithm could be repeated several times, with a different initial configuration. By varying the number of clusters $k$, it is possible to determine the one which maximizes the likelihood and thus the ``natural'' number of clusters.
+
+\begin{thebibliography}{1}
+\bibitem{witten_eibe_2000}
+Ian H. Witten and Eibe Frank.
+\newblock Data Mining.
+\newblock Morgan Kaufmann Publishers, 2000.
+\end{thebibliography}
+
+\end{document}
