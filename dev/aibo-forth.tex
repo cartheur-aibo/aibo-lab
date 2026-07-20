@@ -51,7 +51,7 @@ This document therefore expresses EM clustering in a way that matches Forth deve
 
 Before the paper reaches the EM appendix, it describes a simpler visual memory on page 17. Each normalized image is reduced to a $16 \times 16$ two-dimensional color histogram over the retained green and blue dimensions. The result is a flat vector of 256 values. In the paper's framing, these histograms are not yet full object concepts; they are stored views that capture both the object and its background.
 
-For Forth work, this matters because it is the more immediate candidate for a reusable module. A histogram-based matcher can be implemented independently of the later EM clustering code and can serve as the visual comparison layer for stored views.
+For Forth work, this matters because it is the more immediate candidate for a reusable module. A histogram-based matcher can be implemented independently of the later EM clustering code and can serve as the visual comparison layer for stored views. The current `dev/aibo-em.fs` file implements a small demo of this mechanism rather than a fully generalized module API, so the interface described below follows the code as it exists today.
 
 The paper compares histograms using equation 1, a $\chi^2$-style divergence:
 
@@ -70,7 +70,8 @@ A practical Forth module for the page 17 mechanism can start with these pieces:
 \item a flat float array for each stored histogram,
 \item an address helper for `hist[i]`,
 \item `hist-divergence ( hist-a hist-b -- r )`,
-\item `nearest-view ( query views count -- best-index )`.
+\item `init-histograms ( -- )` to populate the demo histograms,
+\item `nearest-view ( -- n )` for the current two-view demo.
 \end{itemize}
 
 Suggested stack-oriented words:
@@ -81,7 +82,9 @@ Suggested stack-oriented words:
 \item `hist! ( r hist i -- )`
 \item `clear-hist ( hist -- )`
 \item `hist-divergence ( hist-a hist-b -- r )`
-\item `nearest-view ( query view-table count -- best-index )`
+\item `init-histograms ( -- )`
+\item `nearest-view ( -- n )`
+\item `.histogram-demo ( -- )`
 \end{itemize}
 
 \section*{Forth-Style Histogram Pseudocode}
@@ -99,15 +102,24 @@ Suggested stack-oriented words:
 \ return total
 ;
 
-\ nearest-view ( query views count -- best-index )
-\ best-index = 0
-\ best-score = +infinity
-\ for each stored view j:
-\   score = hist-divergence( query, views[j] )
-\   if score < best-score:
-\     best-score = score
-\     best-index = j
-\ return best-index
+\ init-histograms ( -- )
+\ clear the three demo histograms
+\ load a few bins into query, view-a, and view-b
+;
+
+\ nearest-view ( -- n )
+\ score-a = hist-divergence( query, view-a )
+\ score-b = hist-divergence( query, view-b )
+\ if score-b < score-a:
+\   return 1
+\ else
+\   return 0
+;
+
+\ .histogram-demo ( -- )
+\ print D(query, view-a)
+\ print D(query, view-b)
+\ print nearest-view
 ;
 \end{lstlisting}
 
@@ -174,7 +186,7 @@ An address helper for the probability table is useful:
 
 \section*{Suggested Word Set}
 
-The implementation can be decomposed into a small set of words:
+The EM part of the implementation can be decomposed into a small set of words:
 
 \begin{itemize}
 \item `gaussian-pdf ( x k -- r )`
@@ -189,7 +201,7 @@ The implementation can be decomposed into a small set of words:
 \item `run-em ( -- )`
 \end{itemize}
 
-These names are descriptive rather than canonical. In a constrained target, shorter words may be preferred once the behavior is stable.
+These names are descriptive rather than canonical. In a constrained target, shorter words may be preferred once the behavior is stable. The histogram words above are already implemented in the current demo file; the more general multi-view `nearest-view ( query views count -- best-index )` interface remains a future module step rather than the current code shape.
 
 \section*{Forth-Style Pseudocode}
 

@@ -2,7 +2,7 @@
 \ This is a small 1D Gaussian mixture example intended as a
 \ runnable bridge from the AIBO histogram and EM notes into real Forth code.
 \ Run on this machine with:
-\   XDG_CACHE_HOME=/tmp gforth-fast --no-0rc scripts/aibo-em.fs
+\   XDG_CACHE_HOME=/tmp gforth-fast --no-0rc dev/aibo-em.fs
 
 decimal
 
