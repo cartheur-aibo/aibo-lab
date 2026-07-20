@@ -25,3 +25,7 @@ paper/*.out
 
 # Bench trial trees and copied test payloads
 trials/
+Steels--Aibo first words-appendix-I.aux
+Steels--Aibo first words-appendix-I.log
+docs/aibo-forth.aux
+docs/aibo-forth.log
