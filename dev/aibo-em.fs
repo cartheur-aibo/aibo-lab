@@ -1,7 +1,6 @@
 \ Expectation-Maximization clustering demo for gforth.
-\ This is a small 1D Gaussian mixture example intended as a
-\ runnable bridge from the AIBO histogram and EM notes into real Forth code.
-\ Run on this machine with:
+\ This is a small 1D Gaussian mixture example intended as a histogram identification of objects.
+\ Run with:
 \   XDG_CACHE_HOME=/tmp gforth-fast --no-0rc dev/aibo-em.fs
 
 decimal
