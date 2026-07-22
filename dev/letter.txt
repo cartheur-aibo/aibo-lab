@@ -1,4 +1,4 @@
-Your WAIC interview and Charles H. Moore
+Your CGTN interview and Charles H. Moore
 
 Hello,
 
@@ -6,7 +6,7 @@ I recently saw your CGTN interview aired ahead of the WAIC conference. Tian Wei 
 
 My reason for writing you is twofold:
 
-I would like to express my admiration for your intellect. I think it is important to acknowledge such when one sees it. One example I would add is the Hitachi 6309.
+I would like to express my admiration for your intellect. I think it is important to acknowledge such when one sees it. One story I would add is the Hitachi 6309.
 
 I would like to nominate Charles H. Moore for a future A.M. Turing Award, in recognition of his contributions to the Forth language and to the sequence of architectures that led to the GA144 multi-computer chip.
 
