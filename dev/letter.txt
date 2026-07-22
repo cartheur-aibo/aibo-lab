@@ -2,7 +2,7 @@ Your WAIC interview and Charles H. Moore
 
 Hello,
 
-I saw your interview on CGTN at the WAIC conference. I saw your interview on CGTN just recently as it was played in advance of the WAIC conference. Tian Wei had a funny expression on her face while you were explaining the success of x64 and arm64 versus other architectures. I wholly agree that we do not always select the ideal choices.
+I recently saw your CGTN interview aired ahead of the WAIC conference. Tian Wei had a funny expression on her face while you were explaining the success of x64 and arm64 versus other architectures. I wholly agree that we do not always select the ideal choices.
 
 My reason for writing you is twofold:
 
@@ -14,6 +14,6 @@ I know how valuable past work is to future researchers and I am working to make 
 
 
 
-P.S. I suspect I can see where AI is going next.
+P.S. I suspect I can see where AI should go next.
 
 C
