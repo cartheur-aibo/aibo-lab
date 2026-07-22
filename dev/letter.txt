@@ -1,0 +1,17 @@
+Hello,
+
+I saw your interview on CGTN at the WAIC conference. Tian Wei had a funny expression on her face while you were explaining the success of x64 and arm64 versus other architectures. I wholly agree that we do not always select the ideal choices.
+
+My reason for writing you is twofold:
+
+I would like to express my admiration for your intellect. I think it is important to acknowledge such when one sees it. One example I would add is the Hitachi 6309.
+
+I would like to nominate Charles H. Moore for a future A.M. Turing Award, in recognition of his contributions to the Forth language and to the sequence of architectures that led to the GA144 multi-computer chip.
+
+I know how valuable past work is to future researchers and I am working to make it as visible as possible. I would very much appreciate your support.
+
+
+
+P.S. I suspect I can see where AI is going next.
+
+C
