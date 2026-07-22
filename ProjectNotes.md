@@ -8,7 +8,7 @@ An Aibo laboratory that replaces iCybie.
 
 #### 19:10
 
-Nominate Chuck Moore for the Turing Prize: `whitfield.diffie@gmail.com`
+Nominate Chuck Moore for the Turing Prize: `DONE` 22.07.2026-1140.
 
 #### 19:45
 
